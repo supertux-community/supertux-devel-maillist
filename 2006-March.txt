@@ -1,0 +1,1031 @@
+From goldenpiranha at gmail.com  Wed Mar  1 02:46:25 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Tue, 28 Feb 2006 17:46:25 -0800
+Subject: [Supertux-devel] Zeekling help
+Message-ID: <bcd1d8470602281746j4a32603egd01a7bf18165ed8d@mail.gmail.com>
+
+How do you get the zeekling into the game?
+I'm pretty new at this.
+
+-Piranha
+
+
+From supertux at 2006.expires.deltadevelopment.de  Wed Mar  1 03:25:58 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Wed, 01 Mar 2006 03:25:58 +0100
+Subject: [Supertux-devel] Zeekling help
+In-Reply-To: <bcd1d8470602281746j4a32603egd01a7bf18165ed8d@mail.gmail.com>
+References: <bcd1d8470602281746j4a32603egd01a7bf18165ed8d@mail.gmail.com>
+Message-ID: <44050636.7070700@2006.expires.deltadevelopment.de>
+
+Hey Danny,
+
+Danny Bittman wrote:
+> How do you get the zeekling into the game?
+> I'm pretty new at this.
+
+You didn't give a lot of information before asking this question, so I 
+can only assume you
+
+  - downloaded SuperTux milestone 1 from the World Wide Web
+  - heard about a new badguy
+  - want to play with this badguy in milestone 1
+
+I'm afraid that's not (easily) doable. SuperTux is currently not only in 
+the process of being enhanced, but is also being partly rewritten. 
+Several things are still missing, some others unstable and there's still 
+a long way to go until the next release will be ready.
+
+If you really want to experiment with the development version of 
+SuperTux, a little bit of documentation on getting it is already in the 
+Wiki at <http://supertux.berlios.de/wiki/index.php/Download/Subversion>.
+
+I won't go into further detail without knowing what exactly you want, 
+but feel free to
+
+  - improve on the instructions in the Wiki
+  - send back comments and suggestions to this list
+
+
+Kind regards,
+
+   Christoph
+
+
+-- 
+If it were easy to read, it wouldn't be called code. (Jeff Dalton)
+
+
+From slacker at gluebox.com  Wed Mar  1 14:14:28 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Wed, 1 Mar 2006 08:14:28 -0500 (EST)
+Subject: [Supertux-devel] Zeekling - danger fades
+In-Reply-To: <44049673.8090400@2006.expires.deltadevelopment.de>
+References: <36798.192.168.1.1.1141089010.squirrel@gluebox.com>   
+    <44043E93.70301@2006.expires.deltadevelopment.de>
+    <55434.146.145.190.179.1141142298.squirrel@gluebox.com>
+    <44049673.8090400@2006.expires.deltadevelopment.de>
+Message-ID: <36891.192.168.1.1.1141218868.squirrel@gluebox.com>
+
+hello everyone.
+
+Christoph,
+Thanks for the zeekling link. I'm not sure if either attempt, yours or
+mine,  makes the bad guy any more menacing for Tux. I like the way yours
+fades her into the scene. We still need something more like zigzags or
+divebombs.
+
+Regarding the nogl patch. I have tried this on two low end machines where
+ST-1.2 runs OK. (PII/PIII 450/700?, Nvidia something or another w/o
+acceleration)  The nogl patch works, it just runs real slow. When I run
+the nogl code on my more modern development workstation it runs OK. (AMD64
+X.?)
+
+enjoy.
+
+
+>>> S.Groundwater wrote:
+>>>> Here is a zeekling sprite that fades to invisible.
+>>>> http://gluebox.com/images/zeekling.tar.gz
+
+>>>> Christoph wrote:
+<http://www.deltadevelopment.de/users/christoph/supertux/supertux-3063-hideandzeek.diff.gz>
+> This zeekling version decloaks only while above the player - eyes come
+> first, rest slowly fades in.
+>
+> Give it a shot, it's quite a thrill if you don't know where all the
+> zeeklings are hiding.
+
+
+
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From supertux at 2006.expires.deltadevelopment.de  Wed Mar  1 19:05:23 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Wed, 01 Mar 2006 19:05:23 +0100
+Subject: [Supertux-devel] Zeekling - danger fades
+In-Reply-To: <36891.192.168.1.1.1141218868.squirrel@gluebox.com>
+References: <36798.192.168.1.1.1141089010.squirrel@gluebox.com>       <44043E93.70301@2006.expires.deltadevelopment.de>    <55434.146.145.190.179.1141142298.squirrel@gluebox.com>    <44049673.8090400@2006.expires.deltadevelopment.de> <36891.192.168.1.1.1141218868.squirrel@gluebox.com>
+Message-ID: <4405E263.7050304@2006.expires.deltadevelopment.de>
+
+Hey S.,
+
+S.Groundwater wrote:
+> We still need something more like zigzags or divebombs.
+
+No problem, this zeekling does divebombs:
+<http://www.deltadevelopment.de/users/christoph/supertux/supertux-3063-zeekswoop.diff.gz>
+
+Oh, and just ignore the junk in the diff file - looks like "jam clean" 
+left some files behind. Just make sure to try it out on a backup ;-)
+
+
+> Regarding the nogl patch. I have tried this on two low end machines where
+> ST-1.2 runs OK. [...] it just runs real slow. When I run
+> the nogl code on my more modern development workstation it runs OK.
+
+Thanks for the test drive! Yeah, I expected slow performance.
+
+That's because the patch imitates its OpenGL counterpart as closely as 
+possible (e.g. surface flipping done on-the-fly). Even with the best of 
+tweaks, however, it could never run any smoother than the original, 
+because it has to do without help from the GPU.
+
+To me, it was more important to be able to play SuperTux on my 
+onboard-graphics-only Linux box and on my virtual machines - they have 
+more than enough power for SDL, but not nearly enough for Software-OpenGL.
+
+
+Kind regards,
+
+   Christoph
+
+-- 
+The manager has personally passed all the water served here (Sign in a 
+hotel in Acapulco)
+
+
+From supertux at 2006.expires.deltadevelopment.de  Thu Mar  2 23:22:51 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Thu, 02 Mar 2006 23:22:51 +0100
+Subject: [Supertux-devel] badguy sketch: "Angry Stone"
+Message-ID: <4407703B.9000104@2006.expires.deltadevelopment.de>
+
+Hi all,
+
+I found an image for a badguy named "Angry Stone" in the trunk, but no 
+sprites or code.
+
+In the following patch I tried to bring this Angry Stone to life:
+http://www.deltadevelopment.de/users/christoph/supertux/supertux-3063-angrystone.diff.gz
+
+Graphics and code are still just a sketch - I'm just curious what you 
+think about the idea.
+
+Please note that the patch also replaces some enemies in world1/level1 
+for easy testing and will generally wreak havok on your branch - so try 
+it out on a backup.
+
+
+Regards,
+
+   Christoph
+
+-- 
+Never EVER mess with a jumper you don't know about, even if it's labeled 
+"sex and free beer". (Dave Haynie, Amiga developer)
+
+
+From matze at braunis.de  Fri Mar  3 13:47:49 2006
+From: matze at braunis.de (Matze Braun)
+Date: Fri, 03 Mar 2006 13:47:49 +0100
+Subject: [Supertux-devel] badguy sketch: "Angry Stone"
+In-Reply-To: <4407703B.9000104@2006.expires.deltadevelopment.de>
+References: <4407703B.9000104@2006.expires.deltadevelopment.de>
+Message-ID: <1141390069.25943.6.camel@taylor.local>
+
+This looks good, Stephen just committed it and told me about it
+(unforunately I didn't have time to look at it yet until now).
+
+Some comments:
+- If you create new files change the
+	Copyright (C) 2005 Matthias Braun <matze at braunis.de>
+to
+	Copyright (C) 2006 Christoph Sommer <...>
+It's your file and you should get the credit for it!
+- you probably want to override the kill_fall() function with a function
+that does nothing, so that angry stones don't kill themselfes and can't
+be killed with fireballs
+
+Anyway I like the patch and the badguy behaviour.
+
+Greetings,
+	Matze
+
+Am Donnerstag, den 02.03.2006, 23:22 +0100 schrieb Christoph Sommer:
+> Hi all,
+> 
+> I found an image for a badguy named "Angry Stone" in the trunk, but no 
+> sprites or code.
+> 
+> In the following patch I tried to bring this Angry Stone to life:
+> http://www.deltadevelopment.de/users/christoph/supertux/supertux-3063-angrystone.diff.gz
+> 
+> Graphics and code are still just a sketch - I'm just curious what you 
+> think about the idea.
+> 
+> Please note that the patch also replaces some enemies in world1/level1 
+> for easy testing and will generally wreak havok on your branch - so try 
+> it out on a backup.
+> 
+> 
+> Regards,
+> 
+>    Christoph
+> 
+
+
+
+From cwebber at dustycloud.org  Fri Mar  3 14:38:09 2006
+From: cwebber at dustycloud.org (Christopher Allan Webber)
+Date: Fri, 03 Mar 2006 07:38:09 -0600
+Subject: [Supertux-devel] Zeekling -Fade to DANGER tar.gz
+In-Reply-To: <55434.146.145.190.179.1141142298.squirrel@gluebox.com>
+	(S. Groundwater's message of "Tue, 28 Feb 2006 10:58:18 -0500 (EST)")
+References: <36798.192.168.1.1.1141089010.squirrel@gluebox.com>
+	<44043E93.70301@2006.expires.deltadevelopment.de>
+	<55434.146.145.190.179.1141142298.squirrel@gluebox.com>
+Message-ID: <87r75jsl6m.fsf@dustycloud.org>
+
+
+"S.Groundwater" <slacker at gluebox.com> writes:
+
+> In playing on my local build it seemed the zeekling was too boring, no
+> challenge. Since I can't code, the only way I could fix for myself was to
+> slowly fade the sprite in and out of an invisible state.
+
+
+I certainly agree that the Zeekling is too boring at this point.
+
+I drew up a concept sketch of what I thought the Zeekling *could* do,
+available here:
+
+
+http://lingocomic.com/gfx/goodies/supertux/zeekling-drop-ideas.png
+
+Other available colored eggs ideas:
+
+purple: drops, creates a zeekling baby?  (maybe could act like the
+goomba babies in mario 3)
+
+green: one-up?
+
+Unfortunately, with work and school taking up almost every minute of
+my life right now, I don't have time to implement this myself...
+
+
+
+From cwebber at dustycloud.org  Fri Mar  3 14:38:09 2006
+From: cwebber at dustycloud.org (Christopher Allan Webber)
+Date: Fri, 03 Mar 2006 07:38:09 -0600
+Subject: [Supertux-devel] Zeekling -Fade to DANGER tar.gz
+In-Reply-To: <55434.146.145.190.179.1141142298.squirrel@gluebox.com>
+	(S. Groundwater's message of "Tue, 28 Feb 2006 10:58:18 -0500 (EST)")
+References: <36798.192.168.1.1.1141089010.squirrel@gluebox.com>
+	<44043E93.70301@2006.expires.deltadevelopment.de>
+	<55434.146.145.190.179.1141142298.squirrel@gluebox.com>
+Message-ID: <87r75jsl6m.fsf@dustycloud.org>
+
+
+"S.Groundwater" <slacker at gluebox.com> writes:
+
+> In playing on my local build it seemed the zeekling was too boring, no
+> challenge. Since I can't code, the only way I could fix for myself was to
+> slowly fade the sprite in and out of an invisible state.
+
+
+I certainly agree that the Zeekling is too boring at this point.
+
+I drew up a concept sketch of what I thought the Zeekling *could* do,
+available here:
+
+
+http://lingocomic.com/gfx/goodies/supertux/zeekling-drop-ideas.png
+
+Other available colored eggs ideas:
+
+purple: drops, creates a zeekling baby?  (maybe could act like the
+goomba babies in mario 3)
+
+green: one-up?
+
+Unfortunately, with work and school taking up almost every minute of
+my life right now, I don't have time to implement this myself...
+
+
+
+From supertux at 2006.expires.deltadevelopment.de  Sat Mar  4 01:26:31 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Sat, 04 Mar 2006 01:26:31 +0100
+Subject: [Supertux-devel] Question...
+In-Reply-To: <00A5739D-BFCC-46F1-8B03-E2149C5AE702@shaw.ca>
+References: <00A5739D-BFCC-46F1-8B03-E2149C5AE702@shaw.ca>
+Message-ID: <4408DEB7.2030109@2006.expires.deltadevelopment.de>
+
+Hey Stephanie,
+
+Stephanie Moffat wrote:
+> Where can you find Milestone 2? Is it a new download or what?
+
+SuperTux is undergoing constant development with the latest stable 
+release being SuperTux "Milestone 1". This is what can be downloaded 
+from the World Wide Web as binary packages.
+
+SuperTux "Milestone 2" will be the next stable release. At this time 
+there is no telling when it will be finished, but you can always try out 
+the current (but unstable) development version by getting the sources 
+via SVN and compiling them.
+
+Kind regards,
+
+   Christoph
+
+
+-- 
+Standards are wonderful! So many to pick from!
+
+
+From martin.beeger at online.de  Sat Mar  4 21:55:00 2006
+From: martin.beeger at online.de (martin.beeger at online.de)
+Date: Sat, 04 Mar 2006 21:55:00 +0100
+Subject: [Supertux-devel] Reset of supertux
+Message-ID: <17072839.50301141505700740.JavaMail.servlet@kundenserver>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060304/b34dcf3c/attachment.html>
+
+From seline.frei at greenmail.ch  Sat Mar  4 17:32:53 2006
+From: seline.frei at greenmail.ch (Seline)
+Date: Sat, 4 Mar 2006 17:32:53 +0100
+Subject: [Supertux-devel] Frage zum Level Editor
+Message-ID: <EXSMTP02fvJuDyWQT2m000bb958@exsmtp02.agrinet.ch>
+
+
+Hallo Tux-Team
+
+1. Als ich heute eine Level selber herstellte, fiel mir pl?tlich auf, dass
+mir der Hintergrund nicht gef?llt, und dass in den 
+anderen Levels der Hintergrund verschieden ist.  Vo kann ich ihn ?ndern?
+
+2. Bei den Levels, die ihr hergestellt habt, hat es immer Anhaltspunkte. Wie
+kann ich diese setzen?
+
+3. Bei euch hat es Levels, die "fahren". Wie kann ich dies machen?
+
+4. Gibt es schon Bonus Island 3? Das Bonusland 1 und 2 habe ich schon. Und
+auch schon alle Levels geschafft. Ausser es h?tte noch weitere versteckte
+Inseln.
+
+Bitte schreibt zur?ck.
+
+Liebe Gr?sse
+
+Tanja       +       Seline
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060304/809da818/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Sun Mar  5 18:18:06 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Sun, 05 Mar 2006 18:18:06 +0100
+Subject: [Supertux-devel] Frage zum Level Editor
+In-Reply-To: <EXSMTP02fvJuDyWQT2m000bb958@exsmtp02.agrinet.ch>
+References: <EXSMTP02fvJuDyWQT2m000bb958@exsmtp02.agrinet.ch>
+Message-ID: <440B1D4E.7010605@2006.expires.deltadevelopment.de>
+
+Hallo Tanja, hallo Seline,
+
+auf dieser Liste wird eigentlich bevorzugt auf Englisch diskutiert. 
+Schreibt also Fragen m?glichst auf Englisch, dann verstehen euch auch 
+mehr Mitleser.
+
+Seline wrote:
+> 1. Als ich heute eine Level selber herstellte, fiel mir pl?tlich auf, dass
+> mir der Hintergrund nicht gef?llt, und dass in den 
+> anderen Levels der Hintergrund verschieden ist.  Vo kann ich ihn ?ndern?
+
+Der Hintergrund l?sst sich in den allgemeinen Level-Einstellungen 
+?ndern. Klickt im Level-Editor dazu auf das "Werkzeug"-Symbol unten rechts.
+
+
+> 2. Bei den Levels, die ihr hergestellt habt, hat es immer Anhaltspunkte. Wie
+> kann ich diese setzen?
+
+Falls ihr die Punkte meint, an denen Tux neu startet, falls er in einer 
+Level stirbt: Diese Punkte lassen sich meines Wissens nach nicht mit dem 
+integrierten Level-Editor ?ndern. Ihr k?nnt sie aber per Hand in die 
+Level-Datei schreiben.
+
+Legt dazu, wie z.B. in data/levels/world1/level1.stl zu sehen, eine 
+Liste "reset-points" an. Um die Koordinaten zu bestimmen, k?nnt ihr z.B. 
+einen Gegner an die gew?nschte Stelle setzen und seine Werte aus der 
+Liste "objects" ?bernehmen.
+
+Falls euch das zu aufwendig ist: Einige Leute haben auch alleinstehende 
+Level-Editoren f?r SuperTux geschrieben. Vielleicht findet ihr ja einen, 
+der euch gef?llt.
+
+
+> 3. Bei euch hat es Levels, die "fahren". Wie kann ich dies machen?
+
+Da bin ich zur Zeit ?berfragt. Ihr k?nnt aber auch hier einfach mal eine 
+Level-Datei untersuchen, die so etwas macht und den entsprechenden 
+Eintrag in eure Level-Datei ?bernehmen.
+
+
+> 4. Gibt es schon Bonus Island 3? 
+
+Meines Wissens nach noch nicht. Es gibt aber einige Level-Sammlungen im 
+World Wide Web. <http://www.supertux.info> f?hrt zum Beispiel eine gro?e 
+Auswahl von Levels, die von Fans erstellt wurden.
+
+
+Gru?,
+
+   Christoph
+
+
+-- 
+Never test for an error you don't know how to handle.
+
+
+From warpstar99 at gmail.com  Thu Mar  9 22:43:49 2006
+From: warpstar99 at gmail.com (=?UTF-8?B?zpTQvM65zrfhvrEga2jhvrHOtw==?=)
+Date: Thu, 9 Mar 2006 16:43:49 -0500
+Subject: [Supertux-devel] when oh when?
+Message-ID: <db16eaeb0603091343l2f1f7404neb870531c5c9cae5@mail.gmail.com>
+
+hello!
+being a major supertux fan, and beating milestone 1 a record or 34
+times, I was really wondering when oh when will milestone two come out
+approximately? please inform me so i have a range as to how long i
+should wait!
+
+thanks!
+
+--
+.:?? ?????. =] ??:.
+
+
+From afief.h at gmail.com  Sat Mar 11 08:35:21 2006
+From: afief.h at gmail.com (Afief Halumi)
+Date: Sat, 11 Mar 2006 09:35:21 +0200
+Subject: [Supertux-devel] when oh when?
+In-Reply-To: <db16eaeb0603091343l2f1f7404neb870531c5c9cae5@mail.gmail.com>
+References: <db16eaeb0603091343l2f1f7404neb870531c5c9cae5@mail.gmail.com>
+Message-ID: <83a40700603102335u198f85dej99e1a24eef1e89e1@mail.gmail.com>
+
+Hi,
+As far as i know, the official answer for that question is "soon."
+However, you could make "soon" become "sooner" if you contribute
+something/anything to the project. check the wiki todo list. you don't need
+to be a C++ or graphic/sound expert. writing the story and coming up with
+new ideas would be great.
+
+PS: you should be able to see the progress when items disappear from the
+todo list, no items there anymore means there are just a few last tests
+before the final release.
+
+Afief
+
+
+On 3/9/06, ????? kh?? <warpstar99 at gmail.com> wrote:
+>
+> hello!
+> being a major supertux fan, and beating milestone 1 a record or 34
+> times, I was really wondering when oh when will milestone two come out
+> approximately? please inform me so i have a range as to how long i
+> should wait!
+>
+> thanks!
+>
+> --
+> .:?? ?????. =] ??:.
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060311/c2b4129a/attachment.html>
+
+From christian_hoff at gmx.net  Sun Mar 12 20:14:29 2006
+From: christian_hoff at gmx.net (Christian Hoff)
+Date: Sun, 12 Mar 2006 20:14:29 +0100
+Subject: [Supertux-devel] Supertux worldmap-editor
+Message-ID: <000901c64609$300b3a50$17b2a8c0@hoffch>
+
+Hi,
+
+I created a supertux worldmap-editor. With this editor you can open and save all supertux worldmaps (files with the extension .stwm) like the Bonus Islands I and II and the Icyisland-worldmap. It is also possible to create a new worldmap. The editor named SWafe can be downloaded from http://www.christian-hoff.de (on the startpage, click on the link named downloads(do not use the Supertux link!) and then click on the link to SWafe). I am sorry to say that the editor can't be run under linux because Mono does not support the .Net Framework in version 2 yet. Additionally you must download the .Net Framework 2.0 from Microsoft(23 Mb). If you don't, an error will occur when starting the application.
+
+Please send your feedback to christian_hoff at gmx.net so that I know what has to be improved...
+
+I hope you will have much fun with this editor!
+
+
+Christian Hoff
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060312/7d9c5576/attachment.html>
+
+From matze at braunis.de  Sun Mar 12 21:01:21 2006
+From: matze at braunis.de (Matze Braun)
+Date: Sun, 12 Mar 2006 21:01:21 +0100
+Subject: [Supertux-devel] Supertux worldmap-editor
+In-Reply-To: <000901c64609$300b3a50$17b2a8c0@hoffch>
+References: <000901c64609$300b3a50$17b2a8c0@hoffch>
+Message-ID: <1142193681.30821.2.camel@taylor.local>
+
+Am Sonntag, den 12.03.2006, 20:14 +0100 schrieb Christian Hoff:
+> Hi,
+>  
+> I created a supertux worldmap-editor. With this editor you can open
+> and save all supertux worldmaps (files with the extension .stwm) like
+> the Bonus Islands I and II and the Icyisland-worldmap. It is also
+> possible to create a new worldmap. The editor named SWafe can be
+> downloaded from http://www.christian-hoff.de (on the startpage, click
+> on the link named downloads(do not use the Supertux link!) and then
+> click on the link to SWafe). I am sorry to say that the editor can't
+> be run under linux because Mono does not support the .Net Framework in
+> version 2 yet. Additionally you must download the .Net Framework 2.0
+> from Microsoft(23 Mb). If you don't, an error will occur when starting
+> the application.
+Mono does support most of .net 2.0 by now (though I'm not sure how good
+the System.Windows.Forms support is). Would be interesting to see the
+sourcecode...
+
+(You might also take a look at some stuff I tried here:
+	http://www.stud.uni-karlsruhe.de/~uxsm/supertux-sharp.tar.bz2
+it's just some experiments with C#, I ported some few parts of the
+engine to it)
+
+Greetings,
+	Matze
+
+
+
+
+From matze at braunis.de  Sun Mar 12 21:01:21 2006
+From: matze at braunis.de (Matze Braun)
+Date: Sun, 12 Mar 2006 21:01:21 +0100
+Subject: [Supertux-devel] Supertux worldmap-editor
+In-Reply-To: <000901c64609$300b3a50$17b2a8c0@hoffch>
+References: <000901c64609$300b3a50$17b2a8c0@hoffch>
+Message-ID: <1142193681.30821.2.camel@taylor.local>
+
+Am Sonntag, den 12.03.2006, 20:14 +0100 schrieb Christian Hoff:
+> Hi,
+>  
+> I created a supertux worldmap-editor. With this editor you can open
+> and save all supertux worldmaps (files with the extension .stwm) like
+> the Bonus Islands I and II and the Icyisland-worldmap. It is also
+> possible to create a new worldmap. The editor named SWafe can be
+> downloaded from http://www.christian-hoff.de (on the startpage, click
+> on the link named downloads(do not use the Supertux link!) and then
+> click on the link to SWafe). I am sorry to say that the editor can't
+> be run under linux because Mono does not support the .Net Framework in
+> version 2 yet. Additionally you must download the .Net Framework 2.0
+> from Microsoft(23 Mb). If you don't, an error will occur when starting
+> the application.
+Mono does support most of .net 2.0 by now (though I'm not sure how good
+the System.Windows.Forms support is). Would be interesting to see the
+sourcecode...
+
+(You might also take a look at some stuff I tried here:
+	http://www.stud.uni-karlsruhe.de/~uxsm/supertux-sharp.tar.bz2
+it's just some experiments with C#, I ported some few parts of the
+engine to it)
+
+Greetings,
+	Matze
+
+
+
+
+From slacker at gluebox.com  Tue Mar 14 05:05:23 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Mon, 13 Mar 2006 23:05:23 -0500 (EST)
+Subject: [Supertux-devel] StrawBlock
+Message-ID: <37638.192.168.1.1.1142309123.squirrel@gluebox.com>
+
+hello.
+
+I took a stab at creating the strawbox listed in the wiki's todo.  There
+is an animation for being hit with fire. These images need more work but
+it's a start.
+
+Since there is no working code yet for this feature here is a gif
+animation so you can see it. I also dropped a non-animated object in
+data/levels/world2/castledoor.stl.
+
+http://gluebox.com/images/straw.gif
+
+ .enjoy
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From goldenpiranha at gmail.com  Wed Mar 15 23:55:20 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Wed, 15 Mar 2006 14:55:20 -0800
+Subject: [Supertux-devel] (no subject)
+Message-ID: <bcd1d8470603151455m3f2f7012x38837058c8a0b713@mail.gmail.com>
+
+Is there going to be a Bonus Island 3 that will come out?
+
+
+From matze at braunis.de  Thu Mar 16 09:52:24 2006
+From: matze at braunis.de (Matze Braun)
+Date: Thu, 16 Mar 2006 09:52:24 +0100
+Subject: [Supertux-devel] (no subject)
+In-Reply-To: <bcd1d8470603151455m3f2f7012x38837058c8a0b713@mail.gmail.com>
+References: <bcd1d8470603151455m3f2f7012x38837058c8a0b713@mail.gmail.com>
+Message-ID: <1142499144.24312.0.camel@taylor.local>
+
+There are no plans for this currently. There aren't that much new player
+made levels that it would be worth putting them together to a new bonus
+island.
+
+Greetings,
+	Matze
+
+Am Mittwoch, den 15.03.2006, 14:55 -0800 schrieb Danny Bittman:
+> Is there going to be a Bonus Island 3 that will come out?
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+From matze at braunis.de  Thu Mar 16 09:52:24 2006
+From: matze at braunis.de (Matze Braun)
+Date: Thu, 16 Mar 2006 09:52:24 +0100
+Subject: [Supertux-devel] (no subject)
+In-Reply-To: <bcd1d8470603151455m3f2f7012x38837058c8a0b713@mail.gmail.com>
+References: <bcd1d8470603151455m3f2f7012x38837058c8a0b713@mail.gmail.com>
+Message-ID: <1142499144.24312.0.camel@taylor.local>
+
+There are no plans for this currently. There aren't that much new player
+made levels that it would be worth putting them together to a new bonus
+island.
+
+Greetings,
+	Matze
+
+Am Mittwoch, den 15.03.2006, 14:55 -0800 schrieb Danny Bittman:
+> Is there going to be a Bonus Island 3 that will come out?
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+From christian_hoff at gmx.net  Thu Mar 23 19:36:26 2006
+From: christian_hoff at gmx.net (Christian Hoff)
+Date: Thu, 23 Mar 2006 18:36:26 +0000
+Subject: [Supertux-devel] Cannot run supertux
+Message-ID: <4422EAAA.2090701@gmx.net>
+
+Hi,
+
+I just downloaded and installed the supertux development version. At 
+first everything works fine, but after I installed supertux, I cannot 
+find any file to execute which would start the game. But the installed 
+seems to have worked correctly (I can see the installation directory 
+/usr/local/share/supertux with all images etc.). I did it exactly as 
+described in the INSTALL-file. I also could not start supertux when 
+typing "supertux" in the shell.
+
+Does anyone know how to run supertux?
+
+Greets,
+Christian Hoff
+
+
+From joseph.brower at gmail.com  Thu Mar 23 19:50:29 2006
+From: joseph.brower at gmail.com (joseph brower)
+Date: Thu, 23 Mar 2006 11:50:29 -0700
+Subject: [Supertux-devel] Cannot run supertux
+In-Reply-To: <4422EAAA.2090701@gmx.net>
+References: <4422EAAA.2090701@gmx.net>
+Message-ID: <a82cfa150603231050y67ef83d0v8d1a0990a69ad5d@mail.gmail.com>
+
+You could try to run directly from the directory by browsing to it and
+then executing it.
+
+Let me know if that helps,
+
+Joseph Brower
+
+On 3/23/06, Christian Hoff <christian_hoff at gmx.net> wrote:
+> Hi,
+>
+> I just downloaded and installed the supertux development version. At
+> first everything works fine, but after I installed supertux, I cannot
+> find any file to execute which would start the game. But the installed
+> seems to have worked correctly (I can see the installation directory
+> /usr/local/share/supertux with all images etc.). I did it exactly as
+> described in the INSTALL-file. I also could not start supertux when
+> typing "supertux" in the shell.
+>
+> Does anyone know how to run supertux?
+>
+> Greets,
+> Christian Hoff
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+
+
+From afief.h at gmail.com  Thu Mar 23 19:59:38 2006
+From: afief.h at gmail.com (Afief Halumi)
+Date: Thu, 23 Mar 2006 20:59:38 +0200
+Subject: [Supertux-devel] Cannot run supertux
+In-Reply-To: <4422EAAA.2090701@gmx.net>
+References: <4422EAAA.2090701@gmx.net>
+Message-ID: <83a40700603231059i3bdbe34aw47ce89664052bc1@mail.gmail.com>
+
+for me it just works if i write supertux -w (runs in window mode) from
+anywhere in the terminal. there are some missing images as it seems, you'd
+better copy the data folder to the installed data folder before running it
+full screen
+
+On 3/23/06, Christian Hoff <christian_hoff at gmx.net> wrote:
+>
+> Hi,
+>
+> I just downloaded and installed the supertux development version. At
+> first everything works fine, but after I installed supertux, I cannot
+> find any file to execute which would start the game. But the installed
+> seems to have worked correctly (I can see the installation directory
+> /usr/local/share/supertux with all images etc.). I did it exactly as
+> described in the INSTALL-file. I also could not start supertux when
+> typing "supertux" in the shell.
+>
+> Does anyone know how to run supertux?
+>
+> Greets,
+> Christian Hoff
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060323/94ab327e/attachment.html>
+
+From afief.h at gmail.com  Thu Mar 23 23:08:28 2006
+From: afief.h at gmail.com (Afief Halumi)
+Date: Fri, 24 Mar 2006 00:08:28 +0200
+Subject: [Supertux-devel] New Intro
+Message-ID: <83a40700603231408p11ecb5b2h6d678edfcc609dcb@mail.gmail.com>
+
+Hello Everybody,
+
+The old into kinda annoyed me when tux got stuck, i changed title.cpp to use
+the new scripted intro instead.
+
+Special thanks to MatzeB, wansti and Devel__ for keeping up with my annoying
+questions today. Hopefully i'll be able to contribute more to the project in
+the future too.
+
+
+Afief
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060324/0be5daca/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: intro.patch
+Type: text/x-patch
+Size: 484 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060324/0be5daca/attachment.bin>
+
+From sarianne.v at luukku.com  Tue Mar 21 19:58:58 2006
+From: sarianne.v at luukku.com (=?ISO-8859-1?Q?sarianne_v=E4rtinen?=)
+Date: Tue, 21 Mar 2006 20:58:58 +0200 (EET)
+Subject: [Supertux-devel] hello
+Message-ID: <1142967538355.sarianne.v.103324.piw3B0xQ57fIKkrXJ2VhsQ@luukku.com>
+
+I am 31 years old women from finland and i find your game from internet. When we have new levels on super tux game? Answer me please. Greatings from finland and thanks.
+Sarianne V?rtinen
+
+
+
+
+
+
+...................................................................
+Luukku Plus paketilla p??set eroon tila- ja turvallisuusongelmista.
+Hanki Luukku Plus ja helpotat el?m??si. http://www.mtv3.fi/luukku
+
+
+
+From LucasPFWard at aol.com  Wed Mar 22 22:48:11 2006
+From: LucasPFWard at aol.com (LucasPFWard at aol.com)
+Date: Wed, 22 Mar 2006 16:48:11 EST
+Subject: [Supertux-devel] supertux 2
+Message-ID: <360.54d5da.3153201b@aol.com>
+
+Dear person/people,                                                           
+                                         I want to know when milestone two 
+will be ready                                                       from lucas
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060322/59d5c3d9/attachment.html>
+
+From meaghanbriggs at hotmail.com  Thu Mar 23 23:41:22 2006
+From: meaghanbriggs at hotmail.com (Meaghan Briggs)
+Date: Fri, 24 Mar 2006 09:41:22 +1100
+Subject: [Supertux-devel] (no subject)
+Message-ID: <786c31d1124ea1cfb273909aa58a7319@hotmail.com>
+
+how can i download super tux 2/milestone2?
+Do i have to contact you another way and do i have to pay?
+Thanks
+Meaghan
+
+
+
+From liams_toaster at yahoo.com  Sat Mar 25 17:51:29 2006
+From: liams_toaster at yahoo.com (worn mibal)
+Date: Sat, 25 Mar 2006 08:51:29 -0800 (PST)
+Subject: [Supertux-devel] Congrats
+Message-ID: <20060325165129.62131.qmail@web54302.mail.yahoo.com>
+
+Hey, I just wanted to leave a thank-you for producing an excellent free game.  (If it weren't free, we'd all have to pay for it! :)  SuperTux 1.3 is included with the SuSE 10.0 release, which is how I first learned of it.  Out of all the games SuSE puts on their releases, this is probably the most simply enjoyable one.  I think you've done a fantastic job producing a stable and playable game, and it's hilarious to boot.  Got to say, I love the sounds as well as the graphics.  
+ 
+ One thing you could use (and I would help if I were able - still want to if I can find time during the summer) is some additional music. Five or six other soundtracks would spice up the background of the game.
+ 
+		
+---------------------------------
+Yahoo! Messenger with Voice. Make PC-to-Phone Calls to the US (and 30+ countries) for 2?/min or less.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060325/bb473cbc/attachment.html>
+
+From ravu_al_hemio at berlios.de  Thu Mar 30 19:19:00 2006
+From: ravu_al_hemio at berlios.de (Ravu al Hemio)
+Date: Thu, 30 Mar 2006 19:19:00 +0200
+Subject: [Supertux-devel] Congrats
+In-Reply-To: <20060325165129.62131.qmail@web54302.mail.yahoo.com>
+References: <20060325165129.62131.qmail@web54302.mail.yahoo.com>
+Message-ID: <442C1304.1010303@berlios.de>
+
+worn mibal wrote:
+> Hey, I just wanted to leave a thank-you for producing an excellent 
+> free game.  (If it weren't free, we'd all have to pay for it! :)  
+> SuperTux 1.3 is included with the SuSE 10.0 release, which is how I 
+> first learned of it.  Out of all the games SuSE puts on their 
+> releases, this is probably the most simply enjoyable one.  I think 
+> you've done a fantastic job producing a stable and playable game, and 
+> it's hilarious to boot.  Got to say, I love the sounds as well as the 
+> graphics. 
+>
+> One thing you could use (and I would help if I were able - still want 
+> to if I can find time during the summer) is some additional music. 
+> Five or six other soundtracks would spice up the background of the game.
+>
+> ------------------------------------------------------------------------
+> Yahoo! Messenger with Voice. Make PC-to-Phone Calls 
+> <http://us.rd.yahoo.com/mail_us/taglines/postman1/*http://us.rd.yahoo.com/evt=39663/*http://voice.yahoo.com> 
+> to the US (and 30+ countries) for 2?/min or less. 
+Thank you for the positive feedback. On the music: don't worry. We're 
+already working on the next release, which will contain quite a few 
+pieces more music.
+
+~~ Ondra
+
+
+
+From ravu_al_hemio at berlios.de  Thu Mar 30 19:21:21 2006
+From: ravu_al_hemio at berlios.de (Ravu al Hemio)
+Date: Thu, 30 Mar 2006 19:21:21 +0200
+Subject: [Supertux-devel] (no subject)
+In-Reply-To: <786c31d1124ea1cfb273909aa58a7319@hotmail.com>
+References: <786c31d1124ea1cfb273909aa58a7319@hotmail.com>
+Message-ID: <442C1391.1040505@berlios.de>
+
+Meaghan Briggs wrote:
+> how can i download super tux 2/milestone2?
+> Do i have to contact you another way and do i have to pay?
+> Thanks
+> Meaghan
+Hi Meaghan!
+
+At the moment, Milestone 2 is only in production, so you'd have to 
+install various development tools and compile (i.e. transfer it into an 
+application file) yourself. If this does not put you down... no, you do 
+not need to pay. Our development process is transparent and you can 
+download the newest compilable production versions for free. However, as 
+stated, these need to be compiled for you to be able to play them.
+
+~~ Ondra
+
+
+From ravu_al_hemio at berlios.de  Thu Mar 30 19:24:04 2006
+From: ravu_al_hemio at berlios.de (Ravu al Hemio)
+Date: Thu, 30 Mar 2006 19:24:04 +0200
+Subject: [Supertux-devel] supertux 2
+In-Reply-To: <360.54d5da.3153201b@aol.com>
+References: <360.54d5da.3153201b@aol.com>
+Message-ID: <442C1434.60003@berlios.de>
+
+LucasPFWard at aol.com wrote:
+> Dear person/people,                                                  
+>                                                   I want to know when 
+> milestone two will be ready                                        
+>                from lucas
+Dear Lucas,
+
+There's only one realistic estimate: "When it's done." Not even we know 
+when we'll complete it and since we don't want to create false hope 
+(there's unfortunately more than enough of it in the world anyway), we 
+are limiting ourselves to this simple sentence.
+
+~~ Ondra
+
+
+From wansti at gmx.de  Thu Mar 30 19:33:37 2006
+From: wansti at gmx.de (Marek M.)
+Date: Thu, 30 Mar 2006 19:33:37 +0200
+Subject: [Supertux-devel] Congrats
+In-Reply-To: <442C1304.1010303@berlios.de>
+References: <20060325165129.62131.qmail@web54302.mail.yahoo.com>
+	 <442C1304.1010303@berlios.de>
+Message-ID: <1143740017.9810.2.camel@rincewind.discworld.wansti.de>
+
+On Thu, 2006-03-30 at 19:19 +0200, Ravu al Hemio wrote:
+> worn mibal wrote:
+> > Hey, I just wanted to leave a thank-you for producing an excellent 
+> > free game.  (If it weren't free, we'd all have to pay for it! :)  
+> > SuperTux 1.3 is included with the SuSE 10.0 release, which is how I 
+> > first learned of it.  Out of all the games SuSE puts on their 
+> > releases, this is probably the most simply enjoyable one.  I think 
+> > you've done a fantastic job producing a stable and playable game, and 
+> > it's hilarious to boot.  Got to say, I love the sounds as well as the 
+> > graphics. 
+> >
+> > One thing you could use (and I would help if I were able - still want 
+> > to if I can find time during the summer) is some additional music. 
+> > Five or six other soundtracks would spice up the background of the game.
+> >
+> > ------------------------------------------------------------------------
+> > Yahoo! Messenger with Voice. Make PC-to-Phone Calls 
+> > <http://us.rd.yahoo.com/mail_us/taglines/postman1/*http://us.rd.yahoo.com/evt=39663/*http://voice.yahoo.com> 
+> > to the US (and 30+ countries) for 2?/min or less. 
+> Thank you for the positive feedback. On the music: don't worry. We're 
+> already working on the next release, which will contain quite a few 
+> pieces more music.
+
+Some of the music that will be in the next release is available for
+download and live streaming at last.fm 
+http://www.last.fm/music/Wansti/Assorted+Songs+From+SuperTux+Milestone+2
+
+	Marek
+
+
+
+
+From supertux at 2006.expires.deltadevelopment.de  Thu Mar 30 19:49:52 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Thu, 30 Mar 2006 19:49:52 +0200
+Subject: [Supertux-devel] hello
+In-Reply-To: <1142967538355.sarianne.v.103324.piw3B0xQ57fIKkrXJ2VhsQ@luukku.com>
+References: <1142967538355.sarianne.v.103324.piw3B0xQ57fIKkrXJ2VhsQ@luukku.com>
+Message-ID: <442C1A40.3070408@2006.expires.deltadevelopment.de>
+
+Hello Sarianne,
+
+sarianne v?rtinen wrote:
+> When we have new levels on super tux game?
+
+If you want to play new levels, have a look at 
+<http://www.supertux.info/plmdlvlsres.php?title=&lvset=>. It's a list of 
+levels made by other players on a SuperTux Fan Site.
+
+While the quality of uploaded levels varies, you can find some real 
+jewels in there.
+
+
+Regards,
+
+   Christoph
+
+
+-- 
+If your sergeant can see you, so can the enemy.
+
+

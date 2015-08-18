@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Tux Single Image Sprite
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Tux%20Single%20Image%20Sprite&In-Reply-To=%3C59034.146.145.190.179.1152799498.squirrel%40gluebox.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000397.html">
+   <LINK REL="Next"  HREF="000399.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Tux Single Image Sprite</H1>
+    <B>S.Groundwater</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Tux%20Single%20Image%20Sprite&In-Reply-To=%3C59034.146.145.190.179.1152799498.squirrel%40gluebox.com%3E"
+       TITLE="[Supertux-devel] Tux Single Image Sprite">slacker at gluebox.com
+       </A><BR>
+    <I>Thu Jul 13 16:04:58 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000397.html">[Supertux-devel] Links, please
+</A></li>
+        <LI>Next message: <A HREF="000399.html">[Supertux-devel] Tux Single Image Sprite
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#398">[ date ]</a>
+              <a href="thread.html#398">[ thread ]</a>
+              <a href="subject.html#398">[ subject ]</a>
+              <a href="author.html#398">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello SuperTux Crew.
+
+We have gone back and forth over the last year with respect to making the
+Tux sprite a single image again as opposed to the current four section
+body parts. If anyone here on the ML was around when the split was made, -
+feel free to shed light on why this split was a good idea or why this was
+done.
+
+In discussions on IRC I was commenting on how I would like to basically
+zero out the head and feet and move towards a two sprite solution with a 
+body and an arm sprites. From the graphic side this seems like the easiest
+way to get some relief from the complexities of the current sectional Tux,
+while still retaining a normal look as Tux's carried object gets layered
+between the arms and the body.
+
+IIRC, the other day Grumble had commented in favor of just a single Tux
+sprite.  With additional single graphics for every situation.
+i.e. - BigTux, BigTux with Block, FirehatTux, FirehatTux with Block, etc..
+
+I started the process of making xcf templates for each 'singleTux'
+situation but now I have questions about wether this is a good idea. The
+problem I see is how natural things look and work, especially with regard
+to holding an object and jumping through a 1 tile hole.
+
+On IRC today I discussed this with Sommer and his comments were:
+&quot;I don't know if one complete animation set per type of thing carried is a
+good idea. I'd prefer a generic 'Tux carrying something' animation, which
+the game can then overlay with e.g. MrIceblock. The game can then let Tux
+carry MrIceblock closer to his body when he drops through a 1-tile-hole.&quot;
+
+Please speak up if you have comments on how/why the Tux sprite should work.
+I am leaning back towards my original game plan of body plus arm sprites.
+
+- greetings :p
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000397.html">[Supertux-devel] Links, please
+</A></li>
+	<LI>Next message: <A HREF="000399.html">[Supertux-devel] Tux Single Image Sprite
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#398">[ date ]</a>
+              <a href="thread.html#398">[ thread ]</a>
+              <a href="subject.html#398">[ subject ]</a>
+              <a href="author.html#398">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

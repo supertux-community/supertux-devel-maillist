@@ -1,0 +1,1662 @@
+From mad_monk4000 at yahoo.com  Sun Sep  3 17:26:37 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Sun, 3 Sep 2006 08:26:37 -0700 (PDT)
+Subject: [Supertux-devel] Ice Flower
+Message-ID: <20060903152637.32127.qmail@web37012.mail.mud.yahoo.com>
+
+This is how I think the Ice Flower should work: First, the player presses and holds the fire key. While the key is held down, the game freezes and a cursur for targeting appears. While still holding down the key, the player uses the arrow keys to move the cursur. Finally, When the player releases the button, a ball of ice shoots in a straight line toward the cursur and keeps moving until it hits an object or enemy. If it hits an enemy, the enemy is defeated, and if it hits something else, it turns into ice. (everything on the Interactive layer counts as "Something Else".) Also, when Tux ducks he becomes covered in ice making him invincible but also causing Tux to get pushed when hit by an enemy or object.
+ 		
+---------------------------------
+Talk is cheap. Use Yahoo! Messenger to make PC-to-Phone calls.  Great rates starting at 1?/min.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060903/24df7e8d/attachment.html>
+
+From djwings at gmail.com  Sun Sep  3 17:29:25 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Sun, 3 Sep 2006 11:29:25 -0400
+Subject: [Supertux-devel] Frozen?
+In-Reply-To: <44F4411D.9050908@gmx.de>
+References: <826ffc730608290533j305fd8a4w65cc41105ab19a86@mail.gmail.com>
+	<44F43E0C.3080900@gmx.de>
+	<826ffc730608290619k6f99234exedf610aed6c6bc22@mail.gmail.com>
+	<44F4411D.9050908@gmx.de>
+Message-ID: <826ffc730609030829h508f2d68ydf09d292a7a9018a@mail.gmail.com>
+
+The mix is now up for public download on the ST fan site at supertux.info.
+
+On 8/29/06, Marek M. <wansti at gmx.de> wrote:
+>
+> Cool! Keep me updated about your progress. And about what's going to be
+> in the next milestone, that'll simply be the one that sounds better. I'm
+> also planning on releasing a sound track album with milestone 2, and
+> it'd be cool to put some remixes on that.
+>
+>     MWM
+>
+> djwings at gmail.com wrote:
+> > Ah. So Nolok's Party Pit hasn't frozen over yet? I'm planning on
+> > making some remixes of ST music themes, but I'm not suggesting they
+> > should go into the next milestone, the versions you made are fine
+> > (<3ing the new Fortress theme), so much as an extra for the fan site.
+> >
+> > On 8/29/06, *Marek M.* <wansti at gmx.de <mailto:wansti at gmx.de>> wrote:
+> >
+> >     djwings at gmail.com <mailto:djwings at gmail.com> wrote:
+> >     > Is the development branch completely frozen? Have we stopped
+> working
+> >     > on Milestone 2?
+> >     I guess we're just all on vacation these days. At least that's the
+> >     case
+> >     with me. :-)
+> >
+> >         Marek
+> >     _______________________________________________
+> >     Supertux-devel mailing list
+> >     Supertux-devel at lists.berlios.de
+> >     <mailto:Supertux-devel at lists.berlios.de>
+> >     https://lists.berlios.de/mailman/listinfo/supertux-devel
+> >
+> >
+> > ------------------------------------------------------------------------
+> >
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/supertux-devel
+> >
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060903/e3e6bbab/attachment.html>
+
+From tuxdev103 at gmail.com  Mon Sep  4 00:42:21 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Sun, 3 Sep 2006 15:42:21 -0700
+Subject: [Supertux-devel] Ice Flower
+In-Reply-To: <20060903152637.32127.qmail@web37012.mail.mud.yahoo.com>
+References: <20060903152637.32127.qmail@web37012.mail.mud.yahoo.com>
+Message-ID: <ff70c5070609031542t219e559fo509b1780267d51f5@mail.gmail.com>
+
+That is way too complicated.  Metroid-style Ice beam is much simpler
+to use and has been sorta implemented already.
+
+
+From goldenpiranha at gmail.com  Thu Sep  7 06:11:33 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Wed, 6 Sep 2006 21:11:33 -0700
+Subject: [Supertux-devel] Dead?
+Message-ID: <bcd1d8470609062111n12264ba1qb241157c4160404@mail.gmail.com>
+
+Is this project dead?
+I haven't got any mail from this list for a while...
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060906/f6cef633/attachment.html>
+
+From anmaster at berlios.de  Thu Sep  7 09:14:58 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Thu, 07 Sep 2006 09:14:58 +0200
+Subject: [Supertux-devel] Dead?
+In-Reply-To: <bcd1d8470609062111n12264ba1qb241157c4160404@mail.gmail.com>
+References: <bcd1d8470609062111n12264ba1qb241157c4160404@mail.gmail.com>
+Message-ID: <44FFC6F2.3090001@berlios.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+No it is not dead. Even if the project is on low speed at the moment the
+mailing list seems active. Maybe you made a config error in your mail
+client or your mail service have problems? (That is why I send a copy to
+your email as well as to the list.)
+
+Danny Bittman wrote:
+> Is this project dead?
+> I haven't got any mail from this list for a while...
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFE/8byWmK6ng/aMNkRA/nDAJ4yGbf6grCjlfFNOV73akducR9bZwCgvmH1
+gTajQKoIJvZllw45tsTEfTI=
+=bAmc
+-----END PGP SIGNATURE-----
+
+
+From djwings at gmail.com  Thu Sep  7 12:57:22 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Thu, 7 Sep 2006 06:57:22 -0400
+Subject: [Supertux-devel] Dead?
+In-Reply-To: <44FFC6F2.3090001@berlios.de>
+References: <bcd1d8470609062111n12264ba1qb241157c4160404@mail.gmail.com>
+	<44FFC6F2.3090001@berlios.de>
+Message-ID: <826ffc730609070357x6343c9b6h7fbdfe52219adffc@mail.gmail.com>
+
+I made a topic called "Frozen?" about the same thing, and Marek reassured me
+that yeah, it's still going.
+
+On 9/7/06, AnMaster <anmaster at berlios.de> wrote:
+>
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: RIPEMD160
+>
+> No it is not dead. Even if the project is on low speed at the moment the
+> mailing list seems active. Maybe you made a config error in your mail
+> client or your mail service have problems? (That is why I send a copy to
+> your email as well as to the list.)
+>
+> Danny Bittman wrote:
+> > Is this project dead?
+> > I haven't got any mail from this list for a while...
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.2.1 (MingW32)
+> Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+>
+> iD8DBQFE/8byWmK6ng/aMNkRA/nDAJ4yGbf6grCjlfFNOV73akducR9bZwCgvmH1
+> gTajQKoIJvZllw45tsTEfTI=
+> =bAmc
+> -----END PGP SIGNATURE-----
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060907/8ea11186/attachment.html>
+
+From goldenpiranha at gmail.com  Fri Sep  8 03:31:11 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Thu, 7 Sep 2006 18:31:11 -0700
+Subject: [Supertux-devel] Dead?
+In-Reply-To: <826ffc730609070357x6343c9b6h7fbdfe52219adffc@mail.gmail.com>
+References: <bcd1d8470609062111n12264ba1qb241157c4160404@mail.gmail.com>
+	<44FFC6F2.3090001@berlios.de>
+	<826ffc730609070357x6343c9b6h7fbdfe52219adffc@mail.gmail.com>
+Message-ID: <bcd1d8470609071831o74d4f9d4k24e54a39f6d88941@mail.gmail.com>
+
+OK, thanks!
+
+On 9/7/06, djwings at gmail.com <djwings at gmail.com> wrote:
+>
+> I made a topic called "Frozen?" about the same thing, and Marek reassured
+> me that yeah, it's still going.
+>
+> On 9/7/06, AnMaster < anmaster at berlios.de> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: RIPEMD160
+>
+> No it is not dead. Even if the project is on low speed at the moment the
+> mailing list seems active. Maybe you made a config error in your mail
+> client or your mail service have problems? (That is why I send a copy to
+> your email as well as to the list.)
+>
+> Danny Bittman wrote:
+> > Is this project dead?
+> > I haven't got any mail from this list for a while...
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.2.1 (MingW32)
+> Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+>
+> iD8DBQFE/8byWmK6ng/aMNkRA/nDAJ4yGbf6grCjlfFNOV73akducR9bZwCgvmH1
+> gTajQKoIJvZllw45tsTEfTI=
+> =bAmc
+> -----END PGP SIGNATURE-----
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060907/bcbb54d1/attachment.html>
+
+From p637777 at aol.com  Fri Sep  8 21:13:25 2006
+From: p637777 at aol.com (Markus Engel)
+Date: Fri, 08 Sep 2006 21:13:25 +0200
+Subject: [Supertux-devel] Bombs and unstable tiles
+Message-ID: <4501C0D5.7070608@aol.com>
+
+Hi there!
+
+When I played the level 'Crumbling Path' I wondered whether it would be 
+a good idea to let the unstable tiles fall down when a bomb explodes on 
+them... I think there is no reason not to do this?
+
+Markus
+
+
+From goldenpiranha at gmail.com  Sat Sep  9 01:51:21 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Fri, 8 Sep 2006 16:51:21 -0700
+Subject: [Supertux-devel] Bombs and unstable tiles
+In-Reply-To: <4501C0D5.7070608@aol.com>
+References: <4501C0D5.7070608@aol.com>
+Message-ID: <bcd1d8470609081651h6ea4ddf5i9ef721ff7ba5a735@mail.gmail.com>
+
+Yeah that is cool and stuff. I agree
+
+On 9/8/06, Markus Engel <p637777 at aol.com> wrote:
+>
+> Hi there!
+>
+> When I played the level 'Crumbling Path' I wondered whether it would be
+> a good idea to let the unstable tiles fall down when a bomb explodes on
+> them... I think there is no reason not to do this?
+>
+> Markus
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060908/f6ab505e/attachment.html>
+
+From uafr at gmx.de  Sat Sep  9 02:37:07 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Sat, 9 Sep 2006 02:37:07 +0200
+Subject: [Supertux-devel] Bombs and unstable tiles
+In-Reply-To: <4501C0D5.7070608@aol.com>
+References: <4501C0D5.7070608@aol.com>
+Message-ID: <20060909003707.GA8107@greg.local>
+
+On 20060908 Markus Engel <p637777 at aol.com> wrote:
+> When I played the level 'Crumbling Path' I wondered whether it would be 
+> a good idea to let the unstable tiles fall down when a bomb explodes on 
+> them... I think there is no reason not to do this?
+
+Worst case you shoot Mr. Bomb in the wrong place and can not
+solve the level any more. Does not sound like much fun.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From p637777 at aol.com  Sat Sep  9 17:55:10 2006
+From: p637777 at aol.com (Markus Engel)
+Date: Sat, 09 Sep 2006 17:55:10 +0200
+Subject: [Supertux-devel] Bombs and unstable tiles
+Message-ID: <4502E3DE.3060000@aol.com>
+
+Okay... But then you could go back maybe and find another way...
+But I had another idea yesterday: If Mr. Bomb is exploding and there are 
+coins around him, maybe they could smelt?
+
+
+From p637777 at aol.com  Sat Sep  9 18:07:22 2006
+From: p637777 at aol.com (Markus Engel)
+Date: Sat, 09 Sep 2006 18:07:22 +0200
+Subject: [Supertux-devel] Bug Revision 4214
+Message-ID: <4502E6BA.2060604@aol.com>
+
+When you are collecting too many coins at once, the game suddenly exits:
+
+[INFO] src/main.cpp:196 [D:\Dokumente und 
+Einstellungen\Markus\.supertux2] is in the search path
+[INFO] src/main.cpp:196 [C:\MinGW\1.0\build\supertux\/data] is in the 
+search path
+[INFO] src/main.cpp:430 Component 'controller' finished after 0.2 seconds
+[WARNING] src/control/joystickkeyboardcontroller.cpp:209 Invalid button 
+'0' in buttonmap
+[WARNING] src/control/joystickkeyboardcontroller.cpp:209 Invalid button 
+'1' in buttonmap
+[INFO] src/main.cpp:430 Component 'config' finished after 0.073 seconds
+[INFO] src/main.cpp:430 Component 'tinygettext' finished after 0.03 seconds
+[INFO] src/main.cpp:430 Component 'commandline' finished after 0 seconds
+[INFO] src/main.cpp:430 Component 'audio' finished after 0.301 seconds
+[INFO] src/main.cpp:430 Component 'video' finished after 1.806 seconds
+[INFO] src/main.cpp:430 Component 'scripting' finished after 0.113 seconds
+[DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.085 seconds
+[INFO] src/main.cpp:430 Component 'resources' finished after 0.971 seconds
+[INFO] src/main.cpp:298 Using random seed 1157817430, from time().
+[WARNING] src/title.cpp:133 Couldn't parse levelset info for 
+'levels/.svn': Couldn't open file 'levels/.svn/info': Das System kann 
+die angegebene Datei nicht finden.
+[WARNING] src/title.cpp:133 Couldn't parse levelset info for 
+'levels/misc': Couldn't open file 'levels/misc/info': Das System kann 
+die angegebene Datei nicht finden.
+[DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.054 seconds
+[WARNING] src/sector.cpp:212 sector 'main' does not contain a camera.
+[WARNING] src/sector.cpp:212 sector 'main' does not contain a camera.
+[WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+sounds/coin.wav: Couldn't create audio source: Invalid Value
+[WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+sounds/coin.wav: Couldn't create audio source: Invalid Value
+[WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+sounds/coin.wav: Couldn't create audio source: Invalid Value
+[WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+sounds/coin.wav: Couldn't create audio source: Invalid Value
+[WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+sounds/coin.wav: Couldn't create audio source: Invalid Value
+[WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+sounds/coin.wav: Couldn't create audio source: Invalid Value
+[WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+sounds/coin.wav: Couldn't create audio source: Invalid Value
+[WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+sounds/coin.wav: Couldn't create audio source: Invalid Value
+[WARNING] src/sector.cpp:212 sector 'main' does not contain a camera.
+[FATAL] src/main.cpp:507 Unexpected exception: Couldn't create audio 
+source: Invalid Value
+
+
+From goldenpiranha at gmail.com  Sat Sep  9 19:24:18 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Sat, 9 Sep 2006 10:24:18 -0700
+Subject: [Supertux-devel] World maps
+Message-ID: <bcd1d8470609091024w3d562dd2j45319ee144004ddd@mail.gmail.com>
+
+Does anyone have a link to a world map editor?
+thanks
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060909/4ca52960/attachment.html>
+
+From anmaster at berlios.de  Sat Sep  9 20:02:06 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Sat, 09 Sep 2006 20:02:06 +0200
+Subject: [Supertux-devel] World maps
+In-Reply-To: <bcd1d8470609091024w3d562dd2j45319ee144004ddd@mail.gmail.com>
+References: <bcd1d8470609091024w3d562dd2j45319ee144004ddd@mail.gmail.com>
+Message-ID: <4503019E.5070306@berlios.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+For supertux-0.1.x or supertux-svn?
+
+For supertux-svn SuperTux# can do it:
+http://supertux.berlios.de/wiki/index.php/Building_SuperTux#Compiling_the_editor
+Or for SuperTux# on Windows:
+http://supertux.berlios.de/wiki/index.php/Building_on_Windows#Building_the_editor
+
+For supertux-0.1.x I *think* Flexlay can do it, but as I never got
+Flexlay to work I'm not sure.
+
+Danny Bittman skrev:
+> Does anyone have a link to a world map editor?
+> thanks
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFFAwGeWmK6ng/aMNkRA6uKAJoCldF6hPAZN0cfNJTGHlmAIwRTZwCgtXnZ
+l165/wjA7thMJ7pcyLKbXC0=
+=OVQS
+-----END PGP SIGNATURE-----
+
+
+From goldenpiranha at gmail.com  Sat Sep  9 20:17:31 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Sat, 9 Sep 2006 11:17:31 -0700
+Subject: [Supertux-devel] World maps
+In-Reply-To: <4503019E.5070306@berlios.de>
+References: <bcd1d8470609091024w3d562dd2j45319ee144004ddd@mail.gmail.com>
+	<4503019E.5070306@berlios.de>
+Message-ID: <bcd1d8470609091117y5b36236dmaf951206a95d501f@mail.gmail.com>
+
+It doesn't compile.
+
+On 9/9/06, AnMaster <anmaster at berlios.de> wrote:
+>
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: RIPEMD160
+>
+> For supertux-0.1.x or supertux-svn?
+>
+> For supertux-svn SuperTux# can do it:
+>
+> http://supertux.berlios.de/wiki/index.php/Building_SuperTux#Compiling_the_editor
+> Or for SuperTux# on Windows:
+>
+> http://supertux.berlios.de/wiki/index.php/Building_on_Windows#Building_the_editor
+>
+> For supertux-0.1.x I *think* Flexlay can do it, but as I never got
+> Flexlay to work I'm not sure.
+>
+> Danny Bittman skrev:
+> > Does anyone have a link to a world map editor?
+> > thanks
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.2.1 (MingW32)
+> Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+>
+> iD8DBQFFAwGeWmK6ng/aMNkRA6uKAJoCldF6hPAZN0cfNJTGHlmAIwRTZwCgtXnZ
+> l165/wjA7thMJ7pcyLKbXC0=
+> =OVQS
+> -----END PGP SIGNATURE-----
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060909/e4c6b173/attachment.html>
+
+From uafr at gmx.de  Sat Sep  9 23:29:09 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Sat, 9 Sep 2006 23:29:09 +0200
+Subject: [Supertux-devel] Bug Revision 4214
+In-Reply-To: <4502E6BA.2060604@aol.com>
+References: <4502E6BA.2060604@aol.com>
+Message-ID: <20060909212909.GA17652@greg.local>
+
+On 20060909 Markus Engel <p637777 at aol.com> wrote:
+> When you are collecting too many coins at once, the game suddenly exits:
+
+How many? I noticed that if you run through hundreds of coins it
+takes the counter a while to catch up. Also the hud shows only up to
+9999 coins even if tux has more.
+ 
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From anmaster at berlios.de  Sat Sep  9 23:48:26 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Sat, 09 Sep 2006 23:48:26 +0200
+Subject: [Supertux-devel] Bug Revision 4214
+In-Reply-To: <20060909212909.GA17652@greg.local>
+References: <4502E6BA.2060604@aol.com> <20060909212909.GA17652@greg.local>
+Message-ID: <450336AA.70304@berlios.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+> [FATAL] src/main.cpp:507 Unexpected exception: Couldn't create audio
+> source: Invalid Value
+I have seen this error when getting a lot of coins fast (like dropping
+from above into a field of 20x20 coins or so) on Windows a few times.
+Never seems to happen on Linux. Last time I saw it was several months
+ago though.
+
+/Arvid
+
+Wolfgang Becker skrev:
+> On 20060909 Markus Engel <p637777 at aol.com> wrote:
+>> When you are collecting too many coins at once, the game suddenly exits:
+> 
+> How many? I noticed that if you run through hundreds of coins it
+> takes the counter a while to catch up. Also the hud shows only up to
+> 9999 coins even if tux has more.
+>  
+> Tsch??,
+> Wolfgang
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+
+iD8DBQFFAzaqWmK6ng/aMNkRA6QKAJ0Vk2hOWIWW0Am0LSvhBr9w/VkDHACgyQ3i
+bT81LpAWXUNf5gtLOZdCORo=
+=IASF
+-----END PGP SIGNATURE-----
+
+
+From uafr at gmx.de  Sun Sep 10 00:05:08 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Sun, 10 Sep 2006 00:05:08 +0200
+Subject: [Supertux-devel] World maps
+In-Reply-To: <bcd1d8470609091117y5b36236dmaf951206a95d501f@mail.gmail.com>
+References: <bcd1d8470609091024w3d562dd2j45319ee144004ddd@mail.gmail.com>
+	<4503019E.5070306@berlios.de>
+	<bcd1d8470609091117y5b36236dmaf951206a95d501f@mail.gmail.com>
+Message-ID: <20060909220508.GA19096@greg.local>
+
+On 20060909 Danny Bittman <goldenpiranha at gmail.com> wrote:
+> It doesn't compile.
+
+What does not compile? What did you do. What error message do you get?
+Which operating system are we talking about?
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From goldenpiranha at gmail.com  Sun Sep 10 02:22:55 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Sat, 9 Sep 2006 17:22:55 -0700
+Subject: [Supertux-devel] World maps
+In-Reply-To: <20060909220508.GA19096@greg.local>
+References: <bcd1d8470609091024w3d562dd2j45319ee144004ddd@mail.gmail.com>
+	<4503019E.5070306@berlios.de>
+	<bcd1d8470609091117y5b36236dmaf951206a95d501f@mail.gmail.com>
+	<20060909220508.GA19096@greg.local>
+Message-ID: <bcd1d8470609091722n68fd09efp532c40f357087596@mail.gmail.com>
+
+Nevermind. I got it working!
+
+
+On 9/9/06, Wolfgang Becker <uafr at gmx.de> wrote:
+>
+> On 20060909 Danny Bittman <goldenpiranha at gmail.com> wrote:
+> > It doesn't compile.
+>
+> What does not compile? What did you do. What error message do you get?
+> Which operating system are we talking about?
+>
+> Tsch??,
+> Wolfgang
+> --
+> Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060909/a79dd72f/attachment.html>
+
+From matze at braunis.de  Sun Sep 10 11:51:45 2006
+From: matze at braunis.de (Matthias Braun)
+Date: Sun, 10 Sep 2006 11:51:45 +0200
+Subject: [Supertux-devel] Bug Revision 4214
+In-Reply-To: <4502E6BA.2060604@aol.com>
+References: <4502E6BA.2060604@aol.com>
+Message-ID: <1157881905.24928.0.camel@taylor.local>
+
+Should be fixed now
+
+Am Samstag, den 09.09.2006, 18:07 +0200 schrieb Markus Engel:
+> When you are collecting too many coins at once, the game suddenly exits:
+> 
+> [INFO] src/main.cpp:196 [D:\Dokumente und 
+> Einstellungen\Markus\.supertux2] is in the search path
+> [INFO] src/main.cpp:196 [C:\MinGW\1.0\build\supertux\/data] is in the 
+> search path
+> [INFO] src/main.cpp:430 Component 'controller' finished after 0.2 seconds
+> [WARNING] src/control/joystickkeyboardcontroller.cpp:209 Invalid button 
+> '0' in buttonmap
+> [WARNING] src/control/joystickkeyboardcontroller.cpp:209 Invalid button 
+> '1' in buttonmap
+> [INFO] src/main.cpp:430 Component 'config' finished after 0.073 seconds
+> [INFO] src/main.cpp:430 Component 'tinygettext' finished after 0.03 seconds
+> [INFO] src/main.cpp:430 Component 'commandline' finished after 0 seconds
+> [INFO] src/main.cpp:430 Component 'audio' finished after 0.301 seconds
+> [INFO] src/main.cpp:430 Component 'video' finished after 1.806 seconds
+> [INFO] src/main.cpp:430 Component 'scripting' finished after 0.113 seconds
+> [DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.085 seconds
+> [INFO] src/main.cpp:430 Component 'resources' finished after 0.971 seconds
+> [INFO] src/main.cpp:298 Using random seed 1157817430, from time().
+> [WARNING] src/title.cpp:133 Couldn't parse levelset info for 
+> 'levels/.svn': Couldn't open file 'levels/.svn/info': Das System kann 
+> die angegebene Datei nicht finden.
+> [WARNING] src/title.cpp:133 Couldn't parse levelset info for 
+> 'levels/misc': Couldn't open file 'levels/misc/info': Das System kann 
+> die angegebene Datei nicht finden.
+> [DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.054 seconds
+> [WARNING] src/sector.cpp:212 sector 'main' does not contain a camera.
+> [WARNING] src/sector.cpp:212 sector 'main' does not contain a camera.
+> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+> sounds/coin.wav: Couldn't create audio source: Invalid Value
+> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+> sounds/coin.wav: Couldn't create audio source: Invalid Value
+> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+> sounds/coin.wav: Couldn't create audio source: Invalid Value
+> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+> sounds/coin.wav: Couldn't create audio source: Invalid Value
+> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+> sounds/coin.wav: Couldn't create audio source: Invalid Value
+> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+> sounds/coin.wav: Couldn't create audio source: Invalid Value
+> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+> sounds/coin.wav: Couldn't create audio source: Invalid Value
+> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+> sounds/coin.wav: Couldn't create audio source: Invalid Value
+> [WARNING] src/sector.cpp:212 sector 'main' does not contain a camera.
+> [FATAL] src/main.cpp:507 Unexpected exception: Couldn't create audio 
+> source: Invalid Value
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+From sheets.d at gmail.com  Tue Sep 12 05:13:32 2006
+From: sheets.d at gmail.com (Daniel Sheets)
+Date: Mon, 11 Sep 2006 23:13:32 -0400
+Subject: [Supertux-devel] trying to install in xandros
+Message-ID: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>
+
+No luck though... I tried the autopackage thing, but couldnt get it to work
+either.
+
+My wife really likes this game and I would like to get it installed.
+
+Thanks!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060911/7ae21f76/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Tue Sep 12 05:39:48 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Tue, 12 Sep 2006 05:39:48 +0200
+Subject: [Supertux-devel] trying to install in xandros
+In-Reply-To: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>
+References: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>
+Message-ID: <45062C04.3010109@2006.expires.deltadevelopment.de>
+
+Hey Daniel,
+
+Daniel Sheets wrote:
+> My wife really likes this game and I would like to get it installed.
+> 
+> Thanks!
+
+You're welcome. Or was that supposed to be a question? :-)
+
+
+If so, please provide the version numbers of related programs you were 
+using (or trying to use), as well as some details:
+
+- What did you try?
+- How did you go about it?
+- What worked?
+- What didn't work?
+- What error messages did you get?
+- How can the error be reproduced?
+
+
+Without such details it's next to impossible for most of us to track 
+down the error - it's like me asking you "Why couldn't I eat pancakes 
+this morning?" - it could be pretty much anything...
+
+
+Regards,
+
+   Christoph
+
+
+
+From sheets.d at gmail.com  Tue Sep 12 13:08:01 2006
+From: sheets.d at gmail.com (Daniel Sheets)
+Date: Tue, 12 Sep 2006 07:08:01 -0400
+Subject: [Supertux-devel] trying to install in xandros
+In-Reply-To: <45062C04.3010109@2006.expires.deltadevelopment.de>
+References: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>
+	<45062C04.3010109@2006.expires.deltadevelopment.de>
+Message-ID: <467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>
+
+>
+> Ok, first off, I am new to linux. I could be just doing something worng.
+
+
+ Versions:
+                  Xandros Desktop OS 3.0.2
+                  Super Tux 0.1.3
+                  I tried the generic autopackage 1.0.10
+                  I couldnt fine and downloads for xandros. I believe
+xandros is based      on debian, but the apt-get did nothing.
+
+- What did you try?
+
+             I installed autopackage which seemed to go ok. I downloaded the
+
+             super tux for autopackage, but cant get anything to work. It
+just
+             opens in a text editor.
+
+- How did you go about it?
+
+             I tried entering commands in the console (autopackage,
+apt-get),
+             but nothing happened. I dont think xandros was shipped with
+Super
+             tux.
+
+- What worked?
+
+             Autopackage seems to have installed ok.
+
+
+- What didn't work?
+
+             I couldnt get super tux to install. When I click on it from the
+desktop,
+             it opens in a text editor (meaning the system doesnt know what
+to
+             do with a .package file). Autopackage wont work from the
+command
+             line. Neither will apt-get.
+
+- What error messages did you get?
+
+             No errors, nothing happens at all.
+
+
+- How can the error be reproduced?
+>           N/A
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060912/2f151630/attachment.html>
+
+From sheets.d at gmail.com  Tue Sep 12 13:10:33 2006
+From: sheets.d at gmail.com (Daniel Sheets)
+Date: Tue, 12 Sep 2006 07:10:33 -0400
+Subject: [Supertux-devel] trying to install in xandros
+In-Reply-To: <467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>
+References: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>
+	<45062C04.3010109@2006.expires.deltadevelopment.de>
+	<467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>
+Message-ID: <467bb95b0609120410j62c3b513gfc68f071514928f0@mail.gmail.com>
+
+---==== CORRRECTION ====---
+
+Ignore the whole email I just sent... I figured out something else.
+
+I'll try to get it and then I will send an update.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060912/c59ecdc9/attachment.html>
+
+From sheets.d at gmail.com  Tue Sep 12 13:27:38 2006
+From: sheets.d at gmail.com (Daniel Sheets)
+Date: Tue, 12 Sep 2006 07:27:38 -0400
+Subject: [Supertux-devel] trying to install in xandros
+In-Reply-To: <467bb95b0609120410j62c3b513gfc68f071514928f0@mail.gmail.com>
+References: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>
+	<45062C04.3010109@2006.expires.deltadevelopment.de>
+	<467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>
+	<467bb95b0609120410j62c3b513gfc68f071514928f0@mail.gmail.com>
+Message-ID: <467bb95b0609120427r1c8c1c7eh348ca9d1dea69142@mail.gmail.com>
+
+I had to install SDL libraries.
+
+Everything installed ok, but now the game wont run. When I click on it, it
+does nothing.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060912/725dfe8c/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Tue Sep 12 15:49:41 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Tue, 12 Sep 2006 15:49:41 +0200
+Subject: [Supertux-devel] trying to install in xandros
+In-Reply-To: <467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>
+References: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>	<45062C04.3010109@2006.expires.deltadevelopment.de>
+	<467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>
+Message-ID: <4506BAF5.1090204@2006.expires.deltadevelopment.de>
+
+Daniel Sheets wrote:
+> I tried the generic autopackage 1.0.10
+
+Perfect. This should work on almost any system.
+
+> I couldnt fine and downloads for xandros. I believe
+> xandros is based on debian, but the apt-get did nothing.
+
+If it really did nothing at all, i.e. report neither success nor error
+you might have done something wrong.
+
+Did you try looking for a SuperTux package in your graphical package
+manager ("Xandros Networks" if I read the Wikipedia article right)?
+
+If it doesn't, I can think of two possible ways, both of which require
+typing commands in a console: Open a console window by clicking "Launch
+> Run Command...", then typing "konsole" and pressing the Enter key.
+
+
+== 1: Get and install the debian package manually =====
+
+Download the package from
+
+http://ftp.us.debian.org/debian/pool/main/s/supertux/supertux_0.1.3-1.1_i386.deb
+
+Try double-clicking the file. If this doesn't open your package manager,
+move the file somewhere convenient, e.g. to "/tmp", open a console
+window then type the following commands:
+
+su
+dpkg --install /tmp/supertux_0.1.3-1.1_i386.deb
+
+
+== 2: Run the autopackage file manually =====
+
+If your desktop does not know how to start shell scripts (which seems to
+be the case with Xandros') you can launch the autopackage installer
+manually. Just do the following:
+
+1.) Move the "supertux-0.1.3.x86.package" file to somewhere convenient,
+e.g. the "/tmp" directory.
+
+2.) In a console window, enter the following lines:
+cd /tmp && bash supertux-0.1.3.x86.package
+
+Just follow the installer's prompts and you should be done.
+
+
+
+Please let us know if either (1) or (2) worked for you.
+
+
+Regards,
+
+   Christoph
+
+
+
+From sheets.d at gmail.com  Tue Sep 12 15:59:58 2006
+From: sheets.d at gmail.com (Daniel Sheets)
+Date: Tue, 12 Sep 2006 08:59:58 -0500
+Subject: [Supertux-devel] trying to install in xandros
+In-Reply-To: <4506BAF5.1090204@2006.expires.deltadevelopment.de>
+References: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>
+	<45062C04.3010109@2006.expires.deltadevelopment.de>
+	<467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>
+	<4506BAF5.1090204@2006.expires.deltadevelopment.de>
+Message-ID: <467bb95b0609120659tadd59fau624969fea03cb132@mail.gmail.com>
+
+I'm at school now but I will try this when I get home.
+
+I got everything installed now and now its says that I need the GLIBC
+package.
+
+I cant find this for xandros either.
+
+I will try ubuntu after I get a feel for xandros, I may have better luck
+with that.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060912/5540a3b7/attachment.html>
+
+From anmaster at berlios.de  Tue Sep 12 20:45:20 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Tue, 12 Sep 2006 20:45:20 +0200
+Subject: [Supertux-devel] trying to install in xandros
+In-Reply-To: <467bb95b0609120659tadd59fau624969fea03cb132@mail.gmail.com>
+References: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>	<45062C04.3010109@2006.expires.deltadevelopment.de>	<467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>	<4506BAF5.1090204@2006.expires.deltadevelopment.de>
+	<467bb95b0609120659tadd59fau624969fea03cb132@mail.gmail.com>
+Message-ID: <45070040.3050407@berlios.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+Glibc is present in every Linux distribution. Don't install another
+glibc version over the one you currently have, that could only lead to
+very bad results (I saw someone install a glibc RPM from RedHat on a
+SuSE once, the only thing that worked after that was the command "cd" in
+bash, quite bad)
+
+/Arvid
+
+Daniel Sheets skrev:
+> I'm at school now but I will try this when I get home.
+> 
+> I got everything installed now and now its says that I need the GLIBC
+> package.
+> 
+> I cant find this for xandros either.
+> 
+> I will try ubuntu after I get a feel for xandros, I may have better luck
+> with that.
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+
+iD8DBQFFBwBAWmK6ng/aMNkRAz8WAJ9KhK0F3s1FN/gOQOAJYB5xGgh1TACfTSHr
+kDaqlNqcrpfizVwESRIdvsQ=
+=uOss
+-----END PGP SIGNATURE-----
+
+
+From sheets.d at gmail.com  Tue Sep 12 22:49:18 2006
+From: sheets.d at gmail.com (Daniel Sheets)
+Date: Tue, 12 Sep 2006 15:49:18 -0500
+Subject: [Supertux-devel] trying to install in xandros
+In-Reply-To: <45070040.3050407@berlios.de>
+References: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>
+	<45062C04.3010109@2006.expires.deltadevelopment.de>
+	<467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>
+	<4506BAF5.1090204@2006.expires.deltadevelopment.de>
+	<467bb95b0609120659tadd59fau624969fea03cb132@mail.gmail.com>
+	<45070040.3050407@berlios.de>
+Message-ID: <467bb95b0609121349r2a9c92b9ha3b107f226b2a989@mail.gmail.com>
+
+the game says it cant find glibc.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060912/39f7dce1/attachment.html>
+
+From anmaster at berlios.de  Tue Sep 12 22:51:16 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Tue, 12 Sep 2006 22:51:16 +0200
+Subject: [Supertux-devel] trying to install in xandros
+In-Reply-To: <467bb95b0609121349r2a9c92b9ha3b107f226b2a989@mail.gmail.com>
+References: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>	<45062C04.3010109@2006.expires.deltadevelopment.de>	<467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>	<4506BAF5.1090204@2006.expires.deltadevelopment.de>	<467bb95b0609120659tadd59fau624969fea03cb132@mail.gmail.com>	<45070040.3050407@berlios.de>
+	<467bb95b0609121349r2a9c92b9ha3b107f226b2a989@mail.gmail.com>
+Message-ID: <45071DC4.2050002@berlios.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+What is the exact error message?
+
+Daniel Sheets skrev:
+> the game says it cant find glibc.
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+
+iD8DBQFFBx3EWmK6ng/aMNkRAxcEAJ0YKQah88QRClc9wlWrdPjZ8uXUEACePkIe
+jjdt7dw48SYfFMWDrXSpO8c=
+=7DA3
+-----END PGP SIGNATURE-----
+
+
+From supertux at 2006.expires.deltadevelopment.de  Tue Sep 12 23:12:25 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Tue, 12 Sep 2006 23:12:25 +0200
+Subject: [Supertux-devel] trying to install in xandros
+In-Reply-To: <467bb95b0609120659tadd59fau624969fea03cb132@mail.gmail.com>
+References: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>	<45062C04.3010109@2006.expires.deltadevelopment.de>	<467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>	<4506BAF5.1090204@2006.expires.deltadevelopment.de>
+	<467bb95b0609120659tadd59fau624969fea03cb132@mail.gmail.com>
+Message-ID: <450722B9.9000107@2006.expires.deltadevelopment.de>
+
+Hey Daniel,
+
+Daniel Sheets wrote:
+> I got everything installed now and now its says that I need the GLIBC
+> package.
+
+Did you try the autopackage? Maybe the debian package works better.
+
+If I understand the Xandros manual correctly, there seems to be support 
+for automatically installing Debian packages in at least some versions 
+of Xandros - there should be an "Debian Unsupported" source option 
+somewhere in the Xandros Networks package manager. Check it and you 
+should be able to install most Debian packages with Xandros Networks.
+
+
+> I will try ubuntu after I get a feel for xandros, I may have better luck
+> with that.
+
+Good choice.
+
+
+Regards,
+
+   Christoph
+
+
+From thommy at globo.com  Tue Sep 12 22:54:17 2006
+From: thommy at globo.com (Thomaz de Oliveira dos Reis)
+Date: Tue, 12 Sep 2006 17:54:17 -0300
+Subject: [Supertux-devel] trying to install in xandros
+In-Reply-To: <45071DC4.2050002@berlios.de>
+References: <467bb95b0609112013l55db8ad1w4fef983e21e36653@mail.gmail.com>	<45062C04.3010109@2006.expires.deltadevelopment.de>	<467bb95b0609120408o213c23c1q3cb681874904bdc5@mail.gmail.com>	<4506BAF5.1090204@2006.expires.deltadevelopment.de>	<467bb95b0609120659tadd59fau624969fea03cb132@mail.gmail.com>	<45070040.3050407@berlios.de>	<467bb95b0609121349r2a9c92b9ha3b107f226b2a989@mail.gmail.com>
+	<45071DC4.2050002@berlios.de>
+Message-ID: <45071E79.7060806@globo.com>
+
+maybe you need some glibc-devel package....
+
+AnMaster wrote:
+
+>-----BEGIN PGP SIGNED MESSAGE-----
+>Hash: RIPEMD160
+>
+>What is the exact error message?
+>
+>Daniel Sheets skrev:
+>  
+>
+>>the game says it cant find glibc.
+>>
+>>
+>>------------------------------------------------------------------------
+>>
+>>_______________________________________________
+>>Supertux-devel mailing list
+>>Supertux-devel at lists.berlios.de
+>>https://lists.berlios.de/mailman/listinfo/supertux-devel
+>>    
+>>
+>-----BEGIN PGP SIGNATURE-----
+>Version: GnuPG v1.4.2.1 (MingW32)
+>
+>iD8DBQFFBx3EWmK6ng/aMNkRAxcEAJ0YKQah88QRClc9wlWrdPjZ8uXUEACePkIe
+>jjdt7dw48SYfFMWDrXSpO8c=
+>=7DA3
+>-----END PGP SIGNATURE-----
+>_______________________________________________
+>Supertux-devel mailing list
+>Supertux-devel at lists.berlios.de
+>https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>  
+>
+
+
+
+From matze at braunis.de  Fri Sep 15 22:18:52 2006
+From: matze at braunis.de (Matthias Braun)
+Date: Fri, 15 Sep 2006 22:18:52 +0200
+Subject: [Supertux-devel] Yet another supertux port
+Message-ID: <1158351533.9062.4.camel@taylor.local>
+
+Well this year I had a course at university about operating system
+design and implementation with a practical part where we had to
+implement a toy operating system. Well our group was thinking that an
+operating system without games is boring so we ported SDL and supertux
+on it ;-) So now we have yet another platform that runs supertux 0.1.3.
+
+You can find a few more informations and the source in Timos blog entry:
+   http://idlebox.net/2006/20060914-SDIOS06.blog
+or simply download a ready to run vmware image here:
+   http://idlebox.net/2006/SDIOS06/sdios06-vmware-image-v1.0.tar.bz2
+
+More information about the OS can be found in the README file:
+   http://idlebox.net/2006/SDIOS06/README.source
+
+Greetings,
+	Matze
+
+
+
+
+From djwings at gmail.com  Sat Sep 16 22:22:05 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Sat, 16 Sep 2006 16:22:05 -0400
+Subject: [Supertux-devel] Iceflower implementation
+In-Reply-To: <200608182321.11896.jonas.baehr@web.de>
+References: <44E24627.9050805@hotmail.com> <20060817125122.GA6181@greg.local>
+	<83a40700608171614s3bbb43fcjda30d3db3e7ab3b4@mail.gmail.com>
+	<200608182321.11896.jonas.baehr@web.de>
+Message-ID: <826ffc730609161322n5703da13r2f0c0ab4aeb45558@mail.gmail.com>
+
+I have an idea for creating frozen images of bagdguys in Gimp:
+1) Make a new layer as wide as the image, but only 1 pixel high (2 or 3
+works fine).
+2) Render a solid-noise cloud with Filters > Render > Clouds > Solid
+Noise...
+3) Scale the layer to the full image size.
+4) Make the layer between 50 and 70% opaque.
+5) Go to Layer > Colors > Colorize, and crank up the lightness (about 25 to
+50%), and move the hue to between 180 and 200 degrees.
+6) Go to the badguy's layer, hit Z, and select the transparency, then go
+back and trim the frost layer.
+I'm doing this to a series of badguys, and I'll upload the results when I'm
+done.
+
+On 8/18/06, Jonas B?hr <jonas.baehr at web.de> wrote:
+>
+> Am Freitag, 18. August 2006 01:14 schrieb Afief Halumi:
+> > IMHO playing with ice flower is more fun than fire flower, how else
+> would
+> > tux cross the extra hard ocean levels? of course he has to freez the
+> water
+> > with ice flower abilities :-P
+>
+> The ability to freeze wather would be quite interesting if it's not
+> permanently:
+> Imagine if the a frozen block stays frozen when there is no more wather
+> around
+> it. If there is still whater from one side (right, left or underneath) the
+> block melts ater three seconds, wather from two sides: melt after two
+> seconds
+> and if there is whater from all three sides, the block melts after one
+> second...
+>
+> bye,
+> Jonas
+>
+> --
+> Try Krusader...
+> http://krusader.org - twinpanel filemanager for KDE
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/1e3ccb3f/attachment.html>
+
+From djwings at gmail.com  Sat Sep 16 22:49:10 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Sat, 16 Sep 2006 16:49:10 -0400
+Subject: [Supertux-devel] Frozen Mr. Tree and Snow Snail sprites
+Message-ID: <826ffc730609161349h2a1f2539qd4891679e7dda77c@mail.gmail.com>
+
+All the files are attached, including updated sprite files for each. See my
+post in the Ice Flower topic about making these pics.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: dizzy_frozen.png
+Type: image/png
+Size: 7479 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.png>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: mr_tree.sprite
+Type: application/octet-stream
+Size: 507 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: small_frozen.png
+Type: image/png
+Size: 7489 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0001.png>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: stumpy.sprite
+Type: application/octet-stream
+Size: 1150 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0001.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: walk_frozen.png
+Type: image/png
+Size: 12927 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0002.png>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: snail.sprite
+Type: application/octet-stream
+Size: 1268 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0002.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: snowsnail_flip_frozen.png
+Type: image/png
+Size: 2335 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0003.png>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: snowsnail_frozen.png
+Type: image/png
+Size: 2815 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0004.png>
+
+From p637777 at aol.com  Sun Sep 17 14:09:40 2006
+From: p637777 at aol.com (Markus Engel)
+Date: Sun, 17 Sep 2006 14:09:40 +0200
+Subject: [Supertux-devel] Patch Level 'Oh No More Snowballs'
+Message-ID: <450D3B04.2000003@aol.com>
+
+Hi!
+
+I changed this level a little bit because there's a secret area that 
+doesn't get transparent when Tux enters it.
+
+Markus
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: ohno.patch
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060917/93edc599/attachment.ksh>
+
+From sheets.d at gmail.com  Mon Sep 18 02:27:02 2006
+From: sheets.d at gmail.com (Daniel Sheets)
+Date: Sun, 17 Sep 2006 20:27:02 -0400
+Subject: [Supertux-devel] Compiling in Windows
+Message-ID: <467bb95b0609171727l45edc631t24794ba755f07cb5@mail.gmail.com>
+
+Can I compile the source in Windows?
+
+What compiler do I need?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060917/43b9e77e/attachment.html>
+
+From djwings at gmail.com  Mon Sep 18 13:11:28 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Mon, 18 Sep 2006 07:11:28 -0400
+Subject: [Supertux-devel] Compiling in Windows
+In-Reply-To: <467bb95b0609171727l45edc631t24794ba755f07cb5@mail.gmail.com>
+References: <467bb95b0609171727l45edc631t24794ba755f07cb5@mail.gmail.com>
+Message-ID: <826ffc730609180411g5ba0cf13o546a96ffe9317f2c@mail.gmail.com>
+
+There's an article about it
+here.<http://supertux.berlios.de/wiki/index.php/Building_on_Windows>
+
+On 9/17/06, Daniel Sheets <sheets.d at gmail.com> wrote:
+>
+> Can I compile the source in Windows?
+>
+> What compiler do I need?
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060918/749751d4/attachment.html>
+
+From mad_monk4000 at yahoo.com  Mon Sep 18 21:59:08 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Mon, 18 Sep 2006 12:59:08 -0700 (PDT)
+Subject: [Supertux-devel] PROBLEM!!!
+In-Reply-To: <mailman.11916.1158439778.22248.supertux-devel@lists.berlios.de>
+Message-ID: <20060918195908.71385.qmail@web37010.mail.mud.yahoo.com>
+
+The only messages I'm getting from the mailing list are ones like the one below. I think my e-mail account might have something to do with it.
+
+  Send Supertux-devel mailing list submissions to
+supertux-devel at lists.berlios.de
+
+To subscribe or unsubscribe via the World Wide Web, visit
+https://lists.berlios.de/mailman/listinfo/supertux-devel
+or, via email, send a message with subject or body 'help' to
+supertux-devel-request at lists.berlios.de
+
+You can reach the person managing the list at
+supertux-devel-owner at lists.berlios.de
+
+When replying, please edit your Subject line so it is more specific
+than "Re: Contents of Supertux-devel digest..."
+
+
+Today's Topics:
+
+1. Re: Iceflower implementation (djwings at gmail.com)
+2. Frozen Mr. Tree and Snow Snail sprites (djwings at gmail.com)
+
+
+----------------------------------------------------------------------
+
+Message: 1
+Date: Sat, 16 Sep 2006 16:22:05 -0400
+From: djwings at gmail.com
+Subject: Re: [Supertux-devel] Iceflower implementation
+To: supertux-devel at lists.berlios.de
+Message-ID:
+<826ffc730609161322n5703da13r2f0c0ab4aeb45558 at mail.gmail.com>
+Content-Type: text/plain; charset="iso-8859-1"
+
+I have an idea for creating frozen images of bagdguys in Gimp:
+1) Make a new layer as wide as the image, but only 1 pixel high (2 or 3
+works fine).
+2) Render a solid-noise cloud with Filters > Render > Clouds > Solid
+Noise...
+3) Scale the layer to the full image size.
+4) Make the layer between 50 and 70% opaque.
+5) Go to Layer > Colors > Colorize, and crank up the lightness (about 25 to
+50%), and move the hue to between 180 and 200 degrees.
+6) Go to the badguy's layer, hit Z, and select the transparency, then go
+back and trim the frost layer.
+I'm doing this to a series of badguys, and I'll upload the results when I'm
+done.
+
+On 8/18/06, Jonas B?hr wrote:
+>
+> Am Freitag, 18. August 2006 01:14 schrieb Afief Halumi:
+> > IMHO playing with ice flower is more fun than fire flower, how else
+> would
+> > tux cross the extra hard ocean levels? of course he has to freez the
+> water
+> > with ice flower abilities :-P
+>
+> The ability to freeze wather would be quite interesting if it's not
+> permanently:
+> Imagine if the a frozen block stays frozen when there is no more wather
+> around
+> it. If there is still whater from one side (right, left or underneath) the
+> block melts ater three seconds, wather from two sides: melt after two
+> seconds
+> and if there is whater from all three sides, the block melts after one
+> second...
+>
+> bye,
+> Jonas
+>
+> --
+> Try Krusader...
+> http://krusader.org - twinpanel filemanager for KDE
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/1e3ccb3f/attachment-0001.html 
+
+------------------------------
+
+Message: 2
+Date: Sat, 16 Sep 2006 16:49:10 -0400
+From: djwings at gmail.com
+Subject: [Supertux-devel] Frozen Mr. Tree and Snow Snail sprites
+To: supertux-devel at lists.berlios.de
+Message-ID:
+<826ffc730609161349h2a1f2539qd4891679e7dda77c at mail.gmail.com>
+Content-Type: text/plain; charset="iso-8859-1"
+
+All the files are attached, including updated sprite files for each. See my
+post in the Ice Flower topic about making these pics.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.html 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: dizzy_frozen.png
+Type: image/png
+Size: 7479 bytes
+Desc: not available
+Url : https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.png 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: mr_tree.sprite
+Type: application/octet-stream
+Size: 507 bytes
+Desc: not available
+Url : https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: small_frozen.png
+Type: image/png
+Size: 7489 bytes
+Desc: not available
+Url : https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0001.png 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: stumpy.sprite
+Type: application/octet-stream
+Size: 1150 bytes
+Desc: not available
+Url : https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0001.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: walk_frozen.png
+Type: image/png
+Size: 12927 bytes
+Desc: not available
+Url : https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0002.png 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: snail.sprite
+Type: application/octet-stream
+Size: 1268 bytes
+Desc: not available
+Url : https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0002.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: snowsnail_flip_frozen.png
+Type: image/png
+Size: 2335 bytes
+Desc: not available
+Url : https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0003.png 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: snowsnail_frozen.png
+Type: image/png
+Size: 2815 bytes
+Desc: not available
+Url : https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0004.png 
+
+------------------------------
+
+_______________________________________________
+Supertux-devel mailing list
+Supertux-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+End of Supertux-devel Digest, Vol 3, Issue 10
+*********************************************
+
+
+ 		
+---------------------------------
+Do you Yahoo!?
+ Get on board. You're invited to try the new Yahoo! Mail.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060918/f43e2f8c/attachment.html>
+
+From rflegel at gmail.com  Mon Sep 18 22:08:33 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Mon, 18 Sep 2006 14:08:33 -0600
+Subject: [Supertux-devel] PROBLEM!!!
+In-Reply-To: <20060918195908.71385.qmail@web37010.mail.mud.yahoo.com>
+References: <mailman.11916.1158439778.22248.supertux-devel@lists.berlios.de>
+	<20060918195908.71385.qmail@web37010.mail.mud.yahoo.com>
+Message-ID: <5a5496320609181308w675f3e48pbc88e14f96f3ca38@mail.gmail.com>
+
+And what's the actual problem?
+
+On 9/18/06, Julian Marchant <mad_monk4000 at yahoo.com> wrote:
+> The only messages I'm getting from the mailing list are ones like the one
+> below. I think my e-mail account might have something to do with it.
+>
+>
+
+[snip]
+
+
+From rebecca at laudate.ca  Mon Sep 18 22:09:43 2006
+From: rebecca at laudate.ca (Rebecca Gilbert)
+Date: Mon, 18 Sep 2006 16:09:43 -0400
+Subject: [Supertux-devel] PROBLEM!!!
+In-Reply-To: <5a5496320609181308w675f3e48pbc88e14f96f3ca38@mail.gmail.com>
+References: <mailman.11916.1158439778.22248.supertux-devel@lists.berlios.de>	<20060918195908.71385.qmail@web37010.mail.mud.yahoo.com>
+	<5a5496320609181308w675f3e48pbc88e14f96f3ca38@mail.gmail.com>
+Message-ID: <450EFD07.9030200@laudate.ca>
+
+I wonder if he wants individual messages not digests?
+
+Ryan Flegel wrote:
+> And what's the actual problem?
+>
+> On 9/18/06, Julian Marchant <mad_monk4000 at yahoo.com> wrote:
+>   
+>> The only messages I'm getting from the mailing list are ones like the one
+>> below. I think my e-mail account might have something to do with it.
+>>
+>>
+>>     
+>
+> [snip]
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>   
+
+-- 
+"Work hard and become a leader; be lazy and never succeed."
+        -- Proverbs 12:24
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060918/e8934e60/attachment.html>
+
+From penma at penma.de  Mon Sep 25 19:50:55 2006
+From: penma at penma.de (Penguinmaster)
+Date: Mon, 25 Sep 2006 19:50:55 +0200
+Subject: [Supertux-devel] Worldmap graphics:firetux and icetux
+Message-ID: <451816FF.8020904@penma.de>
+
+When you use the current SVN version and debugging is on, you get 
+thousand of lines like this in the console window:
+
+    [DEBUG] src/worldmap/tux.cpp:69 Bonus type not handled in worldmap.
+
+That happens if you type "ice()" in the console and walk on the worldmap 
+while having the ability to ice. So i designed an ice tux and redesigned 
+the fire tux. If the attachment doesn't work, download them from:
+
+    http://penma.funpic.de/firetux.png
+    http://penma.funpic.de/icetux.png
+
+LG penma
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: firetux.png
+Type: image/png
+Size: 1773 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060925/f3204f09/attachment.png>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: icetux.png
+Type: image/png
+Size: 1984 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060925/f3204f09/attachment-0001.png>
+
+From slacker at gluebox.com  Mon Sep 25 19:23:09 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Mon, 25 Sep 2006 13:23:09 -0400 (EDT)
+Subject: [Supertux-devel] Worldmap graphics:firetux and icetux
+In-Reply-To: <451816FF.8020904@penma.de>
+References: <451816FF.8020904@penma.de>
+Message-ID: <58905.146.145.190.179.1159204989.squirrel@gluebox.com>
+
+Nice work Penma.
+
+This is one of those bugs that I've been looking at everyday. I'll work on
+getting these graphics into svn. They may need a little adjustment to get
+them animated for when Tux walks, but at least the ball is rolling on
+getting this fixed.
+
+greetings,
+Stephen G.
+
+> When you use the current SVN version and debugging is on, you get
+> thousand of lines like this in the console window:
+>
+>     [DEBUG] src/worldmap/tux.cpp:69 Bonus type not handled in worldmap.
+>
+> That happens if you type "ice()" in the console and walk on the worldmap
+> while having the ability to ice. So i designed an ice tux and redesigned
+> the fire tux. If the attachment doesn't work, download them from:
+>
+>     http://penma.funpic.de/firetux.png
+>     http://penma.funpic.de/icetux.png
+>
+> LG penma
+>
+> --
+> This message has been scanned for viruses and
+> dangerous content by MailScanner, and is
+> believed to be clean.
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From mad_monk4000 at yahoo.com  Mon Sep 25 22:44:29 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Mon, 25 Sep 2006 13:44:29 -0700 (PDT)
+Subject: [Supertux-devel] Gameboy Player
+Message-ID: <20060925204429.15941.qmail@web37011.mail.mud.yahoo.com>
+
+I'm sorry this has nothing to do with Super Tux. I,ve tried Google and it didn't help.
+  Anyway, does anyone know of a website selling a used Gameboy Player?
+  Hey, while I'm talking about Gameboy, who else thinks it would be an awesome idea to let Nintendo put Super Tux on a GBA Game Pack?
+
+ 		
+---------------------------------
+Stay in the know. Pulse on the new Yahoo.com.  Check it out. 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060925/d85023ea/attachment.html>
+
+From tuxdev103 at gmail.com  Mon Sep 25 23:09:24 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Mon, 25 Sep 2006 14:09:24 -0700
+Subject: [Supertux-devel] Gameboy Player
+In-Reply-To: <20060925204429.15941.qmail@web37011.mail.mud.yahoo.com>
+References: <20060925204429.15941.qmail@web37011.mail.mud.yahoo.com>
+Message-ID: <ff70c5070609251409u55f2df51w25d15c5ded058521@mail.gmail.com>
+
+Can't help you with the Gameboy, maybe try an emulator.  As for a GBA
+SuperTux, why not take a look at SuperTux-Portable?
+
+On 9/25/06, Julian Marchant <mad_monk4000 at yahoo.com> wrote:
+> I'm sorry this has nothing to do with Super Tux. I,ve tried Google and it
+> didn't help.
+>   Anyway, does anyone know of a website selling a used Gameboy Player?
+>   Hey, while I'm talking about Gameboy, who else thinks it would be an
+> awesome idea to let Nintendo put Super Tux on a GBA Game Pack?
+>
+>  		
+> ---------------------------------
+> Stay in the know. Pulse on the new Yahoo.com.  Check it out.
+>
+
+
+From tuxdev103 at gmail.com  Thu Sep 28 16:30:52 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Thu, 28 Sep 2006 07:30:52 -0700
+Subject: [Supertux-devel] PATCH: Added unisolid pipes to complement solid
+	pipes
+Message-ID: <ff70c5070609280730o5b4796d3i6af1896b8f04cd74@mail.gmail.com>
+
+In Shattered Bridge, one of the secret areas requires the use of a
+unisolid pipe top.  Since making all pipe tops unisolid causes
+problems, I've added another tile for the cases where a unisolid pipe
+is needed.  I've also added a "Unisolid" tilegroup because the second
+pipe top might confuse level designers if it was in the "Pipe"
+tilegroup.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: unisolid-pipe.patch
+Type: application/octet-stream
+Size: 151220 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060928/c9bd03e5/attachment.obj>
+

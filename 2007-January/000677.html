@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Problems with compiling Supertux on Windows
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Problems%20with%20compiling%20Supertux%20on%20Windows&In-Reply-To=%3C45A14B98.9090907%402006.expires.deltadevelopment.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000676.html">
+   <LINK REL="Next"  HREF="000678.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Problems with compiling Supertux on Windows</H1>
+    <B>Christoph Sommer</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Problems%20with%20compiling%20Supertux%20on%20Windows&In-Reply-To=%3C45A14B98.9090907%402006.expires.deltadevelopment.de%3E"
+       TITLE="[Supertux-devel] Problems with compiling Supertux on Windows">supertux at 2006.expires.deltadevelopment.de
+       </A><BR>
+    <I>Sun Jan  7 20:35:52 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000676.html">[Supertux-devel] Problems with compiling Supertux on Windows
+</A></li>
+        <LI>Next message: <A HREF="000678.html">[Supertux-devel] Problems with compiling Supertux on Windows
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#677">[ date ]</a>
+              <a href="thread.html#677">[ thread ]</a>
+              <a href="subject.html#677">[ subject ]</a>
+              <a href="author.html#677">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey Jan,
+
+Jan Reininghaus wrote:
+&gt;<i> I have pasted the first lines of the output of jam
+</I>&gt;<i> here: <A HREF="http://pastebin.com/853578">http://pastebin.com/853578</A> 
+</I>
+pastebin wrote:
+|<i> jam
+</I>|<i> ...found 821 target(s)...
+</I>|<i> ...using 1 temp target(s)...
+</I>|<i> ...updating 211 target(s)...
+</I>|<i> C++ ./build/i686-pc-mingw32/debug/src/squirrel/squirrel/sqapi.o
+</I>|<i> In file included from src/squirrel/squirrel/sqpcheader.h:9,
+</I>|<i>                  from src/squirrel/squirrel/sqapi.cpp:4:
+</I>|<i> c:/MinGW/bin/../lib/gcc/mingw32/3.4.5/[...]/include/stdio.h:26:20:
+</I>|<i> stddef.h: No such file or directory
+</I>
+I'd guess your installation of GCC is corrupted. Try reinstalling,
+preferably from the binary linked on the SuperTux Wiki. I just checked
+to make sure the versions I linked are still online - maybe you have to
+replace the &quot;g++&quot; in the link with &quot;g%2B%2B&quot; to make the gcc link work,
+though.
+
+Btw: I find my &quot;stddef.h&quot; as &quot;C:\MinGW\include\stddef.h&quot;. Do you?
+
+
+Kind regards,
+
+  Christoph
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000676.html">[Supertux-devel] Problems with compiling Supertux on Windows
+</A></li>
+	<LI>Next message: <A HREF="000678.html">[Supertux-devel] Problems with compiling Supertux on Windows
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#677">[ date ]</a>
+              <a href="thread.html#677">[ thread ]</a>
+              <a href="subject.html#677">[ subject ]</a>
+              <a href="author.html#677">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] &quot;Remote Control&quot; for Supertux
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux&In-Reply-To=%3C4437D40F.6000206%40a-king.us%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000121.html">
+   <LINK REL="Next"  HREF="000124.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] &quot;Remote Control&quot; for Supertux</H1>
+    <B>Allen King</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux&In-Reply-To=%3C4437D40F.6000206%40a-king.us%3E"
+       TITLE="[Supertux-devel] &quot;Remote Control&quot; for Supertux">allen at a-king.us
+       </A><BR>
+    <I>Sat Apr  8 17:17:35 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000121.html">[Supertux-devel] Moving graphic and audio source files
+</A></li>
+        <LI>Next message: <A HREF="000124.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#122">[ date ]</a>
+              <a href="thread.html#122">[ thread ]</a>
+              <a href="subject.html#122">[ subject ]</a>
+              <a href="author.html#122">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Folks of Supertux,
+
+    As part of a machine learning testbed, I want to add a &quot;remote 
+control&quot; API to Supertux.  This will allow another program sitting as a 
+client on a port to Supertux to supply button information for tux and 
+receive back which icons are visible on the screen and where.  Because 
+the client program may be slow, it will have to have control the advance 
+of Supertux time, and thus in this mode, Supertux will not be &quot;real 
+time&quot;.  (Perhaps it might even be faster!^)  Repeatability of runs is 
+also desirable, so control of random number seeds must be gained.
+
+   The following questions to your group are on my mind:
+
+   1. What work is ongoing that would help me with this effort?  I
+      noticed a post about a console.
+   2. What is the right forum to pick people's brains, with further
+      design questions? I notice a lot of game-play programming activity
+      in <A HREF="http://developer.berlios.de/mail/?group_id=3467">http://developer.berlios.de/mail/?group_id=3467</A> , but little
+      with the &quot;engine&quot; part.  Are there specific people who specialize
+      in the &quot;engine&quot; parts of Supertux?  Who are they?
+   3. What would it take to have the &quot;remote control&quot; operation, given
+      it works and is well structured, be incorporated into the Supertux
+      codebase? I would supply documentation of the API, and a minimum
+      diagnostic demo as an example of the API's use.   Do I just submit
+      a patch and pray, are there &quot;powers to be&quot; that nod and give me
+      svn access, or what? 
+   4.  From the standpoint of the Supertux community, what is the
+      desirability of having a &quot;remote control&quot; ability incorporated
+      into the mainline Supertux code base?  I see the following
+      advantages: a) automated testing of Supertux, b) increasing the
+      Supertux user community with people, like myself, interested in
+      machine learning, and c) &quot;it's easy, why not!&quot;
+
+   So I've actually been fiddling with a copy of the supertux source (an 
+svn checkout on 4/6/06).  So far I have built a PortServerController 
+subclass of Controller, instantiated it in supertux in a very simple way 
+(alongside of JoystickKeyboardController), which talks via ports to a 
+lightweight client.   So here is my plan, which I'd like to pick your 
+collective brains about:
+
+   1. The plan is to have my PortServerController register using
+      tux.set_controller, and buttons should &quot;just work&quot;.
+   2. I was planning on adding two class variable to game_session, one
+      to fix the increments of time simulated to a fixed value, and the
+      other to stop simulation to wait for more API commands. The plan
+      is to add where needed (bracketed by if statements) the code for
+      non-real time (port) operation.  These notions are currently
+      &quot;fuzzy&quot;, I suspect there are better ones.
+   3. How to gather object info to send back is a few days out for me. 
+      Thought was to add a statusString serialization method to some of
+      the game object classes, and just package up the results.  I am
+      interested in a block name/UID which will be stable over
+      revisions, perhaps some basic properties (like solid, background,
+      sprite (for tux, bad guys, and coinage), etc).  Also the game
+      status line.
+   4. The following is last: modifications for random number generator
+      repeatability would be as follows:  In normal operation, the
+      random seed (probably selected by time()) would printed out on a
+      console.  If that run was interesting, it would be possible to
+      force that seed with config code.  Are any efforts to this effect
+      already in the code?
+   5. Does this plan look sane?  Are there other ways to accomplish my
+      goals which come to mind?  Are there ongoing changes to the
+      &quot;engine&quot; which I sould know about?
+
+
+Hope that you can guide my effort, and that my work can contribute to 
+Supertux.  All opinions, thoughts, and help are welcome.
+
+    Allen King
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060408/8c7c4273/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060408/8c7c4273/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000121.html">[Supertux-devel] Moving graphic and audio source files
+</A></li>
+	<LI>Next message: <A HREF="000124.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#122">[ date ]</a>
+              <a href="thread.html#122">[ thread ]</a>
+              <a href="subject.html#122">[ subject ]</a>
+              <a href="author.html#122">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,3841 @@
+From p637777 at aol.com  Mon May  1 15:04:33 2006
+From: p637777 at aol.com (Markus Engel)
+Date: Mon, 1 May 2006 15:04:33 +0200
+Subject: [Supertux-devel] Infoboxes
+Message-ID: <000001c66d1f$ce75acb0$2001a8c0@homepc01>
+
+Hello!
+
+I have rewritten the patch for the infoboxes. Now it loads all images in the
+infobox and checks their size, then it divides it by 16 to get the number of
+lines they use.
+
+Markus
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: infobox.diff
+Type: application/octet-stream
+Size: 3013 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060501/d6c0b551/attachment.obj>
+
+From allen at a-king.us  Mon May  1 14:55:58 2006
+From: allen at a-king.us (Allen King)
+Date: Mon, 01 May 2006 08:55:58 -0400
+Subject: [Supertux-devel] dev version bug
+In-Reply-To: <e5aaa77a0604301257i340e4a8fy75a82952a827f382@mail.gmail.com>
+References: <e5aaa77a0604261237u2a9a6d7cr623f170f5b246fd5@mail.gmail.com>	 <44538934.1060103@a-king.us>	 <e5aaa77a0604291142s424566e1of8386c50e3e412ca@mail.gmail.com>	 <445420A9.4040300@a-king.us> <e5aaa77a0604301257i340e4a8fy75a82952a827f382@mail.gmail.com>
+Message-ID: <4456055E.50302@a-king.us>
+
+Joth,
+    Mission accomplished -- grats!  Your test exposed a flaw in my thinking
+
+Ryan,
+    In going to an architecture-independent random number 
+implementation, I was still using the architecture-dependent variable 
+RAND_MAX.  In Joth's setup, apparently RAND_MAX was 0x7fff, and not 
+equal to INT_MAX (which was 0x7fffffff, since the program passed an 
+assert(sizeof(int) >= 4); )
+
+    This insight exposes an error the patch will induce in the 
+randf(...) routines -- they will produce numbers 65,536.0 times too big!
+
+    Attached is a RandomGenerator.patch3b fixes this problem, and also 
+contains all of the changes in RandomPatch.3, since r3478 seemed to have 
+none of them yet.
+
+Joth Esmo wrote:
+> Greetings,
+>
+> Thanks for clearing everything up. Attached is random_generator.cpp
+> with the stderr file. In case you can't access it, here's the
+> important stuff:
+>
+> ==== srand(1146426740) (         0) RAND_MAX=7fff =====
+> ERROR: x=44551574, x0=0, RAND_MAX=7fff
+> Assertion failed: 0, file src/random_generator.cpp, line 77
+>
+> Regards,
+> Joth
+>
+> On 4/29/06, Allen King <allen at a-king.us> wrote:
+>> Joth,
+>>
+>>    Thanks for getting back to me so quickly, and with all the right 
+>> data.
+>>
+>> There may have been a mis-understanding. The experiment I'm asking 
+>> you to do
+>> is not to fix your problem, but to produce additional output in the 
+>> failing
+>> mode that will help me isolate another suspected related problem.  
+>> (Below, I
+>> will tell you how to get the code to work, but not here.)
+>>
+>> So here are some points I want to make very clear. (Sorry if this is
+>> obvious, and I'm being blunt.):
+>>
+>> The newer version of the RandomGenerator::srand method code I sent 
+>> you also
+>> fail.  I want it to.  As such, that line 72 of random_generator.cpp (the
+>> "assert(0);") fails is not a problem for this test, it is good.
+>> Line 68 should be of a form "if (x < RAND_MAX)" to duplicate the 
+>> failure.
+>> In particular, it should not be modified to "if (x <= RAND_MAX)", or the
+>> failure may change or perhaps go away.  ACTION: change line 68 from "<="
+>> back to "<", so the failure will be replicated.
+>> I see no line like "==== srand(ddd) (ddd) RAND_MAX=xxx =====" (where ddd
+>> (xxx) are some decimal (hex) numbers) in your console output.  QUESTION:
+>> Double and tripple check. Did you perhaps not compile the changes, or 
+>> not
+>> use the patched version when making the new console output?
+>> If the above gets you lines like "=====...." above in the console 
+>> output,
+>> you're done, send be back the console and random_generator.cpp, and 
+>> ignore
+>> this.  If still no such lines appear, I'm wondering if your console 
+>> log is
+>> only monitoring things to standard error.  To get these printouts 
+>> also on
+>> standard error, try changing the string "printf(" to "fprintf(stderr, 
+>> ", in
+>> lines 67 and 71.  (You may or may not need to add a "#include <stdio.h>"
+>> line to compile properly.) At this point, the routine in question should
+>> look like the following:
+>> #include <stdio.h>
+>>
+>> int RandomGenerator::srand(int x)    {
+>>     int x0 = x;
+>>     while (x == 0)                          // random seed of zero means
+>>         x = time(0);                        // randomize with time
+>>     fprintf(stderr, "==== srand(%10d) (%10d) RAND_MAX=%x =====\n", x, 
+>> x0,
+>> RAND_MAX);
+>>
+>>     if (x < RAND_MAX) {
+>>     }
+>>     else {                                  // only allow
+>> posative 31-bit seeds
+>>         fprintf(stderr, "ERROR: x=%x, x0=%x, RAND_MAX=%x\n", x, x0,
+>> RAND_MAX);
+>>
+>>         assert(0);
+>>     }
+>>     RandomGenerator::srandom(x);
+>>     return x;                               // let caller
+>> know seed used
+>> }
+>>
+>> When you get the line with the "====..." in it, send me back the same 
+>> stuff
+>> as before, except don't bother with the config file -- it's good.
+>>
+>> If you can't get the "====..." line, try commenting out the assert(0) 
+>> above,
+>> and replace the following routine:
+>>
+>> int RandomGenerator::rand(int v) {
+>>     assert(v != 0 && v <= RAND_MAX);
+>>     int rv = RandomGenerator::random();
+>>     printf("===x= rand(%10d) (%10d) RAND_MAX=%x =x====\n", v, rv, 
+>> RAND_MAX);
+>>     fprintf(stderr, "==== rand(%10d) (%10d) RAND_MAX=%x =====\n", v, rv,
+>> RAND_MAX);
+>>     return rv % v;
+>> }
+>>
+>> Short of that, can I have VNC  access to your machine?  Hopefully it 
+>> won't
+>> get to that!
+>>
+>>     Allen
+>>
+>> P.S.:  To run supertux, use the origional code (without any of the 
+>> mods I've
+>> been feeding to you for debug), and comment out the 
+>> "assert(x<RAND_MAX);"
+>> line.
+>>
+>> Joth Esmo wrote:
+>>
+>>
+>> int RandomGenerator::srand(int x)    {
+>>     int x0 = x;
+>>     while (x == 0)                          // random seed of zero means
+>>         x = time(0);                        // randomize with time
+>>     fprintf(stderr, "==== srand(%10d) (%10d) RAND_MAX=%x =====\n", x, 
+>> x0,
+>> RAND_MAX);
+>>
+>>     if (x < RAND_MAX) {
+>>     }
+>>     else {                                  // only allow
+>> posative 31-bit seeds
+>>         fprintf(stderr, "ERROR: x=%x, x0=%x, RAND_MAX=%x\n", x, x0,
+>> RAND_MAX);
+>>
+>>         assert(0);
+>>     }
+>>     RandomGenerator::srandom(x);
+>>     return x;                               // let caller
+>> know seed used
+>> }
+>>
+>> When you get the line with the "====..." in it, send me back the same 
+>> stuff
+>> as before, except don't bother with the config file -- it's good.
+>>
+>> If you can't get the "====..." line, try commenting out the assert(0) 
+>> above,
+>> and replace the following routine:
+>>
+>> int RandomGenerator::rand(int v) {
+>>     assert(v != 0 && v <= RAND_MAX);
+>>     int rv = RandomGenerator::random();
+>>     printf("===x= rand(%10d) (%10d) RAND_MAX=%x =x====\n", v, rv, 
+>> RAND_MAX);
+>>     fprintf(stderr, "==== rand(%10d) (%10d) RAND_MAX=%x =====\n", v, rv,
+>> RAND_MAX);
+>>     return rv % v;
+>> }
+>>
+>> Short of that, can I have VNC  access to your machine?  Hopefully it 
+>> won't
+>> get to that!
+>>
+>>     Allen
+>>
+>> P.S.:  To run supertux, use the origional code (without any of the 
+>> mods I've
+>> been feeding to you for debug), and comment out the 
+>> "assert(x<RAND_MAX);"
+>> line.
+>>
+>> Joth Esmo wrote:
+>> I replaced the text in the .cpp file as you asked and compiled. The
+>> error log (stderr) is attached. Line 72 of random_generator.cpp seems
+>> to be the problem (the line being: assert(0);). Also attached is my
+>> ./supertux/config file. I start the application by opening MSYS,
+>> navigating to my supertux directory, and issuing the command
+>> 'supertux.exe -w' (as per the Building on Windows page on the wiki --
+>> however the -w has been recently removed).
+>>
+>> In your email, you asked for the patched version of random_seed.cpp. I
+>> assume you meant random_generator.cpp, which is attached.
+>>
+>> I'm not sure what you mean by 'capable of debug'. Should I debug it
+>> and then watch the value of the config variable? I didn't quite
+>> understand your meaning.
+>>
+>> PS> I changed the text in random_generator.cpp to read : x <= RAND_MAX
+>> (as you requested).
+>>
+>> Regards,
+>> Joth
+>>
+>> On 4/29/06, Allen King <allen at a-king.us> wrote:
+>> Joth,
+>>
+>> A new patch to fix that problem is in the works, and should be in svn
+>> shortly.  Should have been x <= RAND_MAX. For the moment, that line 
+>> can be
+>> commented out, or the < changed to <= .
+>>
+>> But the fact that this problem happened at all is curious to me, and I
+>> suspect another bug lurking nearby.  In particular, I would like to
+>> understand what about your XP setup caused that assertion error.  If
+>> RAND_MAX is 0x7fffffff, the largest int32, it would be improbably that
+>> time(0) would generate that (unless it's not working).  Or perhaps 
+>> RAND_MAX
+>> is smaller.
+>>
+>> If you can patch to the source code, would you replace the routine in
+>> random_generator.cpp with
+>> int RandomGenerator::srand(int x)    {
+>>     int x0 = x;
+>>     while (x == 0)                          // random seed of zero means
+>>         x = time(0);                        // randomize with time
+>>     printf("==== srand(%10d) (%10d) RAND_MAX=%x =====\n", x, x0, 
+>> RAND_MAX);
+>>     if (x < RAND_MAX) {
+>>     }
+>>     else {                                  // only allow
+>> posative 31-bit
+>> seeds
+>>         printf("ERROR: x=%x, x0=%x, RAND_MAX=%x\n", x, x0, RAND_MAX);
+>>         assert(0);
+>>     }
+>>     RandomGenerator::srandom(x);
+>>     return x;                               // let caller
+>> know seed used
+>> }
+>> and recreate the failure.  Send me the command line used to invoke 
+>> supertux,
+>> the failing printout (as you did), a copy of your ~/.supertux/config 
+>> file,
+>> and the patched copy of random_seed.cpp.  If you are you capable of 
+>> debug,
+>> the variable config->random_seed should be traced.  Is it RAND_MAX at 
+>> the
+>> assertion failure?  Who sets it that?
+>>
+>> Thanks for your help on this.
+>>
+>>        Allen
+>>
+>>
+>> Jonathan Campbell wrote:
+>>
+>> Greetings I just finished compiling the development version of 
+>> SuperTux (the
+>> newest build) and tried to launch it. However, it quits after showing a
+>> transparent window. The file stderr has the following: [INFO]
+>> src/main.cpp:195 [C:\Documents and
+>> Settings\Administrator\.supertux] is in the search path
+>> [INFO] src/main.cpp:195 [c:\msys\1.0\build\supertux\/data]
+>> is in the search path [INFO] src/main.cpp:429 Component 'controller'
+>> finished after 0.2 seconds [INFO] src/main.cpp:68 Couldn't load 
+>> config file:
+>> Couldn't open file 'config': The system cannot find the file 
+>> specified. ,
+>> using default settings [INFO] src/main.cpp:429 Component 'config' 
+>> finished
+>> after 0 seconds [INFO] src/main.cpp:429 Component 'tinygettext' finished
+>> after 0.001 seconds [INFO] src/main.cpp:429 Component 'commandline' 
+>> finished
+>> after 0 seconds [INFO] src/main.cpp:429 Component 'audio' finished after
+>> 0.202 seconds [INFO] src/main.cpp:429 Component 'video' finished 
+>> after 0.278
+>> seconds [INFO] src/main.cpp:429 Component 'scripting' finished after 
+>> 0.005
+>> seconds [DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.059 seconds 
+>> [INFO]
+>> src/main.cpp:429 Component 'resources' finished after 0.236 seconds
+>> Assertion failed: x < RAND_MAX, file src/random_generator.cpp, line 
+>> 57 I'm
+>> running Windows XP with all updates installed. To compile it, I 
+>> followed the
+>> instructions on this page on the wiki:
+>> http://supertux.berlios.de/wiki/index.php/Building_on_Windows
+>> Any help would be appreciated. I'd really like to see this new 
+>> version of
+>> SuperTux. Regards, Joth Esmo
+>> _______________________________________________
+>> Supertux-devel mailing list Supertux-devel at lists.berlios.de
+>> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>>
+>>
+>>
+>>
+>> -- 
+>> Flarbland: Your one and only stop for cheats, articles, comedy and
+>> much, much more!
+>> http://flarbland.bravehost.com
+>> ________________________________
+>>
+> [INFO] src/main.cpp:195 [C:\Documents and
+>> Settings\HP_Administrator\.supertux] is in the search
+>> path
+> [INFO] src/main.cpp:195
+>> [c:\msys\1.0\build\supertux2\/data] is in the search
+>> path
+> [INFO] src/main.cpp:429 Component 'controller' finished after 0.2
+>> seconds
+> [WARNING]
+>> src/control/joystickkeyboardcontroller.cpp:192 Invalid
+>> button '0' in buttonmap
+> [WARNING]
+>> src/control/joystickkeyboardcontroller.cpp:192 Invalid
+>> button '1' in buttonmap
+> [INFO] src/main.cpp:429 Component 'config' finished
+>> after 0.021 seconds
+> [INFO] src/main.cpp:429 Component 'tinygettext' finished
+>> after 0 seconds
+> [INFO] src/main.cpp:429 Component 'commandline' finished
+>> after 0 seconds
+> [INFO] src/main.cpp:429 Component 'audio' finished after
+>> 0.302 seconds
+> [INFO] src/main.cpp:429 Component 'video' finished after 0.432
+>> seconds
+> [INFO] src/main.cpp:429 Component 'scripting' finished after 0.034
+>> seconds
+> [DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.057 seconds
+> [INFO]
+>> src/main.cpp:429 Component 'resources' finished after 0.217
+>> seconds
+> Assertion failed: 0, file src/random_generator.cpp, line 72
+>
+> This
+>> application has requested the Runtime to terminate it in an unusual
+>> way.
+> Please contact the application's support team for more
+>> information.
+>
+>
+>
+>
+>
+>
+>> ________________________________
+>>
+> (supertux-config
+> (show_fps #f)
+> (cheats #f)
+> (video
+> (fullscreen #t)
+>> (width 800)
+> (height 600)
+> )
+> (audio
+> (sound_enabled #t)
+> (music_enabled
+>> #t)
+> )
+> (control
+> (keymap
+> (map
+> (key 13)
+> (control "menu-select")
+> )
+> (map
+>> (key 19)
+> (control "pause-menu")
+> )
+> (map
+> (key 27)
+> (control "pause-menu")
+>> )
+> (map
+> (key 94)
+> (control "console")
+> )
+> (map
+> (key 112)
+> (control
+>> "pause-menu")
+> )
+> (map
+> (key 271)
+> (control "menu-select")
+> )
+> (map
+> (key
+>> 273)
+> (control "jump")
+> )
+> (map
+> (key 274)
+> (control "down")
+> )
+> (map
+> (key
+>> 275)
+> (control "right")
+> )
+> (map
+> (key 276)
+> (control "left")
+> )
+> (map
+> (key
+>> 303)
+> (control "up")
+> )
+> (map
+> (key 304)
+> (control "action")
+> )
+> )
+>> (joystick
+> (use_hat #t)
+> (axis_x 0)
+> (axis_y 1)
+> (dead_zone_x 1000)
+>> (dead_zone_y 1000)
+> (map
+> (button 0)
+> (control "jump")
+> )
+> (map
+> (button 1)
+>> (control "action")
+> )
+> )
+> )
+> )
+>
+>
+>
+>
+>
+>> ________________________________
+>>
+> // $Id: random_generator.cpp 3435 2006-04-26 02:13:42Z sik0fewl $
+> //
+> // A
+>> strong random number generator
+> //
+> // Copyright (C) 2006 Allen King
+> //
+>> Copyright (C) 2002 Michael Ringgaard. All rights reserved.
+> // Copyright (C)
+>> 1983, 1993 The Regents of the University of California.
+> //
+> // Redistribution
+>> and use in source and binary forms, with or without
+> // modification, are
+>> permitted provided that the following conditions
+> // are met:
+> //
+> // 1.
+>> Redistributions of source code must retain the above copyright
+> // notice,
+>> this list of conditions and the following disclaimer.
+> // 2. Redistributions
+>> in binary form must reproduce the above copyright
+> // notice, this list of
+>> conditions and the following disclaimer in the
+> // documentation and/or other
+>> materials provided with the distribution.
+> // 3. Neither the name of the
+>> project nor the names of its contributors
+> // may be used to endorse or
+>> promote products derived from this software
+> // without specific prior
+>> written permission.
+> //
+> // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT
+>> HOLDERS AND CONTRIBUTORS "AS IS" AND
+> // ANY EXPRESS OR IMPLIED WARRANTIES,
+>> INCLUDING, BUT NOT LIMITED TO, THE
+> // IMPLIED WARRANTIES OF MERCHANTABILITY
+>> AND FITNESS FOR A PARTICULAR PURPOSE
+> // ARE DISCLAIMED. IN NO EVENT SHALL
+>> THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+> // FOR ANY DIRECT, INDIRECT,
+>> INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+> // DAMAGES (INCLUDING, BUT
+>> NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+> // OR SERVICES; LOSS OF USE,
+>> DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+> // HOWEVER CAUSED AND ON ANY
+>> THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+> // LIABILITY, OR TORT
+>> (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+> // OUT OF THE USE OF
+>> THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+> // SUCH DAMAGE.
+>
+> //
+>> Transliterated into C++ Allen King 060417, from sources on
+> //
+>> http://www.jbox.dk/sanos/source/lib/random.c.html
+>
+>
+>
+> #include
+>> <stdexcept>
+> #include "random_generator.hpp"
+> #include
+>> "scripting/squirrel_util.hpp"
+>
+> RandomGenerator systemRandom; // global
+>> random number generator
+>
+> RandomGenerator::RandomGenerator()
+>> {
+> assert(sizeof(int) >= 4);
+> initialized = 0;
+>> initialize();
+> }
+>
+> RandomGenerator::~RandomGenerator()
+>> {
+> }
+>
+> /*int RandomGenerator::srand(int x) {
+> while (x == 0) // random seed of
+>> zero means
+> x = time(0); // randomize with time
+> assert(x < RAND_MAX); //
+>> only allow posative 31-bit seeds
+> assert(sizeof(int) >= 4);
+> srandom(x);
+>> return x; // let caller know seed used
+> }*/
+>
+> int RandomGenerator::srand(int
+>> x) {
+> int x0 = x;
+> while (x == 0) // random seed of zero means
+> x = time(0);
+>> // randomize with time
+> printf("==== srand(%10d) (%10d) RAND_MAX=%x
+>> =====\n", x, x0, RAND_MAX);
+> if (x <= RAND_MAX) {
+> }
+> else { // only allow
+>> posative 31-bit seeds
+> printf("ERROR: x=%x, x0=%x, RAND_MAX=%x\n", x, x0,
+>> RAND_MAX);
+> assert(0);
+> }
+> RandomGenerator::srandom(x);
+> return x; // let
+>> caller know seed used
+> }
+>
+> int RandomGenerator::rand() { return random();
+>> }
+>
+> int RandomGenerator::rand(int v) {
+> assert(v != 0 && v <= RAND_MAX); //
+>> illegal arg: 0 or too big
+> return RandomGenerator::random() % v;
+> }
+>
+> int
+>> RandomGenerator::rand(int u, int v) {
+> assert(v > u);
+> return u +
+>> RandomGenerator::rand(v-u);
+> }
+>
+> double RandomGenerator::randf(double v) {
+>> float rv;
+> while ((rv = (double)RandomGenerator::random() /
+>> RAND_MAX * v) >= v)
+> ; // never return v!
+> return rv;
+> }
+>
+> double
+>> RandomGenerator::randf(double u, double v) {
+> return u +
+>> RandomGenerator::randf(v-u);
+> }
+>
+> //-----------------------------------------------------------------------
+> //
+>>
+> // Copyright (C) 2002 Michael Ringgaard. All rights reserved.
+> // Copyright
+>> (C) 1983, 1993 The Regents of the University of California.
+> //
+> //
+>> Redistribution and use in source and binary forms, with or without
+> //
+>> modification, are permitted provided that the following conditions
+> // are
+>> met:
+> //
+> // 1. Redistributions of source code must retain the above
+>> copyright
+> // notice, this list of conditions and the following disclaimer.
+>>
+> // 2. Redistributions in binary form must reproduce the above copyright
+> //
+>> notice, this list of conditions and the following disclaimer in the
+> //
+>> documentation and/or other materials provided with the distribution.
+> // 3.
+>> Neither the name of the project nor the names of its contributors
+> // may be
+>> used to endorse or promote products derived from this software
+> // without
+>> specific prior written permission.
+> //
+> // THIS SOFTWARE IS PROVIDED BY THE
+>> COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+> // ANY EXPRESS OR IMPLIED
+>> WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+> // IMPLIED WARRANTIES OF
+>> MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+> // ARE DISCLAIMED. IN
+>> NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+> // FOR ANY
+>> DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+> //
+>> DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+> //
+>> OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+> //
+>> HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+>> STRICT
+> // LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+>> ANY WAY
+> // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+>> POSSIBILITY OF
+> // SUCH DAMAGE.
+> //
+>
+> //**#include <os.h>
+>
+> //
+> // An improved
+>> random number generation package. In addition to the standard
+> //
+>> rand()/srand() like interface, this package also has a special state 
+>> info
+> //
+>> interface. The initstate() routine is called with a seed, an array of
+> //
+>> bytes, and a count of how many bytes are being passed in; this array is
+> //
+>> then initialized to contain information for random number generation 
+>> with
+> //
+>> that much state information. Good sizes for the amount of state
+> //
+>> information are 32, 64, 128, and 256 bytes. The state can be switched by
+> //
+>> calling the setstate() routine with the same array as was initiallized
+> //
+>> with initstate(). By default, the package runs with 128 bytes of state
+> //
+>> information and generates far better random numbers than a linear
+> //
+>> congruential generator. If the amount of state information is less than
+> //
+>> 32 bytes, a simple linear congruential R.N.G. is used.
+> //
+> // Internally, the
+>> state information is treated as an array of longs; the
+> // zeroeth element of
+>> the array is the type of R.N.G. being used (small
+> // integer); the remainder
+>> of the array is the state information for the
+> // R.N.G. Thus, 32 bytes of
+>> state information will give 7 longs worth of
+> // state information, which
+>> will allow a degree seven polynomial. (Note:
+> // the zeroeth word of state
+>> information also has some other information
+> // stored in it -- see
+>> setstate() for details).
+> //
+> // The random number generation technique is a
+>> linear feedback shift register
+> // approach, employing trinomials (since
+>> there are fewer terms to sum up that
+> // way). In this approach, the least
+>> significant bit of all the numbers in
+> // the state table will act as a
+>> linear feedback shift register, and will
+> // have period 2^deg - 1 (where deg
+>> is the degree of the polynomial being
+> // used, assuming that the polynomial
+>> is irreducible and primitive). The
+> // higher order bits will have longer
+>> periods, since their values are also
+> // influenced by pseudo-random carries
+>> out of the lower bits. The total
+> // period of the generator is approximately
+>> deg*(2**deg - 1); thus doubling
+> // the amount of state information has a
+>> vast influence on the period of the
+> // generator. Note: the deg*(2**deg - 1)
+>> is an approximation only good for
+> // large deg, when the period of the shift
+>> is the dominant factor.
+> // With deg equal to seven, the period is actually
+>> much longer than the
+> // 7*(2**7 - 1) predicted by this formula.
+> //
+> //
+>> Modified 28 December 1994 by Jacob S. Rosenberg.
+> //
+>
+> //
+> // For each of the
+>> currently supported random number generators, we have a
+> // break value on
+>> the amount of state information (you need at least this
+> // many bytes of
+>> state info to support this random number generator), a degree
+> // for the
+>> polynomial (actually a trinomial) that the R.N.G. is based on, and
+> // the
+>> separation between the two lower order coefficients of the trinomial.
+>
+> void
+>> RandomGenerator::initialize() {
+>
+> #define NSHUFF 100 // To drop part of seed
+>> -> 1st value correlation
+>
+> //static long degrees[MAX_TYPES] = { DEG_0, DEG_1,
+>> DEG_2, DEG_3, DEG_4 };
+> //static long seps [MAX_TYPES] = { SEP_0, SEP_1,
+>> SEP_2, SEP_3, SEP_4 };
+>
+> degrees[0] = DEG_0;
+> degrees[1] = DEG_1;
+>> degrees[2] = DEG_2;
+> degrees[3] = DEG_3;
+> degrees[4] = DEG_4;
+>
+> seps [0] =
+>> SEP_0;
+> seps [1] = SEP_1;
+> seps [2] = SEP_2;
+> seps [3] = SEP_3;
+> seps [4] =
+>> SEP_4;
+>
+> //
+> // Initially, everything is set up as if from:
+> //
+> // initstate(1,
+>> randtbl, 128);
+> //
+> // Note that this initialization takes advantage of the
+>> fact that srandom()
+> // advances the front and rear pointers 10*rand_deg
+>> times, and hence the
+> // rear pointer which starts at 0 will also end up at
+>> zero; thus the zeroeth
+> // element of the state information, which contains
+>> info about the current
+> // position of the rear pointer is just
+> //
+> //
+>> MAX_TYPES * (rptr - state) + TYPE_3 == TYPE_3.
+>
+> randtbl[ 0] = TYPE_3;
+>> randtbl[ 1] = 0x991539b1;
+> randtbl[ 2] = 0x16a5bce3;
+> randtbl[ 3] =
+>> 0x6774a4cd;
+> randtbl[ 4] = 0x3e01511e;
+> randtbl[ 5] = 0x4e508aaa;
+> randtbl[
+>> 6] = 0x61048c05;
+> randtbl[ 7] = 0xf5500617;
+> randtbl[ 8] = 0x846b7115;
+>> randtbl[ 9] = 0x6a19892c;
+> randtbl[10] = 0x896a97af;
+> randtbl[11] =
+>> 0xdb48f936;
+> randtbl[12] = 0x14898454;
+> randtbl[13] = 0x37ffd106;
+>> randtbl[14] = 0xb58bff9c;
+> randtbl[15] = 0x59e17104;
+> randtbl[16] =
+>> 0xcf918a49;
+> randtbl[17] = 0x09378c83;
+> randtbl[18] = 0x52c7a471;
+>> randtbl[19] = 0x8d293ea9;
+> randtbl[20] = 0x1f4fc301;
+> randtbl[21] =
+>> 0xc3db71be;
+> randtbl[22] = 0x39b44e1c;
+> randtbl[23] = 0xf8a44ef9;
+>> randtbl[24] = 0x4c8b80b1;
+> randtbl[25] = 0x19edc328;
+> randtbl[26] =
+>> 0x87bf4bdd;
+> randtbl[27] = 0xc9b240e5;
+> randtbl[28] = 0xe9ee4b1b;
+>> randtbl[29] = 0x4382aee7;
+> randtbl[30] = 0x535b6b41;
+> randtbl[31] =
+>> 0xf3bec5da;
+>
+> // static long randtbl[DEG_3 + 1] =
+> // {
+> // TYPE_3;
+> //
+>> 0x991539b1, 0x16a5bce3, 0x6774a4cd, 0x3e01511e, 0x4e508aaa, 0x61048c05,
+> //
+>> 0xf5500617, 0x846b7115, 0x6a19892c, 0x896a97af, 0xdb48f936, 0x14898454,
+> //
+>> 0x37ffd106, 0xb58bff9c, 0x59e17104, 0xcf918a49, 0x09378c83, 0x52c7a471,
+> //
+>> 0x8d293ea9, 0x1f4fc301, 0xc3db71be, 0x39b44e1c, 0xf8a44ef9, 0x4c8b80b1,
+> //
+>> 0x19edc328, 0x87bf4bdd, 0xc9b240e5, 0xe9ee4b1b, 0x4382aee7, 0x535b6b41,
+> //
+>> 0xf3bec5da
+> // };
+>
+>
+> //
+> // fptr and rptr are two pointers into the state info,
+>> a front and a rear
+> // pointer. These two pointers are always rand_sep places
+>> aparts, as they
+> // cycle cyclically through the state information. (Yes,
+>> this does mean we
+> // could get away with just one pointer, but the code for
+>> random() is more
+> // efficient this way). The pointers are left positioned as
+>> they would be
+> // from the call
+> //
+> // initstate(1, randtbl, 128);
+> //
+> // (The
+>> position of the rear pointer, rptr, is really 0 (as explained above
+> // in
+>> the initialization of randtbl) because the state table pointer is set
+> // to
+>> point to randtbl[1] (as explained below).
+> //
+>
+> fptr = &randtbl[SEP_3 + 1];
+>> rptr = &randtbl[1];
+>
+> //
+> // The following things are the pointer to the state
+>> information table, the
+> // type of the current generator, the degree of the
+>> current polynomial being
+> // used, and the separation between the two
+>> pointers. Note that for efficiency
+> // of random(), we remember the first
+>> location of the state information, not
+> // the zeroeth. Hence it is valid to
+>> access state[-1], which is used to
+> // store the type of the R.N.G. Also, we
+>> remember the last location, since
+> // this is more efficient than indexing
+>> every time to find the address of
+> // the last element to see if the front
+>> and rear pointers have wrapped.
+> //
+>
+> state = &randtbl[1];
+> rand_type =
+>> TYPE_3;
+> rand_deg = DEG_3;
+> rand_sep = SEP_3;
+> end_ptr = &randtbl[DEG_3 +
+>> 1];
+>
+> }
+>
+> //
+> // Compute x = (7^5 * x) mod (2^31 - 1)
+> // wihout overflowing 31
+>> bits:
+> // (2^31 - 1) = 127773 * (7^5) + 2836
+> // From "Random number
+>> generators: good ones are hard to find",
+> // Park and Miller, Communications
+>> of the ACM, vol. 31, no. 10,
+> // October 1988, p. 1195.
+> //
+>
+> __inline static
+>> long good_rand(long x)
+> {
+> long hi, lo;
+>
+> // Can't be initialized with 0, so
+>> use another value.
+> if (x == 0) x = 123459876;
+> hi = x / 127773;
+> lo = x %
+>> 127773;
+> x = 16807 * lo - 2836 * hi;
+> if (x < 0) x += 0x7fffffff;
+> return
+>> x;
+> }
+>
+> //
+> // srandom
+> //
+> // Initialize the random number generator based on
+>> the given seed. If the
+> // type is the trivial no-state-information type,
+>> just remember the seed.
+> // Otherwise, initializes state[] based on the given
+>> "seed" via a linear
+> // congruential generator. Then, the pointers are set to
+>> known locations
+> // that are exactly rand_sep places apart. Lastly, it cycles
+>> the state
+> // information a given number of times to get rid of any initial
+>> dependencies
+> // introduced by the L.C.R.N.G. Note that the initialization of
+>> randtbl[]
+> // for default usage relies on values produced by this
+>> routine.
+>
+> void RandomGenerator::srandom(unsigned long x)
+> {
+>> long i, lim;
+>
+> state[0] = x;
+> if (rand_type == TYPE_0)
+> lim = NSHUFF;
+> else
+>>
+> {
+> for (i = 1; i < rand_deg; i++) state[i] = good_rand(state[i - 1]);
+>> fptr = &state[rand_sep];
+> rptr = &state[0];
+> lim = 10 * rand_deg;
+> }
+>
+>> initialized = 1;
+> for (i = 0; i < lim; i++) random();
+> }
+>
+> #ifdef
+>> NOT_FOR_SUPERTUX // use in supertux doesn't require these methods,
+> // which
+>> are not portable to as many platforms as
+> // SDL. The cost is that the
+>> variability of the
+> // initial seed is reduced to only 32 bits of
+> //
+>> randomness, seemingly enough. PAK 060420
+> //
+> // srandomdev
+> //
+> // Many
+>> programs choose the seed value in a totally predictable manner.
+> // This
+>> often causes problems. We seed the generator using the much more
+> // secure
+>> random() interface. Note that this particular seeding
+> // procedure can
+>> generate states which are impossible to reproduce by
+> // calling srandom()
+>> with any value, since the succeeding terms in the
+> // state buffer are no
+>> longer derived from the LC algorithm applied to
+> // a fixed seed.
+>
+> void
+>> RandomGenerator::srandomdev()
+> {
+> int fd, done;
+> size_t len;
+>
+> if (rand_type
+>> == TYPE_0)
+> len = sizeof state[0];
+> else
+> len = rand_deg * sizeof
+>> state[0];
+>
+> done = 0;
+> fd = open("/dev/urandom", O_RDONLY);
+> if (fd >= 0)
+>> {
+> if (read(fd, state, len) == len) done = 1;
+> close(fd);
+> }
+>
+> if (!done)
+>> {
+> struct timeval tv;
+>
+> gettimeofday(&tv, NULL);
+> srandom(tv.tv_sec ^
+>> tv.tv_usec);
+> return;
+> }
+>
+> if (rand_type != TYPE_0)
+> {
+> fptr =
+>> &state[rand_sep];
+> rptr = &state[0];
+> }
+> initialized = 1;
+> }
+>
+> //
+> //
+>> initstate
+> //
+> // Initialize the state information in the given array of n
+>> bytes for future
+> // random number generation. Based on the number of bytes
+>> we are given, and
+> // the break values for the different R.N.G.'s, we choose
+>> the best (largest)
+> // one we can and set things up for it. srandom() is then
+>> called to
+> // initialize the state information.
+> //
+> // Note that on return
+>> from srandom(), we set state[-1] to be the type
+> // multiplexed with the
+>> current value of the rear pointer; this is so
+> // successive calls to
+>> initstate() won't lose this information and will be
+> // able to restart with
+>> setstate().
+> //
+> // Note: the first thing we do is save the current state, if
+>> any, just like
+> // setstate() so that it doesn't matter when initstate is
+>> called.
+> //
+> // Returns a pointer to the old state.
+> //
+>
+> char *
+>> RandomGenerator::initstate(unsigned long seed, char
+>> *arg_state, long n)
+> {
+> char *ostate = (char *) (&state[-1]);
+> long
+>> *long_arg_state = (long *) arg_state;
+>
+> if (rand_type == TYPE_0)
+> state[-1]
+>> = rand_type;
+> else
+> state[-1] = MAX_TYPES * (rptr - state) + rand_type;
+>
+> if
+>> (n < BREAK_0) return NULL;
+>
+> if (n < BREAK_1)
+> {
+> rand_type = TYPE_0;
+>> rand_deg = DEG_0;
+> rand_sep = SEP_0;
+> }
+> else if (n < BREAK_2)
+> {
+>> rand_type = TYPE_1;
+> rand_deg = DEG_1;
+> rand_sep = SEP_1;
+> }
+> else if (n <
+>> BREAK_3)
+> {
+> rand_type = TYPE_2;
+> rand_deg = DEG_2;
+> rand_sep = SEP_2;
+> }
+>> else if (n < BREAK_4)
+> {
+> rand_type = TYPE_3;
+> rand_deg = DEG_3;
+> rand_sep
+>> = SEP_3;
+> }
+> else
+> {
+> rand_type = TYPE_4;
+> rand_deg = DEG_4;
+> rand_sep =
+>> SEP_4;
+> }
+>
+> state = (long *) (long_arg_state + 1); // First location
+>> end_ptr = &state[rand_deg]; // Must set end_ptr before srandom
+>> srandom(seed);
+>
+> if (rand_type == TYPE_0)
+> long_arg_state[0] = rand_type;
+>> else
+> long_arg_state[0] = MAX_TYPES * (rptr - state) + rand_type;
+>
+>> initialized = 1;
+> return ostate;
+> }
+>
+> //
+> // setstate
+> //
+> // Restore the state
+>> from the given state array.
+> //
+> // Note: it is important that we also
+>> remember the locations of the pointers
+> // in the current state information,
+>> and restore the locations of the pointers
+> // from the old state information.
+>> This is done by multiplexing the pointer
+> // location into the zeroeth word
+>> of the state information.
+> //
+> // Note that due to the order in which things
+>> are done, it is OK to call
+> // setstate() with the same state as the current
+>> state.
+> //
+> // Returns a pointer to the old state information.
+> //
+>
+> char *
+>> RandomGenerator::setstate(char *arg_state)
+> {
+> long *new_state = (long *)
+>> arg_state;
+> long type = new_state[0] % MAX_TYPES;
+> long rear = new_state[0]
+>> / MAX_TYPES;
+> char *ostate = (char *) (&state[-1]);
+>
+> if (rand_type ==
+>> TYPE_0)
+> state[-1] = rand_type;
+> else
+> state[-1] = MAX_TYPES * (rptr -
+>> state) + rand_type;
+>
+> switch(type)
+> {
+> case TYPE_0:
+> case TYPE_1:
+> case
+>> TYPE_2:
+> case TYPE_3:
+> case TYPE_4:
+> rand_type = type;
+> rand_deg =
+>> degrees[type];
+> rand_sep = seps[type];
+> break;
+> }
+>
+> state = (long *)
+>> (new_state + 1);
+> if (rand_type != TYPE_0)
+> {
+> rptr = &state[rear];
+> fptr =
+>> &state[(rear + rand_sep) % rand_deg];
+> }
+> end_ptr = &state[rand_deg]; // Set
+>> end_ptr too
+>
+> initialized = 1;
+> return ostate;
+> }
+> #endif
+>> //NOT_FOR_SUPERTUX
+> //
+> // random:
+> //
+> // If we are using the trivial TYPE_0
+>> R.N.G., just do the old linear
+> // congruential bit. Otherwise, we do our
+>> fancy trinomial stuff, which is
+> // the same in all the other cases due to
+>> all the global variables that have
+> // been set up. The basic operation is to
+>> add the number at the rear pointer
+> // into the one at the front pointer.
+>> Then both pointers are advanced to
+> // the next location cyclically in the
+>> table. The value returned is the sum
+> // generated, reduced to 31 bits by
+>> throwing away the "least random" low bit.
+> //
+> // Note: the code takes
+>> advantage of the fact that both the front and
+> // rear pointers can't wrap on
+>> the same call by not testing the rear
+> // pointer if the front one has
+>> wrapped.
+> //
+> // Returns a 31-bit random number.
+> //
+>
+> long
+>> RandomGenerator::random()
+> {
+> long i;
+> long *f, *r;
+> if (!initialized) {
+>> throw std::runtime_error("uninitialized RandomGenerator
+>> object");
+> }
+>
+> if (rand_type == TYPE_0)
+> {
+> i = state[0];
+> state[0] = i =
+>> (good_rand(i)) & 0x7fffffff;
+> }
+> else
+> {
+> f = fptr; r = rptr;
+> *f += *r;
+>> i = (*f >> 1) & 0x7fffffff; // Chucking least random bit
+> if (++f >=
+>> end_ptr)
+> {
+> f = state;
+> ++r;
+> }
+> else if (++r >= end_ptr)
+> r = state;
+>
+>> fptr = f; rptr = r;
+> }
+>
+> return i;
+> }
+>
+>
+>>
+>
+>
+> -- 
+> Flarbland: Your one and only stop for cheats, articles, comedy and
+> much, much more!
+> http://flarbland.bravehost.com
+> ------------------------------------------------------------------------
+>
+> [INFO] src/main.cpp:195 [C:\Documents and Settings\HP_Administrator\.supertux] is in the search path
+> [INFO] src/main.cpp:195 [c:\msys\1.0\build\supertux2\/data] is in the search path
+> [INFO] src/main.cpp:429 Component 'controller' finished after 0.2 seconds
+> [WARNING] src/control/joystickkeyboardcontroller.cpp:192 Invalid button '0' in buttonmap
+> [WARNING] src/control/joystickkeyboardcontroller.cpp:192 Invalid button '1' in buttonmap
+> [INFO] src/main.cpp:429 Component 'config' finished after 0.003 seconds
+> [INFO] src/main.cpp:429 Component 'tinygettext' finished after 0.001 seconds
+> [INFO] src/main.cpp:429 Component 'commandline' finished after 0 seconds
+> [INFO] src/main.cpp:429 Component 'audio' finished after 0.335 seconds
+> [INFO] src/main.cpp:429 Component 'video' finished after 5.476 seconds
+> [INFO] src/main.cpp:429 Component 'scripting' finished after 0.236 seconds
+> [DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.463 seconds
+> [INFO] src/main.cpp:429 Component 'resources' finished after 3.552 seconds
+> ==== srand(1146426740) (         0) RAND_MAX=7fff =====
+> ERROR: x=44551574, x0=0, RAND_MAX=7fff
+> Assertion failed: 0, file src/random_generator.cpp, line 77
+>
+> This application has requested the Runtime to terminate it in an unusual way.
+> Please contact the application's support team for more information.
+>   
+> ------------------------------------------------------------------------
+>
+> // $Id: random_generator.cpp 3435 2006-04-26 02:13:42Z sik0fewl $
+> // 
+> // A strong random number generator
+> //
+> // Copyright (C) 2006 Allen King
+> // Copyright (C) 2002 Michael Ringgaard. All rights reserved.
+> // Copyright (C) 1983, 1993 The Regents of the University of California.
+> //
+> // Redistribution and use in source and binary forms, with or without
+> // modification, are permitted provided that the following conditions
+> // are met:
+> // 
+> // 1. Redistributions of source code must retain the above copyright 
+> //    notice, this list of conditions and the following disclaimer.  
+> // 2. Redistributions in binary form must reproduce the above copyright
+> //    notice, this list of conditions and the following disclaimer in the
+> //    documentation and/or other materials provided with the distribution.  
+> // 3. Neither the name of the project nor the names of its contributors
+> //    may be used to endorse or promote products derived from this software
+> //    without specific prior written permission. 
+> // 
+> // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+> // ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+> // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+> // ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+> // FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+> // DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+> // OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+> // HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+> // LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+> // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+> // SUCH DAMAGE.
+>
+> // Transliterated into C++ Allen King 060417, from sources on
+> //          http://www.jbox.dk/sanos/source/lib/random.c.html
+>
+>
+>
+> #include <stdexcept>
+> #include <stdio.h>
+> #include "random_generator.hpp"
+> #include "scripting/squirrel_util.hpp"
+>
+> RandomGenerator systemRandom;               // global random number generator
+>
+> RandomGenerator::RandomGenerator() {
+>     assert(sizeof(int) >= 4);
+>     initialized = 0;
+>     initialize();
+> }
+>
+> RandomGenerator::~RandomGenerator() {
+> }
+>
+> /*int RandomGenerator::srand(int x)    {
+>     while (x == 0)                          // random seed of zero means
+>         x = time(0);                        // randomize with time
+>     assert(x < RAND_MAX);                   // only allow posative 31-bit seeds
+>     assert(sizeof(int) >= 4);
+>     srandom(x);
+>     return x;                               // let caller know seed used
+> }*/
+>
+> int RandomGenerator::srand(int x)    {
+>     int x0 = x;
+>     while (x == 0)                          // random seed of zero means
+>         x = time(0);                        // randomize with time
+>
+>     fprintf(stderr, "==== srand(%10d) (%10d) RAND_MAX=%x =====\n", x, x0, RAND_MAX);
+>
+>     if (x < RAND_MAX) {
+>     }
+>     else {                                  // only allow positive 31-bit seeds
+>
+>         fprintf(stderr, "ERROR: x=%x, x0=%x, RAND_MAX=%x\n", x, x0, RAND_MAX);
+>
+>         assert(0);
+>     }
+>     RandomGenerator::srandom(x);
+>     return x;                               // let caller know seed used
+> }
+>
+> int RandomGenerator::rand()                 {        return random();    }
+>
+> int RandomGenerator::rand(int v) {
+>     assert(v != 0 && v <= RAND_MAX);        // illegal arg: 0 or too big
+>     return RandomGenerator::random() % v;
+> }
+>
+> int RandomGenerator::rand(int u, int v) {
+>     assert(v > u);    
+>     return u + RandomGenerator::rand(v-u);
+> }
+>
+> double RandomGenerator::randf(double v) {
+>     float rv;
+>     while ((rv = (double)RandomGenerator::random() / RAND_MAX * v) >= v)
+>         ;                                   // never return v!
+>     return rv;
+> }
+>
+> double RandomGenerator::randf(double u, double v) {
+>     return u + RandomGenerator::randf(v-u);
+> }
+>
+> //-----------------------------------------------------------------------
+> //        
+> // Copyright (C) 2002 Michael Ringgaard. All rights reserved.
+> // Copyright (C) 1983, 1993 The Regents of the University of California.
+> //
+> // Redistribution and use in source and binary forms, with or without
+> // modification, are permitted provided that the following conditions
+> // are met:
+> // 
+> // 1. Redistributions of source code must retain the above copyright 
+> //    notice, this list of conditions and the following disclaimer.  
+> // 2. Redistributions in binary form must reproduce the above copyright
+> //    notice, this list of conditions and the following disclaimer in the
+> //    documentation and/or other materials provided with the distribution.  
+> // 3. Neither the name of the project nor the names of its contributors
+> //    may be used to endorse or promote products derived from this software
+> //    without specific prior written permission. 
+> // 
+> // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+> // ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+> // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+> // ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+> // FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+> // DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+> // OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+> // HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+> // LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+> // OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+> // SUCH DAMAGE.
+> // 
+>
+> //**#include <os.h>
+>
+> //
+> // An improved random number generation package.  In addition to the standard
+> // rand()/srand() like interface, this package also has a special state info
+> // interface.  The initstate() routine is called with a seed, an array of
+> // bytes, and a count of how many bytes are being passed in; this array is
+> // then initialized to contain information for random number generation with
+> // that much state information.  Good sizes for the amount of state
+> // information are 32, 64, 128, and 256 bytes.  The state can be switched by
+> // calling the setstate() routine with the same array as was initiallized
+> // with initstate().  By default, the package runs with 128 bytes of state
+> // information and generates far better random numbers than a linear
+> // congruential generator.  If the amount of state information is less than
+> // 32 bytes, a simple linear congruential R.N.G. is used.
+> //
+> // Internally, the state information is treated as an array of longs; the
+> // zeroeth element of the array is the type of R.N.G. being used (small
+> // integer); the remainder of the array is the state information for the
+> // R.N.G.  Thus, 32 bytes of state information will give 7 longs worth of
+> // state information, which will allow a degree seven polynomial.  (Note:
+> // the zeroeth word of state information also has some other information
+> // stored in it -- see setstate() for details).
+> //
+> // The random number generation technique is a linear feedback shift register
+> // approach, employing trinomials (since there are fewer terms to sum up that
+> // way).  In this approach, the least significant bit of all the numbers in
+> // the state table will act as a linear feedback shift register, and will
+> // have period 2^deg - 1 (where deg is the degree of the polynomial being
+> // used, assuming that the polynomial is irreducible and primitive).  The
+> // higher order bits will have longer periods, since their values are also
+> // influenced by pseudo-random carries out of the lower bits.  The total
+> // period of the generator is approximately deg*(2**deg - 1); thus doubling
+> // the amount of state information has a vast influence on the period of the
+> // generator.  Note: the deg*(2**deg - 1) is an approximation only good for
+> // large deg, when the period of the shift is the dominant factor.
+> // With deg equal to seven, the period is actually much longer than the
+> // 7*(2**7 - 1) predicted by this formula.
+> //
+> // Modified 28 December 1994 by Jacob S. Rosenberg.
+> //
+>
+> //
+> // For each of the currently supported random number generators, we have a
+> // break value on the amount of state information (you need at least this
+> // many bytes of state info to support this random number generator), a degree
+> // for the polynomial (actually a trinomial) that the R.N.G. is based on, and
+> // the separation between the two lower order coefficients of the trinomial.
+>
+> void RandomGenerator::initialize() {
+>
+> #define NSHUFF 100      // To drop part of seed -> 1st value correlation
+>
+> //static long degrees[MAX_TYPES] = { DEG_0, DEG_1, DEG_2, DEG_3, DEG_4 };
+> //static long seps [MAX_TYPES] = { SEP_0, SEP_1, SEP_2, SEP_3, SEP_4 };
+>
+>     degrees[0] = DEG_0;
+>     degrees[1] = DEG_1;
+>     degrees[2] = DEG_2;
+>     degrees[3] = DEG_3;
+>     degrees[4] = DEG_4;
+>
+>     seps [0] = SEP_0;
+>     seps [1] = SEP_1;
+>     seps [2] = SEP_2;
+>     seps [3] = SEP_3;
+>     seps [4] = SEP_4;
+>
+> //
+> // Initially, everything is set up as if from:
+> //
+> //  initstate(1, randtbl, 128);
+> //
+> // Note that this initialization takes advantage of the fact that srandom()
+> // advances the front and rear pointers 10*rand_deg times, and hence the
+> // rear pointer which starts at 0 will also end up at zero; thus the zeroeth
+> // element of the state information, which contains info about the current
+> // position of the rear pointer is just
+> //
+> //  MAX_TYPES * (rptr - state) + TYPE_3 == TYPE_3.
+>
+>     randtbl[ 0] =  TYPE_3;
+>     randtbl[ 1] =  0x991539b1;
+>     randtbl[ 2] =  0x16a5bce3;
+>     randtbl[ 3] =  0x6774a4cd;
+>     randtbl[ 4] =  0x3e01511e;
+>     randtbl[ 5] =  0x4e508aaa;
+>     randtbl[ 6] =  0x61048c05;
+>     randtbl[ 7] =  0xf5500617;
+>     randtbl[ 8] =  0x846b7115;
+>     randtbl[ 9] =  0x6a19892c;
+>     randtbl[10] =  0x896a97af;
+>     randtbl[11] =  0xdb48f936;
+>     randtbl[12] =  0x14898454;
+>     randtbl[13] =  0x37ffd106;
+>     randtbl[14] =  0xb58bff9c;
+>     randtbl[15] =  0x59e17104;
+>     randtbl[16] =  0xcf918a49;
+>     randtbl[17] =  0x09378c83;
+>     randtbl[18] =  0x52c7a471;
+>     randtbl[19] =  0x8d293ea9;
+>     randtbl[20] =  0x1f4fc301;
+>     randtbl[21] =  0xc3db71be;
+>     randtbl[22] =  0x39b44e1c;
+>     randtbl[23] =  0xf8a44ef9;
+>     randtbl[24] =  0x4c8b80b1;
+>     randtbl[25] =  0x19edc328;
+>     randtbl[26] =  0x87bf4bdd;
+>     randtbl[27] =  0xc9b240e5;
+>     randtbl[28] =  0xe9ee4b1b;
+>     randtbl[29] =  0x4382aee7;
+>     randtbl[30] =  0x535b6b41;
+>     randtbl[31] =  0xf3bec5da;
+>
+> // static long randtbl[DEG_3 + 1] = 
+> // {
+> //   TYPE_3;
+> //   0x991539b1, 0x16a5bce3, 0x6774a4cd, 0x3e01511e, 0x4e508aaa, 0x61048c05,
+> //   0xf5500617, 0x846b7115, 0x6a19892c, 0x896a97af, 0xdb48f936, 0x14898454,
+> //   0x37ffd106, 0xb58bff9c, 0x59e17104, 0xcf918a49, 0x09378c83, 0x52c7a471,
+> //   0x8d293ea9, 0x1f4fc301, 0xc3db71be, 0x39b44e1c, 0xf8a44ef9, 0x4c8b80b1,
+> //   0x19edc328, 0x87bf4bdd, 0xc9b240e5, 0xe9ee4b1b, 0x4382aee7, 0x535b6b41,
+> //   0xf3bec5da
+> // };
+>
+>
+> //
+> // fptr and rptr are two pointers into the state info, a front and a rear
+> // pointer.  These two pointers are always rand_sep places aparts, as they
+> // cycle cyclically through the state information.  (Yes, this does mean we
+> // could get away with just one pointer, but the code for random() is more
+> // efficient this way).  The pointers are left positioned as they would be
+> // from the call
+> //
+> //  initstate(1, randtbl, 128);
+> //
+> // (The position of the rear pointer, rptr, is really 0 (as explained above
+> // in the initialization of randtbl) because the state table pointer is set
+> // to point to randtbl[1] (as explained below).
+> //
+>
+>     fptr = &randtbl[SEP_3 + 1];
+>     rptr = &randtbl[1];
+>
+> //
+> // The following things are the pointer to the state information table, the
+> // type of the current generator, the degree of the current polynomial being
+> // used, and the separation between the two pointers.  Note that for efficiency
+> // of random(), we remember the first location of the state information, not
+> // the zeroeth.  Hence it is valid to access state[-1], which is used to
+> // store the type of the R.N.G.  Also, we remember the last location, since
+> // this is more efficient than indexing every time to find the address of
+> // the last element to see if the front and rear pointers have wrapped.
+> //
+>
+>     state = &randtbl[1];
+>     rand_type = TYPE_3;
+>     rand_deg = DEG_3;
+>     rand_sep = SEP_3;
+>     end_ptr = &randtbl[DEG_3 + 1];
+>
+> }
+>
+> //
+> // Compute x = (7^5 * x) mod (2^31 - 1)
+> // wihout overflowing 31 bits:
+> //      (2^31 - 1) = 127773 * (7^5) + 2836
+> // From "Random number generators: good ones are hard to find",
+> // Park and Miller, Communications of the ACM, vol. 31, no. 10,
+> // October 1988, p. 1195.
+> //
+>
+> __inline static long good_rand(long x)
+> {
+>   long hi, lo;
+>
+>   // Can't be initialized with 0, so use another value.
+>   if (x == 0) x = 123459876;
+>   hi = x / 127773;
+>   lo = x % 127773;
+>   x = 16807 * lo - 2836 * hi;
+>   if (x < 0) x += 0x7fffffff;
+>   return x;
+> }
+>
+> //
+> // srandom
+> //
+> // Initialize the random number generator based on the given seed.  If the
+> // type is the trivial no-state-information type, just remember the seed.
+> // Otherwise, initializes state[] based on the given "seed" via a linear
+> // congruential generator.  Then, the pointers are set to known locations
+> // that are exactly rand_sep places apart.  Lastly, it cycles the state
+> // information a given number of times to get rid of any initial dependencies
+> // introduced by the L.C.R.N.G.  Note that the initialization of randtbl[]
+> // for default usage relies on values produced by this routine.
+>
+> void RandomGenerator::srandom(unsigned long x)
+> {
+>   long i, lim;
+>
+>   state[0] = x;
+>   if (rand_type == TYPE_0)
+>     lim = NSHUFF;
+>   else 
+>   {
+>     for (i = 1; i < rand_deg; i++) state[i] = good_rand(state[i - 1]);
+>     fptr = &state[rand_sep];
+>     rptr = &state[0];
+>     lim = 10 * rand_deg;
+>   }
+>
+>   initialized = 1;
+>   for (i = 0; i < lim; i++) random();
+> }
+>
+> #ifdef NOT_FOR_SUPERTUX     // use in supertux doesn't require these methods,
+>                             // which are not portable to as many platforms as
+>                             // SDL.  The cost is that the variability of the
+>                             // initial seed is reduced to only 32 bits of
+>                             // randomness, seemingly enough. PAK 060420
+> //
+> // srandomdev
+> //
+> // Many programs choose the seed value in a totally predictable manner.
+> // This often causes problems.  We seed the generator using the much more
+> // secure random() interface.  Note that this particular seeding
+> // procedure can generate states which are impossible to reproduce by
+> // calling srandom() with any value, since the succeeding terms in the
+> // state buffer are no longer derived from the LC algorithm applied to
+> // a fixed seed.
+>
+> void RandomGenerator::srandomdev()
+> {
+>   int fd, done;
+>   size_t len;
+>
+>   if (rand_type == TYPE_0)
+>     len = sizeof state[0];
+>   else
+>     len = rand_deg * sizeof state[0];
+>
+>   done = 0;
+>   fd = open("/dev/urandom", O_RDONLY);
+>   if (fd >= 0) 
+>    {
+>      if (read(fd, state, len) == len) done = 1;
+>      close(fd);
+>    }
+>
+>   if (!done) 
+>   {
+>     struct timeval tv;
+>
+>     gettimeofday(&tv, NULL);
+>     srandom(tv.tv_sec ^ tv.tv_usec);
+>     return;
+>   }
+>
+>   if (rand_type != TYPE_0) 
+>   {
+>     fptr = &state[rand_sep];
+>     rptr = &state[0];
+>   }
+>   initialized = 1;
+> }
+>
+> //
+> // initstate
+> //
+> // Initialize the state information in the given array of n bytes for future
+> // random number generation.  Based on the number of bytes we are given, and
+> // the break values for the different R.N.G.'s, we choose the best (largest)
+> // one we can and set things up for it.  srandom() is then called to
+> // initialize the state information.
+> //
+> // Note that on return from srandom(), we set state[-1] to be the type
+> // multiplexed with the current value of the rear pointer; this is so
+> // successive calls to initstate() won't lose this information and will be
+> // able to restart with setstate().
+> //
+> // Note: the first thing we do is save the current state, if any, just like
+> // setstate() so that it doesn't matter when initstate is called.
+> //
+> // Returns a pointer to the old state.
+> //
+>
+> char * RandomGenerator::initstate(unsigned long seed, char *arg_state, long n)
+> {
+>   char *ostate = (char *) (&state[-1]);
+>   long *long_arg_state = (long *) arg_state;
+>
+>   if (rand_type == TYPE_0)
+>     state[-1] = rand_type;
+>   else
+>     state[-1] = MAX_TYPES * (rptr - state) + rand_type;
+>
+>   if (n < BREAK_0) return NULL;
+>
+>   if (n < BREAK_1) 
+>   {
+>     rand_type = TYPE_0;
+>     rand_deg = DEG_0;
+>     rand_sep = SEP_0;
+>   } 
+>   else if (n < BREAK_2) 
+>   {
+>     rand_type = TYPE_1;
+>     rand_deg = DEG_1;
+>     rand_sep = SEP_1;
+>   } 
+>   else if (n < BREAK_3) 
+>   {
+>     rand_type = TYPE_2;
+>     rand_deg = DEG_2;
+>     rand_sep = SEP_2;
+>   } 
+>   else if (n < BREAK_4) 
+>   {
+>     rand_type = TYPE_3;
+>     rand_deg = DEG_3;
+>     rand_sep = SEP_3;
+>   } 
+>   else 
+>   {
+>     rand_type = TYPE_4;
+>     rand_deg = DEG_4;
+>     rand_sep = SEP_4;
+>   }
+>   
+>   state = (long *) (long_arg_state + 1); // First location
+>   end_ptr = &state[rand_deg]; // Must set end_ptr before srandom
+>   srandom(seed);
+>
+>   if (rand_type == TYPE_0)
+>     long_arg_state[0] = rand_type;
+>   else
+>     long_arg_state[0] = MAX_TYPES * (rptr - state) + rand_type;
+>
+>   initialized = 1;
+>   return ostate;
+> }
+>
+> //
+> // setstate
+> //
+> // Restore the state from the given state array.
+> //
+> // Note: it is important that we also remember the locations of the pointers
+> // in the current state information, and restore the locations of the pointers
+> // from the old state information.  This is done by multiplexing the pointer
+> // location into the zeroeth word of the state information.
+> //
+> // Note that due to the order in which things are done, it is OK to call
+> // setstate() with the same state as the current state.
+> //
+> // Returns a pointer to the old state information.
+> //
+>
+> char * RandomGenerator::setstate(char *arg_state)
+> {
+>   long *new_state = (long *) arg_state;
+>   long type = new_state[0] % MAX_TYPES;
+>   long rear = new_state[0] / MAX_TYPES;
+>   char *ostate = (char *) (&state[-1]);
+>
+>   if (rand_type == TYPE_0)
+>     state[-1] = rand_type;
+>   else
+>     state[-1] = MAX_TYPES * (rptr - state) + rand_type;
+>
+>   switch(type) 
+>   {
+>     case TYPE_0:
+>     case TYPE_1:
+>     case TYPE_2:
+>     case TYPE_3:
+>     case TYPE_4:
+>       rand_type = type;
+>       rand_deg = degrees[type];
+>       rand_sep = seps[type];
+>       break;
+>   }
+>
+>   state = (long *) (new_state + 1);
+>   if (rand_type != TYPE_0) 
+>   {
+>     rptr = &state[rear];
+>     fptr = &state[(rear + rand_sep) % rand_deg];
+>   }
+>   end_ptr = &state[rand_deg];   // Set end_ptr too
+>
+>   initialized = 1;
+>   return ostate;
+> }
+> #endif //NOT_FOR_SUPERTUX
+> //
+> // random:
+> //
+> // If we are using the trivial TYPE_0 R.N.G., just do the old linear
+> // congruential bit.  Otherwise, we do our fancy trinomial stuff, which is
+> // the same in all the other cases due to all the global variables that have
+> // been set up.  The basic operation is to add the number at the rear pointer
+> // into the one at the front pointer.  Then both pointers are advanced to
+> // the next location cyclically in the table.  The value returned is the sum
+> // generated, reduced to 31 bits by throwing away the "least random" low bit.
+> //
+> // Note: the code takes advantage of the fact that both the front and
+> // rear pointers can't wrap on the same call by not testing the rear
+> // pointer if the front one has wrapped.
+> //
+> // Returns a 31-bit random number.
+> //
+>
+> long RandomGenerator::random()
+> {
+>   long i;
+>   long *f, *r;
+>   if (!initialized) {
+>       throw std::runtime_error("uninitialized RandomGenerator object");
+>   }
+>
+>   if (rand_type == TYPE_0) 
+>   {
+>     i = state[0];
+>     state[0] = i = (good_rand(i)) & 0x7fffffff;
+>   } 
+>   else 
+>   {
+>     f = fptr; r = rptr;
+>     *f += *r;
+>     i = (*f >> 1) & 0x7fffffff; // Chucking least random bit
+>     if (++f >= end_ptr) 
+>     {
+>       f = state;
+>       ++r;
+>     }
+>     else if (++r >= end_ptr) 
+>       r = state;
+>
+>     fptr = f; rptr = r;
+>   }
+>
+>   return i;
+> }
+>   
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060501/8d533885/attachment.html>
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: RandomGenerator.patch3b
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060501/8d533885/attachment.ksh>
+
+From matze at braunis.de  Tue May  2 22:08:00 2006
+From: matze at braunis.de (Matze Braun)
+Date: Tue, 02 May 2006 22:08:00 +0200
+Subject: [Supertux-devel] Development Cycle 2
+Message-ID: <1146600480.24729.4.camel@taylor.local>
+
+Development Cycle 1 has been completed. World 1 is updated for the new
+engine and enriched with some new features like the intro, yeti and the
+boat to world2. Sure there are still some rough edges, but we need some
+polishing and fixing before release anyway and can do this while working
+on other stuff. So now it's time to move on to development cycle2:
+
+Goal will be to model the light forest part around the castle. The wiki
+is currently filled with the following sub-tasks:
+
+* Make sure there are images for all 5 castle keys
+  * Decide how many and what levels will be part of the light forest
+  * Place the new levels on the worldmap
+  * Add water to an edge of worldmap 2 where tux arrives with the boat
+    and where he can get back to worldmap 1
+  * Place 3 of the 5 keys in the light forest
+  * Design a little sequence (+music?) that is shown when tux finds a
+    key
+  * Add support for paths to the editor
+  * Plan+Create levels for the light forest
+
+Greetings,
+	Matze
+
+
+
+
+From Brock.Alexander at web.de  Wed May  3 07:29:01 2006
+From: Brock.Alexander at web.de (Alexander Brock)
+Date: Tue, 02 May 2006 22:29:01 -0700
+Subject: [Supertux-devel] Development Cycle 2
+In-Reply-To: <1146600480.24729.4.camel@taylor.local>
+References: <1146600480.24729.4.camel@taylor.local>
+Message-ID: <44583F9D.7010100@web.de>
+
+Hello,
+
+> * Make sure there are images for all 5 castle keys
+
+How big shall they be? That influences the number of details they (can) 
+have.
+
+Alexander
+
+
+From Brock.Alexander at web.de  Wed May  3 07:29:01 2006
+From: Brock.Alexander at web.de (Alexander Brock)
+Date: Tue, 02 May 2006 22:29:01 -0700
+Subject: [Supertux-devel] Development Cycle 2
+In-Reply-To: <1146600480.24729.4.camel@taylor.local>
+References: <1146600480.24729.4.camel@taylor.local>
+Message-ID: <44583F9D.7010100@web.de>
+
+Hello,
+
+> * Make sure there are images for all 5 castle keys
+
+How big shall they be? That influences the number of details they (can) 
+have.
+
+Alexander
+
+
+From djwings at gmail.com  Tue May  2 22:56:54 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Tue, 2 May 2006 16:56:54 -0400
+Subject: [Supertux-devel] Development Cycle 2
+In-Reply-To: <44583F9D.7010100@web.de>
+References: <1146600480.24729.4.camel@taylor.local> <44583F9D.7010100@web.de>
+Message-ID: <826ffc730605021356v876f73en92d3e0b77e5218a@mail.gmail.com>
+
+As a beta tester, I agree that Cycle 1 is complete. World 1 is completely
+done, and it looks great. From now on, I'll try to contribute to the dev
+process as a mapmaker.
+
+On 5/3/06, Alexander Brock <Brock.Alexander at web.de> wrote:
+>
+> Hello,
+>
+> > * Make sure there are images for all 5 castle keys
+>
+> How big shall they be? That influences the number of details they (can)
+> have.
+>
+> Alexander
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060502/b4d8d3b0/attachment.html>
+
+From thommy at globo.com  Wed May  3 01:02:26 2006
+From: thommy at globo.com (Thomaz de Oliveira dos Reis)
+Date: Tue, 02 May 2006 20:02:26 -0300
+Subject: [Supertux-devel] Suggestion: Remove Saved Game missing
+In-Reply-To: <44583F9D.7010100@web.de>
+References: <1146600480.24729.4.camel@taylor.local> <44583F9D.7010100@web.de>
+Message-ID: <4457E502.2000309@globo.com>
+
+Hi Folks!
+
+There is no (easy) way to remove saved games... that is important :o)
+
+[]'s
+
+Thomaz
+
+
+From admin at berlios.de  Wed May  3 13:44:01 2006
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 3 May 2006 03:44:01 -0800 (AKDT)
+Subject: [Supertux-devel] [Bug #7373] Supertux crash when starting game
+Message-ID: <200605031144.k43Bi19d002702@unicorn.berlios.de>
+
+Bug #7373, was updated on 2006-May-03 03:44
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: bugmenot
+Assigned to : none
+Summary: Supertux crash when starting game
+
+Details: Latest svn, --enable-debug
+[DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.131 seconds
+[INFO] src/main.cpp:429 Component 'resources' finished after 1.503 seconds
+[INFO] src/main.cpp:297 Using random seed 1146655925, from time().
+[DEBUG] src/world.cpp:233 Couldn't load savegame: Couldn't open file 'save/world1_1.stsg': No such file or directory
+Display intro
+
+Program received signal SIGILL, Illegal instruction.
+[Switching to Thread -1225926944 (LWP 9147)]
+0xb7e7cd98 in png_handle_gAMA ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+(gdb) bt
+#0  0xb7e7cd98 in png_handle_gAMA ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#1  0xb7e69061 in png_read_info ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#2  0xb7e53243 in IMG_LoadPNG_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#3  0xb7e4fca4 in IMG_LoadTyped_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#4  0xb7e4fb0c in IMG_Load_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#5  0x08121e91 in TextureManager::create_image_texture (this=0x82b88c0,
+    filename=@0xbfe9d8b8) at src/video/texture_manager.cpp:103
+#6  0x08122d5b in TextureManager::get (this=0x82b88c0, _filename=@0xbfe9d954)
+    at src/video/texture_manager.cpp:66
+#7  0x08121353 in Surface (this=0x8912740, file=@0xbfe9d954)
+    at src/video/surface.cpp:40
+#8  0x080e1da2 in SnowParticleSystem (this=0x8911b38)
+    at src/object/particlesystem.cpp:85
+#9  0x080756f2 in Sector::parse_object (this=0x890e9e0, name=@0xbfe9da28,
+    reader=@0x0) at src/sector.cpp:144
+#10 0x0807a6a3 in Sector::parse (this=0x890e9e0, sector=@0x890e6e0)
+    at src/sector.cpp:194
+#11 0x080500cb in Level::load (this=0x8927e88, filepath=@0x8927918)
+    at src/level.cpp:89
+
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=7373&group_id=3467
+
+
+From matze at braunis.de  Wed May  3 23:48:52 2006
+From: matze at braunis.de (Matze Braun)
+Date: Wed, 03 May 2006 23:48:52 +0200
+Subject: [Supertux-devel] Development Cycle 2
+In-Reply-To: <44583F9D.7010100@web.de>
+References: <1146600480.24729.4.camel@taylor.local>
+	 <44583F9D.7010100@web.de>
+Message-ID: <1146692932.24925.1.camel@taylor.local>
+
+Am Dienstag, den 02.05.2006, 22:29 -0700 schrieb Alexander Brock:
+> Hello,
+> 
+> > * Make sure there are images for all 5 castle keys
+> 
+> How big shall they be? That influences the number of details they (can) 
+> have.
+
+We already have images for most of the keys (some images are missing and
+therefore plain copies of other keys at the moment). You can take a look
+into data/images/objects/keys. Keep in mind that we need images of these
+keys in keyholes (though we're not finally decided how that should look)
+later.
+
+Greetings,
+	Matze
+
+
+
+
+From matze at braunis.de  Wed May  3 23:48:52 2006
+From: matze at braunis.de (Matze Braun)
+Date: Wed, 03 May 2006 23:48:52 +0200
+Subject: [Supertux-devel] Development Cycle 2
+In-Reply-To: <44583F9D.7010100@web.de>
+References: <1146600480.24729.4.camel@taylor.local>
+	 <44583F9D.7010100@web.de>
+Message-ID: <1146692932.24925.1.camel@taylor.local>
+
+Am Dienstag, den 02.05.2006, 22:29 -0700 schrieb Alexander Brock:
+> Hello,
+> 
+> > * Make sure there are images for all 5 castle keys
+> 
+> How big shall they be? That influences the number of details they (can) 
+> have.
+
+We already have images for most of the keys (some images are missing and
+therefore plain copies of other keys at the moment). You can take a look
+into data/images/objects/keys. Keep in mind that we need images of these
+keys in keyholes (though we're not finally decided how that should look)
+later.
+
+Greetings,
+	Matze
+
+
+
+
+From djwings at gmail.com  Wed May  3 23:58:51 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Wed, 3 May 2006 17:58:51 -0400
+Subject: [Supertux-devel] Development Cycle 2
+In-Reply-To: <1146692932.24925.1.camel@taylor.local>
+References: <1146600480.24729.4.camel@taylor.local> <44583F9D.7010100@web.de>
+	 <1146692932.24925.1.camel@taylor.local>
+Message-ID: <826ffc730605031458g6d80034ep7a808d78fda57b49@mail.gmail.com>
+
+What are the keys, again?
+
+On 5/3/06, Matze Braun <matze at braunis.de> wrote:
+>
+> Am Dienstag, den 02.05.2006, 22:29 -0700 schrieb Alexander Brock:
+> > Hello,
+> >
+> > > * Make sure there are images for all 5 castle keys
+> >
+> > How big shall they be? That influences the number of details they (can)
+> > have.
+>
+> We already have images for most of the keys (some images are missing and
+> therefore plain copies of other keys at the moment). You can take a look
+> into data/images/objects/keys. Keep in mind that we need images of these
+> keys in keyholes (though we're not finally decided how that should look)
+> later.
+>
+> Greetings,
+>         Matze
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060503/80b7ba0d/attachment.html>
+
+From Brock.Alexander at web.de  Thu May  4 09:06:49 2006
+From: Brock.Alexander at web.de (Alexander Brock)
+Date: Thu, 04 May 2006 00:06:49 -0700
+Subject: [Supertux-devel] Development Cycle 2
+In-Reply-To: <826ffc730605031458g6d80034ep7a808d78fda57b49@mail.gmail.com>
+References: <1146600480.24729.4.camel@taylor.local> <44583F9D.7010100@web.de>	 <1146692932.24925.1.camel@taylor.local> <826ffc730605031458g6d80034ep7a808d78fda57b49@mail.gmail.com>
+Message-ID: <4459A809.6020206@web.de>
+
+Hello,
+
+> What are the keys, again?
+
+AFAIR Tux must collect them to unlock the end of the level or something 
+like that.
+
+Alexander
+
+
+From djwings at gmail.com  Thu May  4 00:06:24 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Wed, 3 May 2006 18:06:24 -0400
+Subject: [Supertux-devel] Development Cycle 2
+In-Reply-To: <4459A809.6020206@web.de>
+References: <1146600480.24729.4.camel@taylor.local> <44583F9D.7010100@web.de>
+	 <1146692932.24925.1.camel@taylor.local>
+	 <826ffc730605031458g6d80034ep7a808d78fda57b49@mail.gmail.com>
+	 <4459A809.6020206@web.de>
+Message-ID: <826ffc730605031506t53d358eei6facd70676353867@mail.gmail.com>
+
+No, I mean what colors.
+
+On 5/4/06, Alexander Brock <Brock.Alexander at web.de> wrote:
+>
+> Hello,
+>
+> > What are the keys, again?
+>
+> AFAIR Tux must collect them to unlock the end of the level or something
+> like that.
+>
+> Alexander
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060503/d36e2897/attachment.html>
+
+From djwings at gmail.com  Thu May  4 00:46:06 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Wed, 3 May 2006 18:46:06 -0400
+Subject: [Supertux-devel] Development Cycle 2
+In-Reply-To: <826ffc730605031506t53d358eei6facd70676353867@mail.gmail.com>
+References: <1146600480.24729.4.camel@taylor.local> <44583F9D.7010100@web.de>
+	 <1146692932.24925.1.camel@taylor.local>
+	 <826ffc730605031458g6d80034ep7a808d78fda57b49@mail.gmail.com>
+	 <4459A809.6020206@web.de>
+	 <826ffc730605031506t53d358eei6facd70676353867@mail.gmail.com>
+Message-ID: <826ffc730605031546u4665731aq48ef1f3521d04ebf@mail.gmail.com>
+
+Never mind, I got the files.
+Here's my Bronze design (kind of a more rusty version of the Brass one),
+attached.
+
+On 5/3/06, djwings at gmail.com <djwings at gmail.com> wrote:
+>
+> No, I mean what colors.
+>
+>
+> On 5/4/06, Alexander Brock <Brock.Alexander at web.de> wrote:
+> >
+> > Hello,
+> >
+> > > What are the keys, again?
+> >
+> > AFAIR Tux must collect them to unlock the end of the level or something
+> > like that.
+> >
+> > Alexander
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.de
+> > http://lists.berlios.de/mailman/listinfo/supertux-devel
+> >
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060503/94e1f763/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: key_bronze_2.png
+Type: image/png
+Size: 1772 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060503/94e1f763/attachment.png>
+
+From ravu_al_hemio at berlios.de  Fri May  5 07:06:06 2006
+From: ravu_al_hemio at berlios.de (Ravu al Hemio)
+Date: Fri, 05 May 2006 07:06:06 +0200
+Subject: [Supertux-devel] Re: [Supertux-commit] r3492
+In-Reply-To: <200605041929.k44JTMlO016680@sheep.berlios.de>
+References: <200605041929.k44JTMlO016680@sheep.berlios.de>
+Message-ID: <445ADD3E.8070504@berlios.de>
+
+Shouldn't we call the badguy "hedgehog" to appeal to non-German-speaking
+audiences too? (I don't think people will understand "Kugelblitz" either...)
+
+~~ Ondra
+
+sommer at BerliOS wrote:
+> Author: sommer
+> Date: 2006-05-04 21:29:09 +0200 (Thu, 04 May 2006)
+> New Revision: 3492
+>
+> Added:
+>    trunk/supertux/data/images/creatures/igel/
+>    trunk/supertux/data/images/creatures/igel/igel.sprite
+>    trunk/supertux/data/images/creatures/igel/walking-0.png
+>    trunk/supertux/src/badguy/igel.cpp
+>    trunk/supertux/src/badguy/igel.hpp
+> Modified:
+>    trunk/supertux-sharp/supertux-editor/Objects.cs
+>    trunk/supertux/data/levels/world2/christoph5.stl
+>    trunk/supertux/data/levels/world2/level2.stl
+> Log:
+> New Badguy "Igel"
+>   
+
+
+
+From supertux at 2006.expires.deltadevelopment.de  Fri May  5 12:34:50 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Fri, 05 May 2006 12:34:50 +0200
+Subject: [Supertux-devel] Re: [Supertux-commit] r3492
+In-Reply-To: <445ADD3E.8070504@berlios.de>
+References: <200605041929.k44JTMlO016680@sheep.berlios.de> <445ADD3E.8070504@berlios.de>
+Message-ID: <445B2A4A.50606@2006.expires.deltadevelopment.de>
+
+[New Badguy "Igel" - a hedgehog]
+
+Ravu al Hemio wrote:
+> Shouldn't we call the badguy "hedgehog" to appeal to non-German-speaking
+> audiences too? (I don't think people will understand "Kugelblitz" 
+> either...)
+
+Well, the Badguys' names are unchanged in localizations anyway. An 
+English name would also only be understood by part of our players, 
+although quite a larger one.
+
+I also think that only few players will actually come in touch with the 
+Badguys' names - I'd guess that not too many of our average players call 
+the yellow orbs "Flame".
+
+Then, there's also the fact that many videogames call their badguys 
+weird names: Take, for example, Yoshi (jap. "happy"), Unagi (jap. 
+"eel"), Guybrush (guy.brush) or maybe Roger Wilco.
+
+
+
+I am, however, not particularly attached to the name "Igel". We can, of 
+course, change it to anything the majority likes.
+
+Maybe we could start another vote...
+
+http://supertux.berlios.de/wiki/index.php/Talk:Igel
+
+
+Regards,
+
+   Christoph
+
+
+From rebecca at laudate.ca  Fri May  5 13:11:55 2006
+From: rebecca at laudate.ca (Rebecca Gilbert)
+Date: Fri, 05 May 2006 07:11:55 -0400
+Subject: [Supertux-devel] Re: [Supertux-commit] r3492
+In-Reply-To: <445ADD3E.8070504@berlios.de>
+References: <200605041929.k44JTMlO016680@sheep.berlios.de> <445ADD3E.8070504@berlios.de>
+Message-ID: <445B32FB.8050900@laudate.ca>
+
+I wouldn't know that Kugelblitz was a hedgehog, but it's fun to say.   :-)
+
+Ravu al Hemio wrote:
+> Shouldn't we call the badguy "hedgehog" to appeal to non-German-speaking
+> audiences too? (I don't think people will understand "Kugelblitz" 
+> either...)
+>
+> ~~ Ondra
+>
+> sommer at BerliOS wrote:
+>> Author: sommer
+>> Date: 2006-05-04 21:29:09 +0200 (Thu, 04 May 2006)
+>> New Revision: 3492
+>>
+>> Added:
+>>    trunk/supertux/data/images/creatures/igel/
+>>    trunk/supertux/data/images/creatures/igel/igel.sprite
+>>    trunk/supertux/data/images/creatures/igel/walking-0.png
+>>    trunk/supertux/src/badguy/igel.cpp
+>>    trunk/supertux/src/badguy/igel.hpp
+>> Modified:
+>>    trunk/supertux-sharp/supertux-editor/Objects.cs
+>>    trunk/supertux/data/levels/world2/christoph5.stl
+>>    trunk/supertux/data/levels/world2/level2.stl
+>> Log:
+>> New Badguy "Igel"
+>>   
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+From admin at berlios.de  Thu May  4 07:17:17 2006
+From: admin at berlios.de (admin at berlios.de)
+Date: Thu, 4 May 2006 07:17:17 +0200 (CEST)
+Subject: [Supertux-devel] [Bug #7373] Supertux crash when starting game
+Message-ID: <200605040517.k445HHss023248@unicorn.berlios.de>
+
+Bug #7373, was updated on 2006-May-03 13:44
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: bugmenot
+Assigned to : none
+Summary: Supertux crash when starting game
+
+Details: Latest svn, --enable-debug
+[DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.131 seconds
+[INFO] src/main.cpp:429 Component 'resources' finished after 1.503 seconds
+[INFO] src/main.cpp:297 Using random seed 1146655925, from time().
+[DEBUG] src/world.cpp:233 Couldn't load savegame: Couldn't open file 'save/world1_1.stsg': No such file or directory
+Display intro
+
+Program received signal SIGILL, Illegal instruction.
+[Switching to Thread -1225926944 (LWP 9147)]
+0xb7e7cd98 in png_handle_gAMA ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+(gdb) bt
+#0  0xb7e7cd98 in png_handle_gAMA ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#1  0xb7e69061 in png_read_info ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#2  0xb7e53243 in IMG_LoadPNG_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#3  0xb7e4fca4 in IMG_LoadTyped_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#4  0xb7e4fb0c in IMG_Load_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#5  0x08121e91 in TextureManager::create_image_texture (this=0x82b88c0,
+    filename=@0xbfe9d8b8) at src/video/texture_manager.cpp:103
+#6  0x08122d5b in TextureManager::get (this=0x82b88c0, _filename=@0xbfe9d954)
+    at src/video/texture_manager.cpp:66
+#7  0x08121353 in Surface (this=0x8912740, file=@0xbfe9d954)
+    at src/video/surface.cpp:40
+#8  0x080e1da2 in SnowParticleSystem (this=0x8911b38)
+    at src/object/particlesystem.cpp:85
+#9  0x080756f2 in Sector::parse_object (this=0x890e9e0, name=@0xbfe9da28,
+    reader=@0x0) at src/sector.cpp:144
+#10 0x0807a6a3 in Sector::parse (this=0x890e9e0, sector=@0x890e6e0)
+    at src/sector.cpp:194
+#11 0x080500cb in Level::load (this=0x8927e88, filepath=@0x8927918)
+    at src/level.cpp:89
+
+
+Follow-Ups:
+
+Date: 2006-May-04 07:17
+By: ravu_al_hemio
+
+Comment:
+Sounds like an SDL/PNG problem.
+
+Could you go "up 5" and "print *filename"? Thanks.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=7373&group_id=3467
+
+
+From wansti at gmx.de  Fri May  5 17:35:49 2006
+From: wansti at gmx.de (Marek M.)
+Date: Fri, 05 May 2006 17:35:49 +0200
+Subject: [Supertux-devel] Re: [Supertux-commit] r3492
+In-Reply-To: <445ADD3E.8070504@berlios.de>
+References: <200605041929.k44JTMlO016680@sheep.berlios.de>
+	 <445ADD3E.8070504@berlios.de>
+Message-ID: <1146843349.9074.6.camel@rincewind.discworld.wansti.de>
+
+On Fri, 2006-05-05 at 07:06 +0200, Ravu al Hemio wrote:
+> Shouldn't we call the badguy "hedgehog" to appeal to non-German-speaking
+> audiences too? (I don't think people will understand "Kugelblitz" either...)
+
+As I already mentioned, Kugelblitz was named that way because "ball
+lightning" sounds like a venereal disease. It is also one of the very
+few words that sound cooler in German. :-) And since "blitz" seems to be
+a commonly used term in English-speaking regions, I really like the name
+a lot as it is. So far it also received some extra attention from being
+the only non-English name, which I think should stay that way.
+As for "Igel", I agree. I believe that name was meant to be a
+placeholder anyway. Different ideas have already been discussed on the
+IRC channel and the Wiki page.
+
+	Marek
+
+
+
+
+From wansti at gmx.de  Fri May  5 17:44:46 2006
+From: wansti at gmx.de (Marek M.)
+Date: Fri, 05 May 2006 17:44:46 +0200
+Subject: [Supertux-devel] Re: [Supertux-commit] r3492
+In-Reply-To: <445B32FB.8050900@laudate.ca>
+References: <200605041929.k44JTMlO016680@sheep.berlios.de>
+	 <445ADD3E.8070504@berlios.de>  <445B32FB.8050900@laudate.ca>
+Message-ID: <1146843887.9074.15.camel@rincewind.discworld.wansti.de>
+
+> I wouldn't know that Kugelblitz was a hedgehog, but it's fun to say.   :-)
+It's not - "Igel" is "hedgehog", "Kugelblitz" translates to "ball
+lightning" - as far as I know, at least.
+Being "fun to say" is why the name was chosen, so it looks like it
+already served its purpose. :-) It'd be interesting to hear more
+opinions from people who don't speak German.
+
+	Marek
+
+
+
+
+From rebecca at laudate.ca  Fri May  5 20:06:49 2006
+From: rebecca at laudate.ca (Rebecca Gilbert)
+Date: Fri, 05 May 2006 14:06:49 -0400
+Subject: [Supertux-devel] Re: [Supertux-commit] r3492
+In-Reply-To: <1146843887.9074.15.camel@rincewind.discworld.wansti.de>
+References: <200605041929.k44JTMlO016680@sheep.berlios.de>	 <445ADD3E.8070504@berlios.de>  <445B32FB.8050900@laudate.ca> <1146843887.9074.15.camel@rincewind.discworld.wansti.de>
+Message-ID: <445B9439.7090700@laudate.ca>
+
+ I only thought it was a hedgehog because it was suggested to me it was 
+a hedgehog.  I don't the names of any of the enemies.  I call the lethal 
+snowballs "spikey hat snowballs". 
+
+Having installed this again on my new computer, I am yet again 
+discovering levels that were the bain of my existence for the longest 
+time.  There are a couple of levels that I'm pretty sure I'm *really* 
+close to finishing, but haven't yet.
+
+Marek M. wrote:
+
+>>I wouldn't know that Kugelblitz was a hedgehog, but it's fun to say.   :-)
+>>    
+>>
+>It's not - "Igel" is "hedgehog", "Kugelblitz" translates to "ball
+>lightning" - as far as I know, at least.
+>Being "fun to say" is why the name was chosen, so it looks like it
+>already served its purpose. :-) It'd be interesting to hear more
+>opinions from people who don't speak German.
+>
+>	Marek
+>
+>
+>_______________________________________________
+>Supertux-devel mailing list
+>Supertux-devel at lists.berlios.de
+>http://lists.berlios.de/mailman/listinfo/supertux-devel
+>  
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060505/85f91b8e/attachment.html>
+
+From djwings at gmail.com  Fri May  5 21:06:01 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Fri, 5 May 2006 15:06:01 -0400
+Subject: [Supertux-devel] Re: [Supertux-commit] r3492
+In-Reply-To: <445B9439.7090700@laudate.ca>
+References: <200605041929.k44JTMlO016680@sheep.berlios.de>
+	 <445ADD3E.8070504@berlios.de> <445B32FB.8050900@laudate.ca>
+	 <1146843887.9074.15.camel@rincewind.discworld.wansti.de>
+	 <445B9439.7090700@laudate.ca>
+Message-ID: <826ffc730605051206j5c82beedteec2ab5b05bd0735@mail.gmail.com>
+
+The hedgehog idea makes sense, maybe Marek had Sonic on his mind as a second
+choice for building SuperTux around, and decided to bring it up in Milestone
+2. I like the name "kugelblitz" too, keep it, but add an explanation (maybe
+an infobox?) the first time it's used.
+
+On 5/5/06, Rebecca Gilbert <rebecca at laudate.ca> wrote:
+>
+>  I only thought it was a hedgehog because it was suggested to me it was a
+> hedgehog.  I don't the names of any of the enemies.  I call the lethal
+> snowballs "spikey hat snowballs".
+>
+> Having installed this again on my new computer, I am yet again discovering
+> levels that were the bain of my existence for the longest time.  There are a
+> couple of levels that I'm pretty sure I'm *really* close to finishing, but
+> haven't yet.
+>
+>
+> Marek M. wrote:
+>
+>  I wouldn't know that Kugelblitz was a hedgehog, but it's fun to say.   :-)
+>
+>  It's not - "Igel" is "hedgehog", "Kugelblitz" translates to "ball
+> lightning" - as far as I know, at least.
+> Being "fun to say" is why the name was chosen, so it looks like it
+> already served its purpose. :-) It'd be interesting to hear more
+> opinions from people who don't speak German.
+>
+> 	Marek
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.dehttp://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060505/6ead4fa5/attachment.html>
+
+From andersersej at gmail.com  Sat May  6 10:57:35 2006
+From: andersersej at gmail.com (Anders er sej)
+Date: Sat, 6 May 2006 10:57:35 +0200
+Subject: [Supertux-devel] Danish translation updateed
+Message-ID: <7f6a0ad0605060157p378e75caqf78ea7d3e624f3fc@mail.gmail.com>
+
+Hi
+
+I've improved the Danish translation of SuperTux. I have attached the
+translation to this email.
+
+- Anders
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: supertux.tar.bz2
+Type: application/x-bzip2
+Size: 10293 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060506/1395abcf/attachment.bin>
+
+From dave_yeo at paralynx.com  Mon May  8 06:31:01 2006
+From: dave_yeo at paralynx.com (Dave Yeo)
+Date: Sun, 07 May 2006 20:31:01 -0800
+Subject: [Supertux-devel] Building Supertux on OS/2
+Message-ID: <20060508033040.A1212B95BB@generation.lgisp.net>
+
+Hi, I'm trying to build Supertux (latest svn version) on OS/2. While ver 0.1.3 built out of the box I'm having problems with the svn version.
+src/video/font.cpp needs <sys/types.h> for ssize_t
+The big problem is in tools/miniswig where the error starts like this
+Compiler is GCC-EMX 
+...found 753 target(s)...
+...updating 8 target(s)...
+Bison tools\miniswig\parser.cpp tools\miniswig\parser.hpp 
+C++ tools\miniswig\lexer.o 
+tools/miniswig/lexer.cpp:514:22: parser.hpp: No such file or directory
+tools/miniswig/lexer.cpp:688: error: `YYSTYPE' was not declared in this scope
+tools/miniswig/lexer.cpp:688: error: `yylval' was not declared in this scope
+tools/miniswig/lexer.cpp:689: error: syntax error before `{' token
+tools/miniswig/lexer.cpp:691: error: register name not specified for `
+   char*yy_cp'
+...
+
+and I can't decide what the problem is. Bison?, jam (which I had to hack a bit to get it working) or what?
+Dave, who has a son who loves Supertux
+
+
+
+From EvilGlowingApple at gmail.com  Mon May  8 05:43:14 2006
+From: EvilGlowingApple at gmail.com (Jayson Kempinger)
+Date: Sun, 07 May 2006 22:43:14 -0500
+Subject: [Supertux-devel] Building Supertux on OS/2
+In-Reply-To: <20060508033040.A1212B95BB@generation.lgisp.net>
+References: <20060508033040.A1212B95BB@generation.lgisp.net>
+Message-ID: <35EA2B6B-2801-4780-9FAA-B1921FC23112@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Dave,
+	I have the same problem on Mac OS X.  Try running:
+
+mv tools/miniswig/parser.cpp.h tools/miniswig/parser.hpp
+
+before you run jam.
+
+~Jayson
+
+
+- ----------------------------------------------------------------------
+This message is digitally signed with GnuPG.
+http://www.kempinger.homelinux.net/EvilGlowingApple at gmail.com.GPG.html
+
+(see http://www.gnupg.org/gph/en/manual.html#AEN136
+for information on how to verify this message)
+- ----------------------------------------------------------------------
+
+
+On May 7, 2006, at 11:31 PM, Dave Yeo wrote:
+
+> Hi, I'm trying to build Supertux (latest svn version) on OS/2.  
+> While ver 0.1.3 built out of the box I'm having problems with the  
+> svn version.
+> src/video/font.cpp needs <sys/types.h> for ssize_t
+> The big problem is in tools/miniswig where the error starts like this
+> Compiler is GCC-EMX
+> ...found 753 target(s)...
+> ...updating 8 target(s)...
+> Bison tools\miniswig\parser.cpp tools\miniswig\parser.hpp
+> C++ tools\miniswig\lexer.o
+> tools/miniswig/lexer.cpp:514:22: parser.hpp: No such file or directory
+> tools/miniswig/lexer.cpp:688: error: `YYSTYPE' was not declared in  
+> this scope
+> tools/miniswig/lexer.cpp:688: error: `yylval' was not declared in  
+> this scope
+> tools/miniswig/lexer.cpp:689: error: syntax error before `{' token
+> tools/miniswig/lexer.cpp:691: error: register name not specified for `
+>    char*yy_cp'
+> ...
+>
+> and I can't decide what the problem is. Bison?, jam (which I had to  
+> hack a bit to get it working) or what?
+> Dave, who has a son who loves Supertux
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.3 (Darwin)
+
+iD8DBQFEXr5TW6oxcmeg/20RAqa2AJ4pjOrpDap+oxfjVshMIshNOfEC8wCaA0E1
+OUYiUMycjs4a6sqAf8i5Mmk=
+=qXeX
+-----END PGP SIGNATURE-----
+
+
+From ravu_al_hemio at berlios.de  Mon May  8 07:20:02 2006
+From: ravu_al_hemio at berlios.de (Ravu al Hemio)
+Date: Mon, 08 May 2006 07:20:02 +0200
+Subject: [Supertux-devel] Building Supertux on OS/2
+In-Reply-To: <20060508033040.A1212B95BB@generation.lgisp.net>
+References: <20060508033040.A1212B95BB@generation.lgisp.net>
+Message-ID: <445ED502.9060005@berlios.de>
+
+Hey Dave,
+
+it's entirely possible that bison spat out a pair of files (parser.cpp 
+and a header) with the header file not being called "parser.hpp". Check 
+if you can find a file named parser.cpp.h and rename it to parser.hpp. 
+Then you should be able to continue the build.
+
+(I had to do this hack on Mac OS X too.)
+
+Please drop a line if it helped.
+
+Have fun,
+~~ Ondra Hosek
+
+Dave Yeo wrote:
+> Hi, I'm trying to build Supertux (latest svn version) on OS/2. While ver 0.1.3 built out of the box I'm having problems with the svn version.
+> src/video/font.cpp needs <sys/types.h> for ssize_t
+> The big problem is in tools/miniswig where the error starts like this
+> Compiler is GCC-EMX 
+> ...found 753 target(s)...
+> ...updating 8 target(s)...
+> Bison tools\miniswig\parser.cpp tools\miniswig\parser.hpp 
+> C++ tools\miniswig\lexer.o 
+> tools/miniswig/lexer.cpp:514:22: parser.hpp: No such file or directory
+> tools/miniswig/lexer.cpp:688: error: `YYSTYPE' was not declared in this scope
+> tools/miniswig/lexer.cpp:688: error: `yylval' was not declared in this scope
+> tools/miniswig/lexer.cpp:689: error: syntax error before `{' token
+> tools/miniswig/lexer.cpp:691: error: register name not specified for `
+>    char*yy_cp'
+> ...
+>
+> and I can't decide what the problem is. Bison?, jam (which I had to hack a bit to get it working) or what?
+> Dave, who has a son who loves Supertux
+>   
+
+
+From allen at a-king.us  Mon May  8 20:31:47 2006
+From: allen at a-king.us (Allen King)
+Date: Mon, 08 May 2006 14:31:47 -0400
+Subject: [Supertux-devel] OpenAL configuration nuisance when it requires pthreads
+Message-ID: <445F8E93.4040809@a-king.us>
+
+On Linux FC4, my implementation of OpenAL requires libpthread!  However 
+./configure does not include libpthread when it tests for OpenAL.  (The 
+first OpenAL I used was a binary package: 
+openal-0.0.9-0.4.20060204cvs.fc4.i386.rpm.  It is the recommended OpenAL 
+for FC4. I then installed and built the source package: 
+openal-0.0.9-0.4.20060204cvs.fc4.src.rpm.  Both have the same problem.)
+
+The patch below fixes the problem.  It also changes the warning message, 
+because the failure of this test could be for either OpenAL or pthreads.  
+
+Perhaps a better solution would be to have configure check for pthread 
+first (before OpenAL), and always include -lpthread in the OpenAL test 
+if it exists.  However I am not experienced enough in things configure 
+to ferret that one out.
+
+I am also not sure that this patch works on all platforms, especially on 
+those without pthreads.
+
+I hope this isn't a cross-platform monkey!
+
+
+Index: configure.ac
+===================================================================
+--- configure.ac        (revision 3502)
++++ configure.ac        (working copy)
+@@ -134,10 +134,10 @@
+ NP_FINDLIB([OPENAL], [OpenAL], [OpenAL],
+          NP_LANG_PROGRAM([#include <AL/al.h>],
+            [alcOpenDevice(0);]),
+-         [], [-lopenal],
++         [], [-lopenal -lpthread],
+          [],
+-         [AC_MSG_ERROR([Please intall OpenAL])],
+-         [], [])
++         [AC_MSG_ERROR([Please intall OpenAL (or perhaps pthread)])],
++        [], [])
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060508/36ba1867/attachment.html>
+
+From allen at a-king.us  Mon May  8 20:05:57 2006
+From: allen at a-king.us (Allen King)
+Date: Mon, 08 May 2006 14:05:57 -0400
+Subject: [Supertux-devel] Building Supertux on OS/2
+In-Reply-To: <445ED502.9060005@berlios.de>
+References: <20060508033040.A1212B95BB@generation.lgisp.net> <445ED502.9060005@berlios.de>
+Message-ID: <445F8885.5020701@a-king.us>
+
+I get the same error messages on Linux FC4.  However, it occurs only on 
+the first attempt to jam (make) after a new download (or a jam 
+distclean).  After issuing jam a second it compiles cleanly.  Strangely, 
+that 2'nd jam doesn't resolve all dependencies -- it takes a 3'rd jam 
+which compiles about 20 dependencies, and thereafter it is clean.
+
+I have ignored it up to now, but since others brought it up, rebuilt a 
+clean copy (r3502) and remade.  The two files Ondra asked about were 
+there (./tools/miniswig/parser.cpp, and ./tools/miniswig/parser.hpp).  
+The only other thing I noticed was the line starting with "Bison tools", 
+which came out after main.o, and may or may not be important.
+
+
+    [allen at grub supertuxT1]$ ./autogen.sh
+    [allen at grub supertuxT1]$ ./configure --enable-debug
+    [allen at grub supertuxT1]$ jam
+    ...patience...
+    ...found 1069 target(s)...
+            ....
+    C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/create_wrapper.o
+    Lex tools/miniswig/lexer.cpp
+    C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/lexer.o
+    *tools/miniswig/lexer.cpp:514:22: error: parser.hpp: No such file or
+    directory
+    tools/miniswig/lexer.cpp:688: error: 'YYSTYPE' was not declared in
+    this scope
+    tools/miniswig/lexer.cpp:688: error: 'yylval' was not declared in
+    this scope
+    tools/miniswig/lexer.cpp:689: error: expected ',' or ';' before '{'
+    token
+
+        g++ -c -o
+    ./build/i686-pc-linux-gnu/debug/tools/miniswig/lexer.o  -I. -I./src
+    -Itools/miniswig/.   -ffast-math -Wall -W -Werror -O0 -g3 -DDEBUG
+    -Wno-unused tools/miniswig/lexer.cpp
+
+    ...failed C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/lexer.o ...
+    *C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/main.o
+    *Bison tools/miniswig/parser.cpp tools/miniswig/parser.hpp *
+    C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/parser.o
+    C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/create_docu.o
+        .....
+    ...on 100th target...
+        .....
+    ...on 200th target...
+       .....
+    C++ ./build/i686-pc-linux-gnu/debug/src/scripting/time_scheduler.o
+    ...skipped <T!src!scripting!>wrapper.cpp for lack of miniswig...
+    ...skipped <T!src!scripting!>wrapper.o for lack of
+    <T!src!scripting!>wrapper.cpp...
+    ...skipped supertux for lack of <T!src!scripting!>wrapper.o...
+      .....
+    ...failed updating 1 target(s)...
+    ...skipped 4 target(s)...
+    ...updated 209 target(s)...
+
+
+Ravu al Hemio wrote:
+> Hey Dave,
+>
+> it's entirely possible that bison spat out a pair of files (parser.cpp 
+> and a header) with the header file not being called "parser.hpp". 
+> Check if you can find a file named parser.cpp.h and rename it to 
+> parser.hpp. Then you should be able to continue the build.
+>
+> (I had to do this hack on Mac OS X too.)
+>
+> Please drop a line if it helped.
+>
+> Have fun,
+> ~~ Ondra Hosek
+>
+> Dave Yeo wrote:
+>> Hi, I'm trying to build Supertux (latest svn version) on OS/2. While 
+>> ver 0.1.3 built out of the box I'm having problems with the svn version.
+>> src/video/font.cpp needs <sys/types.h> for ssize_t
+>> The big problem is in tools/miniswig where the error starts like this
+>> Compiler is GCC-EMX ...found 753 target(s)...
+>> ...updating 8 target(s)...
+>> Bison tools\miniswig\parser.cpp tools\miniswig\parser.hpp C++ 
+>> tools\miniswig\lexer.o tools/miniswig/lexer.cpp:514:22: parser.hpp: 
+>> No such file or directory
+>> tools/miniswig/lexer.cpp:688: error: `YYSTYPE' was not declared in 
+>> this scope
+>> tools/miniswig/lexer.cpp:688: error: `yylval' was not declared in 
+>> this scope
+>> tools/miniswig/lexer.cpp:689: error: syntax error before `{' token
+>> tools/miniswig/lexer.cpp:691: error: register name not specified for `
+>>    char*yy_cp'
+>> ...
+>>
+>> and I can't decide what the problem is. Bison?, jam (which I had to 
+>> hack a bit to get it working) or what?
+>> Dave, who has a son who loves Supertux
+>>   
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060508/561529f5/attachment.html>
+
+From admin at berlios.de  Fri May  5 16:26:07 2006
+From: admin at berlios.de (admin at berlios.de)
+Date: Fri, 5 May 2006 06:26:07 -0800 (AKDT)
+Subject: [Supertux-devel] [Bug #7373] Supertux crash when starting game
+Message-ID: <200605051426.k45EQ7e9010809@unicorn.berlios.de>
+
+Bug #7373, was updated on 2006-May-03 03:44
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: bugmenot
+Assigned to : none
+Summary: Supertux crash when starting game
+
+Details: Latest svn, --enable-debug
+[DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.131 seconds
+[INFO] src/main.cpp:429 Component 'resources' finished after 1.503 seconds
+[INFO] src/main.cpp:297 Using random seed 1146655925, from time().
+[DEBUG] src/world.cpp:233 Couldn't load savegame: Couldn't open file 'save/world1_1.stsg': No such file or directory
+Display intro
+
+Program received signal SIGILL, Illegal instruction.
+[Switching to Thread -1225926944 (LWP 9147)]
+0xb7e7cd98 in png_handle_gAMA ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+(gdb) bt
+#0  0xb7e7cd98 in png_handle_gAMA ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#1  0xb7e69061 in png_read_info ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#2  0xb7e53243 in IMG_LoadPNG_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#3  0xb7e4fca4 in IMG_LoadTyped_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#4  0xb7e4fb0c in IMG_Load_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#5  0x08121e91 in TextureManager::create_image_texture (this=0x82b88c0,
+    filename=@0xbfe9d8b8) at src/video/texture_manager.cpp:103
+#6  0x08122d5b in TextureManager::get (this=0x82b88c0, _filename=@0xbfe9d954)
+    at src/video/texture_manager.cpp:66
+#7  0x08121353 in Surface (this=0x8912740, file=@0xbfe9d954)
+    at src/video/surface.cpp:40
+#8  0x080e1da2 in SnowParticleSystem (this=0x8911b38)
+    at src/object/particlesystem.cpp:85
+#9  0x080756f2 in Sector::parse_object (this=0x890e9e0, name=@0xbfe9da28,
+    reader=@0x0) at src/sector.cpp:144
+#10 0x0807a6a3 in Sector::parse (this=0x890e9e0, sector=@0x890e6e0)
+    at src/sector.cpp:194
+#11 0x080500cb in Level::load (this=0x8927e88, filepath=@0x8927918)
+    at src/level.cpp:89
+
+
+Follow-Ups:
+
+Date: 2006-May-05 06:26
+By: bugmenot
+
+Comment:
+Strange, now it is working. Maybe because I updated to Suse 10 or something in SVN changed. But I can no longer reproduce the problem.
+-------------------------------------------------------
+
+Date: 2006-May-03 21:17
+By: ravu_al_hemio
+
+Comment:
+Sounds like an SDL/PNG problem.
+
+Could you go "up 5" and "print *filename"? Thanks.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=7373&group_id=3467
+
+
+From dave_yeo at paralynx.com  Tue May  9 08:57:41 2006
+From: dave_yeo at paralynx.com (Dave Yeo)
+Date: Mon, 08 May 2006 22:57:41 -0800
+Subject: [Supertux-devel] Building Supertux on OS/2
+Message-ID: <20060509055718.3F56AB7549@generation.lgisp.net>
+
+On Mon, 08 May 2006 07:20:02 +0200, Ravu al Hemio wrote:
+
+>Hey Dave,
+>
+>it's entirely possible that bison spat out a pair of files (parser.cpp 
+>and a header) with the header file not being called "parser.hpp". Check 
+>if you can find a file named parser.cpp.h and rename it to parser.hpp. 
+>Then you should be able to continue the build.
+>
+>(I had to do this hack on Mac OS X too.)
+>
+>Please drop a line if it helped.
+
+Thanks Ravu and Jayson for the hint. Yes I had to mv parser.cpp.h to parser.hpp.
+Next problems were with
+        gcc -E -x c -CC  -I. -I./src -DSCRIPTING_API src\scripting\wrapper.interface.hpp -o ./build/i386-pc-os2-emx/optimize/miniswig.tmp
+        ./miniswig --output-cpp src\scripting\wrapper.cpp --input ./build/i386-pc-os2-emx/optimize/miniswig.tmp --output-hpp src\scripting\wrapper.hpp --module supertux --select-namespace Scripting
+#       rm -f ./build/i386-pc-os2-emx/optimize/miniswig.tmp
+
+gcc did not create ./build/i386-pc-os2-emx/optimize. Had to create it manually. Will ask the gcc maintainer about this.
+miniswig was not linked as an executable, miniswig.exe should of been the target eg miniswig$(exeext) (I bound it manually to make the executable)
+The shell (cmd.exe) choked on the ./ which I removed
+The shell choked on the # which I removed.
+I then got this error at the end
+LinkApplication actions too long (max 996)!
+Will investigate if this is a hard limit
+Thanks
+Dave
+
+
+
+From jbcabral_89 at yahoo.com.ar  Tue May  9 06:35:03 2006
+From: jbcabral_89 at yahoo.com.ar (Juan B. Cabral)
+Date: Tue, 09 May 2006 01:35:03 -0300
+Subject: [Supertux-devel] 1 single idea
+Message-ID: <44601BF7.8060404@yahoo.com.ar>
+
+sorry my snglish is poor, watheaver...
+
+The las boss name is Dr. William III (Bill for friends)
+
+you catch my idea
+
+Juan B Cabral
+from Argentina
+
+		
+_________________________________________________________ 
+Hor?scopos, Salud y belleza, Chistes, Consejos de amor: 
+el contenido m?s divertido para tu celular est? en Yahoo! M?vil. 
+Obtenelo en http://movil.yahoo.com.ar
+
+
+From dave_yeo at paralynx.com  Tue May  9 17:55:01 2006
+From: dave_yeo at paralynx.com (Dave Yeo)
+Date: Tue, 09 May 2006 07:55:01 -0800
+Subject: [Supertux-devel] OpenAL configuration nuisance when it requires pthreads
+Message-ID: <20060509145901.4BD4CB94C8@generation.lgisp.net>
+
+On Mon, 08 May 2006 14:31:47 -0400, Allen King wrote:
+
+>Perhaps a better solution would be to have configure check for pthread 
+>first (before OpenAL), and always include -lpthread in the OpenAL test 
+>if it exists.  However I am not experienced enough in things configure 
+>to ferret that one out.
+
+That would not be good. Here pthread.a exists (and right now is used) but I will likely 
+change it to use native (OS/2) threads. All it likely needs is a mutex.
+Also looking at the OpenAl source (al_mutexlib.h) it may use WindowsThreading or 
+Morpothreading (what ever that is).
+Better to test for OpenAl without -lpthread and if that fails test with -lpthread
+Dave
+
+
+
+From djwings at gmail.com  Wed May 10 13:10:10 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Wed, 10 May 2006 07:10:10 -0400
+Subject: [Supertux-devel] 1 single idea
+In-Reply-To: <44601BF7.8060404@yahoo.com.ar>
+References: <44601BF7.8060404@yahoo.com.ar>
+Message-ID: <826ffc730605100410x3e5b653frcb869ce370791c46@mail.gmail.com>
+
+...Nice idea, but if you want to frag Bill Gates, go play
+Xtux.<http://xtux.sourceforge.net>
+SuperTux is intended to be a parody of SuperMario to the core. The last boss
+is Nolok, and it stays that way (otherwise, it would ruin the plotline).
+
+On 5/9/06, Juan B. Cabral <jbcabral_89 at yahoo.com.ar> wrote:
+>
+> sorry my snglish is poor, watheaver...
+>
+> The las boss name is Dr. William III (Bill for friends)
+>
+> you catch my idea
+>
+> Juan B Cabral
+> from Argentina
+>
+>
+> _________________________________________________________
+> Hor?scopos, Salud y belleza, Chistes, Consejos de amor:
+> el contenido m?s divertido para tu celular est? en Yahoo! M?vil.
+> Obtenelo en http://movil.yahoo.com.ar
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060510/e2f0f5e2/attachment.html>
+
+From ravu_al_hemio at berlios.de  Wed May 10 14:55:33 2006
+From: ravu_al_hemio at berlios.de (Ravu al Hemio)
+Date: Wed, 10 May 2006 14:55:33 +0200
+Subject: [Supertux-devel] 1 single idea
+In-Reply-To: <826ffc730605100410x3e5b653frcb869ce370791c46@mail.gmail.com>
+References: <44601BF7.8060404@yahoo.com.ar> <826ffc730605100410x3e5b653frcb869ce370791c46@mail.gmail.com>
+Message-ID: <4461E2C5.1070603@berlios.de>
+
+I'd rather call it a "homage" than a parody. We're not poking at Super 
+Mario, we're creating more of a tribute to it. Plus, we've decided to 
+drop or at least conceal the geek theme (that was before I joined the 
+team), so we'll go for Nolok as the main adversary.
+
+(We could, however, add an easter egg that would, when activated, put 
+dorky glasses on Nolok, adding a "concealed" geek reference just like 
+the current SuperTux theme refers to... I'm not telling.)
+
+~~ Ondra
+
+djwings at gmail.com wrote:
+> ...Nice idea, but if you want to frag Bill Gates, go play Xtux. 
+> <http://xtux.sourceforge.net>
+> SuperTux is intended to be a parody of SuperMario to the core. The 
+> last boss is Nolok, and it stays that way (otherwise, it would ruin 
+> the plotline).
+>
+> On 5/9/06, *Juan B. Cabral* <jbcabral_89 at yahoo.com.ar 
+> <mailto:jbcabral_89 at yahoo.com.ar>> wrote:
+>
+>     sorry my snglish is poor, watheaver...
+>
+>     The las boss name is Dr. William III (Bill for friends)
+>
+>     you catch my idea
+>
+>     Juan B Cabral
+>     from Argentina
+>
+
+
+From djwings at gmail.com  Wed May 10 20:57:12 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Wed, 10 May 2006 14:57:12 -0400
+Subject: [Supertux-devel] 1 single idea
+In-Reply-To: <4461E2C5.1070603@berlios.de>
+References: <44601BF7.8060404@yahoo.com.ar>
+	 <826ffc730605100410x3e5b653frcb869ce370791c46@mail.gmail.com>
+	 <4461E2C5.1070603@berlios.de>
+Message-ID: <826ffc730605101157k21157d53l938dacfab70dc34d@mail.gmail.com>
+
+Nice idea. Easter egg... You mean, a hidden entrance to a chamber with a
+hidden door to warp to a sector w/ a modded version of Nolok? Matze, Chris,
+Wansti... Hope you're reading this.
+
+On 5/10/06, Ravu al Hemio <ravu_al_hemio at berlios.de> wrote:
+>
+> I'd rather call it a "homage" than a parody. We're not poking at Super
+> Mario, we're creating more of a tribute to it. Plus, we've decided to
+> drop or at least conceal the geek theme (that was before I joined the
+> team), so we'll go for Nolok as the main adversary.
+>
+> (We could, however, add an easter egg that would, when activated, put
+> dorky glasses on Nolok, adding a "concealed" geek reference just like
+> the current SuperTux theme refers to... I'm not telling.)
+>
+> ~~ Ondra
+>
+> djwings at gmail.com wrote:
+> > ...Nice idea, but if you want to frag Bill Gates, go play Xtux.
+> > <http://xtux.sourceforge.net>
+> > SuperTux is intended to be a parody of SuperMario to the core. The
+> > last boss is Nolok, and it stays that way (otherwise, it would ruin
+> > the plotline).
+> >
+> > On 5/9/06, *Juan B. Cabral* <jbcabral_89 at yahoo.com.ar
+> > <mailto:jbcabral_89 at yahoo.com.ar>> wrote:
+> >
+> >     sorry my snglish is poor, watheaver...
+> >
+> >     The las boss name is Dr. William III (Bill for friends)
+> >
+> >     you catch my idea
+> >
+> >     Juan B Cabral
+> >     from Argentina
+> >
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060510/6cdfd71c/attachment.html>
+
+From goldenpiranha at gmail.com  Thu May 11 03:06:55 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Wed, 10 May 2006 18:06:55 -0700
+Subject: [Supertux-devel] Why is it slow???????????????
+Message-ID: <bcd1d8470605101806s4af3ec2eodc54cb7cfe551e66@mail.gmail.com>
+
+When I compile supertux and run, the game is slow and jerky. Any ideas on
+how to fix this?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060510/8073a7e2/attachment.html>
+
+From djwings at gmail.com  Fri May 12 14:06:20 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Fri, 12 May 2006 08:06:20 -0400
+Subject: [Supertux-devel] Why is it slow???????????????
+In-Reply-To: <bcd1d8470605101806s4af3ec2eodc54cb7cfe551e66@mail.gmail.com>
+References: <bcd1d8470605101806s4af3ec2eodc54cb7cfe551e66@mail.gmail.com>
+Message-ID: <826ffc730605120506n485edadey94b80735d34c4726@mail.gmail.com>
+
+Try this:
+1. Download SuperTux.
+2. Type into the command prompt (in Linux):
+   cd (the directory you build Su[erTux in)
+   patch -p1 < ./contrib/supertux-nogl*.diff
+3. Compile it.
+Problem solved.
+
+On 5/10/06, Danny Bittman <goldenpiranha at gmail.com> wrote:
+>
+> When I compile supertux and run, the game is slow and jerky. Any ideas on
+> how to fix this?
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060512/1f0d7513/attachment.html>
+
+From wansti at gmx.de  Fri May 12 14:57:37 2006
+From: wansti at gmx.de (Marek M.)
+Date: Fri, 12 May 2006 14:57:37 +0200
+Subject: [Supertux-devel] 1 single idea
+In-Reply-To: <826ffc730605101157k21157d53l938dacfab70dc34d@mail.gmail.com>
+References: <44601BF7.8060404@yahoo.com.ar>	 <826ffc730605100410x3e5b653frcb869ce370791c46@mail.gmail.com>	 <4461E2C5.1070603@berlios.de> <826ffc730605101157k21157d53l938dacfab70dc34d@mail.gmail.com>
+Message-ID: <44648641.4020704@gmx.de>
+
+djwings at gmail.com wrote:
+> Nice idea. Easter egg... You mean, a hidden entrance to a chamber with
+> a hidden door to warp to a sector w/ a modded version of Nolok? Matze,
+> Chris, Wansti... Hope you're reading this.
+I love easter eggs, and I love hidden chambers. I'll definitely keep
+that in mind. :-)
+
+    Marek
+
+
+From thommy at globo.com  Fri May 12 18:01:27 2006
+From: thommy at globo.com (Thomaz de Oliveira dos Reis)
+Date: Fri, 12 May 2006 13:01:27 -0300
+Subject: [Supertux-devel] 1 single idea
+In-Reply-To: <44648641.4020704@gmx.de>
+References: <44601BF7.8060404@yahoo.com.ar>	 <826ffc730605100410x3e5b653frcb869ce370791c46@mail.gmail.com>	 <4461E2C5.1070603@berlios.de> <826ffc730605101157k21157d53l938dacfab70dc34d@mail.gmail.com> <44648641.4020704@gmx.de>
+Message-ID: <4464B157.5090302@globo.com>
+
+Another idea would be a hidden "world" that you can get "special" itens 
+that is not avaible going thru the normal path..... would be awesome... 
+but I don't think that should go to milestone 2 :P anyway... it's up to 
+the devs...
+
+Marek M. wrote:
+
+>djwings at gmail.com wrote:
+>  
+>
+>>Nice idea. Easter egg... You mean, a hidden entrance to a chamber with
+>>a hidden door to warp to a sector w/ a modded version of Nolok? Matze,
+>>Chris, Wansti... Hope you're reading this.
+>>    
+>>
+>I love easter eggs, and I love hidden chambers. I'll definitely keep
+>that in mind. :-)
+>
+>    Marek
+>_______________________________________________
+>Supertux-devel mailing list
+>Supertux-devel at lists.berlios.de
+>http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>  
+>
+
+
+
+From matze at braunis.de  Fri May 12 20:16:50 2006
+From: matze at braunis.de (Matze Braun)
+Date: Fri, 12 May 2006 20:16:50 +0200
+Subject: [Supertux-devel] Re: [Supertux-commit] r3505 - trunk/supertux/src/badguy
+In-Reply-To: <200605111935.k4BJZPMU012899@sheep.berlios.de>
+References: <200605111935.k4BJZPMU012899@sheep.berlios.de>
+Message-ID: <1147457810.22565.8.camel@taylor.local>
+
+Am Donnerstag, den 11.05.2006, 21:35 +0200 schrieb sommer at BerliOS:
+> Author: sommer
+> Date: 2006-05-11 21:35:16 +0200 (Thu, 11 May 2006)
+> New Revision: 3505
+> 
+> Modified:
+>    trunk/supertux/src/badguy/angrystone.hpp
+>    trunk/supertux/src/badguy/badguy.cpp
+>    trunk/supertux/src/badguy/badguy.hpp
+>    trunk/supertux/src/badguy/bomb.hpp
+>    trunk/supertux/src/badguy/bouncing_snowball.hpp
+>    trunk/supertux/src/badguy/dart.cpp
+>    trunk/supertux/src/badguy/dart.hpp
+>    trunk/supertux/src/badguy/darttrap.hpp
+>    trunk/supertux/src/badguy/dispenser.hpp
+>    trunk/supertux/src/badguy/fish.hpp
+>    trunk/supertux/src/badguy/flame.cpp
+>    trunk/supertux/src/badguy/flame.hpp
+>    trunk/supertux/src/badguy/flyingsnowball.hpp
+>    trunk/supertux/src/badguy/igel.hpp
+>    trunk/supertux/src/badguy/jumpy.hpp
+>    trunk/supertux/src/badguy/kugelblitz.hpp
+>    trunk/supertux/src/badguy/mrbomb.hpp
+>    trunk/supertux/src/badguy/mriceblock.hpp
+>    trunk/supertux/src/badguy/mrrocket.hpp
+>    trunk/supertux/src/badguy/mrtree.hpp
+>    trunk/supertux/src/badguy/nolok_01.hpp
+>    trunk/supertux/src/badguy/plant.hpp
+>    trunk/supertux/src/badguy/poisonivy.hpp
+>    trunk/supertux/src/badguy/rocketexplosion.hpp
+>    trunk/supertux/src/badguy/skullyhop.hpp
+>    trunk/supertux/src/badguy/snail.hpp
+>    trunk/supertux/src/badguy/snowball.hpp
+>    trunk/supertux/src/badguy/spidermite.hpp
+>    trunk/supertux/src/badguy/spiky.hpp
+>    trunk/supertux/src/badguy/sspiky.hpp
+>    trunk/supertux/src/badguy/stalactite.hpp
+>    trunk/supertux/src/badguy/totem.cpp
+>    trunk/supertux/src/badguy/totem.hpp
+>    trunk/supertux/src/badguy/willowisp.cpp
+>    trunk/supertux/src/badguy/willowisp.hpp
+>    trunk/supertux/src/badguy/yeti.hpp
+>    trunk/supertux/src/badguy/yeti_stalactite.hpp
+>    trunk/supertux/src/badguy/zeekling.hpp
+> Log:
+> First attempts at making BadGuys cloneable
+
+Why? Is this really needed, it's additional work for people implementing
+badguys...
+
+Greetings,
+	Matze
+
+
+
+
+From supertux at 2006.expires.deltadevelopment.de  Sat May 13 00:28:38 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Sat, 13 May 2006 00:28:38 +0200
+Subject: [Supertux-devel] Re: [Supertux-commit] r3505 - trunk/supertux/src/badguy
+In-Reply-To: <1147457810.22565.8.camel@taylor.local>
+References: <200605111935.k4BJZPMU012899@sheep.berlios.de> <1147457810.22565.8.camel@taylor.local>
+Message-ID: <44650C16.7020408@2006.expires.deltadevelopment.de>
+
+Matze Braun wrote:
+> Am Donnerstag, den 11.05.2006, 21:35 +0200 schrieb sommer at BerliOS:
+>> First attempts at making BadGuys cloneable
+> 
+> Why? Is this really needed, it's additional work for people implementing
+> badguys...
+
+I think a working copy constructor for GameObjects is a thing we really 
+should have. You could use it to create snapshots of the Objects and 
+restore them at a later time - might be useful for cutscenes or savepoints.
+
+Anyway, for most of the badguys it's only one additional line, so I hope 
+it's not really that much work for new badguys.
+
+However, if things don't work out in the end this line can be removed 
+again quite painlessly, so I'd say we try it out.
+
+
+Regards,
+
+   Christoph
+
+
+From lucky0 at gmail.com  Mon May 15 23:32:35 2006
+From: lucky0 at gmail.com (Lucky)
+Date: Tue, 16 May 2006 00:32:35 +0300
+Subject: [Supertux-devel] SuperTux for Intel Macs?
+Message-ID: <8b6936390605151432r5fc8fad2vc8e5c5c87fc630d4@mail.gmail.com>
+
+Hello! I love SuperTux and I would like to be able to run it faster on my
+Intel Mac, without Rosetta translating it. Will there be a Universal Binary
+of this great game?
+
+Thanks and good luck with it. :)
+
+-- 
+Lucky
+http://www.luktechnology.ro
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060516/c4740fa4/attachment.html>
+
+From ravu_al_hemio at berlios.de  Tue May 16 18:43:08 2006
+From: ravu_al_hemio at berlios.de (Ravu al Hemio)
+Date: Tue, 16 May 2006 18:43:08 +0200
+Subject: [Supertux-devel] SuperTux for Intel Macs?
+In-Reply-To: <8b6936390605151432r5fc8fad2vc8e5c5c87fc630d4@mail.gmail.com>
+References: <8b6936390605151432r5fc8fad2vc8e5c5c87fc630d4@mail.gmail.com>
+Message-ID: <446A011C.9050807@berlios.de>
+
+Hey Lucky,
+
+You're lucky. ;-) (Sorry, couldn't resist.)
+
+I've seen to the current development version compiling on Tiger as a
+universal binary. There are a few quirks with SDL currently (including
+the fact that it only seems to be eager to build for Tiger, not for
+Panther or Jaguar), but the chances of SuperTux Milestone 2 running on
+Intel and PowerPC Macs are quite high.
+
+I might make an 0.1.3 (the current milestone/release) Universal Binary;
+however, the 0.1.3 Mac package was not made by anyone of the team, so
+there might be a few changes involved in the whole process.
+
+Have a nice day,
+~~ Ondra
+
+Lucky wrote:
+> Hello! I love SuperTux and I would like to be able to run it faster on 
+> my Intel Mac, without Rosetta translating it. Will there be a 
+> Universal Binary of this great game?
+>
+> Thanks and good luck with it. :)
+>
+> -- 
+> Lucky
+> http://www.luktechnology.ro 
+
+
+
+From tuxdev103 at gmail.com  Thu May 18 15:28:54 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Thu, 18 May 2006 06:28:54 -0700
+Subject: [Supertux-devel] Supertux patches
+Message-ID: <ff70c5070605180628l2332296fkb28704ec928fd8a9@mail.gmail.com>
+
+invc-tux.patch is to allow Invincible tux to walk through exploding bombs
+and to not be able to stand on flames.
+level-enter.patch is to prevent the Worldmap from responding while you are
+entering a level.  Before, you can button mash on say, action and never get
+to the level itself.  This patch seems way bigger than it should be for what
+I actually did.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060518/bcd41758/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: invc-tux.patch
+Type: application/octet-stream
+Size: 1015 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060518/bcd41758/attachment.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level-enter.patch
+Type: application/octet-stream
+Size: 7573 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060518/bcd41758/attachment-0001.obj>
+
+From tuxdev103 at gmail.com  Mon May 22 16:20:42 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Mon, 22 May 2006 07:20:42 -0700
+Subject: [Supertux-devel] Supertux patch - lockup when audio is blocked
+Message-ID: <ff70c5070605220720we826986m320f9695d4883e8f@mail.gmail.com>
+
+When you have something else that uses the audio PCM device such as
+XMMS, supertux will lock up, forcing you to xkill it.  This patch
+prevents that by disabling music and sound if it cannot open the sound
+device.  I hope this patch comes as readable plaintext instead of
+MIME64.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: blocked-audio-lockup.patch
+Type: application/octet-stream
+Size: 460 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060522/3a2ced0d/attachment.obj>
+
+From ondra.hosek at gmail.com  Tue May 16 18:34:55 2006
+From: ondra.hosek at gmail.com (=?UTF-8?B?T25kxZllaiBIb8WhZWs=?=)
+Date: Tue, 16 May 2006 18:34:55 +0200
+Subject: [Supertux-devel] SuperTux for Intel Macs?
+In-Reply-To: <8b6936390605151432r5fc8fad2vc8e5c5c87fc630d4@mail.gmail.com>
+References: <8b6936390605151432r5fc8fad2vc8e5c5c87fc630d4@mail.gmail.com>
+Message-ID: <4469FF2F.7020601@gmail.com>
+
+Hey Lucky,
+
+You're lucky. ;-) (Sorry, couldn't resist.)
+
+I've seen to the current development version compiling on Tiger as a 
+universal binary. There are a few quirks with SDL currently (including 
+the fact that it only seems to be eager to build for Tiger, not for 
+Panther or Jaguar), but the chances of SuperTux Milestone 2 running on 
+Intel and PowerPC Macs are quite high.
+
+I might make an 0.1.3 (the current milestone/release) Universal Binary; 
+however, the 0.1.3 Mac package was not made by anyone of the team, so 
+there might be a few changes involved in the whole process.
+
+Have a nice day,
+~~ Ondra
+
+Lucky wrote:
+> Hello! I love SuperTux and I would like to be able to run it faster on 
+> my Intel Mac, without Rosetta translating it. Will there be a 
+> Universal Binary of this great game?
+>
+> Thanks and good luck with it. :)
+>
+> -- 
+> Lucky
+> http://www.luktechnology.ro 
+
+
+From anmaster at oblivious2society.org  Wed May 24 22:42:27 2006
+From: anmaster at oblivious2society.org (AnMaster)
+Date: Wed, 24 May 2006 22:42:27 +0200
+Subject: [Supertux-devel] Supertux editor patches for paths (on windows) and dispenser properties
+Message-ID: <4474C533.8080104@oblivious2society.org>
+
+Two patches for the ST# editor.
+
+supertuxeditor-windows.diff:
+On Windows paths from the file selector (the "..." button to the right
+of "sprite" for example) uses \ instead of /.
+SuperTux ignores objects with path properties containing \.
+You have to manually change the path in the editor. This patch fixes it.
+
+supertuxeditor-dispenser.diff:
+As ST# discards unknown lisp trees it is a big problem if there are
+objects that it doesn't know the properties of.
+This patch adds some properties to the dispenser (making those available
+in the properties panel as well).
+
+
+/AnMaster
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: supertuxeditor-windows.diff
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060524/6bf5adab/attachment.ksh>
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: supertuxeditor-dispenser.diff
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060524/6bf5adab/attachment-0001.ksh>
+
+From chris_redden at sympatico.ca  Wed May 24 22:54:00 2006
+From: chris_redden at sympatico.ca (Chris Redden)
+Date: Wed, 24 May 2006 16:54:00 -0400
+Subject: [Supertux-devel] SuperTux for Intel Macs?
+In-Reply-To: <4469FF2F.7020601@gmail.com>
+References: <8b6936390605151432r5fc8fad2vc8e5c5c87fc630d4@mail.gmail.com> <4469FF2F.7020601@gmail.com>
+Message-ID: <173D136E-8252-4BD0-A3DD-2922BC38EB70@sympatico.ca>
+
+I believe I've just successfully compiled 0.1.3 as a Universal  
+Binary.  As I don't have an intel mac, I'm currently sending to Lucky  
+for testing.
+
+If it works, I'll assemble a disk image that can be uploaded to the  
+website.
+
+Chris
+
+
+On 16-May-06, at 12:34 PM, Ond?ej Ho?ek wrote:
+
+> Hey Lucky,
+>
+> You're lucky. ;-) (Sorry, couldn't resist.)
+>
+> I've seen to the current development version compiling on Tiger as  
+> a universal binary. There are a few quirks with SDL currently  
+> (including the fact that it only seems to be eager to build for  
+> Tiger, not for Panther or Jaguar), but the chances of SuperTux  
+> Milestone 2 running on Intel and PowerPC Macs are quite high.
+>
+> I might make an 0.1.3 (the current milestone/release) Universal  
+> Binary; however, the 0.1.3 Mac package was not made by anyone of  
+> the team, so there might be a few changes involved in the whole  
+> process.
+>
+> Have a nice day,
+> ~~ Ondra
+>
+> Lucky wrote:
+>> Hello! I love SuperTux and I would like to be able to run it  
+>> faster on my Intel Mac, without Rosetta translating it. Will there  
+>> be a Universal Binary of this great game?
+>>
+>> Thanks and good luck with it. :)
+>>
+>> -- 
+>> Lucky
+>> http://www.luktechnology.ro
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+From matze at braunis.de  Thu May 25 12:15:53 2006
+From: matze at braunis.de (Matze Braun)
+Date: Thu, 25 May 2006 12:15:53 +0200
+Subject: [Supertux-devel] Supertux patch - lockup when audio is blocked
+In-Reply-To: <ff70c5070605220720we826986m320f9695d4883e8f@mail.gmail.com>
+References: <ff70c5070605220720we826986m320f9695d4883e8f@mail.gmail.com>
+Message-ID: <447583D9.7070004@braunis.de>
+
+tuxdev wrote:
+> When you have something else that uses the audio PCM device such as
+> XMMS, supertux will lock up, forcing you to xkill it.  This patch
+> prevents that by disabling music and sound if it cannot open the sound
+> device.  I hope this patch comes as readable plaintext instead of
+> MIME64.
+Thanks for bringing this to our attention. I fixed the problem in a 
+different way now.
+
+Greetings,
+    Matze
+
+
+
+From rdenton34 at optusnet.com.au  Sun May 28 07:07:03 2006
+From: rdenton34 at optusnet.com.au (Robert Denton)
+Date: Sun, 28 May 2006 15:07:03 +1000
+Subject: [Supertux-devel] Permission advice please
+Message-ID: <000201c68214$923261d0$d4261fd3@Notned>
+
+Dear Sir/Madam
+ 
+I am a 12 year old Year 7 student in Sydney Australia. SuperTux is one
+of my favourite computer game and would like to use some images from
+SuperTux in an assignment I am preparing for our Design and Technology
+class. I will not be selling or distributing these images. Do I need to
+get permission to do this?
+ 
+Thank you for your advice.
+Lucy Denton
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060528/186c8b3a/attachment.html>
+
+From matze at braunis.de  Mon May 29 10:28:30 2006
+From: matze at braunis.de (Matze Braun)
+Date: Mon, 29 May 2006 10:28:30 +0200
+Subject: [Supertux-devel] Permission advice please
+In-Reply-To: <000201c68214$923261d0$d4261fd3@Notned>
+References: <000201c68214$923261d0$d4261fd3@Notned>
+Message-ID: <447AB0AE.9050400@braunis.de>
+
+Robert Denton wrote:
+> Dear Sir/Madam
+>  
+> I am a 12 year old Year 7 student in Sydney Australia. SuperTux is one 
+> of my favourite computer game and would like to use some images from 
+> SuperTux in an assignment I am preparing for our Design and Technology 
+> class. I will not be selling or distributing these images. Do I need 
+> to get permission to do this?
+>  
+> Thank you for your advice.
+> Lucy Denton
+Out artwork is licensed as GPL at the moment. (Take a look at 
+http://www.gnu.org/licenses/licenses.html#TOCGPL for the full details). 
+It basically means that you can use the images as you want. The only 
+rule you have to follow is that when you modify the images itself and 
+someone asks you about these modifications, then you have to release 
+these modifications to him under the terms of the GPL...
+
+
+Greetings,
+    Matze
+
+
+
+From chris_redden at sympatico.ca  Wed May 31 02:58:25 2006
+From: chris_redden at sympatico.ca (Chris Redden)
+Date: Tue, 30 May 2006 20:58:25 -0400
+Subject: [Supertux-devel] 0.1.3 for MacOS X recompiled for intel
+In-Reply-To: <447AB0AE.9050400@braunis.de>
+References: <000201c68214$923261d0$d4261fd3@Notned> <447AB0AE.9050400@braunis.de>
+Message-ID: <87B580AC-5AF5-4A6E-8952-540B52C74088@sympatico.ca>
+
+I've recompiled, and (with Lucky's help) just about finished testing  
+a Universal Binary version of SuperTux 0.1.3.
+
+This version will run natively on both PowerPC and Intel Macs.  It  
+also fixes the inverted-cursor problem reintroduced with the 0.1.3 port.
+
+Once it is done, to whom should I send it?
+
+
+	Chris
+
+
+From rflegel at gmail.com  Wed May 31 05:47:10 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Tue, 30 May 2006 21:47:10 -0600
+Subject: [Supertux-devel] 0.1.3 for MacOS X recompiled for intel
+In-Reply-To: <87B580AC-5AF5-4A6E-8952-540B52C74088@sympatico.ca>
+References: <000201c68214$923261d0$d4261fd3@Notned>
+	 <447AB0AE.9050400@braunis.de>
+	 <87B580AC-5AF5-4A6E-8952-540B52C74088@sympatico.ca>
+Message-ID: <5a5496320605302047n733d91e8id2eb58962db4dac@mail.gmail.com>
+
+If you can post it somewhere, just send a link to the mailing list.
+
+If not, you can try sending it to me.. not sure if gmail will allow
+large attachments, but you can give it a shot.
+
+-- 
+Ryan
+
+On 5/30/06, Chris Redden <chris_redden at sympatico.ca> wrote:
+> I've recompiled, and (with Lucky's help) just about finished testing
+> a Universal Binary version of SuperTux 0.1.3.
+>
+> This version will run natively on both PowerPC and Intel Macs.  It
+> also fixes the inverted-cursor problem reintroduced with the 0.1.3 port.
+>
+> Once it is done, to whom should I send it?
+>
+>
+>         Chris
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+
+
+From DougWebb at shaw.ca  Mon May 29 06:36:24 2006
+From: DougWebb at shaw.ca (Doug Webb)
+Date: Sun, 28 May 2006 21:36:24 -0700
+Subject: [Supertux-devel] Supertux
+Message-ID: <447A7A48.3030308@shaw.ca>
+
+In difficult areas of the game the player is suddenly rushed off to the 
+right, usually getting killed.  Since this behaviour isn't universal I 
+can only conclude that it is a design element intended to make the game 
+play more difficult.  Unfortunately it just makes play so frustrating 
+that there was no fun in it.  What fun is a game that cheats?  Maybe you 
+should rename the game SCOBALLS!
+
+In any case, I've uninstalled it so it won't bother me again.  I'll also 
+make sure not to install it on any machines I set up.  I don't want to 
+deal with complaints that it's not working right.
+
+Doug.
+
+
+
+From np at antek.it  Tue May 30 17:49:50 2006
+From: np at antek.it (Nicolas Predella)
+Date: Tue, 30 May 2006 17:49:50 +0200
+Subject: [Supertux-devel] Help for Supertux
+Message-ID: <200605301749.50887.np@antek.it>
+
+Hello, I am Nicolas and i am thirteen years old.
+I use mandriva linux and i like your game, Supertux.
+I thought about sending a mail for asking if i can be of any help. I can use 
+well "the GIMP" and i sometimes have ideas for levels. Can i be of any help 
+to you for artwork or level-editing?
+Thanks for attention.
+Nicolas
+
+(p.s: if you are going to translate the game,i can also write in Italian and 
+French)
+
+
+From desirevivas at hotmail.com  Mon May 29 17:53:50 2006
+From: desirevivas at hotmail.com (=?iso-8859-1?B?RGVzaXLpZSBWaXZhcw==?=)
+Date: Mon, 29 May 2006 17:53:50 +0200
+Subject: [Supertux-devel] (no subject)
+Message-ID: <BAY110-F5555E6D80523EFAEF20E1B89D0@phx.gbl>
+
+ola!!!vos sos kien creo super tux estoy mu feliz  porke me g?sta  mucho el 
+game pero no lo podes enviar eske yo no lo puedo coger y no me la banco vos 
+sabes no?bueno si podes me lo envias si no podes me contestas y no te 
+rejistro si vos keres
+
+_________________________________________________________________
+Un amor, una aventura, compa??a para un viaje. Reg?strate gratis en MSN Amor 
+& Amistad. http://match.msn.es/match/mt.cfm?pg=channel&tcid=162349
+
+
+
+From dustin.eckhardt at online.de  Wed May 31 15:45:47 2006
+From: dustin.eckhardt at online.de (Dustin Eckhardt)
+Date: Wed, 31 May 2006 15:45:47 +0200
+Subject: [Supertux-devel] Downloade
+Message-ID: <0ML31I-1FlR1A31GE-0006Bb@mrelayeu.kundenserver.de>
+
+Wie kann ich das spiel Super Tux  downloaden ? 
+
+ 
+
+Bitte antworten !
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060531/8bfae063/attachment.html>
+

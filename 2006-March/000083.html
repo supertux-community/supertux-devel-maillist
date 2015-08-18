@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Zeekling - danger fades
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Zeekling%20-%20danger%20fades&In-Reply-To=%3C4405E263.7050304%402006.expires.deltadevelopment.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000082.html">
+   <LINK REL="Next"  HREF="000084.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Zeekling - danger fades</H1>
+    <B>Christoph Sommer</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Zeekling%20-%20danger%20fades&In-Reply-To=%3C4405E263.7050304%402006.expires.deltadevelopment.de%3E"
+       TITLE="[Supertux-devel] Zeekling - danger fades">supertux at 2006.expires.deltadevelopment.de
+       </A><BR>
+    <I>Wed Mar  1 19:05:23 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000082.html">[Supertux-devel] Zeekling - danger fades
+</A></li>
+        <LI>Next message: <A HREF="000084.html">[Supertux-devel] badguy sketch: &quot;Angry Stone&quot;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#83">[ date ]</a>
+              <a href="thread.html#83">[ thread ]</a>
+              <a href="subject.html#83">[ subject ]</a>
+              <a href="author.html#83">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey S.,
+
+S.Groundwater wrote:
+&gt;<i> We still need something more like zigzags or divebombs.
+</I>
+No problem, this zeekling does divebombs:
+&lt;<A HREF="http://www.deltadevelopment.de/users/christoph/supertux/supertux-3063-zeekswoop.diff.gz">http://www.deltadevelopment.de/users/christoph/supertux/supertux-3063-zeekswoop.diff.gz</A>&gt;
+
+Oh, and just ignore the junk in the diff file - looks like &quot;jam clean&quot; 
+left some files behind. Just make sure to try it out on a backup ;-)
+
+
+&gt;<i> Regarding the nogl patch. I have tried this on two low end machines where
+</I>&gt;<i> ST-1.2 runs OK. [...] it just runs real slow. When I run
+</I>&gt;<i> the nogl code on my more modern development workstation it runs OK.
+</I>
+Thanks for the test drive! Yeah, I expected slow performance.
+
+That's because the patch imitates its OpenGL counterpart as closely as 
+possible (e.g. surface flipping done on-the-fly). Even with the best of 
+tweaks, however, it could never run any smoother than the original, 
+because it has to do without help from the GPU.
+
+To me, it was more important to be able to play SuperTux on my 
+onboard-graphics-only Linux box and on my virtual machines - they have 
+more than enough power for SDL, but not nearly enough for Software-OpenGL.
+
+
+Kind regards,
+
+   Christoph
+
+-- 
+The manager has personally passed all the water served here (Sign in a 
+hotel in Acapulco)
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000082.html">[Supertux-devel] Zeekling - danger fades
+</A></li>
+	<LI>Next message: <A HREF="000084.html">[Supertux-devel] badguy sketch: &quot;Angry Stone&quot;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#83">[ date ]</a>
+              <a href="thread.html#83">[ thread ]</a>
+              <a href="subject.html#83">[ subject ]</a>
+              <a href="author.html#83">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

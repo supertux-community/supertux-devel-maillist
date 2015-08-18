@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Re: [Supertux-commit] r3436 - trunk/supertux/src/badguy
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3436%20-%20trunk/supertux/src/badguy&In-Reply-To=%3C43EB8CF0000C8596%40riosf06.globoi.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000169.html">
+   <LINK REL="Next"  HREF="000171.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Re: [Supertux-commit] r3436 - trunk/supertux/src/badguy</H1>
+    <B>thommy at globo.com</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3436%20-%20trunk/supertux/src/badguy&In-Reply-To=%3C43EB8CF0000C8596%40riosf06.globoi.com%3E"
+       TITLE="[Supertux-devel] Re: [Supertux-commit] r3436 - trunk/supertux/src/badguy">thommy at globo.com
+       </A><BR>
+    <I>Thu Apr 27 23:35:15 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000169.html">[Supertux-devel] Re: [Supertux-commit] r3436 - trunk/supertux/src/badguy
+</A></li>
+        <LI>Next message: <A HREF="000171.html">[Supertux-devel] r3436 - trunk/supertux/src/badguy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#170">[ date ]</a>
+              <a href="thread.html#170">[ thread ]</a>
+              <a href="subject.html#170">[ subject ]</a>
+              <a href="author.html#170">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I prefer for it falling, not exploding....
+
+I know that is not &quot;logical&quot; but anyway, penguins twroing bouncing fireballs
+is not &quot;logical&quot; either. :P
+
+So Ryan, you are not alone here ;)
+
+[]'s
+ '&gt;'-- Mensagem Original --
+ '&gt;'From: &quot;Ryan Flegel&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">rflegel at gmail.com</A>&gt;
+ '&gt;'To: <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">supertux-devel at berlios.de</A>
+ '&gt;'Subject: Re: [Supertux-devel] Re: [Supertux-commit] r3436 - trunk/supertux/src/badguy
+ '&gt;'Reply-To: <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">supertux-devel at berlios.de</A>
+ '&gt;'Date: Thu, 27 Apr 2006 15:12:12 -0600
+ '&gt;'
+ '&gt;'
+ '&gt;'Well, I personally thought that it is more logical for the bomb to
+ '&gt;'just fall, since that's what all the other badguys do. Although I
+ '&gt;'understand why a bullet should make him explode.
+ '&gt;'
+ '&gt;'Anyway, I'll change the behaviour back, since I seemed to be outnumbered
+ '&gt;'here.
+ '&gt;'
+ '&gt;'--
+ '&gt;'Ryan
+ '&gt;'
+ '&gt;'On 4/26/06, Matze Braun &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">matze at braunis.de</A>&gt; wrote:
+ '&gt;'&gt; Why did you do that? This was done on purpose and it's nice and logical
+ '&gt;'&gt; if a bomb explodes if you hit it with a bullet.
+ '&gt;'&gt;
+ '&gt;'&gt; Greetings,
+ '&gt;'&gt;         Matze
+ '&gt;'&gt;
+ '&gt;'&gt; Am Mittwoch, den 26.04.2006, 07:59 +0200 schrieb <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">sik0fewl at berlios.de</A>:
+ '&gt;'&gt; &gt; Author: sik0fewl
+ '&gt;'&gt; &gt; Date: 2006-04-26 07:59:31 +0200 (Wed, 26 Apr 2006)
+ '&gt;'&gt; &gt; New Revision: 3436
+ '&gt;'&gt; &gt;
+ '&gt;'&gt; &gt; Modified:
+ '&gt;'&gt; &gt;    trunk/supertux/src/badguy/mrbomb.cpp
+ '&gt;'&gt; &gt;    trunk/supertux/src/badguy/mrbomb.hpp
+ '&gt;'&gt; &gt; Log:
+ '&gt;'&gt; &gt; Cause MrBomb to be instantly killed by invincibility or bullets
+ '&gt;'&gt; &gt;
+ '&gt;'&gt; &gt; Modified: trunk/supertux/src/badguy/mrbomb.cpp
+ '&gt;'&gt; &gt; ===================================================================
+ '&gt;'&gt; &gt; --- trunk/supertux/src/badguy/mrbomb.cpp      2006-04-26 02:13:42
+UTC
+ '&gt;'(rev 3435)
+ '&gt;'&gt; &gt; +++ trunk/supertux/src/badguy/mrbomb.cpp      2006-04-26 05:59:31
+UTC
+ '&gt;'(rev 3436)
+ '&gt;'&gt; &gt; @@ -110,13 +110,4 @@
+ '&gt;'&gt; &gt;    return CONTINUE;
+ '&gt;'&gt; &gt;  }
+ '&gt;'&gt; &gt;
+ '&gt;'&gt; &gt; -void
+ '&gt;'&gt; &gt; -MrBomb::kill_fall()
+ '&gt;'&gt; &gt; -{
+ '&gt;'&gt; &gt; -  remove_me();
+ '&gt;'&gt; &gt; -  Bomb* bomb = new Bomb(get_pos(), dir);
+ '&gt;'&gt; &gt; -  Sector::current()-&gt;add_object(bomb);
+ '&gt;'&gt; &gt; -  bomb-&gt;explode();
+ '&gt;'&gt; &gt; -}
+ '&gt;'&gt; &gt; -
+ '&gt;'&gt; &gt;  IMPLEMENT_FACTORY(MrBomb, &quot;mrbomb&quot;)
+ '&gt;'&gt; &gt;
+ '&gt;'&gt; &gt; Modified: trunk/supertux/src/badguy/mrbomb.hpp
+ '&gt;'&gt; &gt; ===================================================================
+ '&gt;'&gt; &gt; --- trunk/supertux/src/badguy/mrbomb.hpp      2006-04-26 02:13:42
+UTC
+ '&gt;'(rev 3435)
+ '&gt;'&gt; &gt; +++ trunk/supertux/src/badguy/mrbomb.hpp      2006-04-26 05:59:31
+UTC
+ '&gt;'(rev 3436)
+ '&gt;'&gt; &gt; @@ -33,7 +33,6 @@
+ '&gt;'&gt; &gt;    void write(lisp::Writer&amp; writer);
+ '&gt;'&gt; &gt;    HitResponse collision_solid(GameObject&amp; other, const CollisionHit&amp;
+ '&gt;'hit);
+ '&gt;'&gt; &gt;    HitResponse collision_badguy(BadGuy&amp; badguy, const CollisionHit&amp;
+hit);
+ '&gt;'&gt; &gt; -  void kill_fall();
+ '&gt;'&gt; &gt;
+ '&gt;'&gt; &gt;  protected:
+ '&gt;'&gt; &gt;    bool collision_squished(Player&amp; player);
+ '&gt;'&gt; &gt;
+ '&gt;'&gt; &gt; _______________________________________________
+ '&gt;'&gt; &gt; Supertux-commit mailing list
+ '&gt;'&gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-commit at lists.berlios.de</A>
+ '&gt;'&gt; &gt; <A HREF="http://lists.berlios.de/mailman/listinfo/supertux-commit">http://lists.berlios.de/mailman/listinfo/supertux-commit</A>
+ '&gt;'&gt;
+ '&gt;'&gt; _______________________________________________
+ '&gt;'&gt; Supertux-devel mailing list
+ '&gt;'&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+ '&gt;'&gt; <A HREF="http://lists.berlios.de/mailman/listinfo/supertux-devel">http://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+ '&gt;'&gt;
+ '&gt;'_______________________________________________
+ '&gt;'Supertux-devel mailing list
+ '&gt;'<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+ '&gt;'<A HREF="http://lists.berlios.de/mailman/listinfo/supertux-devel">http://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000169.html">[Supertux-devel] Re: [Supertux-commit] r3436 - trunk/supertux/src/badguy
+</A></li>
+	<LI>Next message: <A HREF="000171.html">[Supertux-devel] r3436 - trunk/supertux/src/badguy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#170">[ date ]</a>
+              <a href="thread.html#170">[ thread ]</a>
+              <a href="subject.html#170">[ subject ]</a>
+              <a href="author.html#170">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

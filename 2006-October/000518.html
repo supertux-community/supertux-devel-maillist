@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Supertux Sharp (Editor) Patch for extended sector resizing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Supertux%20Sharp%20%28Editor%29%20Patch%20for%20extended%0A%20sector%20resizing&In-Reply-To=%3C4522B974.3020708%40berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000517.html">
+   <LINK REL="Next"  HREF="000519.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Supertux Sharp (Editor) Patch for extended sector resizing</H1>
+    <B>AnMaster</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Supertux%20Sharp%20%28Editor%29%20Patch%20for%20extended%0A%20sector%20resizing&In-Reply-To=%3C4522B974.3020708%40berlios.de%3E"
+       TITLE="[Supertux-devel] Supertux Sharp (Editor) Patch for extended sector resizing">anmaster at berlios.de
+       </A><BR>
+    <I>Tue Oct  3 21:26:44 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000517.html">[Supertux-devel] Supertux Sharp (Editor) Patch for extended sector	resizing
+</A></li>
+        <LI>Next message: <A HREF="000519.html">[Supertux-devel] ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#518">[ date ]</a>
+              <a href="thread.html#518">[ thread ]</a>
+              <a href="subject.html#518">[ subject ]</a>
+              <a href="author.html#518">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+The code for moving objects is broken, they move to outside sector
+sometimes and never where they should go. Please fix this and send an
+updated patch.
+
+/AnMaster
+
+Penguinmaster skrev:
+&gt;<i> Sometimes you don't just want to add empty tiles to the end of a sector,
+</I>&gt;<i> but you have already built the end of the sector and the beginning of
+</I>&gt;<i> the sector and want to build the middle when you experience that the
+</I>&gt;<i> room is not enough. You have to manually move all badguys and tiles
+</I>&gt;<i> after resizing the sector. My patch helps people doing this by
+</I>&gt;<i> specifying  a number of tiles before that another number of empty files
+</I>&gt;<i> should be inserted. Example: if you say if should insert at position 0,
+</I>&gt;<i> it will move the whole level to the right (after resizing, of course).
+</I>&gt;<i> Objects are also moved. You can reach that by right-clicking sector tab
+</I>&gt;<i> and clicking &quot;Insert&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> Hope that helps some people, at least it helped me :)
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+
+iD8DBQFFIrl0WmK6ng/aMNkRA/nPAJwPa7JfOJk/K+XTbj7R42DeNpSpQgCfU+3c
+jxx3Nr9SeV0FJbTtck4vr/Q=
+=+fkU
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000517.html">[Supertux-devel] Supertux Sharp (Editor) Patch for extended sector	resizing
+</A></li>
+	<LI>Next message: <A HREF="000519.html">[Supertux-devel] ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#518">[ date ]</a>
+              <a href="thread.html#518">[ thread ]</a>
+              <a href="subject.html#518">[ subject ]</a>
+              <a href="author.html#518">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

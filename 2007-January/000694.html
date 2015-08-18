@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Patches for lightmap and widescreen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Patches%20for%20lightmap%20and%20widescreen&In-Reply-To=%3C200701100155.45438.supertux-devel%40denkersoft.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000695.html">
+   <LINK REL="Next"  HREF="000696.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Patches for lightmap and widescreen</H1>
+    <B>Klaus Denker</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Patches%20for%20lightmap%20and%20widescreen&In-Reply-To=%3C200701100155.45438.supertux-devel%40denkersoft.de%3E"
+       TITLE="[Supertux-devel] Patches for lightmap and widescreen">supertux-devel at denkersoft.de
+       </A><BR>
+    <I>Wed Jan 10 01:55:45 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000695.html">[Supertux-devel] Another little patch
+</A></li>
+        <LI>Next message: <A HREF="000696.html">[Supertux-devel] Patches for lightmap and widescreen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#694">[ date ]</a>
+              <a href="thread.html#694">[ thread ]</a>
+              <a href="subject.html#694">[ subject ]</a>
+              <a href="author.html#694">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Supertux Developers!
+
+I have made two patches for Supertux (SVN).
+The Patches can be found at <A HREF="http://www.unix-ag.uni-kl.de/~kldenker/supertux/">http://www.unix-ag.uni-kl.de/~kldenker/supertux/</A>
+
+The little lightmap_resolution.patch makes the Level &quot;light+magic&quot; playable at 
+any screen resolution. It fixes a TODO to calculate the correct 
+lightmap-coordinates in the function get_light.
+
+The second patch is a Widescreen-Patch. It includes a new 
+command-line-parameter &quot;--aspect&quot; or &quot;-a&quot;. It defaults to 4:3 but can be 
+changed to any other ratio. SCREEN_WIDTH and SCREEN_HEIGHT are calculated 
+from these aspect-values. This caused some minor Problems with the 
+message-boxes and the credits. But I fixed them already.
+
+I hope you can use these patches,
+Klaus Denker
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000695.html">[Supertux-devel] Another little patch
+</A></li>
+	<LI>Next message: <A HREF="000696.html">[Supertux-devel] Patches for lightmap and widescreen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#694">[ date ]</a>
+              <a href="thread.html#694">[ thread ]</a>
+              <a href="subject.html#694">[ subject ]</a>
+              <a href="author.html#694">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

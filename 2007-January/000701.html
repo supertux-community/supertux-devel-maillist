@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Patches for lightmap and widescreen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Patches%20for%20lightmap%20and%20widescreen&In-Reply-To=%3C200701141804.26148.supertux-devel%40denkersoft.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000700.html">
+   <LINK REL="Next"  HREF="000698.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Patches for lightmap and widescreen</H1>
+    <B>Klaus Denker</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Patches%20for%20lightmap%20and%20widescreen&In-Reply-To=%3C200701141804.26148.supertux-devel%40denkersoft.de%3E"
+       TITLE="[Supertux-devel] Patches for lightmap and widescreen">supertux-devel at denkersoft.de
+       </A><BR>
+    <I>Sun Jan 14 18:04:26 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000700.html">[Supertux-devel] Patches for lightmap and widescreen
+</A></li>
+        <LI>Next message: <A HREF="000698.html">[Supertux-devel] [Supertux-commit] r4542 - in trunk/supertux: .	mk mk/cmake src/squirrel
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#701">[ date ]</a>
+              <a href="thread.html#701">[ thread ]</a>
+              <a href="subject.html#701">[ subject ]</a>
+              <a href="author.html#701">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Freitag 12 Januar 2007 23:13 schrieb Wolfgang Becker:
+&gt;<i> Thank you. offscreen.patch as well as widescreen.patch
+</I>&gt;<i> are in svn now. At least if my svn switch --relocate
+</I>&gt;<i> worked correctly this time.
+</I>
+It worked, thank you.
+
+I've written another patch which fixes some display bugs. The main menu is 
+centered vertically, and the camera centers the level, if it is smaller, than 
+the screen. Worldmap gets a background-color if necessary, and is centered 
+too.
+<A HREF="http://www.unix-ag.uni-kl.de/~kldenker/supertux/widescreen_fixes.patch">http://www.unix-ag.uni-kl.de/~kldenker/supertux/widescreen_fixes.patch</A>
+
+For testing, i included another command-line-switch, to scale the whole 
+screen:
+<A HREF="http://www.unix-ag.uni-kl.de/~kldenker/supertux/scale.patch">http://www.unix-ag.uni-kl.de/~kldenker/supertux/scale.patch</A>
+
+We should think about limiting the Values for the aspect ratio and the scale 
+factor, to values of real screens. The aspect may be limited between 16:9 and 
+5:4. (are 1280x1024 displays sized 5:4 or don't the have quadratic pixels?) 
+The scale factor could be limited between 1.0 and 2.0.
+
+Next thing, I'm going to do, is fix is the demo-recording. A demo recorded 
+with different SCREEN_WIDTH or SCREEN_HEIGHT does not play correctly. The 
+monsters don't spawn at the same points. So it's necessary to store these two 
+values and change them for playback. The screen-resolution needs to be 
+corrected too.
+
+Klaus
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000700.html">[Supertux-devel] Patches for lightmap and widescreen
+</A></li>
+	<LI>Next message: <A HREF="000698.html">[Supertux-devel] [Supertux-commit] r4542 - in trunk/supertux: .	mk mk/cmake src/squirrel
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#701">[ date ]</a>
+              <a href="thread.html#701">[ thread ]</a>
+              <a href="subject.html#701">[ subject ]</a>
+              <a href="author.html#701">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

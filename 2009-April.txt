@@ -1,0 +1,51 @@
+From grumbel at gmail.com  Tue Apr 14 05:34:20 2009
+From: grumbel at gmail.com (Ingo Ruhnke)
+Date: Tue, 14 Apr 2009 05:34:20 +0200
+Subject: [Supertux-devel] SuperTux Wiki License switch from GFDL to CC-BY-SA
+Message-ID: <4f45b570904132034n1a716068ocec7b4eac919644e@mail.gmail.com>
+
+The GNU FDL 1.3 contains a section that allows conversion of Wiki
+Content to CC-BY-SA without actually getting each and every authors
+agreement:
+
+http://www.gnu.org/licenses/fdl-1.3-faq.html
+http://www.gnu.org/copyleft/fdl.html
+http://creativecommons.org/licenses/by-sa/3.0/
+
+Since there isn't really a reason to stick with GFDL I would suggest
+we switch to CC-BY-SA, as it would mean one less license to worry
+about.
+
+Should be doable with some simple changes to the config file:
+
+http://www.mediawiki.org/wiki/Manual:LocalSettings.php#Setting_copyright_for_the_site
+
+-- 
+WWW:      http://pingus.seul.org/~grumbel/
+Blog:     http://grumbel.blogspot.com/
+JabberID: xmpp:grumbel at jabber.org
+ICQ:      59461927
+
+
+From uafr at gmx.de  Tue Apr 14 18:01:28 2009
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Tue, 14 Apr 2009 18:01:28 +0200
+Subject: [Supertux-devel] SuperTux Wiki License switch from GFDL
+	to	CC-BY-SA
+In-Reply-To: <4f45b570904132034n1a716068ocec7b4eac919644e@mail.gmail.com>
+References: <4f45b570904132034n1a716068ocec7b4eac919644e@mail.gmail.com>
+Message-ID: <20090414160128.GA4313@greg.local>
+
+On 2009-04-14 Ingo Ruhnke <grumbel at gmail.com> wrote:
+> Since there isn't really a reason to stick with GFDL I would suggest
+> we switch to CC-BY-SA, as it would mean one less license to worry
+> about.
+
+Reducing the number of licences is a good idea. Lets do it.
+
+Bye,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+

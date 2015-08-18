@@ -1,0 +1,383 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] repeatable platform-independent random numbers
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20repeatable%20platform-independent%20random%20numbers&In-Reply-To=%3C5a5496320607050911k3f137269wb424fba5f9957651%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000359.html">
+   <LINK REL="Next"  HREF="000382.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] repeatable platform-independent random numbers</H1>
+    <B>Ryan Flegel</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20repeatable%20platform-independent%20random%20numbers&In-Reply-To=%3C5a5496320607050911k3f137269wb424fba5f9957651%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] repeatable platform-independent random numbers">rflegel at gmail.com
+       </A><BR>
+    <I>Wed Jul  5 18:11:23 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000359.html">[Supertux-devel] repeatable platform-independent random numbers
+</A></li>
+        <LI>Next message: <A HREF="000382.html">[Supertux-devel] repeatable platform-independent random numbers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#370">[ date ]</a>
+              <a href="thread.html#370">[ thread ]</a>
+              <a href="subject.html#370">[ subject ]</a>
+              <a href="author.html#370">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Could you send the patch as an attachment?
+
+-- 
+Ryan
+
+On 7/2/06, Allen King &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">allen at a-king.us</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  A while back, I did some work to make Supertux have cross-platform
+</I>&gt;<i> repeatability of random numbers.  Back in the end of April, I released those
+</I>&gt;<i> changes, but the release did not go smoothly.  There were some bugs and
+</I>&gt;<i> others with SVN access made some stopgap fixes.  Since then, I've isolated
+</I>&gt;<i> the problem which probably prevented all of the changes from being
+</I>&gt;<i> incorporated.  Attached is a patch which should complete this task.
+</I>&gt;<i>
+</I>&gt;<i>  I hope you can get it into SVN quickly, as I have put some time into
+</I>&gt;<i> reconstructing it.  Whoever puts it in, please let me know how it went.  I
+</I>&gt;<i> am here to help with any problems which might come up.  However my time will
+</I>&gt;<i> be less available starting next month, and I probably won't be able to go
+</I>&gt;<i> through this exercise again.
+</I>&gt;<i>
+</I>&gt;<i>            Allen King
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  It is based on a recent version (3821), and effects the following changes.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> The variable RAND_MAX is machine-dependent, and shouldn't be used inside the
+</I>&gt;<i> machine-independent RandomGenerator, as it currently is.  This patch fixes
+</I>&gt;<i> that problem, which expressed itself in Wintel platforms (where
+</I>&gt;<i> RAND_MAX=0x7fff and INT_MAX=0x7fffffff) as assertion failures as well as
+</I>&gt;<i> numeric errors in randf.
+</I>&gt;<i> In the current version, the random seed is not properly initialized from the
+</I>&gt;<i> demo file.  It says it does, but it doesn't. (Instead a random number is
+</I>&gt;<i> generated from time(0)).
+</I>&gt;<i>
+</I>&gt;<i> GOREY DETAILS:  For things to work, the call to init_rand() must be delayed
+</I>&gt;<i> until after the seed is read from the demo file.  Unfortunately just
+</I>&gt;<i> delaying the init_rand() call till after play_demo  caused the
+</I>&gt;<i> &quot;uninitialized random generator&quot; throw bug. To get around that problem, the
+</I>&gt;<i> code that reads the random seed was moved from GameSession :: play_demo
+</I>&gt;<i> method to a new method:  GameSession :: get_demo_random_seed, which could
+</I>&gt;<i> occur earlier.  Unfortunately in the process of doing that, play_demo
+</I>&gt;<i> stopped skipping over the initial seed, got confused, and prevented
+</I>&gt;<i> play_demo from operating at all. All of this should be fixed now.
+</I>&gt;<i>
+</I>&gt;<i>  Other lesser changes that are also in this patch are:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> RandomGenerator::rand(int) now has no fence-post biases.  Previously,  there
+</I>&gt;<i> were large biases in cases like when it's argument was, say, =rand_max*0.75.
+</I>&gt;<i>
+</I>&gt;<i> A debug mode was added to RandomGenerator, but set to OFF.
+</I>&gt;<i> A periodic call of rand had been added every 20 frames to aid in debug.  It
+</I>&gt;<i> was changed to call rand every cycle because the &quot;every 20 times&quot;
+</I>&gt;<i> functionality broke due to other's changes.  The call is currently commented
+</I>&gt;<i> out, but I un-comment it for debug.
+</I>&gt;<i> The random_seed stored in the demo file is saved as decimal with leading
+</I>&gt;<i> spaces. This removes a trivial debugging cut-and-paste gotcha.
+</I>&gt;<i> in random_generator, an assertion check (of sizeof(int) &gt;= 4) was moved into
+</I>&gt;<i> initialization code to reduce processing time.
+</I>&gt;<i>
+</I>&gt;<i> An old commented-out erroneous call to srand(0) was removed totally.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Index: src/random_generator.hpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/random_generator.hpp    (revision 3821)
+</I>&gt;<i> +++ src/random_generator.hpp    (working copy)
+</I>&gt;<i> @@ -81,6 +81,8 @@
+</I>&gt;<i>      long rand_deg;
+</I>&gt;<i>      long rand_sep;
+</I>&gt;<i>      long *end_ptr;
+</I>&gt;<i> +    int debug;
+</I>&gt;<i> +    static const int rand_max = 0x7fffffff;         // biggest signed
+</I>&gt;<i> Uint32
+</I>&gt;<i>
+</I>&gt;<i>  public:
+</I>&gt;<i>      RandomGenerator();
+</I>&gt;<i> @@ -95,7 +97,7 @@
+</I>&gt;<i>
+</I>&gt;<i>       // generate random 31-bit numbers
+</I>&gt;<i>      // calls to the following return a value evenly distributed between u
+</I>&gt;<i> (or
+</I>&gt;<i> -    // 0 if not specified) and v (or RAND_MAX if not specified).  Return
+</I>&gt;<i> +    // 0 if not specified) and v (or rand_max if not specified).  Return
+</I>&gt;<i>      // values may include u, but never v.
+</I>&gt;<i>      int rand();
+</I>&gt;<i>      int rand(int v);
+</I>&gt;<i> Index: src/game_session.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/game_session.cpp        (revision 3821)
+</I>&gt;<i> +++ src/game_session.cpp        (working copy)
+</I>&gt;<i> @@ -179,11 +179,30 @@
+</I>&gt;<i>    capture_file = filename;
+</I>&gt;<i>
+</I>&gt;<i>    char buf[30];                            // save the seed in the demo
+</I>&gt;<i> file
+</I>&gt;<i> -  sprintf(buf, &quot;random_seed=%010d&quot;, config-&gt;random_seed);
+</I>&gt;<i> +  sprintf(buf, &quot;random_seed=%10d&quot;, config-&gt;random_seed);
+</I>&gt;<i>    for (int i=0; i==0 || buf[i-1]; i++)
+</I>&gt;<i>      capture_demo_stream-&gt;put(buf[i]);
+</I>&gt;<i>  }
+</I>&gt;<i>
+</I>&gt;<i> +int
+</I>&gt;<i> +GameSession::get_demo_random_seed(const std::string&amp;
+</I>&gt;<i> filename)
+</I>&gt;<i> +{
+</I>&gt;<i> +  std::istream* test_stream = new std::ifstream(filename.c_str());
+</I>&gt;<i> +  if(test_stream-&gt;good()) {
+</I>&gt;<i> +    char buf[30];                     // recall the seed from the demo file
+</I>&gt;<i> +    int seed;
+</I>&gt;<i> +    for (int i=0; i&lt;30 &amp;&amp; (i==0 || buf[i-1]); i++)
+</I>&gt;<i> +      test_stream-&gt;get(buf[i]);
+</I>&gt;<i> +    if (sscanf(buf, &quot;random_seed=%10d&quot;, &amp;seed) == 1) {
+</I>&gt;<i> +      log_info &lt;&lt; &quot;Random seed &quot; &lt;&lt; seed &lt;&lt; &quot; from demo file&quot; &lt;&lt; std::endl;
+</I>&gt;<i> +         return seed;
+</I>&gt;<i> +    }
+</I>&gt;<i> +    else
+</I>&gt;<i> +      log_info &lt;&lt; &quot;Demo file contains no random number&quot; &lt;&lt; std::endl;
+</I>&gt;<i> +  }
+</I>&gt;<i> +  return 0;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i>  void
+</I>&gt;<i>  GameSession::play_demo(const std::string&amp; filename)
+</I>&gt;<i>  {
+</I>&gt;<i> @@ -201,18 +220,13 @@
+</I>&gt;<i>    demo_controller = new CodeController();
+</I>&gt;<i>    tux.set_controller(demo_controller);
+</I>&gt;<i>
+</I>&gt;<i> -  char buf[30];                            // recall the seed from the demo
+</I>&gt;<i> file
+</I>&gt;<i> +  // skip over random seed, if it exists in the file
+</I>&gt;<i> +  char buf[30];                            // ascii decimal seed
+</I>&gt;<i>    int seed;
+</I>&gt;<i>    for (int i=0; i&lt;30 &amp;&amp; (i==0 || buf[i-1]); i++)
+</I>&gt;<i>      playback_demo_stream-&gt;get(buf[i]);
+</I>&gt;<i> -  if (sscanf(buf, &quot;random_seed=%010d&quot;, &amp;seed) == 1) {
+</I>&gt;<i> -    config-&gt;random_seed = seed;            // save where it will be used
+</I>&gt;<i> -    log_info &lt;&lt; &quot;Taking random seed &quot; &lt;&lt; seed &lt;&lt; &quot; from demo file&quot;
+</I>&gt;<i> &lt;&lt;std::endl;
+</I>&gt;<i> -  }
+</I>&gt;<i> -  else {
+</I>&gt;<i> +  if (sscanf(buf, &quot;random_seed=%010d&quot;, &amp;seed) != 1)
+</I>&gt;<i>      playback_demo_stream-&gt;seekg(0);     // old style w/o
+</I>&gt;<i> seed, restart at beg
+</I>&gt;<i> -    log_info &lt;&lt; &quot;Demo file contains no random number&quot; &lt;&lt; std::endl;
+</I>&gt;<i> -  }
+</I>&gt;<i>  }
+</I>&gt;<i>
+</I>&gt;<i>  void
+</I>&gt;<i> Index: src/mainloop.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/mainloop.cpp    (revision 3821)
+</I>&gt;<i> +++ src/mainloop.cpp    (working copy)
+</I>&gt;<i> @@ -124,7 +124,6 @@
+</I>&gt;<i>    DrawingContext context;
+</I>&gt;<i>
+</I>&gt;<i>    unsigned int frame_count = 0;
+</I>&gt;<i> -  unsigned int rand_prints = 0;
+</I>&gt;<i>    float fps_fps = 0;
+</I>&gt;<i>    Uint32 fps_ticks = SDL_GetTicks();
+</I>&gt;<i>    Uint32 fps_nextframe_ticks = SDL_GetTicks();
+</I>&gt;<i> @@ -239,11 +238,8 @@
+</I>&gt;<i>      }
+</I>&gt;<i>
+</I>&gt;<i>      sound_manager-&gt;update();
+</I>&gt;<i> -
+</I>&gt;<i> -    // insert calls for debug (there are few rand calls otherwise)
+</I>&gt;<i> -    if (0 &amp;&amp; rand_prints++ % 20 == 0)
+</I>&gt;<i> -        log_info &lt;&lt; &quot;== periodic rand() call &quot; &lt;&lt; systemRandom.rand() &lt;&lt;
+</I>&gt;<i> -                &quot; at frame &quot; &lt;&lt; rand_prints &lt;&lt; &quot;==&quot; &lt;&lt;std::endl;
+</I>&gt;<i> +
+</I>&gt;<i> +    //log_info &lt;&lt; &quot;== periodic rand() = &quot; &lt;&lt; systemRandom.rand() &lt;&lt;
+</I>&gt;<i> std::endl;
+</I>&gt;<i>    }
+</I>&gt;<i>  }
+</I>&gt;<i>
+</I>&gt;<i> Index: src/main.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/main.cpp        (revision 3821)
+</I>&gt;<i> +++ src/main.cpp        (working copy)
+</I>&gt;<i> @@ -445,7 +445,6 @@
+</I>&gt;<i>
+</I>&gt;<i>    try {
+</I>&gt;<i>      Console::instance = new Console();
+</I>&gt;<i> -//  srand(time(0));            // this breaks repeatability in random
+</I>&gt;<i> numbers
+</I>&gt;<i>      init_physfs(argv[0]);
+</I>&gt;<i>      init_sdl();
+</I>&gt;<i>
+</I>&gt;<i> @@ -476,16 +475,18 @@
+</I>&gt;<i>        std::string dir =
+</I>&gt;<i> FileSystem::dirname(config-&gt;start_level);
+</I>&gt;<i>        PHYSFS_addToSearchPath(dir.c_str(), true);
+</I>&gt;<i>
+</I>&gt;<i> -      init_rand();        // play_demo sets seed, record_demo uses it
+</I>&gt;<i> -
+</I>&gt;<i>        if(config-&gt;start_level.size() &gt; 4 &amp;&amp;
+</I>&gt;<i>
+</I>&gt;<i> config-&gt;start_level.compare(config-&gt;start_level.size() - 5,
+</I>&gt;<i> 5, &quot;.stwm&quot;) == 0) {
+</I>&gt;<i> +          init_rand();
+</I>&gt;<i>            main_loop-&gt;push_screen(new WorldMapNS::WorldMap(
+</I>&gt;<i>
+</I>&gt;<i> FileSystem::basename(config-&gt;start_level)));
+</I>&gt;<i>        } else {
+</I>&gt;<i>          std::auto_ptr&lt;GameSession&gt; session (
+</I>&gt;<i>                  new
+</I>&gt;<i> GameSession(FileSystem::basename(config-&gt;start_level)));
+</I>&gt;<i>
+</I>&gt;<i> +        config-&gt;random_seed
+</I>&gt;<i> =session-&gt;get_demo_random_seed(config-&gt;start_demo);
+</I>&gt;<i> +        init_rand();
+</I>&gt;<i> +
+</I>&gt;<i>          if(config-&gt;start_demo != &quot;&quot;)
+</I>&gt;<i>            session-&gt;play_demo(config-&gt;start_demo);
+</I>&gt;<i>
+</I>&gt;<i> @@ -498,6 +499,7 @@
+</I>&gt;<i>        main_loop-&gt;push_screen(new TitleScreen());
+</I>&gt;<i>      }
+</I>&gt;<i>
+</I>&gt;<i> +    //init_rand(); PAK: this call might subsume the above 3, but I'm
+</I>&gt;<i> chicken!
+</I>&gt;<i>      main_loop-&gt;run();
+</I>&gt;<i>
+</I>&gt;<i>    } catch(std::exception&amp; e) {
+</I>&gt;<i> Index: src/random_generator.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/random_generator.cpp    (revision 3821)
+</I>&gt;<i> +++ src/random_generator.cpp    (working copy)
+</I>&gt;<i> @@ -45,6 +45,7 @@
+</I>&gt;<i>  RandomGenerator::RandomGenerator() {
+</I>&gt;<i>      assert(sizeof(int) &gt;= 4);
+</I>&gt;<i>      initialized = 0;
+</I>&gt;<i> +    debug = 0;                              // change this by hand for
+</I>&gt;<i> debug
+</I>&gt;<i>      initialize();
+</I>&gt;<i>  }
+</I>&gt;<i>
+</I>&gt;<i> @@ -52,19 +53,36 @@
+</I>&gt;<i>  }
+</I>&gt;<i>
+</I>&gt;<i>  int RandomGenerator::srand(int x)    {
+</I>&gt;<i> -    while (x == 0)                          // random seed of zero means
+</I>&gt;<i> -        x = (time(0) % RAND_MAX);           // randomize with time
+</I>&gt;<i> -    assert(x &lt; RAND_MAX);                   // only allow posative 31-bit
+</I>&gt;<i> seeds
+</I>&gt;<i> -    assert(sizeof(int) &gt;= 4);
+</I>&gt;<i> -    srandom(x);
+</I>&gt;<i> +    int x0 = x;
+</I>&gt;<i> +    while (x &lt;= 0)                          // random seed of zero means
+</I>&gt;<i> +        x = time(0) % RandomGenerator::rand_max; // randomize with time
+</I>&gt;<i> +
+</I>&gt;<i> +    if (debug &gt; 0)
+</I>&gt;<i> +        printf(&quot;==== srand(%10d) (%10d) rand_max=%x =====\n&quot;,
+</I>&gt;<i> +               x, x0, RandomGenerator::rand_max);
+</I>&gt;<i> +
+</I>&gt;<i> +    RandomGenerator::srandom(x);
+</I>&gt;<i>      return x;                               // let caller know seed used
+</I>&gt;<i>  }
+</I>&gt;<i>
+</I>&gt;<i> -int RandomGenerator::rand()                 {        return random();    }
+</I>&gt;<i> +int RandomGenerator::rand() {
+</I>&gt;<i> +    int rv;                                  // a posative int
+</I>&gt;<i> +    while ((rv = RandomGenerator::random()) &lt;= 0) // neg or zero causes
+</I>&gt;<i> probs
+</I>&gt;<i> +        ;
+</I>&gt;<i> +    if (debug &gt; 0)
+</I>&gt;<i> +        printf(&quot;==== rand(): %10d =====\n&quot;, rv);
+</I>&gt;<i> +    return rv;
+</I>&gt;<i> +}
+</I>&gt;<i>
+</I>&gt;<i>  int RandomGenerator::rand(int v) {
+</I>&gt;<i> -    assert(v != 0 &amp;&amp; v &lt;= RAND_MAX);        // illegal arg: 0 or too big
+</I>&gt;<i> -    return RandomGenerator::random() % v;
+</I>&gt;<i> +    assert(v &gt;= 0 &amp;&amp; v &lt;= RandomGenerator::rand_max); // illegal arg
+</I>&gt;<i> +
+</I>&gt;<i> +     // remove biases, esp. when v is large (e.g. v == (rand_max/4)*3;)
+</I>&gt;<i> +    int rv, maxV =(RandomGenerator::rand_max / v) * v;
+</I>&gt;<i> +    assert(maxV &lt;= RandomGenerator::rand_max);
+</I>&gt;<i> +    while ((rv = RandomGenerator::random()) &gt;= maxV)
+</I>&gt;<i> +        ;
+</I>&gt;<i> +    return rv % v;                          // mod it down to 0..(maxV-1)
+</I>&gt;<i>  }
+</I>&gt;<i>
+</I>&gt;<i>  int RandomGenerator::rand(int u, int v) {
+</I>&gt;<i> @@ -74,8 +92,12 @@
+</I>&gt;<i>
+</I>&gt;<i>  double RandomGenerator::randf(double v) {
+</I>&gt;<i>      float rv;
+</I>&gt;<i> -    while ((rv = (double)RandomGenerator::random() /
+</I>&gt;<i> RAND_MAX * v) &gt;= v)
+</I>&gt;<i> -        ;                                   // never return v!
+</I>&gt;<i> +    do {
+</I>&gt;<i> +               rv =
+</I>&gt;<i> ((double)RandomGenerator::random())/RandomGenerator::rand_max
+</I>&gt;<i> * v;
+</I>&gt;<i> +       } while (rv &gt;= v);                      // rounding might cause
+</I>&gt;<i> rv==v
+</I>&gt;<i> +
+</I>&gt;<i> +    if (debug &gt; 0)
+</I>&gt;<i> +        printf(&quot;==== rand(): %f =====\n&quot;, rv);
+</I>&gt;<i>      return rv;
+</I>&gt;<i>  }
+</I>&gt;<i>
+</I>&gt;<i> Index: src/game_session.hpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/game_session.hpp        (revision 3821)
+</I>&gt;<i> +++ src/game_session.hpp        (working copy)
+</I>&gt;<i> @@ -46,6 +46,7 @@
+</I>&gt;<i>    ~GameSession();
+</I>&gt;<i>
+</I>&gt;<i>    void record_demo(const std::string&amp; filename);
+</I>&gt;<i> +  int get_demo_random_seed(const std::string&amp; filename);
+</I>&gt;<i>    void play_demo(const std::string&amp; filename);
+</I>&gt;<i>
+</I>&gt;<i>    void draw(DrawingContext&amp; context);
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000359.html">[Supertux-devel] repeatable platform-independent random numbers
+</A></li>
+	<LI>Next message: <A HREF="000382.html">[Supertux-devel] repeatable platform-independent random numbers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#370">[ date ]</a>
+              <a href="thread.html#370">[ thread ]</a>
+              <a href="subject.html#370">[ subject ]</a>
+              <a href="author.html#370">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,159 @@
+From DirtY.iCE.hu at gmail.com  Wed Nov  8 18:29:40 2006
+From: DirtY.iCE.hu at gmail.com (DirtY iCE)
+Date: Wed, 08 Nov 2006 18:29:40 +0100
+Subject: [Supertux-devel] Hungarian translation + world1/2 untranslatable
+	info patch
+Message-ID: <45521404.4070507@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi everybody,
+
+I made a hungarian translation for the SuperTux game, and world 1/2
+bonus 1/2. The translation is finished about 95%, but if I not count
+the .txt files (that I think somebody will remove) it finished 97%. I
+have some problems with the hungarian quotation marks (doesn't in the
+font). The another attachment (untrans_fix.diff) is paching the
+world1/2's info file, so in the Bonus Levels menu, the translateded
+name appears. (+1 string in world1. +0 in world2)
+
+DirtY iCE
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFFUhQDoJZDkXYAf9kRAhrZAJ9tVEAdz/r71jP4E+gSGMLv71suOACfUxgt
+V+ufM//vEThZkGN9kuQsPmw=
+=kqxO
+-----END PGP SIGNATURE-----
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: hungarian_translation.diff
+Type: text/x-patch
+Size: 34688 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061108/61bc6916/attachment.bin>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: untrans_fix.diff
+Type: text/x-patch
+Size: 721 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061108/61bc6916/attachment-0001.bin>
+
+From DirtY.iCE.hu at gmail.com  Wed Nov  8 18:40:14 2006
+From: DirtY.iCE.hu at gmail.com (DirtY iCE)
+Date: Wed, 08 Nov 2006 18:40:14 +0100
+Subject: [Supertux-devel] Hungarian translation + world1/2 untranslatable
+	info patch
+Message-ID: <4552167E.7060207@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi everybody,
+
+I made a hungarian translation for the SuperTux game, and world 1/2
+bonus 1/2. The translation is finished about 95%, but if I not count
+the .txt files (that I think somebody will remove) it finished 97%. I
+have some problems with the hungarian quotation marks (doesn't in the
+font). The another attachment (untrans_fix.diff) is paching the
+world1/2's info file, so in the Bonus Levels menu, the translateded
+name appears. (+1 string in world1. +0 in world2)
+
+DirtY iCE
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFFUhQDoJZDkXYAf9kRAhrZAJ9tVEAdz/r71jP4E+gSGMLv71suOACfUxgt
+V+ufM//vEThZkGN9kuQsPmw=
+=kqxO
+-----END PGP SIGNATURE-----
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: hungarian_translation.diff
+Type: text/x-patch
+Size: 34688 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061108/aee31f23/attachment.bin>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: untrans_fix.diff
+Type: text/x-patch
+Size: 721 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061108/aee31f23/attachment-0001.bin>
+
+From goldenpiranha at gmail.com  Sat Nov 11 07:01:57 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Fri, 10 Nov 2006 22:01:57 -0800
+Subject: [Supertux-devel] Ice and running
+Message-ID: <bcd1d8470611102201m228bf06ay1297673a0b005235@mail.gmail.com>
+
+In the development version, why is it that when you hold a Mr. Ice guy, you
+can't run?
+
+thx.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061110/e35e901a/attachment.html>
+
+From uafr at gmx.de  Sat Nov 11 12:52:03 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Sat, 11 Nov 2006 12:52:03 +0100
+Subject: [Supertux-devel] Ice and running
+In-Reply-To: <bcd1d8470611102201m228bf06ay1297673a0b005235@mail.gmail.com>
+References: <bcd1d8470611102201m228bf06ay1297673a0b005235@mail.gmail.com>
+Message-ID: <20061111115203.GA6210@greg.local>
+
+On 20061111 Danny Bittman <goldenpiranha at gmail.com> wrote:
+> In the development version, why is it that when you hold a Mr. Ice guy, you
+> can't run?
+
+Because the ice block is too heavy.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From goldenpiranha at gmail.com  Sat Nov 11 16:57:30 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Sat, 11 Nov 2006 07:57:30 -0800
+Subject: [Supertux-devel] Ice and running
+In-Reply-To: <20061111115203.GA6210@greg.local>
+References: <bcd1d8470611102201m228bf06ay1297673a0b005235@mail.gmail.com>
+	<20061111115203.GA6210@greg.local>
+Message-ID: <bcd1d8470611110757y52bce41m7ffda662037bd9f7@mail.gmail.com>
+
+Oh! I get it. The problem is, in few levels I made you need to run with an
+Ice block, but can't now... I can edit them....
+thx again
+
+On 11/11/06, Wolfgang Becker <uafr at gmx.de> wrote:
+>
+> On 20061111 Danny Bittman <goldenpiranha at gmail.com> wrote:
+> > In the development version, why is it that when you hold a Mr. Ice guy,
+> you
+> > can't run?
+>
+> Because the ice block is too heavy.
+>
+> Tsch??,
+> Wolfgang
+> --
+> Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061111/55b53f35/attachment.html>
+

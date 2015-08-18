@@ -1,0 +1,2519 @@
+From abutterflyinside at comcast.net  Fri Feb  3 02:45:39 2006
+From: abutterflyinside at comcast.net (Connie Witherington)
+Date: Thu, 2 Feb 2006 17:45:39 -0800
+Subject: [Supertux-devel] Super Tux Milestone
+Message-ID: <260284E4-4C31-44D3-B9E0-5166F5DC758B@comcast.net>
+
+When will Super Tux Milestone 2 be coming out?
+
+I really loved Super Tux. Thanks for such a great game and tons of fun.
+
+Connie Witherington
+Bellingham, WA
+abutterflyinside at comcast.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060202/263edd76/attachment.html>
+
+From s.fear at xtra.co.nz  Fri Feb  3 09:39:26 2006
+From: s.fear at xtra.co.nz (Sally)
+Date: Fri, 3 Feb 2006 21:39:26 +1300
+Subject: [Supertux-devel] Supertux
+Message-ID: <000601c6289d$579fe130$1d159ade@sc92705e98df24>
+
+Hi there I am hoping you will be able to help me. Is there a key  on my key board I can use to get Tux over that tall wall It is a great game but there does not seem enough room for him to run and jump over that wall and I have tried just about everything. Please help. Sally
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060203/ef090bf7/attachment.html>
+
+From wansti at gmx.de  Fri Feb  3 11:23:57 2006
+From: wansti at gmx.de (Marek)
+Date: Fri, 03 Feb 2006 10:23:57 +0000
+Subject: [Supertux-devel] Supertux
+In-Reply-To: <000601c6289d$579fe130$1d159ade@sc92705e98df24>
+References: <000601c6289d$579fe130$1d159ade@sc92705e98df24>
+Message-ID: <43E32F3D.4070101@gmx.de>
+
+Sally wrote:
+
+> Hi there I am hoping you will be able to help me. Is there a key  on
+> my key board I can use to get Tux over that tall wall It is a great
+> game but there does not seem enough room for him to run and jump over
+> that wall and I have tried just about everything. Please help. Sally
+
+Hi!
+Which level exactly are you talking about?
+
+    Marek
+
+P.S. For hints on gameplay, you can also check the forums at the
+SuperTux Fansite (http://www.supertux.info). If someone had the same
+problem, you might be able to find the answer there.
+
+    MWM
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060203/8fc05d32/attachment.html>
+
+From joseph.brower at gmail.com  Fri Feb  3 16:06:47 2006
+From: joseph.brower at gmail.com (joseph brower)
+Date: Fri, 3 Feb 2006 08:06:47 -0700
+Subject: [Supertux-devel] Supertux
+In-Reply-To: <43E32F3D.4070101@gmx.de>
+References: <000601c6289d$579fe130$1d159ade@sc92705e98df24>
+	 <43E32F3D.4070101@gmx.de>
+Message-ID: <a82cfa150602030706h3057ed71r71954645e86d3402@mail.gmail.com>
+
+You need to use the "Run" key.  Hit escape, then go to configure your
+keys.  You then can set up a run key.  You hold that key while running
+the right to pick up speed and then you can jump the wall.
+
+
+On 2/3/06, Marek <wansti at gmx.de> wrote:
+>  Sally wrote:
+>
+> Hi there I am hoping you will be able to help me. Is there a key  on my key
+> board I can use to get Tux over that tall wall It is a great game but there
+> does not seem enough room for him to run and jump over that wall and I have
+> tried just about everything. Please help. Sally Hi!
+>  Which level exactly are you talking about?
+>
+>      Marek
+>
+>  P.S. For hints on gameplay, you can also check the forums at the SuperTux
+> Fansite (http://www.supertux.info). If someone had the same problem, you
+> might be able to find the answer there.
+>
+>      MWM
+>
+
+
+From jomarj at gmail.com  Sat Feb  4 22:25:24 2006
+From: jomarj at gmail.com (Jomar Johansen)
+Date: Sat, 4 Feb 2006 22:25:24 +0100
+Subject: [Supertux-devel] New version of SuperTux PSP Edition
+Message-ID: <b4a196420602041325l6a193eefr8f61b130aa65046d@mail.gmail.com>
+
+Hello everybody,
+just though I could inform you about the new version of SuperTux PSP
+Edition.
+
+There were some issues with velocity not being properly adjusted, to
+compensate for the tilesize change in the previous release.  This lead to a
+few speedy objects.  Hopefully most of them should be adressed in this
+update.
+
+For a full changelist head over to:
+http://jomarj.tihlde.org/projects/supertux
+
+To the st-developers: you are doing an execellent job, keep it up!!
+
+Thank you for your attention.
+
+Best regards
+Jomar Johansen
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060204/a5118bdc/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Sun Feb  5 16:39:24 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Sun, 05 Feb 2006 16:39:24 +0100
+Subject: [Supertux-devel] Requesting permission to upload -nogl branch
+Message-ID: <43E61C2C.9080600@2006.expires.deltadevelopment.de>
+
+Hi all,
+
+I've been working on a branch of SuperTux that completely removes the 
+requirement for OpenGL - all rendering is now done with pure SDL.
+
+I uploaded a patch for SuperTux SVN revision 3046 to
+http://www.deltadevelopment.de/users/christoph/supertux/
+
+As there seem to be quite a lot of SuperTux fans out there that are 
+waiting to play SuperTux without OpenGL I hereby kindly request your 
+permission to upload this branch to the official SuperTux repository.
+
+
+Kind regards,
+
+   Christoph
+
+
+-- 
+It has been discovered that C++ provides a remarkable facility for 
+concealing the trival details of a program -- such as where its bugs 
+are. (David Keppel)
+
+
+From thommy at globo.com  Sun Feb  5 17:35:51 2006
+From: thommy at globo.com (Thomaz de Oliveira dos Reis)
+Date: Sun, 05 Feb 2006 14:35:51 -0200
+Subject: [Supertux-devel] Requesting permission to upload -nogl branch
+In-Reply-To: <43E61C2C.9080600@2006.expires.deltadevelopment.de>
+References: <43E61C2C.9080600@2006.expires.deltadevelopment.de>
+Message-ID: <43E62967.1070202@globo.com>
+
+That is really nice. There are many computers here, that we can play 
+milestone 1 but only without OpenGL.
+
+great work, I will really aprecieate this :)
+
+Christoph Sommer wrote:
+
+> Hi all,
+>
+> I've been working on a branch of SuperTux that completely removes the 
+> requirement for OpenGL - all rendering is now done with pure SDL.
+>
+> I uploaded a patch for SuperTux SVN revision 3046 to
+> http://www.deltadevelopment.de/users/christoph/supertux/
+>
+> As there seem to be quite a lot of SuperTux fans out there that are 
+> waiting to play SuperTux without OpenGL I hereby kindly request your 
+> permission to upload this branch to the official SuperTux repository.
+>
+>
+> Kind regards,
+>
+>   Christoph
+>
+>
+
+
+
+From wansti at gmx.de  Sun Feb  5 19:23:29 2006
+From: wansti at gmx.de (Marek)
+Date: Sun, 05 Feb 2006 19:23:29 +0100
+Subject: [Supertux-devel] Requesting permission to upload -nogl branch
+In-Reply-To: <43E62967.1070202@globo.com>
+References: <43E61C2C.9080600@2006.expires.deltadevelopment.de> <43E62967.1070202@globo.com>
+Message-ID: <43E642A1.40509@gmx.de>
+
+Hi Christoph,
+thank you for your work on SuperTux.
+The only problem I see is that we're planning to use a few OpenGL
+functions (rotating, zooming, (colored) lightmaps, translucency) for
+gameplay features, so simply disabling them is not an option.
+Unfortunately, apart from a small lightmap test, we didn't implement any
+of those features yet - the only big change we made to the graphics
+engine since Milestone 1 was to throw out the non-opengl code. Unless
+the things mentioned above can be done in SDL without slowing down the
+game too much, it won't be any useful. :-/
+
+    Marek
+
+Thomaz de Oliveira dos Reis wrote:
+
+> That is really nice. There are many computers here, that we can play
+> milestone 1 but only without OpenGL.
+>
+> great work, I will really aprecieate this :)
+>
+> Christoph Sommer wrote:
+>
+>> Hi all,
+>>
+>> I've been working on a branch of SuperTux that completely removes the
+>> requirement for OpenGL - all rendering is now done with pure SDL.
+>>
+>> I uploaded a patch for SuperTux SVN revision 3046 to
+>> http://www.deltadevelopment.de/users/christoph/supertux/
+>>
+>> As there seem to be quite a lot of SuperTux fans out there that are
+>> waiting to play SuperTux without OpenGL I hereby kindly request your
+>> permission to upload this branch to the official SuperTux repository.
+>>
+>>
+>> Kind regards,
+>>
+>>   Christoph
+>>
+>>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+
+
+-- 
+-----BEGIN GEEK CODE BLOCK-----
+Version: 3.1
+GCS/MU dpu s:+ a-- C++(++++) UL++>++++ P++$ L+++>+++++ E- W++ N o? K- w---
+O M+@ V- !PS !PE Y+ PGP++ t--- 5-- X- R+@ tv-- b+ DI+ D+>++++
+G++ e++>++++@ h--- r++(+++) y+++
+------END GEEK CODE BLOCK------ 
+
+
+
+From supertux at 2006.expires.deltadevelopment.de  Sun Feb  5 23:21:16 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Sun, 05 Feb 2006 23:21:16 +0100
+Subject: [Supertux-devel] Requesting permission to upload -nogl branch
+In-Reply-To: <43E642A1.40509@gmx.de>
+References: <43E61C2C.9080600@2006.expires.deltadevelopment.de> <43E62967.1070202@globo.com> <43E642A1.40509@gmx.de>
+Message-ID: <43E67A5C.4030104@2006.expires.deltadevelopment.de>
+
+Hi Marek,
+
+Marek wrote:
+> The only problem I see is that we're planning to use a few OpenGL
+> functions (rotating, zooming, (colored) lightmaps, translucency) for
+> gameplay features, so simply disabling them is not an option.
+
+Yes, I thought about the engine features advertised on the Wiki and 
+talked about in the published meeting logs. Many of them - as you also 
+concluded - will simply never be doable with SDL.
+
+The reason why I created this patch anyway is simple: Without it, I and 
+many others would just not be able to play SuperTux at all, so having to 
+do without colored light and zooming cutscenes is a small price to pay 
+for being able to play (no pun intended) :-)
+
+Remember, we are talking about a code branch for non-GL systems, not a 
+runtime-switch for software mode and surely not a new version of the 
+SuperTux trunk.
+
+
+Regards,
+
+   Christoph
+
+
+-- 
+If your sergeant can see you, so can the enemy.
+
+
+From thommy at globo.com  Sun Feb  5 23:30:18 2006
+From: thommy at globo.com (Thomaz de Oliveira dos Reis)
+Date: Sun, 05 Feb 2006 20:30:18 -0200
+Subject: [Supertux-devel] Requesting permission to upload -nogl branch
+In-Reply-To: <43E67A5C.4030104@2006.expires.deltadevelopment.de>
+References: <43E61C2C.9080600@2006.expires.deltadevelopment.de> <43E62967.1070202@globo.com> <43E642A1.40509@gmx.de> <43E67A5C.4030104@2006.expires.deltadevelopment.de>
+Message-ID: <43E67C7A.40808@globo.com>
+
+Reforcing what Christoph said, A full OpenGL version of supertux, will 
+make many SuperTux players disapointed. At least here in Brasil, super 
+tux is really famous among people who doesn't have a powerfull computer 
+with OpenGL support.
+
+It would be interesting, if those new effects, that would affect 
+gameplay, could be changed for something similar (maybe not  as 
+"beautiful" as the GL version) but that could "simulate" the same 
+gameplay....
+
+
+Christoph Sommer wrote:
+
+> Hi Marek,
+>
+> Marek wrote:
+>
+>> The only problem I see is that we're planning to use a few OpenGL
+>> functions (rotating, zooming, (colored) lightmaps, translucency) for
+>> gameplay features, so simply disabling them is not an option.
+>
+>
+> Yes, I thought about the engine features advertised on the Wiki and 
+> talked about in the published meeting logs. Many of them - as you also 
+> concluded - will simply never be doable with SDL.
+>
+> The reason why I created this patch anyway is simple: Without it, I 
+> and many others would just not be able to play SuperTux at all, so 
+> having to do without colored light and zooming cutscenes is a small 
+> price to pay for being able to play (no pun intended) :-)
+>
+> Remember, we are talking about a code branch for non-GL systems, not a 
+> runtime-switch for software mode and surely not a new version of the 
+> SuperTux trunk.
+>
+>
+> Regards,
+>
+>   Christoph
+>
+>
+
+
+
+From grumbel at gmx.de  Mon Feb  6 00:56:18 2006
+From: grumbel at gmx.de (Ingo Ruhnke)
+Date: Mon, 06 Feb 2006 00:56:18 +0100
+Subject: [Supertux-devel] Requesting permission to upload -nogl branch
+In-Reply-To: <43E67C7A.40808@globo.com> (Thomaz de Oliveira dos Reis's message
+	of "Sun, 05 Feb 2006 20:30:18 -0200")
+References: <43E61C2C.9080600@2006.expires.deltadevelopment.de>
+	<43E62967.1070202@globo.com> <43E642A1.40509@gmx.de>
+	<43E67A5C.4030104@2006.expires.deltadevelopment.de>
+	<43E67C7A.40808@globo.com>
+Message-ID: <87k6c9l5r1.fsf@gmx.de>
+
+Thomaz de Oliveira dos Reis <thommy at globo.com> writes:
+
+> Reforcing what Christoph said, A full OpenGL version of supertux,
+> will make many SuperTux players disapointed. At least here in
+> Brasil, super tux is really famous among people who doesn't have a
+> powerfull computer with OpenGL support.
+
+On most low-end computers OpenGL SuperTux will run *FAR* better then
+non-OpenGL SuperTux and OpenGL is available on almost all computers
+sold in the last half decade. Especially those computers that are fast
+enough to run current software-2D SuperTux (fullscreen with 640x480
+can eat a lots of CPU, thus requires a non-stoneage computer). Beside
+some laptops which don't have OpenGL driver support, the PSP and the
+GP2x I don't see much systems that could run a software-2D SuperTux,
+but not a OpenGL SuperTux. If you know a bunch of widespread computers
+that can't run OpenGL, but can do software-2D SuperTux fine I would
+like to see some specs, CPU, graphics card and stuff.
+
+> It would be interesting, if those new effects, that would affect
+> gameplay, could be changed for something similar (maybe not  as
+> "beautiful" as the GL version) but that could "simulate" the same
+> gameplay....
+
+I am absolutly not interested in wasting any time on this.
+
+-- 
+WWW:      http://pingus.seul.org/~grumbel/ 
+Blog:     http://grumbel.blogspot.com/
+JabberID: grumbel at jabber.org 
+ICQ:      59461927
+
+
+From thommy at globo.com  Mon Feb  6 01:19:09 2006
+From: thommy at globo.com (Thomaz de Oliveira dos Reis)
+Date: Sun, 05 Feb 2006 22:19:09 -0200
+Subject: [Supertux-devel] Requesting permission to upload -nogl branch
+In-Reply-To: <87k6c9l5r1.fsf@gmx.de>
+References: <43E61C2C.9080600@2006.expires.deltadevelopment.de>	<43E62967.1070202@globo.com> <43E642A1.40509@gmx.de>	<43E67A5C.4030104@2006.expires.deltadevelopment.de>	<43E67C7A.40808@globo.com> <87k6c9l5r1.fsf@gmx.de>
+Message-ID: <43E695FD.20200@globo.com>
+
+Oh..there are many.
+
+Intel Pentium 3 500Mhz
+128MB SDRAM PC133
+4mb AGP video Card
+(with modified knoppix distro)
+Non-openGL runs perfectly with 60 fps
+OpenGL run with 10 ~ 15 fps
+
+Celeron 400Mhz
+96mb SDRAM PC100
+(with gentoo)
+Non-openGL runs perfectly with 60 fps
+OpenGL run with 2 ~ 5 fps
+
+I will see with some friends and some "digital inclusion centers"* here 
+around... but it's easy.. most Pentium 3 and lower, with a standart 2D 
+card will not work in OpenGL mode and will work fine without it...
+
+* - I don't know how to say this exactly in english, but it's a place 
+for poor people who don't even know what is computer learn about 
+computers, and use them. Here in Brazil many of those places are powered 
+by linux .. supertux is really famous among them.... :)
+
+
+Ingo Ruhnke wrote:
+
+>Thomaz de Oliveira dos Reis <thommy at globo.com> writes:
+>
+>  
+>
+>>Reforcing what Christoph said, A full OpenGL version of supertux,
+>>will make many SuperTux players disapointed. At least here in
+>>Brasil, super tux is really famous among people who doesn't have a
+>>powerfull computer with OpenGL support.
+>>    
+>>
+>
+>On most low-end computers OpenGL SuperTux will run *FAR* better then
+>non-OpenGL SuperTux and OpenGL is available on almost all computers
+>sold in the last half decade. Especially those computers that are fast
+>enough to run current software-2D SuperTux (fullscreen with 640x480
+>can eat a lots of CPU, thus requires a non-stoneage computer). Beside
+>some laptops which don't have OpenGL driver support, the PSP and the
+>GP2x I don't see much systems that could run a software-2D SuperTux,
+>but not a OpenGL SuperTux. If you know a bunch of widespread computers
+>that can't run OpenGL, but can do software-2D SuperTux fine I would
+>like to see some specs, CPU, graphics card and stuff.
+>
+>  
+>
+>>It would be interesting, if those new effects, that would affect
+>>gameplay, could be changed for something similar (maybe not  as
+>>"beautiful" as the GL version) but that could "simulate" the same
+>>gameplay....
+>>    
+>>
+>
+>I am absolutly not interested in wasting any time on this.
+>
+>  
+>
+
+
+
+From grumbel at gmx.de  Mon Feb  6 04:22:23 2006
+From: grumbel at gmx.de (Ingo Ruhnke)
+Date: Mon, 06 Feb 2006 04:22:23 +0100
+Subject: [Supertux-devel] Requesting permission to upload -nogl branch
+In-Reply-To: <43E695FD.20200@globo.com> (Thomaz de Oliveira dos Reis's message
+	of "Sun, 05 Feb 2006 22:19:09 -0200")
+References: <43E61C2C.9080600@2006.expires.deltadevelopment.de>
+	<43E62967.1070202@globo.com> <43E642A1.40509@gmx.de>
+	<43E67A5C.4030104@2006.expires.deltadevelopment.de>
+	<43E67C7A.40808@globo.com> <87k6c9l5r1.fsf@gmx.de>
+	<43E695FD.20200@globo.com>
+Message-ID: <87fymxkw7k.fsf@gmx.de>
+
+Thomaz de Oliveira dos Reis <thommy at globo.com> writes:
+
+> 4mb AGP video Card
+
+Could you try to find out the exact type of video card (first screen
+when the PC is booting normally shows the type)?
+
+I also kind of doubt the 60fps number, even my Athlon1800+ can just do
+50fps in software and on a P3 600mhz I get around 25fps, so 60fps
+seems out of reach for such kinds of hardware.
+
+> most Pentium 3 and lower, with a standart 2D card will not work in
+> OpenGL mode and will work fine without it...
+
+As far as I know there havn't been pure 2D cards around for a long
+long time (maybe some on-board stuff?), basically everything has 3D,
+some of course not supported by Linux, but mostly just exotic stuff.
+Everything that is ATI, Nvidia or Matrox should run quite fine. Some
+Intel and S3 stuff might be problematic.
+
+Anyway, I started a SuperTux-portable branch in SVN a while ago, that
+is however not a port, but a full rewrite from scratch aimed mainly at
+the GBA at the moment and optimized for very low system requirements
+(GBA only has 256kb of RAM), porting it to SDL should however be no
+big issue (its far far from being playable, so it doesn't really
+matter at the moment). The reason why it is a rewrite is because there
+is little point in trying to make the latest SuperTux running
+software, sure it can be done and the patch a few mails above shows
+that its reasonably simple, it however neither supports all features
+that Milestone2 will need nor does it provide enough performance to be
+useable on low-spec systems (zooming, alphablending and such are very
+slow in software).
+
+-- 
+WWW:      http://pingus.seul.org/~grumbel/ 
+Blog:     http://grumbel.blogspot.com/
+JabberID: grumbel at jabber.org 
+ICQ:      59461927
+
+
+From supertux at 2006.expires.deltadevelopment.de  Tue Feb  7 03:06:17 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Tue, 07 Feb 2006 03:06:17 +0100
+Subject: [Supertux-devel] New Badguy "Sleeping Spiky"
+Message-ID: <43E80099.4080603@2006.expires.deltadevelopment.de>
+
+Hi all,
+
+I modified the well-known Spiky to create a variant that sits around on 
+the floor sleeping. As soon as the player comes into sight, e.g. by 
+passing him, he slowly gets to his feet and walks around.
+
+Could be useful, e.g. by following the player into a pit or surprising 
+the player from within a hidden cave.
+
+Illustration and demo is at
+http://www.deltadevelopment.de/users/christoph/supertux/
+
+Regards,
+
+   Christoph
+
+
+-- 
+Auto Repair Service. Free pick-up and delivery. Try us once, you'll 
+never go anywhere again.
+
+
+From slacker at gluebox.com  Wed Feb  8 02:44:45 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Tue, 7 Feb 2006 20:44:45 -0500 (EST)
+Subject: [Supertux-devel] Super Tux Milestone
+In-Reply-To: <260284E4-4C31-44D3-B9E0-5166F5DC758B@comcast.net>
+References: <260284E4-4C31-44D3-B9E0-5166F5DC758B@comcast.net>
+Message-ID: <35324.192.168.1.1.1139363085.squirrel@gluebox.com>
+
+Hey Connie.
+
+Thanks for sending in your supportive email. It's nice to hear from people
+who enjoyed the game so much that they dropped a line on the email list.
+
+We working hard on the next milestone but unfortunately there is no
+release date set yet. I can tell you that the project is still very active
+and we will get you a new version as soon as possible.  (Sometimes I think
+we're having to much fun playing the game and that's why we've been a
+little slow on the next release :)
+
+Take care,
+Stephen Groundwater
+
+> When will Super Tux Milestone 2 be coming out?
+>
+> I really loved Super Tux. Thanks for such a great game and tons of fun.
+>
+> Connie Witherington
+> Bellingham, WA
+> abutterflyinside at comcast.net
+
+
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From slacker at gluebox.com  Wed Feb  8 03:19:51 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Tue, 7 Feb 2006 21:19:51 -0500 (EST)
+Subject: [Supertux-devel] New Badguy "Sleeping Spiky"
+In-Reply-To: <43E80099.4080603@2006.expires.deltadevelopment.de>
+References: <43E80099.4080603@2006.expires.deltadevelopment.de>
+Message-ID: <35371.192.168.1.1.1139365191.squirrel@gluebox.com>
+
+Hey Christoph,
+
+I wanted to say thanks for your recent postings. Looks like you may have
+even put some newer bad guy ideas on your website today. I will be trying
+out some of your stuff here when I get a few minutes. I really like the
+idea of a bad guy that catches/spits Tux's fire shots back at him.
+
+I encourage you hang out/around, stop into the IRC channel and keep
+sending stuff into the list.
+
+I understand wanting to put energy in to a non-GL branch/patch. I'd like
+to possibly see that continued. But on the flip side, we made a decision
+to break in favor of GL only. With talented people working together
+towards the same goal we can achieve better results. People with non-GL
+will still have the 1.3 release of SuperTux so it's not like we're taking
+anything away.
+
+Also of note, your patch/zip with the forest graphics is mostly work done
+by our artistic lead, Ingo (Grumbel) Ruhnke.
+
+Keep up the good work and I hope we catch you around on IRC.
+
+-Stephen Groundwater
+
+------------
+I read this on IRC today and it made me laugh, so I'm pasting it as my
+temporary sig.
+
+lotusleaf: everytime someone tells me they have xp I sigh a little bit in
+pity like they've just told me their beloved family member is retarded
+
+-------------
+
+> Hi all,
+>
+> I modified the well-known Spiky to create a variant that sits around on
+> the floor sleeping. As soon as the player comes into sight, e.g. by
+> passing him, he slowly gets to his feet and walks around.
+>
+> Could be useful, e.g. by following the player into a pit or surprising
+> the player from within a hidden cave.
+>
+> Illustration and demo is at
+> http://www.deltadevelopment.de/users/christoph/supertux/
+>
+> Regards,
+>
+>    Christoph
+
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From slacker at gluebox.com  Wed Feb  8 03:19:51 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Tue, 7 Feb 2006 21:19:51 -0500 (EST)
+Subject: [Supertux-devel] New Badguy "Sleeping Spiky"
+In-Reply-To: <43E80099.4080603@2006.expires.deltadevelopment.de>
+References: <43E80099.4080603@2006.expires.deltadevelopment.de>
+Message-ID: <35371.192.168.1.1.1139365191.squirrel@gluebox.com>
+
+Hey Christoph,
+
+I wanted to say thanks for your recent postings. Looks like you may have
+even put some newer bad guy ideas on your website today. I will be trying
+out some of your stuff here when I get a few minutes. I really like the
+idea of a bad guy that catches/spits Tux's fire shots back at him.
+
+I encourage you hang out/around, stop into the IRC channel and keep
+sending stuff into the list.
+
+I understand wanting to put energy in to a non-GL branch/patch. I'd like
+to possibly see that continued. But on the flip side, we made a decision
+to break in favor of GL only. With talented people working together
+towards the same goal we can achieve better results. People with non-GL
+will still have the 1.3 release of SuperTux so it's not like we're taking
+anything away.
+
+Also of note, your patch/zip with the forest graphics is mostly work done
+by our artistic lead, Ingo (Grumbel) Ruhnke.
+
+Keep up the good work and I hope we catch you around on IRC.
+
+-Stephen Groundwater
+
+------------
+I read this on IRC today and it made me laugh, so I'm pasting it as my
+temporary sig.
+
+lotusleaf: everytime someone tells me they have xp I sigh a little bit in
+pity like they've just told me their beloved family member is retarded
+
+-------------
+
+> Hi all,
+>
+> I modified the well-known Spiky to create a variant that sits around on
+> the floor sleeping. As soon as the player comes into sight, e.g. by
+> passing him, he slowly gets to his feet and walks around.
+>
+> Could be useful, e.g. by following the player into a pit or surprising
+> the player from within a hidden cave.
+>
+> Illustration and demo is at
+> http://www.deltadevelopment.de/users/christoph/supertux/
+>
+> Regards,
+>
+>    Christoph
+
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From supertux at 2006.expires.deltadevelopment.de  Wed Feb  8 14:34:02 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Wed, 08 Feb 2006 14:34:02 +0100
+Subject: [Supertux-devel] New Badguy "Sleeping Spiky"
+In-Reply-To: <35371.192.168.1.1.1139365191.squirrel@gluebox.com>
+References: <43E80099.4080603@2006.expires.deltadevelopment.de> <35371.192.168.1.1.1139365191.squirrel@gluebox.com>
+Message-ID: <43E9F34A.6000405@2006.expires.deltadevelopment.de>
+
+Hi Stephen,
+
+S.Groundwater wrote:
+> I wanted to say thanks for your recent postings. [...]
+> I encourage you hang out/around, stop into the IRC channel and keep
+> sending stuff into the list.
+
+Thank you for the warm welcome! I'll be sending another suggestion
+shortly :-)
+
+
+> I understand wanting to put energy in to a non-GL branch/patch. I'd like
+> to possibly see that continued. But on the flip side, we made a decision
+> to break in favor of GL only. 
+
+Yes, I fully understand and accept this decision.
+
+I myself, however, have no choice: I run SuperTux SVN on either a Linux
+box with onboard graphics or on a virtual machine. On both machines the
+OpenGL version of SuperTux runs with only ~8fps, so I just /have/ to
+create and maintain a -nogl Branch if I am to keep up with new versions,
+try new features, maybe fix a bug, etc.
+
+
+> Also of note, your patch/zip with the forest graphics is mostly work done
+> by our artistic lead, Ingo (Grumbel) Ruhnke.
+
+Thanks, I had just given credit to who checked the graphics into your
+repository ("groundwater"). Name's changed now.
+
+
+Regards,
+
+   Christoph
+
+-- 
+Please leave your values at the front desk (Sign in a French hotel)
+
+
+From supertux at 2006.expires.deltadevelopment.de  Wed Feb  8 14:49:37 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Wed, 08 Feb 2006 14:49:37 +0100
+Subject: [Supertux-devel] Trouble with MrIceBlock
+Message-ID: <43E9F6F1.5090309@2006.expires.deltadevelopment.de>
+
+Hi all,
+
+everytime I grabbed MrIceBlock, the game made a "kick" sound anyway.
+
+Having player.cpp notify MrIceBlock immediately after grabbing him cured 
+the problem for me.
+
+This fix, however, depends on the Player receiving collision events 
+before MrIceBlock. I do not know if this will always be the case in 
+later versions of the game, so maybe sector.cpp would additionally have 
+to make sure objects derived from Portable receive collision events 
+after non-portable ones?
+
+I do not yet fully understand the inner workings of the SuperTux engine, 
+but anyway - it "worked for me" (tm), so I thought I post it.
+
+
+Regards,
+
+   Christoph
+
+
+-- 
+My girlfriend always laughs during sex-no matter what she's reading.
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: supertux-3047-mibfix-0.1.diff
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060208/7b220f98/attachment.ksh>
+
+From joseph.brower at gmail.com  Wed Feb  8 15:20:21 2006
+From: joseph.brower at gmail.com (joseph brower)
+Date: Wed, 8 Feb 2006 09:20:21 -0500
+Subject: [Supertux-devel] Super Tux Milestone
+In-Reply-To: <35324.192.168.1.1.1139363085.squirrel@gluebox.com>
+References: <260284E4-4C31-44D3-B9E0-5166F5DC758B@comcast.net>
+	 <35324.192.168.1.1.1139363085.squirrel@gluebox.com>
+Message-ID: <a82cfa150602080620v3e6c5f45rb5a5e93feb0e8412@mail.gmail.com>
+
+Hello All,
+
+I am fluent in spanish and english and would like to help in the
+translation of that is at all possible.
+
+Thanks,
+
+Joseph Brower
+
+On 2/7/06, S.Groundwater <slacker at gluebox.com> wrote:
+> Hey Connie.
+>
+> Thanks for sending in your supportive email. It's nice to hear from people
+> who enjoyed the game so much that they dropped a line on the email list.
+>
+> We working hard on the next milestone but unfortunately there is no
+> release date set yet. I can tell you that the project is still very active
+> and we will get you a new version as soon as possible.  (Sometimes I think
+> we're having to much fun playing the game and that's why we've been a
+> little slow on the next release :)
+>
+> Take care,
+> Stephen Groundwater
+>
+> > When will Super Tux Milestone 2 be coming out?
+> >
+> > I really loved Super Tux. Thanks for such a great game and tons of fun.
+> >
+> > Connie Witherington
+> > Bellingham, WA
+> > abutterflyinside at comcast.net
+>
+>
+>
+>
+> --
+> This message has been scanned for viruses and
+> dangerous content by MailScanner, and is
+> believed to be clean.
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+
+
+From christoph.sommer at 2006.expires.deltadevelopment.de  Wed Feb  8 14:32:18 2006
+From: christoph.sommer at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Wed, 08 Feb 2006 14:32:18 +0100
+Subject: [Supertux-devel] New Badguy "Sleeping Spiky"
+In-Reply-To: <35371.192.168.1.1.1139365191.squirrel@gluebox.com>
+References: <43E80099.4080603@2006.expires.deltadevelopment.de> <35371.192.168.1.1.1139365191.squirrel@gluebox.com>
+Message-ID: <43E9F2E2.40909@2006.expires.deltadevelopment.de>
+
+Hi Stephen,
+
+S.Groundwater wrote:
+> I wanted to say thanks for your recent postings. [...]
+> I encourage you hang out/around, stop into the IRC channel and keep
+> sending stuff into the list.
+
+Thank you for the warm welcome! I'll be sending another suggestion 
+shortly :-)
+
+
+> I understand wanting to put energy in to a non-GL branch/patch. I'd like
+> to possibly see that continued. But on the flip side, we made a decision
+> to break in favor of GL only. 
+
+Yes, I fully understand and accept this decision.
+
+I myself, however, have no choice: I run SuperTux SVN on either a Linux 
+box with onboard graphics or on a virtual machine. On both machines the 
+OpenGL version of SuperTux runs with only ~8fps, so I just /have/ to 
+create and maintain a -nogl Branch if I am to keep up with new versions, 
+try new features, maybe fix a bug, etc.
+
+
+> Also of note, your patch/zip with the forest graphics is mostly work done
+> by our artistic lead, Ingo (Grumbel) Ruhnke.
+
+Thanks, I had just given credit to who checked the graphics into your 
+repository ("groundwater"). Name's changed now.
+
+
+Regards,
+
+   Christoph
+
+-- 
+People generally seem to want software to be free as in speech and/or 
+free as in beer. Unfortunately rather too much of it is free as in jazz. 
+(Janet McKnight)
+
+
+From cppprogrammingguru at juno.com  Wed Feb  8 20:24:48 2006
+From: cppprogrammingguru at juno.com (Christian M. Horne)
+Date: Wed, 8 Feb 2006 11:24:48 -0800
+Subject: [Supertux-devel] anything i can do to help with milestone 2's coming?
+Message-ID: <20060208.112653.-327065.1.cppprogrammingguru@juno.com>
+
+i don't know who is going to get this, but i am a kid programmer (i have
+made a patch for supertux that has all these funny abilitys)--11 years
+old--and i would like to help. i have two windows compilers (C++),
+windows, linux, and a few linux compilers (C and C++, the only one i know
+about is G++) and i would also like to make my altered version work on
+windows (currently, it only works on linux) and the win. compilers that i
+have are:
+Borland C++ builder V5.0
+Bloodshed Dev-C++ V4.9.8.0
+both with all respective libs. i need help -- oh, and if you can't find
+my e-mail address is the places it should be, it's
+cppprogramminggguru at juno.com (i don't think i could make a better one
+than that if i tried!)
+
+Christian Horne
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060208/ee821173/attachment.html>
+
+From thommy at globo.com  Thu Feb  9 01:20:14 2006
+From: thommy at globo.com (Thomaz de Oliveira dos Reis)
+Date: Wed, 08 Feb 2006 22:20:14 -0200
+Subject: [Supertux-devel] Suggestion
+In-Reply-To: <20060208.112653.-327065.1.cppprogrammingguru@juno.com>
+References: <20060208.112653.-327065.1.cppprogrammingguru@juno.com>
+Message-ID: <43EA8ABE.30009@globo.com>
+
+It would be interesting, if you get an "item", such as the flower or the 
+"snow ball" and you already has one of them, the other could go to a top 
+box, as is in Super Mario World (and I think in mario bros 3 too)
+
+
+From slacker at gluebox.com  Thu Feb  9 03:34:08 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Wed, 8 Feb 2006 21:34:08 -0500 (EST)
+Subject: [Supertux-devel] nolok
+In-Reply-To: <200602090105.k1915b96025209@sheep.berlios.de>
+References: <200602090105.k1915b96025209@sheep.berlios.de>
+Message-ID: <35796.192.168.1.1.1139452448.squirrel@gluebox.com>
+
+Here's yet another updated sketch for your enjoyment.
+
+http://gluebox.com/images/NOLOK3.jpg
+
+
+-Stephen G.
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From supertux at 2006.expires.deltadevelopment.de  Thu Feb  9 18:48:05 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Thu, 09 Feb 2006 18:48:05 +0100
+Subject: [Supertux-devel] Jumping off slopes
+Message-ID: <43EB8055.5070501@2006.expires.deltadevelopment.de>
+
+Hi all,
+
+I found it hard to jump while running down a hill, so I made this little 
+patch. Currently, it does not work with the level inverted, because I 
+don't know if the tile collision normal vector being wrong in inverted 
+levels is because of a bug or a feature.
+
+What do you think?
+
+Regards,
+
+   Christoph
+
+
+-- 
+For sale: an antique desk suitable for lady with thick legs and large 
+drawers
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: supertux-3047-slopewalker-0.1.diff
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060209/01985ea8/attachment.ksh>
+
+From wansti at gmx.de  Fri Feb 10 19:42:47 2006
+From: wansti at gmx.de (Marek)
+Date: Fri, 10 Feb 2006 19:42:47 +0100
+Subject: [Supertux-devel] floating_image.hpp and anchor_points.hpp missing
+Message-ID: <43ECDEA7.5040408@gmx.de>
+
+Hi Matze,
+could it be that you forgot to add some files with your last code
+update? :-)
+
+    Marek
+
+
+From clearfield25 at comcast.net  Sat Feb 11 03:00:03 2006
+From: clearfield25 at comcast.net (Barbara Clearfield)
+Date: Fri, 10 Feb 2006 21:00:03 -0500
+Subject: [Supertux-devel] SuperTux
+Message-ID: <43ED4523.1060402@comcast.net>
+
+Please don't e-mail me back but could you please add a flexlay editor to 
+the next level.
+Thank you!
+
+
+From wansti at gmx.de  Sat Feb 11 10:01:33 2006
+From: wansti at gmx.de (Marek)
+Date: Sat, 11 Feb 2006 10:01:33 +0100
+Subject: [Supertux-devel] SuperTux
+In-Reply-To: <43ED4523.1060402@comcast.net>
+References: <43ED4523.1060402@comcast.net>
+Message-ID: <43EDA7ED.8070005@gmx.de>
+
+Barbara Clearfield wrote:
+
+> Please don't e-mail me back but could you please add a flexlay editor
+> to the next level.
+> Thank you!
+>
+Hehe...
+This just arrived at the mailing list admin address:
+
+> >Your mail to 'Supertux-devel' with the subject
+> >
+> > SuperTux
+> >
+> >Is being held until the list moderator can review it for approval.
+> >
+
+>I did not send this e-mail, which means someone not authorized to >use
+this computer did.  I would appreciate information about who you >are.
+>
+>Barbara Clearfield
+
+
+Are we going to tell mommy her child used her email to write us? :-)
+
+
+
+From wansti at gmx.de  Sat Feb 11 10:19:18 2006
+From: wansti at gmx.de (Marek)
+Date: Sat, 11 Feb 2006 10:19:18 +0100
+Subject: [Supertux-devel] Re: [Supertux-commit] r3052 - in trunk/supertux/src: object scripting
+In-Reply-To: <200602110906.k1B96RdZ015571@sheep.berlios.de>
+References: <200602110906.k1B96RdZ015571@sheep.berlios.de>
+Message-ID: <43EDAC16.7020001@gmx.de>
+
+matzebraun at BerliOS wrote:
+
+>Author: matzebraun
+>Date: 2006-02-11 10:06:20 +0100 (Sat, 11 Feb 2006)
+>New Revision: 3052
+>
+>Added:
+>   trunk/supertux/src/object/ambient_light.hpp
+>   trunk/supertux/src/object/anchor_point.cpp
+>   trunk/supertux/src/object/anchor_point.hpp
+>   trunk/supertux/src/object/floating_image.cpp
+>   trunk/supertux/src/object/floating_image.hpp
+>   trunk/supertux/src/scripting/anchor_points.hpp
+>   trunk/supertux/src/scripting/floating_image.cpp
+>   trunk/supertux/src/scripting/floating_image.hpp
+>Log:
+>forgot some files, sorry
+>  
+>
+Thanks!
+Unfortunately, it still doesn't compile, see output below.
+Matze, you mentioned that you've had trouble receiving email from the
+mailing list. Did you solve that problem?
+If you get this twice, then you did. :-)
+
+    Marek
+
+
+C++ ./build/i686-pc-linux-gnu/debug/src/scripting/script_interpreter.o
+cc1plus: warnings being treated as errors
+src/squirrel/include/sqstdio.h:9: warning: ?struct SQStream? has virtual
+functions but non-virtual destructor
+
+    g++ -c -o
+./build/i686-pc-linux-gnu/debug/src/scripting/script_interpreter.o  -I.
+-I./src -I/usr/include/SDL -D_REENTRANT  -I/usr/X11R6/include
+-pthread     -Isrc/squirrel/include   -ffast-math -Wall -W -Werror -O0
+-g3 -DDEBUG -DAPPDATADIR='"/usr/local/share/supertux"'
+src/scripting/script_interpreter.cpp
+
+...failed C++
+./build/i686-pc-linux-gnu/debug/src/scripting/script_interpreter.o ...
+C++ ./build/i686-pc-linux-gnu/debug/src/scripting/functions.o
+cc1plus: warnings being treated as errors
+src/squirrel/include/sqstdio.h:9: warning: ?struct SQStream? has virtual
+functions but non-virtual destructor
+
+    g++ -c -o ./build/i686-pc-linux-gnu/debug/src/scripting/functions.o 
+-I. -I./src -I/usr/include/SDL -D_REENTRANT  -I/usr/X11R6/include
+-pthread     -Isrc/squirrel/include   -ffast-math -Wall -W -Werror -O0
+-g3 -DDEBUG -DAPPDATADIR='"/usr/local/share/supertux"'
+src/scripting/functions.cpp
+
+...failed C++ ./build/i686-pc-linux-gnu/debug/src/scripting/functions.o ...
+
+
+
+From cwebber at dustycloud.org  Sat Feb 11 22:31:14 2006
+From: cwebber at dustycloud.org (Christopher Allan Webber)
+Date: Sat, 11 Feb 2006 15:31:14 -0600
+Subject: [Supertux-devel] nolok
+In-Reply-To: <35796.192.168.1.1.1139452448.squirrel@gluebox.com>
+	(S. Groundwater's message of "Wed, 8 Feb 2006 21:34:08 -0500 (EST)")
+References: <200602090105.k1915b96025209@sheep.berlios.de>
+	<35796.192.168.1.1.1139452448.squirrel@gluebox.com>
+Message-ID: <87irrl8twd.fsf@dustycloud.org>
+
+(Responding very late to this... I don't check my email often enough
+these days..)
+
+By far this is the most interesting of all the renditions of Nolok you
+have done so far.
+
+I'd like to start working on a finalization of what Nolok will look
+like, so I'm going to try to draw a bunch of intermediate forms
+between the nolok ideas which have floated around, and we can decide
+which one we want to stick with.
+
+I'll post that up here soon.  Meanwhile I need to finish this
+studying.
+
+Chris Webber
+
+"S.Groundwater" <slacker at gluebox.com> writes:
+
+> Here's yet another updated sketch for your enjoyment.
+>
+> http://gluebox.com/images/NOLOK3.jpg
+>
+>
+> -Stephen G.
+>
+>
+> -- 
+> This message has been scanned for viruses and
+> dangerous content by MailScanner, and is
+> believed to be clean.
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+From matze at braunis.de  Sun Feb 12 14:04:12 2006
+From: matze at braunis.de (Matze Braun)
+Date: Sun, 12 Feb 2006 14:04:12 +0100
+Subject: [Supertux-devel] Jumping off slopes
+In-Reply-To: <43EB8055.5070501@2006.expires.deltadevelopment.de>
+References: <43EB8055.5070501@2006.expires.deltadevelopment.de>
+Message-ID: <1139749452.4457.1.camel@taylor.local>
+
+Thanks alot for this patch, I just commited it to svn. It fixes an
+important showstopper for the milestone2 engine. And to be honest, I
+wasn't sure yet how I could fix it cleanly, your patch does it in a nice
+way.
+
+Greetings,
+	Matze
+
+Am Donnerstag, den 09.02.2006, 18:48 +0100 schrieb Christoph Sommer:
+> Hi all,
+> 
+> I found it hard to jump while running down a hill, so I made this little 
+> patch. Currently, it does not work with the level inverted, because I 
+> don't know if the tile collision normal vector being wrong in inverted 
+> levels is because of a bug or a feature.
+> 
+> What do you think?
+> 
+> Regards,
+> 
+>    Christoph
+> 
+> 
+> einfaches Textdokument-Anlage (supertux-3047-slopewalker-0.1.diff)
+> diff -Naur supertux-nogl/src/object/player.cpp supertux-slopewalker/src/object/player.cpp
+> --- supertux-nogl/src/object/player.cpp	2006-02-06 18:15:04.000000000 +0100
+> +++ supertux-slopewalker/src/object/player.cpp	2006-02-09 18:26:27.000000000 +0100
+> @@ -141,6 +141,8 @@
+>    on_ground_flag = false;
+>    grabbed_object = 0;
+>  
+> +  floor_normal = Vector(0,-1);
+> +
+>    physic.reset();
+>  }
+>  
+> @@ -329,6 +331,16 @@
+>      bbox.set_width(31.8);
+>    }
+>  
+> +  // on downward slopes, adjust vertical velocity to match slope angle
+> +  if (on_ground()) {
+> +    if (floor_normal.y != 0) {
+> +      if ((floor_normal.x * vx) > 0) {
+> +        // we overdo it a little, just to be on the safe side
+> +        vy = vx * (floor_normal.x / floor_normal.y) * 2;
+> +      }
+> +    }
+> +  }
+> +
+>    physic.set_velocity(vx, vy);
+>    physic.set_acceleration(ax, ay);
+>  }
+> @@ -720,6 +732,18 @@
+>        if(physic.get_velocity_y() < 0)
+>          physic.set_velocity_y(0);
+>        on_ground_flag = true;
+> +
+> +      // remember normal of this tile
+> +      if (hit.normal.y > -0.9) {
+> +        floor_normal.x = hit.normal.x;
+> +        floor_normal.y = hit.normal.y;
+> +      } else {
+> +        // slowly adjust to unisolid tiles. 
+> +        // Necessary because our bounding box sometimes reaches through slopes and thus hits unisolid tiles
+> +        floor_normal.x = (floor_normal.x * 0.9) + (hit.normal.x * 0.1);
+> +        floor_normal.y = (floor_normal.y * 0.9) + (hit.normal.y * 0.1);
+> +      }
+> +
+>      } else if(hit.normal.y > 0) { // bumped against the roof
+>        physic.set_velocity_y(.1);
+>      }
+> diff -Naur supertux-nogl/src/object/player.hpp supertux-slopewalker/src/object/player.hpp
+> --- supertux-nogl/src/object/player.hpp	2006-02-06 18:15:03.000000000 +0100
+> +++ supertux-slopewalker/src/object/player.hpp	2006-02-09 01:13:12.000000000 +0100
+> @@ -178,6 +178,7 @@
+>    Sprite* smalltux_gameover;
+>    Sprite* smalltux_star;
+>    Sprite* bigtux_star;
+> +  Vector floor_normal;
+>  };
+>  
+>  #endif /*SUPERTUX_PLAYER_H*/
+
+
+
+From matze at braunis.de  Sun Feb 12 14:04:12 2006
+From: matze at braunis.de (Matze Braun)
+Date: Sun, 12 Feb 2006 14:04:12 +0100
+Subject: [Supertux-devel] Jumping off slopes
+In-Reply-To: <43EB8055.5070501@2006.expires.deltadevelopment.de>
+References: <43EB8055.5070501@2006.expires.deltadevelopment.de>
+Message-ID: <1139749452.4457.1.camel@taylor.local>
+
+Thanks alot for this patch, I just commited it to svn. It fixes an
+important showstopper for the milestone2 engine. And to be honest, I
+wasn't sure yet how I could fix it cleanly, your patch does it in a nice
+way.
+
+Greetings,
+	Matze
+
+Am Donnerstag, den 09.02.2006, 18:48 +0100 schrieb Christoph Sommer:
+> Hi all,
+> 
+> I found it hard to jump while running down a hill, so I made this little 
+> patch. Currently, it does not work with the level inverted, because I 
+> don't know if the tile collision normal vector being wrong in inverted 
+> levels is because of a bug or a feature.
+> 
+> What do you think?
+> 
+> Regards,
+> 
+>    Christoph
+> 
+> 
+> einfaches Textdokument-Anlage (supertux-3047-slopewalker-0.1.diff)
+> diff -Naur supertux-nogl/src/object/player.cpp supertux-slopewalker/src/object/player.cpp
+> --- supertux-nogl/src/object/player.cpp	2006-02-06 18:15:04.000000000 +0100
+> +++ supertux-slopewalker/src/object/player.cpp	2006-02-09 18:26:27.000000000 +0100
+> @@ -141,6 +141,8 @@
+>    on_ground_flag = false;
+>    grabbed_object = 0;
+>  
+> +  floor_normal = Vector(0,-1);
+> +
+>    physic.reset();
+>  }
+>  
+> @@ -329,6 +331,16 @@
+>      bbox.set_width(31.8);
+>    }
+>  
+> +  // on downward slopes, adjust vertical velocity to match slope angle
+> +  if (on_ground()) {
+> +    if (floor_normal.y != 0) {
+> +      if ((floor_normal.x * vx) > 0) {
+> +        // we overdo it a little, just to be on the safe side
+> +        vy = vx * (floor_normal.x / floor_normal.y) * 2;
+> +      }
+> +    }
+> +  }
+> +
+>    physic.set_velocity(vx, vy);
+>    physic.set_acceleration(ax, ay);
+>  }
+> @@ -720,6 +732,18 @@
+>        if(physic.get_velocity_y() < 0)
+>          physic.set_velocity_y(0);
+>        on_ground_flag = true;
+> +
+> +      // remember normal of this tile
+> +      if (hit.normal.y > -0.9) {
+> +        floor_normal.x = hit.normal.x;
+> +        floor_normal.y = hit.normal.y;
+> +      } else {
+> +        // slowly adjust to unisolid tiles. 
+> +        // Necessary because our bounding box sometimes reaches through slopes and thus hits unisolid tiles
+> +        floor_normal.x = (floor_normal.x * 0.9) + (hit.normal.x * 0.1);
+> +        floor_normal.y = (floor_normal.y * 0.9) + (hit.normal.y * 0.1);
+> +      }
+> +
+>      } else if(hit.normal.y > 0) { // bumped against the roof
+>        physic.set_velocity_y(.1);
+>      }
+> diff -Naur supertux-nogl/src/object/player.hpp supertux-slopewalker/src/object/player.hpp
+> --- supertux-nogl/src/object/player.hpp	2006-02-06 18:15:03.000000000 +0100
+> +++ supertux-slopewalker/src/object/player.hpp	2006-02-09 01:13:12.000000000 +0100
+> @@ -178,6 +178,7 @@
+>    Sprite* smalltux_gameover;
+>    Sprite* smalltux_star;
+>    Sprite* bigtux_star;
+> +  Vector floor_normal;
+>  };
+>  
+>  #endif /*SUPERTUX_PLAYER_H*/
+
+
+
+From slacker at gluebox.com  Tue Feb 14 16:07:07 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Tue, 14 Feb 2006 10:07:07 -0500 (EST)
+Subject: [Supertux-devel] Christoph's patch <- Jumping off slopes
+In-Reply-To: <1139749452.4457.1.camel@taylor.local>
+References: <43EB8055.5070501@2006.expires.deltadevelopment.de>
+    <1139749452.4457.1.camel@taylor.local>
+Message-ID: <56014.146.145.190.179.1139929627.squirrel@gluebox.com>
+
+Hello All.
+
+I am adding Christoph Sommer to the contrib programming section of our
+credits file on my next commit.
+
+enjoy,
+Stephen
+
+> Thanks alot for this patch, I just commited it to svn. It fixes an
+> important showstopper for the milestone2 engine. And to be honest, I
+> wasn't sure yet how I could fix it cleanly, your patch does it in a nice
+> way.
+>
+> Greetings,
+> 	Matze
+>
+> Am Donnerstag, den 09.02.2006, 18:48 +0100 schrieb Christoph Sommer:
+>> Hi all,
+>>
+>> I found it hard to jump while running down a hill, so I made this little
+>> patch. Currently, it does not work with the level inverted, because I
+>> don't know if the tile collision normal vector being wrong in inverted
+>> levels is because of a bug or a feature.
+>>
+>> What do you think?
+>>
+>> Regards,
+>>
+>>    Christoph
+
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From slacker at gluebox.com  Tue Feb 14 16:07:07 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Tue, 14 Feb 2006 10:07:07 -0500 (EST)
+Subject: [Supertux-devel] Christoph's patch <- Jumping off slopes
+In-Reply-To: <1139749452.4457.1.camel@taylor.local>
+References: <43EB8055.5070501@2006.expires.deltadevelopment.de>
+    <1139749452.4457.1.camel@taylor.local>
+Message-ID: <56014.146.145.190.179.1139929627.squirrel@gluebox.com>
+
+Hello All.
+
+I am adding Christoph Sommer to the contrib programming section of our
+credits file on my next commit.
+
+enjoy,
+Stephen
+
+> Thanks alot for this patch, I just commited it to svn. It fixes an
+> important showstopper for the milestone2 engine. And to be honest, I
+> wasn't sure yet how I could fix it cleanly, your patch does it in a nice
+> way.
+>
+> Greetings,
+> 	Matze
+>
+> Am Donnerstag, den 09.02.2006, 18:48 +0100 schrieb Christoph Sommer:
+>> Hi all,
+>>
+>> I found it hard to jump while running down a hill, so I made this little
+>> patch. Currently, it does not work with the level inverted, because I
+>> don't know if the tile collision normal vector being wrong in inverted
+>> levels is because of a bug or a feature.
+>>
+>> What do you think?
+>>
+>> Regards,
+>>
+>>    Christoph
+
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From sanne at caiway.com  Sun Feb 12 21:07:13 2006
+From: sanne at caiway.com (sanne)
+Date: Sun, 12 Feb 2006 21:07:13 +0100 (West-Europa (standaardtijd))
+Subject: [Supertux-devel] hoi
+Message-ID: <43EF9571.000003.03496@MARTIN>
+
+hallo 
+ik wil graag supertux berlios downloaden en spelen maar ik kan nergens
+vinden waar wilt u zo vriendelijk zijn en iets sturen waar ik supertux met
+die puiqwin kan downloaden en spelen graag naar sannerijnsburger at msn.com
+
+alvast bedankt
+
+groetjes sanne
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060212/4853dcd7/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: IMSTP.gif
+Type: image/gif
+Size: 12636 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060212/4853dcd7/attachment.gif>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: hugging_dolphins.jpg
+Type: image/jpeg
+Size: 7398 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060212/4853dcd7/attachment.jpg>
+
+From jane_templateminimized at original-cards.com  Mon Feb 13 10:13:43 2006
+From: jane_templateminimized at original-cards.com (S-news-request)
+Date: Mon, 13 Feb 2006 18:13:43 +0900
+Subject: [Supertux-devel] Valentine's Day (ecard).
+Message-ID: <hqghumeayl.6189279543lfdxfircvs@S-news-requestxggbwkf.com>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060213/ea04e192/attachment.html>
+
+From mailinux at laposte.net  Thu Feb 16 14:19:02 2006
+From: mailinux at laposte.net (mailinux)
+Date: Thu, 16 Feb 2006 14:19:02 +0100
+Subject: [Supertux-devel] found a little bug in milestone 1 0.1.3
+Message-ID: <IUS7NQ$B1339A6B839A9627025B8E9AB2025D2E@laposte.net>
+
+configuration:
+*gentoo 2005.1
+(http://packages.gentoo.org/search/?sstring=supertux)
+*milwstone 1 ,version 0.1.3  
+
+i have gentoo,and gentoo is well known for aplying a lot of
+patch to the packages(it's a source distribution...)
+
+but here it seems that there is no patch aplyed...
+by the way emerge is the package management tool
+
+so here is supertux package building in order to show that
+there is no patch aplyed:
+" emerge supertux
+Calculating dependencies ...done!
+>>> emerge (1 of 1) games-arcade/supertux-0.1.3 to /
+>>> md5 files   ;-) supertux-0.1.3.ebuild
+>>> md5 files   ;-) files/digest-supertux-0.1.3
+>>> md5 src_uri ;-) supertux-0.1.3.tar.bz2
+>>> Unpacking source...
+>>> Unpacking supertux-0.1.3.tar.bz2 to
+/var/tmp/portage/supertux-0.1.3/work
+>>> Source unpacked.
+ * Using GNU config files from /usr/share/libtool
+ *   Updating config.sub                                     
+                                                       [ ok ]
+ *   Updating config.guess                                   
+                                                       [ ok ]
+./configure --prefix=/usr/games --build=i686-pc-linux-gnu
+--host=i686-pc-linux-gnu --mandir=/usr/share/man
+--infodir=/usr/share/info --datadir=/usr/share/games
+--sysconfdir=/etc/games --localstatedir=/var/games
+--disable-dependency-tracking --disable-debug --enable-opengl
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking target system type... i686-pc-linux-gnu
+checking for a BSD-compatible install... /bin/install -c
+checking whether build environment is sane... yes
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for i686-pc-linux-gnu-gcc... i686-pc-linux-gnu-gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables...
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether i686-pc-linux-gnu-gcc accepts -g... yes
+checking for i686-pc-linux-gnu-gcc option to accept ANSI C...
+none needed
+checking for style of include used by make... GNU
+checking dependency style of i686-pc-linux-gnu-gcc... none
+checking for i686-pc-linux-gnu-g++... i686-pc-linux-gnu-g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether i686-pc-linux-gnu-g++ accepts -g... yes
+checking dependency style of i686-pc-linux-gnu-g++... none
+checking for a BSD-compatible install... /bin/install -c
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking how to run the C preprocessor... i686-pc-linux-gnu-gcc -E
+checking for egrep... grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for unistd.h... (cached) yes
+checking for an ANSI C-conforming const... yes
+checking for gprof mode... disabled
+checking for debug mode... disabled
+checking wether OpenGL should be used... yes
+checking for sdl-config... /usr/bin/sdl-config
+checking for SDL - version >= 1.2.4... yes
+checking for Mix_OpenAudio in -lSDL_mixer... yes
+checking for IMG_Load in -lSDL_image... yes
+checking for X... libraries , headers in standard search path
+checking for the pthreads library -lpthreads... no
+checking whether pthreads work without any flags... yes
+checking for joinable pthread attribute... PTHREAD_CREATE_JOINABLE
+checking if more special flags are required for pthreads... no
+checking for cc_r... i686-pc-linux-gnu-gcc
+checking windows.h usability... no
+checking windows.h presence... no
+checking for windows.h... no
+checking for OpenGL library... -lGL
+checking for gzopen in -lz... yes
+checking for mkdir... yes
+checking for strdup... yes
+checking for strstr... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating src/Makefile
+config.status: creating data/Makefile
+config.status: executing depfiles commands
+
+Features:
+=========
+ Profile Mode:   no
+ Debug Mode:     no
+ OpenGL Support: yes
+
+Making all in src
+make[1]: Entering directory
+`/var/tmp/portage/supertux-0.1.3/work/supertux-0.1.3/src'
+i686-pc-linux-gnu-g++ -DPACKAGE_NAME=\"SuperTux\"
+-DPACKAGE_TARNAME=\"supertux\" -DPACKAGE_VERSION=\"0.1.3\"
+-DPACKAGE_STRING=\"SuperTux\ 0.1.3\" -DPACKAGE_BUGREPORT=\"\"
+-DPACKAGE=\"supertux\" -DVERSION=\"0.1.3\" -DHAVE_DIRENT_H=1
+-DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1
+-DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1
+-DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1
+-DHAVE_UNISTD_H=1 -DHAVE_UNISTD_H=1 -DHAVE_LIBSDL_MIXER=1
+-DHAVE_LIBSDL_IMAGE=1 -DHAVE_PTHREAD=1 -DHAVE_LIBZ=1
+-DHAVE_MKDIR=1 -DHAVE_STRDUP=1 -DHAVE_STRSTR=1  -I. -I.    
+-O3 -march=pentium3 -pipe -I/usr/include/SDL -D_REENTRANT 
+-DDATA_PREFIX='"/usr/share/games/supertux"' -c -o badguy.o
+`test -f 'badguy.cpp' || echo './'`badguy.cpp
+i686-pc-linux-gnu-g++ -DPACKAGE_NAME=\"SuperTux\"
+-DPACKAGE_TARNAME=\"supertux\" -DPACKAGE_VERSION=\"0.1.3\"
+-DPACKAGE_STRING=\"SuperTux\ 0.1.3\" -DPACKAGE_BUGREPORT=\"\"
+-DPACKAGE=\"supertux\" -DVERSION=\"0.1.3\" -DHAVE_DIRENT_H=1
+-DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1
+-DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1
+-DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1
+-DHAVE_UNISTD_H=1 -DHAVE_UNISTD_H=1 -DHAVE_LIBSDL_MIXER=1
+-DHAVE_LIBSDL_IMAGE=1 -DHAVE_PTHREAD=1 -DHAVE_LIBZ=1
+-DHAVE_MKDIR=1 -DHAVE_STRDUP=1 -DHAVE_STRSTR=1  -I. -I.    
+-O3 -march=pentium3 -pipe -I/usr/include/SDL -D_REENTRANT 
+-DDATA_PREFIX='"/usr/share/games/supertux"' -c -o bitmask.o
+`test -f 'bitmask.cpp' || echo './'`bitmask.cpp
+sandbox:  Caught signal 2 in pid 10147
+make[1]: *** [badguy.o] Interrupt
+make[1]: *** [bitmask.o] Interrupt
+make: *** [all-recursive] Interrupt"
+
+and here there is the vanilla-sources(the kernel.org kernel)
+packages that is patched:
+"# emerge vanilla-sources
+Calculating dependencies ...done!
+>>> emerge (1 of 1) sys-kernel/vanilla-sources-2.6.15.1 to /
+>>> md5 files   ;-) vanilla-sources-2.6.14.6.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.15.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.10.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.11.11.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.15.4.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.5.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.16_rc1.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.14.3.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.15.1.ebuild
+>>> md5 files   ;-) vanilla-sources-2.0.40-r1.ebuild
+>>> md5 files   ;-) vanilla-sources-2.4.31.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.7.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.14.5.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.11.8.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.15.3.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.13.4.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.14.2.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.11.12.ebuild
+>>> md5 files   ;-) vanilla-sources-2.4.30.ebuild
+>>> md5 files   ;-) vanilla-sources-2.4.21.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.16_rc2.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.14.4.ebuild
+>>> md5 files   ;-) vanilla-sources-2.4.32.ebuild
+>>> md5 files   ;-) vanilla-sources-2.6.12.5.ebuild
+>>> md5 files   ;-) vanilla-sources-2.4.28.ebuild
+>>> md5 files   ;-) vanilla-sources-2.2.26-r1.ebuild
+>>> md5 files   ;-) files/digest-vanilla-sources-2.2.26-r1
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.16_rc1
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.16_rc2
+>>> md5 files   ;-) files/digest-vanilla-sources-2.4.21
+>>> md5 files   ;-) files/digest-vanilla-sources-2.4.28
+>>> md5 files   ;-) files/digest-vanilla-sources-2.4.30
+>>> md5 files   ;-) files/digest-vanilla-sources-2.4.31
+>>> md5 files   ;-) files/digest-vanilla-sources-2.4.32
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.10
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.15
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.11.8
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.12.5
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.13.4
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.14.2
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.14.3
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.14.4
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.14.5
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.14.6
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.15.1
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.15.3
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.15.4
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.5
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.7
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.11.11
+>>> md5 files   ;-) files/digest-vanilla-sources-2.6.11.12
+>>> md5 files   ;-) files/digest-vanilla-sources-2.0.40-r1
+>>> md5 src_uri ;-) patch-2.6.15.1.bz2
+>>> md5 src_uri ;-) linux-2.6.15.tar.bz2
+>>> Preparing to unpack ...
+>>> Unpacking source...
+>>> Unpacking linux-2.6.15.tar.bz2 to
+/var/tmp/portage/vanilla-sources-2.6.15.1/work
+ * Applying patch-2.6.15.1.patch (-p0+) ...                  
+                                                       [ ok ]
+  CHK     include/linux/version.h
+  UPD     include/linux/version.h
+>>> Source unpacked.
+>>> Test phase [not enabled]: sys-kernel/vanilla-sources-2.6.15.1
+
+>>> Install vanilla-sources-2.6.15.1 into
+/var/tmp/portage/vanilla-sources-2.6.15.1/image/ category
+sys-kernel
+>>> Copying sources ...
+man:
+prepallstrip:
+strip: i686-pc-linux-gnu-strip --strip-unneeded
+>>> Completed installing vanilla-sources-2.6.15.1 into
+/var/tmp/portage/vanilla-sources-2.6.15.1/image/
+
+>>> Merging sys-kernel/vanilla-sources-2.6.15.1 to /
+--- /usr/
+--- /usr/src/
+--- /usr/src/linux-2.6.15.1/
+--- /usr/src/linux-2.6.15.1/fs/
+--- /usr/src/linux-2.6.15.1/fs/9p/
+>>> /usr/src/linux-2.6.15.1/fs/9p/9p.c
+>>> /usr/src/linux-2.6.15.1/fs/9p/9p.h
+>>> /usr/src/linux-2.6.15.1/fs/9p/vfs_inode.c
+>>> /usr/src/linux-2.6.15.1/fs/9p/debug.h
+>>> /usr/src/linux-2.6.15.1/fs/9p/trans_fd.c
+>>> /usr/src/linux-2.6.15.1/fs/9p/Makefile
+>>> /usr/src/linux-2.6.15.1/fs/9p/fid.c
+>>> /usr/src/linux-2.6.15.1/fs/9p/fid.h
+>>> /usr/src/linux-2.6.15.1/fs/9p/vfs_file.c
+>>> /usr/src/linux-2.6.15.1/fs/9p/mux.c
+>>> /usr/src/linux-2.6.15.1/fs/9p/mux.h
+>>> /usr/src/linux-2.6.15.1/fs/9p/vfs_dentry.c
+>>> /usr/src/linux-2.6.15.1/fs/9p/v9fs_vfs.h
+>>> /usr/src/linux-2.6.15.1/fs/9p/vfs_dir.c
+"
+
+
+
+
+
+
+
+
+
+
+
+
+how to reproduce the bug:
+*finish the main supertux game
+*go to bonus level (i used bonus level II)
+*play normaly and die 4 times
+*now,normaly if you die you'll restart from the main menu...
+*die and when tux is dying(jumping ) press esc
+*click on abort level
+*now you are on the "world menu" and the life count is as you
+had 0 lifes
+*choose a world and play...while loading it says that you have
+-1 life
+
+implications:
+*if you have -1 life you can't restart from the middle of a
+wolrd as when you have 1 life
+*simply you don't return to the main menu...
+
+by the way that's annoying to restart from the menu all the
+time when your 4 lifes are oveer...mabe a option in the option
+menu?
+
+Acc?dez au courrier ?lectronique de La Poste : www.laposte.net ; 
+3615 LAPOSTENET (0,34 ?/mn) ; t?l : 08 92 68 13 50 (0,34?/mn)
+
+
+
+
+
+From slacker at gluebox.com  Tue Feb 21 03:02:47 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Mon, 20 Feb 2006 21:02:47 -0500 (EST)
+Subject: [Supertux-devel] Screenshot Stuff
+Message-ID: <33000.192.168.1.1.1140487367.squirrel@gluebox.com>
+
+Hello.
+
+Here are some links for a few things I've been working on.
+
+This is a shot showing an electric (hotwater) tile set. It's similar to
+the lava. Touch the blue static area and you get hurt. The blue firefly is
+a moving platform.
+http://gluebox.com/images/hotwater_screenshot.png
+
+Here is the zeekling with bright colors added.
+http://gluebox.com/images/zeekling_screenshot.jpg
+
+I've done an animation set for the red/blue potions. Subtle bubbles done
+in 4 frames.
+http://gluebox.com/images/potion_screenshot.jpg
+
+Instead of a bell for the reset point here is a cocoon/firefly idea.
+http://gluebox.com/images/cocoon.jpg
+
+enjoy.
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From slacker at gluebox.com  Wed Feb 22 03:28:21 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Tue, 21 Feb 2006 21:28:21 -0500 (EST)
+Subject: [Supertux-devel] Captain Yetis
+Message-ID: <33138.192.168.1.1.1140575301.squirrel@gluebox.com>
+
+Feel free to make fun.
+http://gluebox.com/images/Yeti_Stomp.JPG
+
+- enjoy
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From anna_hiep25 at hotmail.com  Mon Feb 20 15:31:50 2006
+From: anna_hiep25 at hotmail.com (anna hiep)
+Date: Mon, 20 Feb 2006 15:31:50 +0100
+Subject: [Supertux-devel] super tux!!!
+Message-ID: <BAY115-F48B8D468C7E65D65521A983FF0@phx.gbl>
+
+hello, we are gijs and anna from the nederlands.
+we really like to play super tux.
+but we have a problem.
+We are making our own levels in the level editor,
+but if we make 2 levels and then play the first in the bonus levels
+it just goes back to the main screen if we finish level 1..
+can you help us solve this weird problem?
+thanks anyway,
+Gijs & Anna
+
+_________________________________________________________________
+Speel online games via MSN Messenger 
+http://www1.imagine-msn.com/Messenger/Default2.aspx
+
+
+
+From mrobey at cox.net  Wed Feb 22 01:16:53 2006
+From: mrobey at cox.net (Michael V Robey)
+Date: Tue, 21 Feb 2006 18:16:53 -0600
+Subject: [Supertux-devel] For some reason SuperTux 1.3 has no Sound.
+Message-ID: <AB983B75-929D-4848-83D2-F1AC03178CF2@cox.net>
+
+The Music and sound options are greyed out.  Ever seen this before?
+
+I'm running OSX 10.4.5 iMac G5  brand new build.
+
+Sound works for all other games and apps.
+
+
+From linus at folkdatorn.se  Thu Feb 23 14:19:36 2006
+From: linus at folkdatorn.se (=?ISO-8859-1?Q?Linus_C_Unneb=E4ck?=)
+Date: Thu, 23 Feb 2006 14:19:36 +0100
+Subject: [Supertux-devel] Supertux
+Message-ID: <43FDB668.1060209@folkdatorn.se>
+
+Can you fix ? (a with ring) ? (a with dots) ? (o with dots) it would be 
+good becaus I am working on a swedish po file.
+Thanks
+
+/Lusse
+
+
+From slacker at gluebox.com  Sat Feb 25 02:17:14 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Fri, 24 Feb 2006 20:17:14 -0500 (EST)
+Subject: [Supertux-devel] butt-slide-jump < bug or feature ?
+Message-ID: <35422.192.168.1.1.1140830234.squirrel@gluebox.com>
+
+hey ho.
+
+The other day on IRC wantsi was trying to point out a specific bug/feature
+where holding keys at the right moment causes tux to slide across the
+screen on his butt. At least that's what I think we were supposed to see.
+
+I think I just discovered what wantsi was trying to point out. I'm not
+sure if it's a bug, seems more like  feature.
+
+Here's how it works:
+
+Tux runs down a sloped hill. While still moving down the slope he speeds
+up in continued motion. Pressing the down arrow while in this motion and
+still on the slope puts tux in a moving butt-jump position. When the slope
+levels out tux continues to slide across the flat ground at run speed. He
+continues until an object or upward slope is reached.
+
+The fix that would make this a killer feature would be a jump at the end
+of the run/slide. Either a ramp or a small upward slope/bump to send tux
+flying. Using the ramp tux could do a butt-slide-jump that launches him to
+a high location which is otherwise unreachable.
+
+Here's a composite of screen shots showing my test yeti doing the
+butt-side motions. This sprite is still in the works so yeti is missing
+his arms :)
+
+http://gluebox.com/images/yeti-butt-slide.jpg
+
+At the moment using these key combinations is not possible with my arcade
+iPAC joystick control panel, which is still under construction. It would
+be worth it to me to have to rebuild my controller panel if someone were
+to complete the code for the butt-slide-jump move. ( hint :)
+
+Anyways, just food for thought.
+enjoy
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From jonaskoelker at users.sourceforge.net  Mon Feb 27 11:13:44 2006
+From: jonaskoelker at users.sourceforge.net (Jonas Koelker)
+Date: Mon, 27 Feb 2006 11:13:44 +0100
+Subject: [Supertux-devel] Milestone 2 -- OpenGL woes
+Message-ID: <20060227101344.GA13352@jonaskoelker.homeunix.org>
+
+Hi.
+
+I'm here to try to convince you to support software rendering for milestone 2.
+
+So, why do I want that?  As Ingo wrote:
+
+> Main reason for going OpenGL is that I want todo the same effects that
+> my SNES could already do 15 years ago in 800x600 today, with software
+> rendering thats impossible.
+
+Well, my main reason for wanting you to still supporting software rendering is
+that I want to do the same effects that my friend's SNES could already do 15
+years ago in 800x600 today.  With OpenGL, that's impossible.
+
+(Also, in Ingo's case, he used a pretty old computer--one can buy one's way
+out of that problem, but AFAIK, one can't buy one's way out of not having
+OpenGL--see below).
+
+But before I go on, let me explain why it's impossible:  because I don't want
+to use non-free software.
+
+Again, I found the words of Ingo interesting:
+
+> There are really only very very few cases left where people can't get
+> OpenGL support, the rest is really nothing more than lazyness to
+> install the correct driver or dualboot in case a driver is really
+> absolutly not available.
+
+Okay... so which graphics cards have free(libre) (correct) drivers available,
+and for which libre (dualbootable) OSes?  If there is any, please *please* let
+me know--I've been dying to play the libre games that does require OpenGL.
+
+I really love supertux, not the least because I can actually *play* it.
+Please, *please* don't take the game away from me.
+
+Kind regards,
+
+Jonas K?lker
+
+-- 
+fourletterwords = set(w for w in programming_languages if len(w) == 4)
+for word in ('java', 'ruby', 'perl'): assert word in fourletterwords
+assert sorted(programming_languages, key=favorite)[0] == 'python'
+
+
+From slacker at gluebox.com  Mon Feb 27 14:03:22 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Mon, 27 Feb 2006 08:03:22 -0500 (EST)
+Subject: [Supertux-devel] Milestone 2 -- OpenGL woes
+In-Reply-To: <20060227101344.GA13352@jonaskoelker.homeunix.org>
+References: <20060227101344.GA13352@jonaskoelker.homeunix.org>
+Message-ID: <35834.192.168.1.1.1141045402.squirrel@gluebox.com>
+
+Hey Jonas,
+
+Fear not, at the moment there is a patch which will allow you to build and
+play the development version of ST without OpenGL.  (Thanks Christoph)
+
+http://www.deltadevelopment.de/users/christoph/supertux/
+
+There have not been a lot of GL effects added so the game still seems
+playable with the patch. How much longer this will work remains to be seen
+:)
+
+-enjoy
+
+http://gluebox.com/images/yeti-jump.jpg
+
+http://gluebox.com/images/yeti-butt-slide.jpg
+
+http://gluebox.com/images/hotwater_screenshot.png
+
+> Hi.
+>
+> I'm here to try to convince you to support software rendering for
+> milestone 2.
+>
+> So, why do I want that?  As Ingo wrote:
+>
+>> Main reason for going OpenGL is that I want todo the same effects that
+>> my SNES could already do 15 years ago in 800x600 today, with software
+>> rendering thats impossible.
+>
+> Well, my main reason for wanting you to still supporting software
+> rendering is
+> that I want to do the same effects that my friend's SNES could already do
+> 15
+> years ago in 800x600 today.  With OpenGL, that's impossible.
+>
+> (Also, in Ingo's case, he used a pretty old computer--one can buy one's
+> way
+> out of that problem, but AFAIK, one can't buy one's way out of not having
+> OpenGL--see below).
+>
+> But before I go on, let me explain why it's impossible:  because I don't
+> want
+> to use non-free software.
+>
+> Again, I found the words of Ingo interesting:
+>
+>> There are really only very very few cases left where people can't get
+>> OpenGL support, the rest is really nothing more than lazyness to
+>> install the correct driver or dualboot in case a driver is really
+>> absolutly not available.
+>
+> Okay... so which graphics cards have free(libre) (correct) drivers
+> available,
+> and for which libre (dualbootable) OSes?  If there is any, please *please*
+> let
+> me know--I've been dying to play the libre games that does require OpenGL.
+>
+> I really love supertux, not the least because I can actually *play* it.
+> Please, *please* don't take the game away from me.
+>
+> Kind regards,
+>
+> Jonas K?lker
+>
+> --
+> fourletterwords = set(w for w in programming_languages if len(w) == 4)
+> for word in ('java', 'ruby', 'perl'): assert word in fourletterwords
+> assert sorted(programming_languages, key=favorite)[0] == 'python'
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+> --
+> This message has been scanned for viruses and
+> dangerous content by MailScanner, and is
+> believed to be clean.
+>
+
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From slacker at gluebox.com  Mon Feb 27 14:03:22 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Mon, 27 Feb 2006 08:03:22 -0500 (EST)
+Subject: [Supertux-devel] Milestone 2 -- OpenGL woes
+In-Reply-To: <20060227101344.GA13352@jonaskoelker.homeunix.org>
+References: <20060227101344.GA13352@jonaskoelker.homeunix.org>
+Message-ID: <35834.192.168.1.1.1141045402.squirrel@gluebox.com>
+
+Hey Jonas,
+
+Fear not, at the moment there is a patch which will allow you to build and
+play the development version of ST without OpenGL.  (Thanks Christoph)
+
+http://www.deltadevelopment.de/users/christoph/supertux/
+
+There have not been a lot of GL effects added so the game still seems
+playable with the patch. How much longer this will work remains to be seen
+:)
+
+-enjoy
+
+http://gluebox.com/images/yeti-jump.jpg
+
+http://gluebox.com/images/yeti-butt-slide.jpg
+
+http://gluebox.com/images/hotwater_screenshot.png
+
+> Hi.
+>
+> I'm here to try to convince you to support software rendering for
+> milestone 2.
+>
+> So, why do I want that?  As Ingo wrote:
+>
+>> Main reason for going OpenGL is that I want todo the same effects that
+>> my SNES could already do 15 years ago in 800x600 today, with software
+>> rendering thats impossible.
+>
+> Well, my main reason for wanting you to still supporting software
+> rendering is
+> that I want to do the same effects that my friend's SNES could already do
+> 15
+> years ago in 800x600 today.  With OpenGL, that's impossible.
+>
+> (Also, in Ingo's case, he used a pretty old computer--one can buy one's
+> way
+> out of that problem, but AFAIK, one can't buy one's way out of not having
+> OpenGL--see below).
+>
+> But before I go on, let me explain why it's impossible:  because I don't
+> want
+> to use non-free software.
+>
+> Again, I found the words of Ingo interesting:
+>
+>> There are really only very very few cases left where people can't get
+>> OpenGL support, the rest is really nothing more than lazyness to
+>> install the correct driver or dualboot in case a driver is really
+>> absolutly not available.
+>
+> Okay... so which graphics cards have free(libre) (correct) drivers
+> available,
+> and for which libre (dualbootable) OSes?  If there is any, please *please*
+> let
+> me know--I've been dying to play the libre games that does require OpenGL.
+>
+> I really love supertux, not the least because I can actually *play* it.
+> Please, *please* don't take the game away from me.
+>
+> Kind regards,
+>
+> Jonas K?lker
+>
+> --
+> fourletterwords = set(w for w in programming_languages if len(w) == 4)
+> for word in ('java', 'ruby', 'perl'): assert word in fourletterwords
+> assert sorted(programming_languages, key=favorite)[0] == 'python'
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+> --
+> This message has been scanned for viruses and
+> dangerous content by MailScanner, and is
+> believed to be clean.
+>
+
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From wansti at gmx.de  Mon Feb 27 14:14:38 2006
+From: wansti at gmx.de (Marek)
+Date: Mon, 27 Feb 2006 14:14:38 +0100
+Subject: [Supertux-devel] Milestone 2 -- OpenGL woes
+In-Reply-To: <20060227101344.GA13352@jonaskoelker.homeunix.org>
+References: <20060227101344.GA13352@jonaskoelker.homeunix.org>
+Message-ID: <4402FB3E.70503@gmx.de>
+
+>Okay... so which graphics cards have free(libre) (correct) drivers available,
+>and for which libre (dualbootable) OSes?  If there is any, please *please* let
+>me know--I've been dying to play the libre games that does require OpenGL.
+>  
+>
+I've been told that the free ATI Linux drivers work well with SuperTux
+(tested with Milestone 1) in OpenGL mode.
+
+    Marek
+
+
+From joseph.brower at gmail.com  Mon Feb 27 15:01:33 2006
+From: joseph.brower at gmail.com (joseph brower)
+Date: Mon, 27 Feb 2006 07:01:33 -0700
+Subject: [Supertux-devel] Milestone 2 -- OpenGL woes
+In-Reply-To: <4402FB3E.70503@gmx.de>
+References: <20060227101344.GA13352@jonaskoelker.homeunix.org>
+	 <4402FB3E.70503@gmx.de>
+Message-ID: <a82cfa150602270601i7c3875d5t81fa03f9472af984@mail.gmail.com>
+
+Also, don't the intel i8xx cards work well and have free drivers?
+
+Thanks,
+
+Joseph Brower
+
+On 2/27/06, Marek <wansti at gmx.de> wrote:
+>
+> >Okay... so which graphics cards have free(libre) (correct) drivers available,
+> >and for which libre (dualbootable) OSes?  If there is any, please *please* let
+> >me know--I've been dying to play the libre games that does require OpenGL.
+> >
+> >
+> I've been told that the free ATI Linux drivers work well with SuperTux
+> (tested with Milestone 1) in OpenGL mode.
+>
+>     Marek
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+
+
+From metal-snake at macnews.de  Mon Feb 27 15:41:56 2006
+From: metal-snake at macnews.de (Metal Snake)
+Date: Mon, 27 Feb 2006 15:41:56 +0100
+Subject: [Supertux-devel] Compile on OS X?
+Message-ID: <04D6B2CF-08EC-4CDD-9E55-75290C28ECD9@macnews.de>
+
+Hi,
+
+I just wanted to try the latest svn version but I can't find any  
+infos on how to compile SuperTux on OS X (10.4.5). When I enter ./ 
+configure I just get a No such file or directory error.
+
+Hope you can help me with this one.
+Thanks!
+
+
+From grumbel at gmx.de  Mon Feb 27 17:23:16 2006
+From: grumbel at gmx.de (Ingo Ruhnke)
+Date: Mon, 27 Feb 2006 17:23:16 +0100
+Subject: [Supertux-devel] Milestone 2 -- OpenGL woes
+In-Reply-To: <20060227101344.GA13352@jonaskoelker.homeunix.org> (Jonas
+	Koelker's message of "Mon, 27 Feb 2006 11:13:44 +0100")
+References: <20060227101344.GA13352@jonaskoelker.homeunix.org>
+Message-ID: <87vev07ouj.fsf@gmx.de>
+
+Jonas Koelker <jonaskoelker at users.sourceforge.net> writes:
+
+> (Also, in Ingo's case, he used a pretty old computer--one can buy one's way
+> out of that problem, but AFAIK, one can't buy one's way out of not having
+> OpenGL--see below).
+
+Brand new shader capable OpenGL card costs 50EUR and yet even
+something as old as a ATI Rage 128 should be enough for SuperTux.
+
+> But before I go on, let me explain why it's impossible:  because I don't want
+> to use non-free software.
+
+Use a Matrox card or some of the ATI models, there you have your libre
+OpenGL drivers. Nvidia TNT2 drivers might be libre as well, however
+not sure about them. If you want more 'fun' you can render with Mesa,
+won't be very fast, but if you lower the resolution a bit it might be
+playable.
+
+> Okay... so which graphics cards have free(libre) (correct) drivers
+> available,
+
+If you care about free(libre) drivers *BUY* a card that has them,
+there are more then enough on the market, they might not be the most
+powerfull cards, but for Supertux they are far more then enough. If
+you haven't bought a card with free drivers, then hell stick to the
+non-free ones, they work fine, they don't cost money and since you
+bought that card in the first place its your fault.
+
+> and for which libre (dualbootable) OSes? If there is any,
+> please *please*
+
+Those cases where there is no way to get accelerated OpenGL, ie.
+laptops with unsupported chipsets, almost always come with a version
+of Windows, no matter if you want or not. Sure its not libre, but if
+you have already bought it you can use it. And again, if you don't
+like that, you should have better choosen a piece of hardware that is
+actually supported under Linux.
+
+In the end there are more then enough cards with libre drivers on the
+market, go buy one if libre drivers are important to you.
+
+-- 
+WWW:      http://pingus.seul.org/~grumbel/ 
+Blog:     http://grumbel.blogspot.com/
+JabberID: grumbel at jabber.org 
+ICQ:      59461927
+
+
+From slacker at gluebox.com  Tue Feb 28 02:10:10 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Mon, 27 Feb 2006 20:10:10 -0500 (EST)
+Subject: [Supertux-devel] Zeekling -Fade to DANGER tar.gz
+Message-ID: <36798.192.168.1.1.1141089010.squirrel@gluebox.com>
+
+hello.
+
+Here is a zeekling sprite that fades to invisible.
+http://gluebox.com/images/zeekling.tar.gz
+
+enjoy
+(or not = :)
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From supertux at 2006.expires.deltadevelopment.de  Tue Feb 28 13:14:11 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Tue, 28 Feb 2006 13:14:11 +0100
+Subject: [Supertux-devel] Zeekling -Fade to DANGER tar.gz
+In-Reply-To: <36798.192.168.1.1.1141089010.squirrel@gluebox.com>
+References: <36798.192.168.1.1.1141089010.squirrel@gluebox.com>
+Message-ID: <44043E93.70301@2006.expires.deltadevelopment.de>
+
+S.Groundwater wrote:
+> Here is a zeekling sprite that fades to invisible.
+> http://gluebox.com/images/zeekling.tar.gz
+
+I like the idea of hard-to-spot fliers, but couldn't find a description 
+of this behaviour on 
+<http://supertux.berlios.de/wiki/index.php/Zeekling>. Could you 
+elaborate on this concept?
+
+Will the zeekling hide while far away from the players?
+Or while having the players' backs turned towards her?
+Or is there a completely different idea in the pipeline?
+
+
+Btw: If the zeekling's hiding from the players is a willful decision 
+made by her, just changing the opacity of the sprite seems a little dull 
+to me. Maybe she could fade out tail first, eyes last or do some 
+bubbly-style dissolving for extra eye-candy :)
+
+
+Have a nice day,
+
+   Christoph
+
+-- 
+...in that case the Boxer rebellion would have be Brief (Robert J. 
+Kolker on s.h.w-i)
+
+
+From adowns at mhtc.net  Tue Feb 28 16:57:44 2006
+From: adowns at mhtc.net (Alan D)
+Date: Tue, 28 Feb 2006 09:57:44 -0600
+Subject: [Supertux-devel] Delete items and slots
+Message-ID: <44041E98.E668.00DB.0@mhtc.net>
+
+Question: Using the level editor, how do I: 
+1) delete existing items (like bad guys, coins, etc)
+2) reset a player's slot to unplayed?
+
+I'm not familiar with the directory structure, so please be precise.
+
+Thanks!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060228/6817ade8/attachment.htm>
+
+From slacker at gluebox.com  Tue Feb 28 16:58:18 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Tue, 28 Feb 2006 10:58:18 -0500 (EST)
+Subject: [Supertux-devel] Zeekling -Fade to DANGER tar.gz
+In-Reply-To: <44043E93.70301@2006.expires.deltadevelopment.de>
+References: <36798.192.168.1.1.1141089010.squirrel@gluebox.com>
+    <44043E93.70301@2006.expires.deltadevelopment.de>
+Message-ID: <55434.146.145.190.179.1141142298.squirrel@gluebox.com>
+
+> S.Groundwater wrote:
+>> Here is a zeekling sprite that fades to invisible.
+>> http://gluebox.com/images/zeekling.tar.gz
+
+> Could you
+> elaborate on this concept?
+
+In playing on my local build it seemed the zeekling was too boring, no
+challenge. Since I can't code, the only way I could fix for myself was to
+slowly fade the sprite in and out of an invisible state.
+
+The animation fades in and out with a few extra empty frames during the
+invisible state. Having to estimate where the bad guy is at certain points
+seemed a little better than just having her go back and forth on the
+screen.
+
+A better fix would be some badguy logic code, like moving up and down
+while flying or something. I'm not sure what the game plan is for the
+zeekling's behavior.
+
+I'm not suggesting this is a good thing, my animation set, that's why I
+did not commit it to the repo. I'm just sharing my files back in case
+people like.
+
+Christoph, feel free to help make zeekling better. :)
+
+> Maybe she could fade out tail first, eyes last or do some
+> bubbly-style dissolving for extra eye-candy :)
+
+Hmm, I'll see if I can give this a try.
+
+>
+> Have a nice day,
+>
+>    Christoph
+>
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From supertux at 2006.expires.deltadevelopment.de  Tue Feb 28 19:29:07 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Tue, 28 Feb 2006 19:29:07 +0100
+Subject: [Supertux-devel] Zeekling -Fade to DANGER tar.gz
+In-Reply-To: <55434.146.145.190.179.1141142298.squirrel@gluebox.com>
+References: <36798.192.168.1.1.1141089010.squirrel@gluebox.com>    <44043E93.70301@2006.expires.deltadevelopment.de> <55434.146.145.190.179.1141142298.squirrel@gluebox.com>
+Message-ID: <44049673.8090400@2006.expires.deltadevelopment.de>
+
+S.Groundwater wrote:
+>> S.Groundwater wrote:
+>>> Here is a zeekling sprite that fades to invisible.
+>>> http://gluebox.com/images/zeekling.tar.gz
+> 
+> In playing on my local build it seemed the zeekling was too boring, no
+> challenge. Since I can't code, the only way I could fix for myself was to
+> slowly fade the sprite in and out of an invisible state.
+> [...]
+> Christoph, feel free to help make zeekling better. :)
+
+<http://www.deltadevelopment.de/users/christoph/supertux/supertux-3063-hideandzeek.diff.gz>
+This zeekling version decloaks only while above the player - eyes come 
+first, rest slowly fades in.
+
+Give it a shot, it's quite a thrill if you don't know where all the 
+zeeklings are hiding.
+
+
+Regards,
+
+   Christoph
+
+-- 
+Never underestimate the power of very stupid people in large groups.
+
+
+From adowns at mhtc.net  Sun Feb 26 05:35:28 2006
+From: adowns at mhtc.net (Alan D)
+Date: Sat, 25 Feb 2006 22:35:28 -0600 (CST)
+Subject: [Supertux-devel] Where installed, how to reset?
+Message-ID: <33550.216.180.210.99.1140928528.squirrel@webmail.mhtc.net>
+
+Can you please tell me where SuperTux installs, and how to reset one of the
+slots back to 'uplayed' status?
+
+Thank you!
+
+
+
+From christoph.sommer at 2006.expires.deltadevelopment.de  Mon Feb 27 12:08:07 2006
+From: christoph.sommer at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Mon, 27 Feb 2006 12:08:07 +0100
+Subject: [Supertux-devel] Milestone 2 -- OpenGL woes
+In-Reply-To: <20060227101344.GA13352@jonaskoelker.homeunix.org>
+References: <20060227101344.GA13352@jonaskoelker.homeunix.org>
+Message-ID: <4402DD97.7050909@2006.expires.deltadevelopment.de>
+
+Hey Jonas,
+
+Jonas Koelker wrote:
+> I've been dying to play the libre games that does require OpenGL.
+> 
+> I really love supertux, not the least because I can actually *play* it.
+> Please, *please* don't take the game away from me.
+
+I don't want to meddle in this discussion again - just a quick note: 
+Regardless of the core developers' decision against "wasting any time" 
+on doing without OpenGL, I have created a -nogl patch that works pretty 
+fine with SDL functions only.
+
+<http://www.deltadevelopment.de/users/christoph/supertux/>
+
+People seem to like it, too. The patch had quite an impressive amount of 
+downloads lately, so I'll continue keeping the branch up-to-date with 
+the trunk.
+
+
+Kind regards,
+
+   Christoph
+
+
+-- 
+When confronted by a difficult problem, you can solve it more easily by 
+reducing it to the question "How would the Lone Ranger handle this?"
+
+
+From lovemyracingrussells at shaw.ca  Tue Feb 28 00:40:41 2006
+From: lovemyracingrussells at shaw.ca (Stephanie Moffat)
+Date: Mon, 27 Feb 2006 16:40:41 -0700
+Subject: [Supertux-devel] Question...
+Message-ID: <00A5739D-BFCC-46F1-8B03-E2149C5AE702@shaw.ca>
+
+Where can you find Milestone 2? Is it a new download or what? If you  
+could respond with an answer, that would be appreciated.
+Thanks.
+
+

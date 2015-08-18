@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20status&In-Reply-To=%3C444BB2D5.5090609%40a-king.us%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000136.html">
+   <LINK REL="Next"  HREF="000156.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status</H1>
+    <B>Allen King</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20status&In-Reply-To=%3C444BB2D5.5090609%40a-king.us%3E"
+       TITLE="[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status">allen at a-king.us
+       </A><BR>
+    <I>Sun Apr 23 19:01:09 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000136.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+        <LI>Next message: <A HREF="000156.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#153">[ date ]</a>
+              <a href="thread.html#153">[ thread ]</a>
+              <a href="subject.html#153">[ subject ]</a>
+              <a href="author.html#153">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Chris, Matt, et. al.
+
+Great feedback.  This is converging.   I will resurface in a couple of 
+days with a patch.  The patch will have only the minimal testing I can 
+do on it, which is play the game for a while.  Also I won't be able to 
+generate the patch until I get the instructions, which are on the wiki 
+(which is down), or perhaps someone could send me them.
+
+Based on what I understand, here is what I'm going to do.  (Things that 
+are new or potentially contentious are in red.)
+
+Question #1:
+
+    a) Agree with Matze: Cross-platform random reproducibility is mostly
+    useful for play-demo.  I will mostly use it to reproduce bugs
+    encountered on long otherwise unreproducible runs.
+
+    b) Added storage of seed in demo-file during demo_record, and recall
+    in play_demo.  The implementation chosen adds a string, like
+    &quot;random_seed=1382233972&quot;, at the front of the file.  The player will
+    now play files with or without the random seed string.  (It makes
+    the reasonable assumption that files without a random seed don't
+    begin with &quot;random_seed=&quot;.)
+
+    c) For my purposes, config settings is adequate, and it already
+    works.  It is also a general tool.  I don't need network setting. 
+    If someone has a religious objection, let me know.
+
+Question #2: 
+
+    a) I have called the random class RandomGenerator.
+    b) Having heard no objections, I will use referenced code, with
+    copyleft as shown. (<A HREF="http://www.jbox.dk/sanos/source/lib/random.c.html">http://www.jbox.dk/sanos/source/lib/random.c.html</A>)
+
+Question #3:
+
+    a) Will make different names for the random calls as suggested. 
+    Good feedback, good reasons.  Now, I need a *short memorable proper
+    *name for it.  Currently thinking of SDL_rand() (as that is what it
+    really is, and currently SDL doesn't have one). Another possibility
+    is tux_rand().  Suggestions?
+    b) Will put includes for RandomGenerator only in .cpp files using
+    RandomGenerator, to minimize compile times.
+
+Question #4: will comment out the call to srand in player.cpp
+
+Question #5:
+
+    a) will ignore squirrel's use of srand for now.  Note: squirrel's
+    use of math_rand() properly uses SDL_rand().
+    b) There is a case to be made for making SDL_srand() a nop.  I
+    propose that, over furthur objections.
+    c) Note Matze: If next time you import squirrel, you just &quot;copy it
+    over&quot; (as you said in your email), you will wipe out the calls to
+    SDL_rand() and break the repeatability!!!
+
+Question #6: will not change generations of ~/.supertux/config
+
+Question #7: will not add option to ./config
+
+
+Thanks...
+
+    Allen
+
+
+Matze Braun wrote:
+&gt;<i> Am Freitag, den 21.04.2006, 05:00 -0400 schrieb Allen King:
+</I>&gt;<i>   
+</I>&gt;&gt;<i> I've been working on the &quot;Remote Control&quot; changes to Supertux that we
+</I>&gt;&gt;<i> talked about last week, and have a first version that works -- I have
+</I>&gt;&gt;<i> a program that supplies button presses from a canned list to supertux
+</I>&gt;&gt;<i> over a port, and supertux returns a list of all the surfaces drawn,
+</I>&gt;&gt;<i> with texture file names.  The changes are still fluid, so I'm inclined
+</I>&gt;&gt;<i> not going to release any patches right yet.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I told Matze I would next make a patch for platform independent
+</I>&gt;&gt;<i> repeatable random numbers, and I am well on my way to completing that.
+</I>&gt;&gt;<i> To finish,  I have some (seven) questions on the mods, which I would
+</I>&gt;&gt;<i> like responses to (the first 3 are generic fishing and educational, on
+</I>&gt;&gt;<i> the last 4 I need detailed answers):
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> BASIC DESIGN:
+</I>&gt;&gt;<i>         1) allows for two random generator modes, under control of the
+</I>&gt;&gt;<i>         configuration file:  
+</I>&gt;&gt;<i>                 a. If a (random_seed &lt;decimal number&gt;) line is present
+</I>&gt;&gt;<i>                 in the configuration file, it is used used as the
+</I>&gt;&gt;<i>                 random seed to start the run.  
+</I>&gt;&gt;<i>                 
+</I>&gt;&gt;<i>                 b. If the above line isn't there, the seed obtained
+</I>&gt;&gt;<i>                 from time() in the usual way, and is additionally
+</I>&gt;&gt;<i>                 printed, so it can later be pasted into the
+</I>&gt;&gt;<i>                 configuration file if the run wants to be reproduced.
+</I>&gt;&gt;<i>         QUESTION #1: seem reasonable?
+</I>&gt;&gt;<i>     
+</I>&gt;<i> The deterministic random number generator is needed for 2 use cases:
+</I>&gt;<i> Saving Demos and Doing reproducible runs with your AI code. For the
+</I>&gt;<i> first case we have to save the seed in the demo file, in your case you
+</I>&gt;<i> probably want to send the seed over network. That would make alot more
+</I>&gt;<i> sense than putting it into a config file IMO.
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i>         2)  Files [.cpp/.hpp] for a platform-independent class
+</I>&gt;&gt;<i>         RandomNumbers were added.  They were transliterated from C
+</I>&gt;&gt;<i>         sources found at
+</I>&gt;&gt;<i>         <A HREF="http://www.jbox.dk/sanos/source/lib/random.c.html.">http://www.jbox.dk/sanos/source/lib/random.c.html.</A>  A wizard
+</I>&gt;&gt;<i>         friend of mine claimed this to be &quot;the fastest and best
+</I>&gt;&gt;<i>         quality&quot; around.  
+</I>&gt;&gt;<i>         
+</I>&gt;&gt;<i>         QUESTION #2: any reason not to proceed this way? Is copyleft
+</I>&gt;&gt;<i>         okay for supertux?
+</I>&gt;&gt;<i>         
+</I>&gt;&gt;<i>     
+</I>&gt;<i> Yep this is the most important part of all this. I personally would call
+</I>&gt;<i> the calss Random or RandomGenerator though...
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i>         3) I've included RandomNumbers in a wrapper file &quot;rand.hpp&quot;
+</I>&gt;&gt;<i>         which redefines rand() and srand() for general consumption by
+</I>&gt;&gt;<i>         supertux. WARNING: Supertux files which call rand() or srand()
+</I>&gt;&gt;<i>         and which do NOT include rand.hpp will use the old rand
+</I>&gt;&gt;<i>         facility, which will be neither initialized correctly,
+</I>&gt;&gt;<i>         controllable by config, nor platform independent.  So this
+</I>&gt;&gt;<i>         would not happen, I buried an include for rand.hpp deep in
+</I>&gt;&gt;<i>         game_object.hpp, which is included by all the &quot;bad guys&quot;.  I
+</I>&gt;&gt;<i>         also (redundantly) added similar includes in all .cpp files
+</I>&gt;&gt;<i>         which contained calls to [s]rand(), with a shameless
+</I>&gt;&gt;<i>         promotional comment, so developers would get the idea.
+</I>&gt;&gt;<i>         
+</I>&gt;&gt;<i>         QUESTION #3: any objections to this?  suggestions of better
+</I>&gt;&gt;<i>         ways (e.g. changing calls to rand to BlaBlaRand, and
+</I>&gt;&gt;<i>         redefining rand() and srand() to print helpful errors?
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Please don't do that. It's not the C library implementation of rand and
+</I>&gt;<i> srand anymore, so don't make it look like it is. Also searching for
+</I>&gt;<i> errors is actually easier if you rename the function, because then you
+</I>&gt;<i> can simply grep for rand() to find (forbidden) usages of libc functions.
+</I>&gt;<i> (Additionally adding #includes into heavily used header files is
+</I>&gt;<i> something that should be avoided too, because it unnecessarily increases
+</I>&gt;<i> compile time and pollutes the namespace)
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> SUPERTUX FUNCTIONALITY:
+</I>&gt;&gt;<i>         4) There is a call to srand() in player.cpp, which occurs
+</I>&gt;&gt;<i>         after a player is killed.  I do not understand why it would be
+</I>&gt;&gt;<i>         necessary to do this -- it seems totally superfluous, but with
+</I>&gt;&gt;<i>         my very limited knowledge am way too afraid to comment it out.
+</I>&gt;&gt;<i>         It would be great if it could go!  As it stands now, random
+</I>&gt;&gt;<i>         number repeatability  ceases after the first time Tux dies. 
+</I>&gt;&gt;<i>         
+</I>&gt;&gt;<i>         QUESTION #4 (THIS IS THE REASON I WROTE THIS EMAIL): Could
+</I>&gt;&gt;<i>         someone verify that this call was just put in by someone who
+</I>&gt;&gt;<i>         didn't understand random numbers (or not)?  If so, the
+</I>&gt;&gt;<i>         solution is simple.  If not, not.
+</I>&gt;&gt;<i>     
+</I>&gt;<i> Yep remove it.
+</I>&gt;<i>   
+</I>&gt;&gt;<i>         
+</I>&gt;&gt;<i>         5) There is another call to srand() in sqstdmath.cpp, but
+</I>&gt;&gt;<i>         nobody in supertux-ville seems to call the routine that
+</I>&gt;&gt;<i>         contains it.  I added an throw of runtime_error to discourage
+</I>&gt;&gt;<i>         its future use.  
+</I>&gt;&gt;<i>         
+</I>&gt;&gt;<i>         QUESTION #5: Is this okay, or too harsh.
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> All the code in src/squirrel is just a 1:1 copy of the squirrel
+</I>&gt;<i> scripting language into the supertux sources. Changes there don't make
+</I>&gt;<i> sense as when there's an update to squirrel, I'll just copy over the new
+</I>&gt;<i> squirrel files into these directories and the changes will be lost.
+</I>&gt;<i>
+</I>&gt;<i> I'd propose to simply ignore this issue for now :) If you wanna fix it
+</I>&gt;<i> then the way to go would be reimplmenting all squirrel library functions
+</I>&gt;<i> that deal with random numbers in supertux and replace the squirrel ones
+</I>&gt;<i> with the supertux ones in the roottable.
+</I>&gt;<i>   
+</I>&gt;&gt;<i>         
+</I>&gt;&gt;<i>         6) I was thinking of adding a commented-out setting of
+</I>&gt;&gt;<i>         random_seed in the default ~/.supertux/config . (I noted that
+</I>&gt;&gt;<i>         that was made for me when I first ran supertux, but a cursory
+</I>&gt;&gt;<i>         scan didn't show me how.)
+</I>&gt;&gt;<i>         
+</I>&gt;&gt;<i>         QUESTION #6:  Can someone help me determine how I would modify
+</I>&gt;&gt;<i>         the default ~/.supertux/config?  I will do this if someone
+</I>&gt;&gt;<i>         does.
+</I>&gt;&gt;<i>         
+</I>&gt;&gt;<i>     
+</I>&gt;<i> Default values come from Config::Config() constructor and the file is
+</I>&gt;<i> written in the Config::save() function. But as stated above I don't
+</I>&gt;<i> think putting the seed into the config is a good idea.
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i>         7)  One could turn on/off the use of platform-independent
+</I>&gt;&gt;<i>         random_numbers with a ./configure --&lt;option&gt; .  
+</I>&gt;&gt;<i>         
+</I>&gt;&gt;<i>         QUESTION #7: Is it worth doing?  Enough so that someone could
+</I>&gt;&gt;<i>         outline the requisite changes to  configure.ac (and friends).
+</I>&gt;&gt;<i>         
+</I>&gt;&gt;<i>     
+</I>&gt;<i> 1 way of doing things is really enough here, we have fewer bloat and
+</I>&gt;<i> maintainence problems by not having additional options.
+</I>&gt;<i>
+</I>&gt;<i> Greetings,
+</I>&gt;<i> 	Matze
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/supertux-devel">http://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060423/f60cc4af/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060423/f60cc4af/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000136.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+	<LI>Next message: <A HREF="000156.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#153">[ date ]</a>
+              <a href="thread.html#153">[ thread ]</a>
+              <a href="subject.html#153">[ subject ]</a>
+              <a href="author.html#153">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

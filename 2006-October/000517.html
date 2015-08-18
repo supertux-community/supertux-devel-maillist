@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Supertux Sharp (Editor) Patch for extended sector	resizing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Supertux%20Sharp%20%28Editor%29%20Patch%20for%20extended%20sector%0A%09resizing&In-Reply-To=%3C4522B17A.50203%40penma.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000518.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Supertux Sharp (Editor) Patch for extended sector	resizing</H1>
+    <B>Penguinmaster</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Supertux%20Sharp%20%28Editor%29%20Patch%20for%20extended%20sector%0A%09resizing&In-Reply-To=%3C4522B17A.50203%40penma.de%3E"
+       TITLE="[Supertux-devel] Supertux Sharp (Editor) Patch for extended sector	resizing">penma at penma.de
+       </A><BR>
+    <I>Tue Oct  3 20:52:42 CEST 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000518.html">[Supertux-devel] Supertux Sharp (Editor) Patch for extended sector resizing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#517">[ date ]</a>
+              <a href="thread.html#517">[ thread ]</a>
+              <a href="subject.html#517">[ subject ]</a>
+              <a href="author.html#517">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sometimes you don't just want to add empty tiles to the end of a sector, 
+but you have already built the end of the sector and the beginning of 
+the sector and want to build the middle when you experience that the 
+room is not enough. You have to manually move all badguys and tiles 
+after resizing the sector. My patch helps people doing this by 
+specifying  a number of tiles before that another number of empty files 
+should be inserted. Example: if you say if should insert at position 0, 
+it will move the whole level to the right (after resizing, of course). 
+Objects are also moved. You can reach that by right-clicking sector tab 
+and clicking &quot;Insert&quot;.
+
+Hope that helps some people, at least it helped me :)
+
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: InsertTiles.patch
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20061003/194e57df/attachment.ksh">https://lists.berlios.de/pipermail/supertux-devel/attachments/20061003/194e57df/attachment.ksh</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000518.html">[Supertux-devel] Supertux Sharp (Editor) Patch for extended sector resizing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#517">[ date ]</a>
+              <a href="thread.html#517">[ thread ]</a>
+              <a href="subject.html#517">[ subject ]</a>
+              <a href="author.html#517">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

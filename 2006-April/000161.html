@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20random%20repeatability%20patch&In-Reply-To=%3C5a5496320604252003s1caf8dacq256ae2bfad66572%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000160.html">
+   <LINK REL="Next"  HREF="000164.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch</H1>
+    <B>Ryan Flegel</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20random%20repeatability%20patch&In-Reply-To=%3C5a5496320604252003s1caf8dacq256ae2bfad66572%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch">rflegel at gmail.com
+       </A><BR>
+    <I>Wed Apr 26 05:03:46 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000160.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+</A></li>
+        <LI>Next message: <A HREF="000164.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#161">[ date ]</a>
+              <a href="thread.html#161">[ thread ]</a>
+              <a href="subject.html#161">[ subject ]</a>
+              <a href="author.html#161">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey,
+
+I committed your patch with a few changes. Please let me know if I
+inadvertantly broke something that you depend on.
+
+On 4/25/06, Allen King &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">allen at a-king.us</A>&gt; wrote:
+
+&gt;<i> The seed used on all runs is logged, and the ability to specify that seed
+</I>&gt;<i> later in the configuration file (with a (random_seed &lt;decimal number&gt;) line
+</I>&gt;<i> in the ~/.supertux/config file, at the same level as control).  This is what
+</I>&gt;<i> I find easiest to use (unless someone has a religious objection).
+</I>&gt;<i> An instance object: RandomGenerator systemRandom is defined in the global
+</I>&gt;<i> namespace in random_generator.hpp.  It has the methods below.
+</I>
+I suppose this works, but wouldn't it make sense to set the seed from
+your remote control?
+
+&gt;<i> There is one slight mathematical enhancement
+</I>&gt;<i> when switching over to randf().  I mention it only because operation is
+</I>&gt;<i> sliii...iitely different.  I will call it the &quot;picket fence&quot; issue:  When
+</I>&gt;<i> one specifies (rand()%100)/100.0, one gets an even distribution of 100
+</I>&gt;<i> probability impulses, at 0.0, 0.01, 0.02, .... 0.98, 0.99.  When one
+</I>&gt;<i> specifies randf(1.0), on gets a continuum of numbers between 0.0 and
+</I>&gt;<i> 0.9999999.  My take is that should not matter at all, because all are for
+</I>&gt;<i> physical parameters like a position or a speed, and nobody will notice.
+</I>
+Ah, yes. Good catch.
+
+&gt;<i> Use math_rand() within squirrel scripts will currently be repeatable, and
+</I>&gt;<i> calls to math_srand() are ignored.  This behavior will break (calls to
+</I>&gt;<i> math_rand will not be repeatable) if a new version of squirrel is copied
+</I>&gt;<i> into src/squirrel without including a 4-line change to sqstdmath.cpp
+</I>&gt;<i>  As always, comments are appreciated...
+</I>
+I didn't make your changes to squirrel code, but I did at a wrapper
+for the RandomGenerator class so squirrel scripts can now use
+RandomGenerator.rand() and friends (see
+src/scripting/random_generator.hpp). We might be able to override the
+srand() and rand() squirrel functions to throw an exception so scripts
+can't use them. Matze will know more about that.
+
+--
+Ryan
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000160.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+</A></li>
+	<LI>Next message: <A HREF="000164.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#161">[ date ]</a>
+              <a href="thread.html#161">[ thread ]</a>
+              <a href="subject.html#161">[ subject ]</a>
+              <a href="author.html#161">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

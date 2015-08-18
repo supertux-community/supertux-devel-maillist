@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20random%20repeatability%20patch&In-Reply-To=%3C5a5496320604271110x54bd9d93k9f1b94ffe2c90da8%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000167.html">
+   <LINK REL="Next"  HREF="000181.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch</H1>
+    <B>Ryan Flegel</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20random%20repeatability%20patch&In-Reply-To=%3C5a5496320604271110x54bd9d93k9f1b94ffe2c90da8%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch">rflegel at gmail.com
+       </A><BR>
+    <I>Thu Apr 27 20:10:03 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000167.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+</A></li>
+        <LI>Next message: <A HREF="000181.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#168">[ date ]</a>
+              <a href="thread.html#168">[ thread ]</a>
+              <a href="subject.html#168">[ subject ]</a>
+              <a href="author.html#168">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 4/26/06, Ryan Flegel &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">rflegel at gmail.com</A>&gt; wrote:
+
+&gt;<i> &gt;  However, there were some problems when I retested.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The relative order of a) inz playdemo; b) inz random; c) inz recorddemo is
+</I>&gt;<i> &gt; important in main.cpp:483. (Playdemo might reads and sets the seed that
+</I>&gt;<i> &gt; initializes random, while recorddemo writes out the seed just used.)  It
+</I>&gt;<i> &gt; appears the changes to that effect in the first patch didn't get in.
+</I>&gt;<i>
+</I>&gt;<i> Hmm.. I might have fiddled with the order when doing some debugging. I
+</I>&gt;<i> can change it back.
+</I>
+Hmm.. I applied your patch and if the init_rand() is called after the
+play there is an exception thrown saying the random number generator
+isn't initalised.
+
+
+I think it's a better idea to keep separate rand() and rand(int v)
+functions, since passing v = 0 is inconsistent with the functions
+returning numbers in the range [u, v), so I won't commit the new
+changes to random_generator.*. Also, we should leave those asserts
+there. It seems there are some problems with the seeding on WIn32 (see
+the thread regarding that).
+
+--
+Ryan
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000167.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+</A></li>
+	<LI>Next message: <A HREF="000181.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#168">[ date ]</a>
+              <a href="thread.html#168">[ thread ]</a>
+              <a href="subject.html#168">[ subject ]</a>
+              <a href="author.html#168">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

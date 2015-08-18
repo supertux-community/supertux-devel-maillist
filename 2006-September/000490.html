@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Bug Revision 4214
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Bug%20Revision%204214&In-Reply-To=%3C1157881905.24928.0.camel%40taylor.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000487.html">
+   <LINK REL="Next"  HREF="000483.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Bug Revision 4214</H1>
+    <B>Matthias Braun</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Bug%20Revision%204214&In-Reply-To=%3C1157881905.24928.0.camel%40taylor.local%3E"
+       TITLE="[Supertux-devel] Bug Revision 4214">matze at braunis.de
+       </A><BR>
+    <I>Sun Sep 10 11:51:45 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000487.html">[Supertux-devel] Bug Revision 4214
+</A></li>
+        <LI>Next message: <A HREF="000483.html">[Supertux-devel] World maps
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#490">[ date ]</a>
+              <a href="thread.html#490">[ thread ]</a>
+              <a href="subject.html#490">[ subject ]</a>
+              <a href="author.html#490">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Should be fixed now
+
+Am Samstag, den 09.09.2006, 18:07 +0200 schrieb Markus Engel:
+&gt;<i> When you are collecting too many coins at once, the game suddenly exits:
+</I>&gt;<i> 
+</I>&gt;<i> [INFO] src/main.cpp:196 [D:\Dokumente und 
+</I>&gt;<i> Einstellungen\Markus\.supertux2] is in the search path
+</I>&gt;<i> [INFO] src/main.cpp:196 [C:\MinGW\1.0\build\supertux\/data] is in the 
+</I>&gt;<i> search path
+</I>&gt;<i> [INFO] src/main.cpp:430 Component 'controller' finished after 0.2 seconds
+</I>&gt;<i> [WARNING] src/control/joystickkeyboardcontroller.cpp:209 Invalid button 
+</I>&gt;<i> '0' in buttonmap
+</I>&gt;<i> [WARNING] src/control/joystickkeyboardcontroller.cpp:209 Invalid button 
+</I>&gt;<i> '1' in buttonmap
+</I>&gt;<i> [INFO] src/main.cpp:430 Component 'config' finished after 0.073 seconds
+</I>&gt;<i> [INFO] src/main.cpp:430 Component 'tinygettext' finished after 0.03 seconds
+</I>&gt;<i> [INFO] src/main.cpp:430 Component 'commandline' finished after 0 seconds
+</I>&gt;<i> [INFO] src/main.cpp:430 Component 'audio' finished after 0.301 seconds
+</I>&gt;<i> [INFO] src/main.cpp:430 Component 'video' finished after 1.806 seconds
+</I>&gt;<i> [INFO] src/main.cpp:430 Component 'scripting' finished after 0.113 seconds
+</I>&gt;<i> [DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.085 seconds
+</I>&gt;<i> [INFO] src/main.cpp:430 Component 'resources' finished after 0.971 seconds
+</I>&gt;<i> [INFO] src/main.cpp:298 Using random seed 1157817430, from time().
+</I>&gt;<i> [WARNING] src/title.cpp:133 Couldn't parse levelset info for 
+</I>&gt;<i> 'levels/.svn': Couldn't open file 'levels/.svn/info': Das System kann 
+</I>&gt;<i> die angegebene Datei nicht finden.
+</I>&gt;<i> [WARNING] src/title.cpp:133 Couldn't parse levelset info for 
+</I>&gt;<i> 'levels/misc': Couldn't open file 'levels/misc/info': Das System kann 
+</I>&gt;<i> die angegebene Datei nicht finden.
+</I>&gt;<i> [DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.054 seconds
+</I>&gt;<i> [WARNING] src/sector.cpp:212 sector 'main' does not contain a camera.
+</I>&gt;<i> [WARNING] src/sector.cpp:212 sector 'main' does not contain a camera.
+</I>&gt;<i> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+</I>&gt;<i> sounds/coin.wav: Couldn't create audio source: Invalid Value
+</I>&gt;<i> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+</I>&gt;<i> sounds/coin.wav: Couldn't create audio source: Invalid Value
+</I>&gt;<i> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+</I>&gt;<i> sounds/coin.wav: Couldn't create audio source: Invalid Value
+</I>&gt;<i> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+</I>&gt;<i> sounds/coin.wav: Couldn't create audio source: Invalid Value
+</I>&gt;<i> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+</I>&gt;<i> sounds/coin.wav: Couldn't create audio source: Invalid Value
+</I>&gt;<i> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+</I>&gt;<i> sounds/coin.wav: Couldn't create audio source: Invalid Value
+</I>&gt;<i> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+</I>&gt;<i> sounds/coin.wav: Couldn't create audio source: Invalid Value
+</I>&gt;<i> [WARNING] src/audio/sound_manager.cpp:188 Couldn't play sound 
+</I>&gt;<i> sounds/coin.wav: Couldn't create audio source: Invalid Value
+</I>&gt;<i> [WARNING] src/sector.cpp:212 sector 'main' does not contain a camera.
+</I>&gt;<i> [FATAL] src/main.cpp:507 Unexpected exception: Couldn't create audio 
+</I>&gt;<i> source: Invalid Value
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000487.html">[Supertux-devel] Bug Revision 4214
+</A></li>
+	<LI>Next message: <A HREF="000483.html">[Supertux-devel] World maps
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#490">[ date ]</a>
+              <a href="thread.html#490">[ thread ]</a>
+              <a href="subject.html#490">[ subject ]</a>
+              <a href="author.html#490">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

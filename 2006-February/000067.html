@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] butt-slide-jump &lt; bug or feature ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20butt-slide-jump%20%3C%20bug%20or%20feature%20%3F&In-Reply-To=%3C35422.192.168.1.1.1140830234.squirrel%40gluebox.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000066.html">
+   <LINK REL="Next"  HREF="000088.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] butt-slide-jump &lt; bug or feature ?</H1>
+    <B>S.Groundwater</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20butt-slide-jump%20%3C%20bug%20or%20feature%20%3F&In-Reply-To=%3C35422.192.168.1.1.1140830234.squirrel%40gluebox.com%3E"
+       TITLE="[Supertux-devel] butt-slide-jump &lt; bug or feature ?">slacker at gluebox.com
+       </A><BR>
+    <I>Sat Feb 25 02:17:14 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000066.html">[Supertux-devel] Supertux
+</A></li>
+        <LI>Next message: <A HREF="000088.html">[Supertux-devel] Where installed, how to reset?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#67">[ date ]</a>
+              <a href="thread.html#67">[ thread ]</a>
+              <a href="subject.html#67">[ subject ]</a>
+              <a href="author.html#67">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hey ho.
+
+The other day on IRC wantsi was trying to point out a specific bug/feature
+where holding keys at the right moment causes tux to slide across the
+screen on his butt. At least that's what I think we were supposed to see.
+
+I think I just discovered what wantsi was trying to point out. I'm not
+sure if it's a bug, seems more like  feature.
+
+Here's how it works:
+
+Tux runs down a sloped hill. While still moving down the slope he speeds
+up in continued motion. Pressing the down arrow while in this motion and
+still on the slope puts tux in a moving butt-jump position. When the slope
+levels out tux continues to slide across the flat ground at run speed. He
+continues until an object or upward slope is reached.
+
+The fix that would make this a killer feature would be a jump at the end
+of the run/slide. Either a ramp or a small upward slope/bump to send tux
+flying. Using the ramp tux could do a butt-slide-jump that launches him to
+a high location which is otherwise unreachable.
+
+Here's a composite of screen shots showing my test yeti doing the
+butt-side motions. This sprite is still in the works so yeti is missing
+his arms :)
+
+<A HREF="http://gluebox.com/images/yeti-butt-slide.jpg">http://gluebox.com/images/yeti-butt-slide.jpg</A>
+
+At the moment using these key combinations is not possible with my arcade
+iPAC joystick control panel, which is still under construction. It would
+be worth it to me to have to rebuild my controller panel if someone were
+to complete the code for the butt-slide-jump move. ( hint :)
+
+Anyways, just food for thought.
+enjoy
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000066.html">[Supertux-devel] Supertux
+</A></li>
+	<LI>Next message: <A HREF="000088.html">[Supertux-devel] Where installed, how to reset?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#67">[ date ]</a>
+              <a href="thread.html#67">[ thread ]</a>
+              <a href="subject.html#67">[ subject ]</a>
+              <a href="author.html#67">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

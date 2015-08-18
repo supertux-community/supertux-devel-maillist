@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3435%20-%20in%20trunk/supertux%3A%0A%20data/levels/world1%20src%20src/badguy%20src/object%20src/scripting&In-Reply-To=%3C1146042116.6287.8.camel%40taylor.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000178.html">
+   <LINK REL="Next"  HREF="000166.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting</H1>
+    <B>Matze Braun</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3435%20-%20in%20trunk/supertux%3A%0A%20data/levels/world1%20src%20src/badguy%20src/object%20src/scripting&In-Reply-To=%3C1146042116.6287.8.camel%40taylor.local%3E"
+       TITLE="[Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting">matze at braunis.de
+       </A><BR>
+    <I>Wed Apr 26 11:01:56 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000178.html">killing Mr. Bomb (was: [Supertux-devel] r3436 - trunk/supertux/src/badguy)
+</A></li>
+        <LI>Next message: <A HREF="000166.html">[Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Mittwoch, den 26.04.2006, 04:15 +0200 schrieb <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">sik0fewl at berlios.de</A>:
+&gt;<i> Author: sik0fewl
+</I>&gt;<i> Date: 2006-04-26 04:13:42 +0200 (Wed, 26 Apr 2006)
+</I>&gt;<i> New Revision: 3435
+</I>&gt;<i> 
+</I>&gt;<i> Added:
+</I>&gt;<i>    trunk/supertux/src/random_generator.cpp
+</I>&gt;<i>    trunk/supertux/src/random_generator.hpp
+</I>&gt;<i>    trunk/supertux/src/scripting/random_generator.hpp
+</I>&gt;<i> Modified:
+</I>&gt;<i>    trunk/supertux/data/levels/world1/intro.nut
+</I>&gt;<i>    trunk/supertux/src/badguy/dispenser.cpp
+</I>&gt;<i>    trunk/supertux/src/badguy/kugelblitz.cpp
+</I>&gt;<i>    trunk/supertux/src/badguy/skullyhop.cpp
+</I>&gt;<i>    trunk/supertux/src/badguy/stalactite.cpp
+</I>&gt;<i>    trunk/supertux/src/badguy/zeekling.cpp
+</I>&gt;<i>    trunk/supertux/src/game_session.cpp
+</I>&gt;<i>    trunk/supertux/src/gameconfig.cpp
+</I>&gt;<i>    trunk/supertux/src/gameconfig.hpp
+</I>&gt;<i>    trunk/supertux/src/main.cpp
+</I>&gt;<i>    trunk/supertux/src/mainloop.cpp
+</I>&gt;<i>    trunk/supertux/src/object/fireworks.cpp
+</I>&gt;<i>    trunk/supertux/src/object/gameobjs.cpp
+</I>&gt;<i>    trunk/supertux/src/object/particles.cpp
+</I>&gt;<i>    trunk/supertux/src/object/particlesystem.cpp
+</I>&gt;<i>    trunk/supertux/src/object/particlesystem_interactive.cpp
+</I>&gt;<i>    trunk/supertux/src/object/player.cpp
+</I>&gt;<i>    trunk/supertux/src/object/skull_tile.cpp
+</I>&gt;<i>    trunk/supertux/src/object/unstable_tile.cpp
+</I>&gt;<i>    trunk/supertux/src/scripting/player.hpp
+</I>&gt;<i>    trunk/supertux/src/scripting/squirrel_util.cpp
+</I>&gt;<i>    trunk/supertux/src/scripting/wrapper.cpp
+</I>&gt;<i>    trunk/supertux/src/scripting/wrapper.hpp
+</I>&gt;<i>    trunk/supertux/src/scripting/wrapper.interface.hpp
+</I>&gt;<i>    trunk/supertux/src/title.cpp
+</I>&gt;<i> Log:
+</I>&gt;<i> Committing RandomGenerator patch from Allen King, with a few small changes
+</I>&gt;<i> Created scripting wrapper for the random number generator
+</I>&gt;<i>  - could someone check this over to make sure I did it properly? :)
+</I>&gt;<i> ...
+</I>
+Some comments:
+
+I don't feel too well about the copyright:
+
+&quot;2. Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.&quot;
+
+We should rather search for an alternative. What about extracting code
+from glibc or so?
+
+
+
+I don't like the squirrel interface like that. I'll change that to a
+single rand() function and override the one built into the squirrel
+standard library, otherwise we still can't be sure that the user is
+using our random numbers.
+
+Greetings,
+	Matze
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000178.html">killing Mr. Bomb (was: [Supertux-devel] r3436 - trunk/supertux/src/badguy)
+</A></li>
+	<LI>Next message: <A HREF="000166.html">[Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

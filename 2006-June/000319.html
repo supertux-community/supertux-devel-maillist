@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Ideas/suggestions
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Ideas/suggestions&In-Reply-To=%3C44A027D8.6030702%40hotmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000318.html">
+   <LINK REL="Next"  HREF="000320.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Ideas/suggestions</H1>
+    <B>gnomino</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Ideas/suggestions&In-Reply-To=%3C44A027D8.6030702%40hotmail.com%3E"
+       TITLE="[Supertux-devel] Ideas/suggestions">gnomino at hotmail.com
+       </A><BR>
+    <I>Mon Jun 26 20:30:48 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000318.html">[Supertux-devel] Re:How?
+</A></li>
+        <LI>Next message: <A HREF="000320.html">[Supertux-devel] FPS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+I made and tested the following experimental modifications to revision 
+3729 (nogl):
+
+To enable butt jump on blocks:
+*** src/object/block.cpp
+--- src/object/block.cpp
+***************
+*** 70,75 ****
+--- 70,79 ----
+      if(hitdata.normal.x == 0 &amp;&amp; hitdata.normal.y &lt; 0) {
+        hit(*player);
+      }
++
++     else if(hitdata.normal.x == 0 &amp;&amp; hitdata.normal.y &gt; 0 &amp;&amp; 
+player-&gt;butt_jump) {
++       hit(*player);
++     }
+    }
+ 
+    if(bouncing) {
+
+
+The door animation shows the door opening and then closing. Why does it 
+close? (The hatch doesn't)
+
+
+To stop Tux from moving during door/hatch animation: (badguys can still 
+attack, unfortunately)
+Make Player::activate &amp; deactivate public or make Door and Hatch friends
+*** src/trigger/door.cpp
+--- src/trigger/door.cpp
+***************
+*** 79,84 ****
+--- 79,86 ----
+    if(sprite-&gt;animation_done()) {
+      sprite-&gt;set_action(&quot;normal&quot;);
+      GameSession::current()-&gt;respawn(target_sector, target_spawnpoint);
++     player-&gt;activate();
++     player = 0;
+    }
+  }
+ 
+***************
+*** 89,97 ****
+  }
+ 
+  void
+! Door::event(Player&amp; , EventType type)
+  {
+    if(type == EVENT_ACTIVATE) {
+      sprite-&gt;set_action(&quot;open&quot;, 1);
+    }
+  }
+--- 91,101 ----
+  }
+ 
+  void
+! Door::event(Player&amp; player, EventType type)
+  {
+    if(type == EVENT_ACTIVATE) {
++     player.deactivate();
++     this-&gt;player = &player;
+      sprite-&gt;set_action(&quot;open&quot;, 1);
+    }
+  }
+*** src/trigger/door.hpp
+--- src/trigger/door.hpp
+***************
+*** 24,29 ****
+--- 24,30 ----
+ 
+  #include &quot;video/surface.hpp&quot;
+  #include &quot;sprite/sprite.hpp&quot;
++ #include &quot;object/player.hpp&quot;
+  #include &quot;trigger_base.hpp&quot;
+  #include &quot;serializable.hpp&quot;
+  #include &quot;timer.hpp&quot;
+***************
+*** 45,50 ****
+--- 46,52 ----
+    std::string target_sector;
+    std::string target_spawnpoint;
+    Sprite* sprite;
++   Player* player;
+  };
+ 
+  #endif
+*** src/trigger/hatch.cpp
+--- src/trigger/hatch.cpp
+***************
+*** 79,84 ****
+--- 79,86 ----
+    if(sprite-&gt;animation_done()) {
+      sprite-&gt;set_action(&quot;normal&quot;);
+      GameSession::current()-&gt;respawn(target_sector, target_spawnpoint);
++     player-&gt;activate();
++     player = 0;
+    }
+  }
+ 
+***************
+*** 89,97 ****
+  }
+ 
+  void
+! Hatch::event(Player&amp; , EventType type)
+  {
+    if(type == EVENT_ACTIVATE) {
+      sprite-&gt;set_action(&quot;open&quot;, 1);
+    }
+  }
+--- 91,101 ----
+  }
+ 
+  void
+! Hatch::event(Player&amp; player, EventType type)
+  {
+    if(type == EVENT_ACTIVATE) {
++     player.deactivate();
++     this-&gt;player = &player;
+      sprite-&gt;set_action(&quot;open&quot;, 1);
+    }
+  }
+*** src/trigger/hatch.hpp
+--- src/trigger/hatch.hpp
+***************
+*** 24,29 ****
+--- 24,30 ----
+ 
+  #include &quot;video/surface.hpp&quot;
+  #include &quot;sprite/sprite.hpp&quot;
++ #include &quot;object/player.hpp&quot;
+  #include &quot;trigger_base.hpp&quot;
+  #include &quot;serializable.hpp&quot;
+  #include &quot;timer.hpp&quot;
+***************
+*** 45,50 ****
+--- 46,52 ----
+    std::string target_sector;
+    std::string target_spawnpoint;
+    Sprite* sprite;
++   Player* player;
+  };
+ 
+  #endif
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000318.html">[Supertux-devel] Re:How?
+</A></li>
+	<LI>Next message: <A HREF="000320.html">[Supertux-devel] FPS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

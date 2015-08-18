@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Problem on building supertux from SVN
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Problem%20on%20building%20supertux%20from%20SVN&In-Reply-To=%3C9f9b69440610181253u61fc9b99jbb43dbc207149c7b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000547.html">
+   <LINK REL="Next"  HREF="000550.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Problem on building supertux from SVN</H1>
+    <B>Krishnamurti L. L. V. Nunes</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Problem%20on%20building%20supertux%20from%20SVN&In-Reply-To=%3C9f9b69440610181253u61fc9b99jbb43dbc207149c7b%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] Problem on building supertux from SVN">krishnalelis at gmail.com
+       </A><BR>
+    <I>Wed Oct 18 21:53:00 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000547.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+        <LI>Next message: <A HREF="000550.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#548">[ date ]</a>
+              <a href="thread.html#548">[ thread ]</a>
+              <a href="subject.html#548">[ subject ]</a>
+              <a href="author.html#548">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>2006/10/18, tuxdev &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">tuxdev103 at gmail.com</A>&gt;:
+&gt;<i> Does /etc/ld.so.conf have /usr/local/lib in it?  What is
+</I>&gt;<i> $LD_CONFIG_PATH (I think that is what it is called, not sure)?  PATH
+</I>&gt;<i> is for binaries, not libraries.
+</I>&gt;<i>
+</I>
+OpenAL `make install' gives me the following:
+
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /usr/local/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the `-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the `LD_RUN_PATH' environment variable
+     during linking
+   - use the `-Wl,--rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+
+So I have run ldconfig -n /usr/local/lib (as root).
+Yet /etc/ld.so.conf had no /usr/local/lib in it.
+Then I included /usr/local/lib in ld.so.conf, but LD_LIBRARY_PATH is still empty
+
+What am I supposed to do? What shall I have forgotten?
+
+I had no libtool program, does openall compiling process try to use
+it? I've just installed.
+
+
+
+
+&gt;<i> On 10/18/06, Krishnamurti L. L. V. Nunes &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">krishnalelis at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; 2006/10/13, Christoph Sommer &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">supertux at 2006.expires.deltadevelopment.de</A>&gt;:
+</I>&gt;<i> &gt; &gt; &gt; 2006/10/13, tuxdev &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">tuxdev103 at gmail.com</A>&gt;:
+</I>&gt;<i> &gt; &gt; &gt;&gt; What version of bison do you have?
+</I>&gt;<i> &gt; &gt; &gt; (...)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I could compile SuperTux from source using bison instead of bison++,
+</I>&gt;<i> &gt; but now I have another problem.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I cannot run supertux:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ./supertux: error while loading shared libraries: libopenal.so.0:
+</I>&gt;<i> &gt; cannot open shared object file: No such file or directory
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; OpenAL was compiled correctly, and Supertux' config script detects it.
+</I>&gt;<i> &gt; libopenal.so.0 exists at /usr/local/lib/, and is a symlink to
+</I>&gt;<i> &gt; libopenal.so.0.0.0
+</I>&gt;<i> &gt; This directory is in my PATH variable, as well as
+</I>&gt;<i> &gt; ~/openal-0.0.8/src/.lib, where the libs have been compiled.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I have read OpenAL INSTALL to figure out whether I should make any
+</I>&gt;<i> &gt; links by myself, but did not find anything.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; All other dependencies are installed, and direct opengl rendering is
+</I>&gt;<i> &gt; enebled.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Have I done something wrong?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Thanx,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>
+
+
+-- 
+Krishnamurti Lelis Lima Vieira Nunes
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000547.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+	<LI>Next message: <A HREF="000550.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#548">[ date ]</a>
+              <a href="thread.html#548">[ thread ]</a>
+              <a href="subject.html#548">[ subject ]</a>
+              <a href="author.html#548">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

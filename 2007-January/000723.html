@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Installing 0.3.0 Level Editor
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Installing%200.3.0%20Level%20Editor&In-Reply-To=%3C1169108836.10538.15.camel%40taylor.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000722.html">
+   <LINK REL="Next"  HREF="000724.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Installing 0.3.0 Level Editor</H1>
+    <B>Matthias Braun</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Installing%200.3.0%20Level%20Editor&In-Reply-To=%3C1169108836.10538.15.camel%40taylor.local%3E"
+       TITLE="[Supertux-devel] Installing 0.3.0 Level Editor">matze at braunis.de
+       </A><BR>
+    <I>Thu Jan 18 09:34:52 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000722.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+        <LI>Next message: <A HREF="000724.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#723">[ date ]</a>
+              <a href="thread.html#723">[ thread ]</a>
+              <a href="subject.html#723">[ subject ]</a>
+              <a href="author.html#723">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Mittwoch, den 17.01.2007, 22:44 -0800 schrieb <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">onlinejb at yahoo.com</A>:
+&gt;<i> The editor finally installed but not working.  While
+</I>&gt;<i> installing pango-1.11.5-2:
+</I>&gt;<i> 
+</I>&gt;<i>  [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">root at localhost</A> pango]# rpm -v -U --nodeps   
+</I>&gt;<i> pango-1.11.5-2.i386.rpm
+</I>&gt;<i>  Preparing packages for installation...
+</I>&gt;<i>  pango-1.11.5-2
+</I>&gt;<i>  /usr/bin/pango-querymodules-32: symbol lookup error: 
+</I>&gt;<i>  /usr/lib/libpango-1.0.so.0: undefined symbol: 
+</I>&gt;<i> g_intern_static_string 
+</I>&gt;<i>  error: %post(pango-1.11.5-2.i386) scriptlet failed, 
+</I>&gt;<i> exit status 127
+</I>&gt;<i> 
+</I>&gt;<i> Hmmm...pango doesn't install.  let's see:
+</I>&gt;<i> 
+</I>&gt;<i>  [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">root at localhost</A> pango]# rpm -v -U --nodeps --test 
+</I>&gt;<i> pango-1.11.5-2.i386.rpm
+</I>&gt;<i>  Preparing packages for installation...
+</I>&gt;<i>          package pango-1.11.5-2 is already installed
+</I>&gt;<i> 
+</I>&gt;<i> Okay...so it is installed, or so they would have me
+</I>&gt;<i> believe.  All right, I'll play along...
+</I>&gt;<i> 
+</I>&gt;<i>  [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">root at localhost</A> supertux]# yum install
+</I>&gt;<i> gtk-sharp2-2.8.2-1.i386.rpm
+</I>&gt;<i> 
+</I>&gt;<i> ...That worked.
+</I>&gt;<i> 
+</I>&gt;<i>  [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">root at localhost</A> supertux-editor-0.3.0]# jam
+</I>&gt;<i> 
+</I>&gt;<i> ...Success.  Now we're ready for the big time:
+</I>
+What exactly did you see after typing jam?
+
+&gt;<i> 
+</I>&gt;<i>  [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">root at localhost</A> supertux]# mono supertux-editor.exe &amp;
+</I>&gt;<i> 
+</I>&gt;<i> ...KA-BOOM!
+</I>&gt;<i> 
+</I>&gt;<i> ** (supertux-editor.exe:7199): WARNING **: The
+</I>&gt;<i> following assembly referenced from
+</I>&gt;<i> /root/in/supertux/supertux-editor.exe could not be
+</I>&gt;<i> loaded:
+</I>&gt;<i>      Assembly:   libeditor    (assemblyref_index=2)
+</I>&gt;<i>      Version:    0.0.0.0
+</I>&gt;<i>      Public Key: (none)
+</I>&gt;<i> The assembly was not found in the Global Assembly
+</I>&gt;<i> Cache, a path listed in the MONO_PATH environment
+</I>&gt;<i> variable, or in the location of the executing assembly
+</I>&gt;<i> (/root/in/supertux/).
+</I>&gt;<i> 
+</I>&gt;<i> ** (supertux-editor.exe:7199): WARNING **: Could not
+</I>&gt;<i> load file or assembly 'libe
+</I>&gt;<i> ditor, Version=0.0.0.0, Culture=neutral' or one of its
+</I>&gt;<i> dependencies.
+</I>
+This error message is not related to pango. It simply means that mono
+isn't able to load libeditor.dll, did it build that file for you? Did
+you start the editor from the editor directory? (Why are you starting it
+as root?)
+
+Greetings,
+	Matze
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000722.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+	<LI>Next message: <A HREF="000724.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#723">[ date ]</a>
+              <a href="thread.html#723">[ thread ]</a>
+              <a href="subject.html#723">[ subject ]</a>
+              <a href="author.html#723">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

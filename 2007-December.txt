@@ -1,0 +1,55 @@
+From supertux at 2006.expires.deltadevelopment.de  Fri Dec 21 04:27:43 2007
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Fri, 21 Dec 2007 04:27:43 +0100
+Subject: [Supertux-devel] SuperTux 0.3.1 released
+Message-ID: <476B32AF.8040101@2006.expires.deltadevelopment.de>
+
+Hi everybody,
+
+--8<--- Release notes --8<---
+
+Supertux Release 0.3.1 (2007-12-20)
+
+Just in time for Christmas, we bring you SuperTux 0.3.1, a preview
+of SuperTux Milestone 2.
+
+This build doesn't contain all levels planned for Milestone 2 and
+its story is by no means complete, but the game is already fun to
+play.
+
+SuperTux 0.3.1 features:
+
+     * new, OpenGL- and OpenAL-based engine
+     * final boss for Icy Island
+     * brand new Forest World with new badguys and new game objects
+     * new and improved soundtrack, immersive sound effects
+     * much more...
+
+The changes in more detail: The SuperTux 0.1 engine was nearly
+completely rewritten. The game is translatable now, a new camera
+algorithm allows scrolling in all four directions. Collision
+detection supports slopes and moving objects now. We have scripting
+support for dynamic level events and animations. New game objects
+include trampolines, switches, portable stones, upside-down
+levels, wind, moving platforms and particle effects. The sound
+system is now OpenAL-based with an improved soundtrack now played
+from Ogg/Vorbis-files, which were pre-rendered on a high-class
+synthesizer.
+
+This is also a call for artists and coders: If you like the game in
+its current state, join us and help us finish Milestone 2!
+
+--8<--- End release notes --8<---
+
+You can find the source package (as well as some binaries) on the 
+SuperTux home page:
+
+http://supertux.lethargik.org/
+
+
+Regards,
+
+   Christoph
+
+
+

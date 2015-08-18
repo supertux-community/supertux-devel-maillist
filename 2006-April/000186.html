@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Supertux doesn't compile on 64-bit Linux
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Supertux%20doesn%27t%20compile%20on%2064-bit%20Linux&In-Reply-To=%3C4453B9AE.3000007%40users.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000179.html">
+   <LINK REL="Next"  HREF="000188.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Supertux doesn't compile on 64-bit Linux</H1>
+    <B>Arvid Norlander</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Supertux%20doesn%27t%20compile%20on%2064-bit%20Linux&In-Reply-To=%3C4453B9AE.3000007%40users.berlios.de%3E"
+       TITLE="[Supertux-devel] Supertux doesn't compile on 64-bit Linux">anmaster at berlios.de
+       </A><BR>
+    <I>Sat Apr 29 21:08:30 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000179.html">[Supertux-devel] Snow appearance
+</A></li>
+        <LI>Next message: <A HREF="000188.html">[Supertux-devel] Milestone II
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#186">[ date ]</a>
+              <a href="thread.html#186">[ thread ]</a>
+              <a href="subject.html#186">[ subject ]</a>
+              <a href="author.html#186">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm on 64-bit Gentoo Linux and SuperTux-svn (revision 3462) doesn't
+compile on that:
+~/src/supertux # jam
+...patience...
+...found 1053 target(s)...
+...updating 211 target(s)...
+MkDir1 ./build/x86_64-pc-linux-gnu/optimize/src/squirrel
+MkDir1 ./build/x86_64-pc-linux-gnu/optimize/src/squirrel/squirrel
+C++ ./build/x86_64-pc-linux-gnu/optimize/src/squirrel/squirrel/sqbaselib.o
+In file included from src/squirrel/squirrel/sqbaselib.cpp:7:
+src/squirrel/squirrel/sqtable.h: In function `SQHash HashObj(const
+SQObjectPtr&amp;)':
+src/squirrel/squirrel/sqtable.h:21: warning: cast from pointer to
+integer of different size
+
+... cut away bit until the error ...
+
+C++ ./build/x86_64-pc-linux-gnu/optimize/src/scripting/squirrel_util.o
+src/scripting/squirrel_util.cpp: In function `std::string
+Scripting::squirrel2string(SQVM*, int)':
+src/scripting/squirrel_util.cpp:157: error: cannot convert `int*' to
+`SQInteger*' for argument `3' to `SQRESULT sq_getinteger(SQVM*,
+SQInteger, SQInteger*)'
+src/scripting/squirrel_util.cpp: In function `void
+Scripting::print_squirrel_stack(SQVM*)':
+src/scripting/squirrel_util.cpp:262: error: cannot convert `int*' to
+`SQInteger*' for argument `3' to `SQRESULT sq_getinteger(SQVM*,
+SQInteger, SQInteger*)'
+
+    g++ -c -o
+./build/x86_64-pc-linux-gnu/optimize/src/scripting/squirrel_util.o  -I.
+-I./src -I/usr/include/SDL -D_REENTRANT  -pthread
+-Isrc/squirrel/include -Isrc/squirrel -march=k8 -pipe -O2 -msse3
+-D__x86_64__ -Wall -O3 -g -DAPPDATADIR='&quot;/usr/local/share/supertux&quot;'
+src/scripting/squirrel_util.cpp
+
+...failed C++
+./build/x86_64-pc-linux-gnu/optimize/src/scripting/squirrel_util.o ...
+MiniSwig src/scripting/wrapper.cpp
+C++ ./build/x86_64-pc-linux-gnu/optimize/src/scripting/wrapper.o
+src/scripting/wrapper.cpp: In function `int
+Scripting::Wrapper::Player_add_coins_wrapper(SQVM*)':
+src/scripting/wrapper.cpp:998: error: cannot convert `int*' to
+`SQInteger*' for argument `3' to `SQRESULT sq_getinteger(SQVM*,
+SQInteger, SQInteger*)'
+src/scripting/wrapper.cpp: In function `int
+Scripting::Wrapper::FloatingImage_constructor_wrapper(SQVM*)':
+src/scripting/wrapper.cpp:1216: error: invalid conversion from `int
+(*)(void*, int)' to `SQInteger (*)(void*, SQInteger)'
+src/scripting/wrapper.cpp:1216: error:   initializing argument 3 of
+`void sq_setreleasehook(SQVM*, SQInteger, SQInteger (*)(void*, SQInteger))'
+src/scripting/wrapper.cpp: In function `int
+Scripting::Wrapper::FloatingImage_set_layer_wrapper(SQVM*)':
+src/scripting/wrapper.cpp:1238: error: cannot convert `int*' to
+`SQInteger*' for argument `3' to `SQRESULT sq_getinteger(SQVM*,
+SQInteger, SQInteger*)'
+src/scripting/wrapper.cpp: In function `int
+Scripting::Wrapper::FloatingImage_set_anchor_point_wrapper(SQVM*)':
+src/scripting/wrapper.cpp:1371: error: cannot convert `int*' to
+`SQInteger*' for argument `3' to `SQRESULT sq_getinteger(SQVM*,
+SQInteger, SQInteger*)'
+src/scripting/wrapper.cpp: In function `void
+Scripting::create_squirrel_instance(SQVM*, Scripting::DisplayEffect*,
+bool)':
+src/scripting/wrapper.cpp:2110: error: invalid conversion from `int
+(*)(void*, int)' to `SQInteger (*)(void*, SQInteger)'
+src/scripting/wrapper.cpp:2110: error:   initializing argument 3 of
+`void sq_setreleasehook(SQVM*, SQInteger, SQInteger (*)(void*, SQInteger))'
+src/scripting/wrapper.cpp: In function `void
+Scripting::create_squirrel_instance(SQVM*, Scripting::Camera*, bool)':
+src/scripting/wrapper.cpp:2136: error: invalid conversion from `int
+(*)(void*, int)' to `SQInteger (*)(void*, SQInteger)'
+src/scripting/wrapper.cpp:2136: error:   initializing argument 3 of
+`void sq_setreleasehook(SQVM*, SQInteger, SQInteger (*)(void*, SQInteger))'
+src/scripting/wrapper.cpp: In function `void
+Scripting::create_squirrel_instance(SQVM*, Scripting::Level*, bool)':
+src/scripting/wrapper.cpp:2162: error: invalid conversion from `int
+(*)(void*, int)' to `SQInteger (*)(void*, SQInteger)'
+src/scripting/wrapper.cpp:2162: error:   initializing argument 3 of
+`void sq_setreleasehook(SQVM*, SQInteger, SQInteger (*)(void*, SQInteger))'
+
+... cut away more of the same error (but different line numbers) ...
+
+
+src/scripting/wrapper.cpp:2872: error: invalid conversion from `int
+(*)(SQVM*)' to `SQInteger (*)(SQVM*)'
+src/scripting/wrapper.cpp:2872: error:   initializing argument 2 of
+`void sq_newclosure(SQVM*, SQInteger (*)(SQVM*), SQUnsignedInteger)'
+src/scripting/wrapper.cpp:2878: error: invalid conversion from `int
+(*)(SQVM*)' to `SQInteger (*)(SQVM*)'
+src/scripting/wrapper.cpp:2878: error:   initializing argument 2 of
+`void sq_newclosure(SQVM*, SQInteger (*)(SQVM*), SQUnsignedInteger)'
+src/scripting/wrapper.cpp:2884: error: invalid conversion from `int
+(*)(SQVM*)' to `SQInteger (*)(SQVM*)'
+src/scripting/wrapper.cpp:2884: error:   initializing argument 2 of
+`void sq_newclosure(SQVM*, SQInteger (*)(SQVM*), SQUnsignedInteger)'
+
+    g++ -c -o
+./build/x86_64-pc-linux-gnu/optimize/src/scripting/wrapper.o  -I.
+-I./src -I/usr/include/SDL -D_REENTRANT  -pthread
+-Isrc/squirrel/include -Isrc/squirrel -march=k8 -pipe -O2 -msse3
+-D__x86_64__ -Wall -O3 -g -DAPPDATADIR='&quot;/usr/local/share/supertux&quot;'
+src/scripting/wrapper.cpp
+
+...failed C++
+./build/x86_64-pc-linux-gnu/optimize/src/scripting/wrapper.o ...
+...skipped supertux for lack of &lt;T!src!scripting!&gt;squirrel_util.o...
+XGetText data/levels/bonus1/messages.pot
+XGetText data/levels/bonus2/messages.pot
+XGetText data/levels/misc/messages.pot
+XGetText data/levels/test/messages.pot
+XGetText data/levels/world1/messages.pot
+XGetText data/levels/world2/messages.pot
+XGetText data/locale/messages.pot
+...failed updating 2 target(s)...
+...skipped 1 target(s)...
+...updated 208 target(s)...
+
+
+The reason for the error is that on AMD64 a long is 8 bytes and not 4
+bytes (according to a conversation with sik0fewl on IRC)
+See also:
+<A HREF="http://dev.gentoo.org/~plasmaroo/devmanual/archs/amd64#machine-word-sizes">http://dev.gentoo.org/~plasmaroo/devmanual/archs/amd64#machine-word-sizes</A>
+
+
+Regards,
+
+AnMaster
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000179.html">[Supertux-devel] Snow appearance
+</A></li>
+	<LI>Next message: <A HREF="000188.html">[Supertux-devel] Milestone II
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#186">[ date ]</a>
+              <a href="thread.html#186">[ thread ]</a>
+              <a href="subject.html#186">[ subject ]</a>
+              <a href="author.html#186">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

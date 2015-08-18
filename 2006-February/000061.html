@@ -1,0 +1,340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] found a little bug in milestone 1 0.1.3
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20found%20a%20little%20bug%20in%20milestone%201%200.1.3&In-Reply-To=%3CIUS7NQ%24B1339A6B839A9627025B8E9AB2025D2E%40laposte.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000060.html">
+   <LINK REL="Next"  HREF="000064.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] found a little bug in milestone 1 0.1.3</H1>
+    <B>mailinux</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20found%20a%20little%20bug%20in%20milestone%201%200.1.3&In-Reply-To=%3CIUS7NQ%24B1339A6B839A9627025B8E9AB2025D2E%40laposte.net%3E"
+       TITLE="[Supertux-devel] found a little bug in milestone 1 0.1.3">mailinux at laposte.net
+       </A><BR>
+    <I>Thu Feb 16 14:19:02 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000060.html">[Supertux-devel] Valentine's Day (ecard).
+</A></li>
+        <LI>Next message: <A HREF="000064.html">[Supertux-devel] super tux!!!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#61">[ date ]</a>
+              <a href="thread.html#61">[ thread ]</a>
+              <a href="subject.html#61">[ subject ]</a>
+              <a href="author.html#61">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>configuration:
+*gentoo 2005.1
+(<A HREF="http://packages.gentoo.org/search/?sstring=supertux">http://packages.gentoo.org/search/?sstring=supertux</A>)
+*milwstone 1 ,version 0.1.3  
+
+i have gentoo,and gentoo is well known for aplying a lot of
+patch to the packages(it's a source distribution...)
+
+but here it seems that there is no patch aplyed...
+by the way emerge is the package management tool
+
+so here is supertux package building in order to show that
+there is no patch aplyed:
+&quot; emerge supertux
+Calculating dependencies ...done!
+&gt;&gt;&gt;<i> emerge (1 of 1) games-arcade/supertux-0.1.3 to /
+</I>&gt;&gt;&gt;<i> md5 files   ;-) supertux-0.1.3.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-supertux-0.1.3
+</I>&gt;&gt;&gt;<i> md5 src_uri ;-) supertux-0.1.3.tar.bz2
+</I>&gt;&gt;&gt;<i> Unpacking source...
+</I>&gt;&gt;&gt;<i> Unpacking supertux-0.1.3.tar.bz2 to
+</I>/var/tmp/portage/supertux-0.1.3/work
+&gt;&gt;&gt;<i> Source unpacked.
+</I> * Using GNU config files from /usr/share/libtool
+ *   Updating config.sub                                     
+                                                       [ ok ]
+ *   Updating config.guess                                   
+                                                       [ ok ]
+./configure --prefix=/usr/games --build=i686-pc-linux-gnu
+--host=i686-pc-linux-gnu --mandir=/usr/share/man
+--infodir=/usr/share/info --datadir=/usr/share/games
+--sysconfdir=/etc/games --localstatedir=/var/games
+--disable-dependency-tracking --disable-debug --enable-opengl
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking target system type... i686-pc-linux-gnu
+checking for a BSD-compatible install... /bin/install -c
+checking whether build environment is sane... yes
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for i686-pc-linux-gnu-gcc... i686-pc-linux-gnu-gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables...
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether i686-pc-linux-gnu-gcc accepts -g... yes
+checking for i686-pc-linux-gnu-gcc option to accept ANSI C...
+none needed
+checking for style of include used by make... GNU
+checking dependency style of i686-pc-linux-gnu-gcc... none
+checking for i686-pc-linux-gnu-g++... i686-pc-linux-gnu-g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether i686-pc-linux-gnu-g++ accepts -g... yes
+checking dependency style of i686-pc-linux-gnu-g++... none
+checking for a BSD-compatible install... /bin/install -c
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking how to run the C preprocessor... i686-pc-linux-gnu-gcc -E
+checking for egrep... grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for unistd.h... (cached) yes
+checking for an ANSI C-conforming const... yes
+checking for gprof mode... disabled
+checking for debug mode... disabled
+checking wether OpenGL should be used... yes
+checking for sdl-config... /usr/bin/sdl-config
+checking for SDL - version &gt;= 1.2.4... yes
+checking for Mix_OpenAudio in -lSDL_mixer... yes
+checking for IMG_Load in -lSDL_image... yes
+checking for X... libraries , headers in standard search path
+checking for the pthreads library -lpthreads... no
+checking whether pthreads work without any flags... yes
+checking for joinable pthread attribute... PTHREAD_CREATE_JOINABLE
+checking if more special flags are required for pthreads... no
+checking for cc_r... i686-pc-linux-gnu-gcc
+checking windows.h usability... no
+checking windows.h presence... no
+checking for windows.h... no
+checking for OpenGL library... -lGL
+checking for gzopen in -lz... yes
+checking for mkdir... yes
+checking for strdup... yes
+checking for strstr... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating src/Makefile
+config.status: creating data/Makefile
+config.status: executing depfiles commands
+
+Features:
+=========
+ Profile Mode:   no
+ Debug Mode:     no
+ OpenGL Support: yes
+
+Making all in src
+make[1]: Entering directory
+`/var/tmp/portage/supertux-0.1.3/work/supertux-0.1.3/src'
+i686-pc-linux-gnu-g++ -DPACKAGE_NAME=\&quot;SuperTux\&quot;
+-DPACKAGE_TARNAME=\&quot;supertux\&quot; -DPACKAGE_VERSION=\&quot;0.1.3\&quot;
+-DPACKAGE_STRING=\&quot;SuperTux\ 0.1.3\&quot; -DPACKAGE_BUGREPORT=\&quot;\&quot;
+-DPACKAGE=\&quot;supertux\&quot; -DVERSION=\&quot;0.1.3\&quot; -DHAVE_DIRENT_H=1
+-DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1
+-DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1
+-DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1
+-DHAVE_UNISTD_H=1 -DHAVE_UNISTD_H=1 -DHAVE_LIBSDL_MIXER=1
+-DHAVE_LIBSDL_IMAGE=1 -DHAVE_PTHREAD=1 -DHAVE_LIBZ=1
+-DHAVE_MKDIR=1 -DHAVE_STRDUP=1 -DHAVE_STRSTR=1  -I. -I.    
+-O3 -march=pentium3 -pipe -I/usr/include/SDL -D_REENTRANT 
+-DDATA_PREFIX='&quot;/usr/share/games/supertux&quot;' -c -o badguy.o
+`test -f 'badguy.cpp' || echo './'`badguy.cpp
+i686-pc-linux-gnu-g++ -DPACKAGE_NAME=\&quot;SuperTux\&quot;
+-DPACKAGE_TARNAME=\&quot;supertux\&quot; -DPACKAGE_VERSION=\&quot;0.1.3\&quot;
+-DPACKAGE_STRING=\&quot;SuperTux\ 0.1.3\&quot; -DPACKAGE_BUGREPORT=\&quot;\&quot;
+-DPACKAGE=\&quot;supertux\&quot; -DVERSION=\&quot;0.1.3\&quot; -DHAVE_DIRENT_H=1
+-DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1
+-DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1
+-DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1
+-DHAVE_UNISTD_H=1 -DHAVE_UNISTD_H=1 -DHAVE_LIBSDL_MIXER=1
+-DHAVE_LIBSDL_IMAGE=1 -DHAVE_PTHREAD=1 -DHAVE_LIBZ=1
+-DHAVE_MKDIR=1 -DHAVE_STRDUP=1 -DHAVE_STRSTR=1  -I. -I.    
+-O3 -march=pentium3 -pipe -I/usr/include/SDL -D_REENTRANT 
+-DDATA_PREFIX='&quot;/usr/share/games/supertux&quot;' -c -o bitmask.o
+`test -f 'bitmask.cpp' || echo './'`bitmask.cpp
+sandbox:  Caught signal 2 in pid 10147
+make[1]: *** [badguy.o] Interrupt
+make[1]: *** [bitmask.o] Interrupt
+make: *** [all-recursive] Interrupt&quot;
+
+and here there is the vanilla-sources(the kernel.org kernel)
+packages that is patched:
+&quot;# emerge vanilla-sources
+Calculating dependencies ...done!
+&gt;&gt;&gt;<i> emerge (1 of 1) sys-kernel/vanilla-sources-2.6.15.1 to /
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.14.6.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.15.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.10.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.11.11.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.15.4.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.5.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.16_rc1.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.14.3.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.15.1.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.0.40-r1.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.4.31.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.7.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.14.5.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.11.8.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.15.3.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.13.4.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.14.2.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.11.12.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.4.30.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.4.21.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.16_rc2.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.14.4.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.4.32.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.6.12.5.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.4.28.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) vanilla-sources-2.2.26-r1.ebuild
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.2.26-r1
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.16_rc1
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.16_rc2
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.4.21
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.4.28
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.4.30
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.4.31
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.4.32
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.10
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.15
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.11.8
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.12.5
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.13.4
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.14.2
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.14.3
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.14.4
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.14.5
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.14.6
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.15.1
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.15.3
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.15.4
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.5
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.7
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.11.11
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.6.11.12
+</I>&gt;&gt;&gt;<i> md5 files   ;-) files/digest-vanilla-sources-2.0.40-r1
+</I>&gt;&gt;&gt;<i> md5 src_uri ;-) patch-2.6.15.1.bz2
+</I>&gt;&gt;&gt;<i> md5 src_uri ;-) linux-2.6.15.tar.bz2
+</I>&gt;&gt;&gt;<i> Preparing to unpack ...
+</I>&gt;&gt;&gt;<i> Unpacking source...
+</I>&gt;&gt;&gt;<i> Unpacking linux-2.6.15.tar.bz2 to
+</I>/var/tmp/portage/vanilla-sources-2.6.15.1/work
+ * Applying patch-2.6.15.1.patch (-p0+) ...                  
+                                                       [ ok ]
+  CHK     include/linux/version.h
+  UPD     include/linux/version.h
+&gt;&gt;&gt;<i> Source unpacked.
+</I>&gt;&gt;&gt;<i> Test phase [not enabled]: sys-kernel/vanilla-sources-2.6.15.1
+</I>
+&gt;&gt;&gt;<i> Install vanilla-sources-2.6.15.1 into
+</I>/var/tmp/portage/vanilla-sources-2.6.15.1/image/ category
+sys-kernel
+&gt;&gt;&gt;<i> Copying sources ...
+</I>man:
+prepallstrip:
+strip: i686-pc-linux-gnu-strip --strip-unneeded
+&gt;&gt;&gt;<i> Completed installing vanilla-sources-2.6.15.1 into
+</I>/var/tmp/portage/vanilla-sources-2.6.15.1/image/
+
+&gt;&gt;&gt;<i> Merging sys-kernel/vanilla-sources-2.6.15.1 to /
+</I>--- /usr/
+--- /usr/src/
+--- /usr/src/linux-2.6.15.1/
+--- /usr/src/linux-2.6.15.1/fs/
+--- /usr/src/linux-2.6.15.1/fs/9p/
+&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/9p.c
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/9p.h
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/vfs_inode.c
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/debug.h
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/trans_fd.c
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/Makefile
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/fid.c
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/fid.h
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/vfs_file.c
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/mux.c
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/mux.h
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/vfs_dentry.c
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/v9fs_vfs.h
+</I>&gt;&gt;&gt;<i> /usr/src/linux-2.6.15.1/fs/9p/vfs_dir.c
+</I>&quot;
+
+
+
+
+
+
+
+
+
+
+
+
+how to reproduce the bug:
+*finish the main supertux game
+*go to bonus level (i used bonus level II)
+*play normaly and die 4 times
+*now,normaly if you die you'll restart from the main menu...
+*die and when tux is dying(jumping ) press esc
+*click on abort level
+*now you are on the &quot;world menu&quot; and the life count is as you
+had 0 lifes
+*choose a world and play...while loading it says that you have
+-1 life
+
+implications:
+*if you have -1 life you can't restart from the middle of a
+wolrd as when you have 1 life
+*simply you don't return to the main menu...
+
+by the way that's annoying to restart from the menu all the
+time when your 4 lifes are oveer...mabe a option in the option
+menu?
+
+Acc&#233;dez au courrier &#233;lectronique de La Poste : www.laposte.net ; 
+3615 LAPOSTENET (0,34 &#128;/mn) ; t&#233;l : 08 92 68 13 50 (0,34&#128;/mn)
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000060.html">[Supertux-devel] Valentine's Day (ecard).
+</A></li>
+	<LI>Next message: <A HREF="000064.html">[Supertux-devel] super tux!!!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#61">[ date ]</a>
+              <a href="thread.html#61">[ thread ]</a>
+              <a href="subject.html#61">[ subject ]</a>
+              <a href="author.html#61">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

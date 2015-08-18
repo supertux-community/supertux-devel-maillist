@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Problem on building supertux from SVN
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Problem%20on%20building%20supertux%20from%20SVN&In-Reply-To=%3Cff70c5070610181123x3198600ev9a6bec42a6f3a118%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000546.html">
+   <LINK REL="Next"  HREF="000548.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Problem on building supertux from SVN</H1>
+    <B>tuxdev</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Problem%20on%20building%20supertux%20from%20SVN&In-Reply-To=%3Cff70c5070610181123x3198600ev9a6bec42a6f3a118%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] Problem on building supertux from SVN">tuxdev103 at gmail.com
+       </A><BR>
+    <I>Wed Oct 18 20:23:45 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000546.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+        <LI>Next message: <A HREF="000548.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#547">[ date ]</a>
+              <a href="thread.html#547">[ thread ]</a>
+              <a href="subject.html#547">[ subject ]</a>
+              <a href="author.html#547">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Does /etc/ld.so.conf have /usr/local/lib in it?  What is
+$LD_CONFIG_PATH (I think that is what it is called, not sure)?  PATH
+is for binaries, not libraries.
+
+On 10/18/06, Krishnamurti L. L. V. Nunes &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">krishnalelis at gmail.com</A>&gt; wrote:
+&gt;<i> 2006/10/13, Christoph Sommer &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">supertux at 2006.expires.deltadevelopment.de</A>&gt;:
+</I>&gt;<i> &gt; &gt; 2006/10/13, tuxdev &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">tuxdev103 at gmail.com</A>&gt;:
+</I>&gt;<i> &gt; &gt;&gt; What version of bison do you have?
+</I>&gt;<i> &gt; &gt; (...)
+</I>&gt;<i>
+</I>&gt;<i> I could compile SuperTux from source using bison instead of bison++,
+</I>&gt;<i> but now I have another problem.
+</I>&gt;<i>
+</I>&gt;<i> I cannot run supertux:
+</I>&gt;<i>
+</I>&gt;<i> ./supertux: error while loading shared libraries: libopenal.so.0:
+</I>&gt;<i> cannot open shared object file: No such file or directory
+</I>&gt;<i>
+</I>&gt;<i> OpenAL was compiled correctly, and Supertux' config script detects it.
+</I>&gt;<i> libopenal.so.0 exists at /usr/local/lib/, and is a symlink to
+</I>&gt;<i> libopenal.so.0.0.0
+</I>&gt;<i> This directory is in my PATH variable, as well as
+</I>&gt;<i> ~/openal-0.0.8/src/.lib, where the libs have been compiled.
+</I>&gt;<i>
+</I>&gt;<i> I have read OpenAL INSTALL to figure out whether I should make any
+</I>&gt;<i> links by myself, but did not find anything.
+</I>&gt;<i>
+</I>&gt;<i> All other dependencies are installed, and direct opengl rendering is
+</I>&gt;<i> enebled.
+</I>&gt;<i>
+</I>&gt;<i> Have I done something wrong?
+</I>&gt;<i>
+</I>&gt;<i> Thanx,
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Krishnamurti Lelis Lima Vieira Nunes
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000546.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+	<LI>Next message: <A HREF="000548.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#547">[ date ]</a>
+              <a href="thread.html#547">[ thread ]</a>
+              <a href="subject.html#547">[ subject ]</a>
+              <a href="author.html#547">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

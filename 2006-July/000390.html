@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3929%20-%20trunk/supertux/src&In-Reply-To=%3C5a5496320607071122y24752dc7k4703ef3bff8336b9%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000388.html">
+   <LINK REL="Next"  HREF="000391.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src</H1>
+    <B>Ryan Flegel</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3929%20-%20trunk/supertux/src&In-Reply-To=%3C5a5496320607071122y24752dc7k4703ef3bff8336b9%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src">rflegel at gmail.com
+       </A><BR>
+    <I>Fri Jul  7 20:22:16 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000388.html">[Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src
+</A></li>
+        <LI>Next message: <A HREF="000391.html">[Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#390">[ date ]</a>
+              <a href="thread.html#390">[ thread ]</a>
+              <a href="subject.html#390">[ subject ]</a>
+              <a href="author.html#390">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hmm.. sorry about that. Apparently I didn't test it well enough before
+checking it in. I will take a look when I have a chance. Hopefully
+Allen is around and can fix the problem before then.
+
+-- 
+Ryan
+
+On 7/7/06, Arvid Norlander &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">anmaster at berlios.de</A>&gt; wrote:
+&gt;<i> This commit cause odd problems for me:
+</I>&gt;<i>
+</I>&gt;<i> ~/src/supertux $ ./supertux data/levels/world2/level1.stl
+</I>&gt;<i> [/home/arvid/.supertux] is in the search path
+</I>&gt;<i> [/home/arvid/src/supertux//data] is in the search path
+</I>&gt;<i> Warning: Invalid button '0' in buttonmap
+</I>&gt;<i> Warning: Invalid button '1' in buttonmap
+</I>&gt;<i> Fatal: Unexpected exception: Problem when reading level 'level1.stl': uninitialized RandomGenerator
+</I>&gt;<i> object
+</I>&gt;<i>
+</I>&gt;<i> Before that level worked. Several others got broken by this patch too (but not all,
+</I>&gt;<i> data/levels/world2/christoph5.stl works for example).
+</I>&gt;<i>
+</I>&gt;<i> My system is Gentoo Linux (64-bit) on an AMD64. It doesn't affect a 32-bit supertux in a chroot.
+</I>&gt;<i>
+</I>&gt;<i> sik0fewl at BerliOS wrote:
+</I>&gt;<i> &gt; Author: sik0fewl
+</I>&gt;<i> &gt; Date: 2006-07-07 09:49:14 +0200 (Fri, 07 Jul 2006)
+</I>&gt;<i> &gt; New Revision: 3929
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Modified:
+</I>&gt;<i> &gt;    trunk/supertux/src/game_session.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/game_session.hpp
+</I>&gt;<i> &gt;    trunk/supertux/src/main.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/mainloop.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/random_generator.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/random_generator.hpp
+</I>&gt;<i> &gt; Log:
+</I>&gt;<i> &gt; RNG patch from Allen King
+</I>&gt;<i> &gt;
+</I>&gt;<i> &lt;snip&gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Supertux-commit mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-commit at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="http://lists.berlios.de/mailman/listinfo/supertux-commit">http://lists.berlios.de/mailman/listinfo/supertux-commit</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/supertux-devel">http://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000388.html">[Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src
+</A></li>
+	<LI>Next message: <A HREF="000391.html">[Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#390">[ date ]</a>
+              <a href="thread.html#390">[ thread ]</a>
+              <a href="subject.html#390">[ subject ]</a>
+              <a href="author.html#390">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

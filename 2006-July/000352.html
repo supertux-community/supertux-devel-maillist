@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Jam Fix for 10240-related Errors (patch)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Jam%20Fix%20for%2010240-related%20Errors%20%28patch%29&In-Reply-To=%3C44A65DD4.4060401%40braunis.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000351.html">
+   <LINK REL="Next"  HREF="000353.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Jam Fix for 10240-related Errors (patch)</H1>
+    <B>Matze Braun</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Jam%20Fix%20for%2010240-related%20Errors%20%28patch%29&In-Reply-To=%3C44A65DD4.4060401%40braunis.de%3E"
+       TITLE="[Supertux-devel] Jam Fix for 10240-related Errors (patch)">matze at braunis.de
+       </A><BR>
+    <I>Sat Jul  1 13:34:44 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000351.html">[Supertux-devel] Jam Fix for 10240-related Errors (patch)
+</A></li>
+        <LI>Next message: <A HREF="000353.html">[Supertux-devel] Jam Fix for 10240-related Errors (patch)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#352">[ date ]</a>
+              <a href="thread.html#352">[ thread ]</a>
+              <a href="subject.html#352">[ subject ]</a>
+              <a href="author.html#352">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ravu al Hemio wrote:
+&gt;<i> Daniel Hedlund wrote:
+</I>&gt;&gt;<i> I have made a patch that fixes the 10240-related errors when 
+</I>&gt;&gt;<i> compiling with Jam (jam-fix-2006-06-30.patch).  The patch has only 
+</I>&gt;&gt;<i> been tested under Linux at the moment and would be appreciated if 
+</I>&gt;&gt;<i> anyone under Windows or OS X can let the list know if they have any 
+</I>&gt;&gt;<i> problems.  AnMaster also recommends for anyone with a multi-cpu/core 
+</I>&gt;&gt;<i> system to see how well it works using multiple threads (ie. jam -j2).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> This patch fixes the problem by breaking each of the SuperTux 
+</I>&gt;&gt;<i> subdirectories into an archive file (.a) and then recombines them at 
+</I>&gt;&gt;<i> the end to form the supertux executable.  This patch slows down 
+</I>&gt;&gt;<i> overall compile time, but it should be compatible with most systems.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I have also attached an older patch (jam-fix-gcc4-2006-06-28.patch) I 
+</I>&gt;&gt;<i> made that fixes the 10240 problems, but only appears to be compatible 
+</I>&gt;&gt;<i> with GCC 4.x.  The part of the patch that is incompatible is the use 
+</I>&gt;&gt;<i> of the '@file' syntax which looks in a file for a list of objects to 
+</I>&gt;&gt;<i> link together.  This patch is much cleaner, but should not be 
+</I>&gt;&gt;<i> introduced into the official source due to its incompatibilities.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Cheers,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Daniel Hedlund
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">daniel at digitree.org</A>
+</I>&gt;<i> Hey Daniel,
+</I>&gt;<i>
+</I>&gt;<i> I just found out that the OSX linker doesn't know &quot;--whole-archive&quot;.
+</I>&gt;<i>
+</I>&gt;<i> Wouldn't it be easier just to modify a small value in the jam sources? 
+</I>&gt;<i> While I think about it... we might want to drop a line to Perforce 
+</I>&gt;<i> that they should use better ways of getting the number of max cmdline 
+</I>&gt;<i> commands (and that 10240 is irrationally small).
+</I>
+Unfortunately there are some problems with this:
+* Jam isn't maintained actively, there are countless patches floating 
+around the jam mailing list and in the perforce public repository (speed 
+improvements, countless bugfixes to the builtin rules and even for 
+commandline length if I remember correctly). The chance for a new jam 
+release anytime soon is minimal :-(
+* There are at least 2 forks of jam around at the moment: ftjam and 
+boostjam. These are more actively maintained and we could look whether 
+they already contain a fix for the commandline length issue or would 
+include a patch from our side.
+* Maybe the 10240 limit is there to enforce you to write portable 
+jamfiles, there might be obscure platforms around that can't handle 
+more. Then again these strange architectures are probably so old that we 
+can't compile supertux on them anyway, so this point isn't really valid 
+for us
+&gt;<i>
+</I>&gt;<i> On OSX and other BSD systems, &quot;sysctl -n kern.argmax&quot; can be used to 
+</I>&gt;<i> get the value.
+</I>&gt;<i>
+</I>&gt;<i> As an interim hack, search &quot;jam.h&quot; in your jam sources for &quot;Jam 
+</I>&gt;<i> implementation misc&quot; and change the following definition of MAXLINE to 
+</I>&gt;<i> a nicer number. (262144 on my Darwin box.) Run &quot;jam&quot; to compile itself 
+</I>&gt;<i> (Baron M&#252;nchhausen's bootstrapping?) and overwrite your old binary 
+</I>&gt;<i> with the resulting one.
+</I>Problem is that it's a very bad idea to ask our users to patch and 
+compile their own jam binaries :-/
+
+Greetings,
+    Matze
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000351.html">[Supertux-devel] Jam Fix for 10240-related Errors (patch)
+</A></li>
+	<LI>Next message: <A HREF="000353.html">[Supertux-devel] Jam Fix for 10240-related Errors (patch)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#352">[ date ]</a>
+              <a href="thread.html#352">[ thread ]</a>
+              <a href="subject.html#352">[ subject ]</a>
+              <a href="author.html#352">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

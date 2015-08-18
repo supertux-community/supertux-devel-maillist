@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20status&In-Reply-To=%3C44489F3E.5000205%40a-king.us%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000139.html">
+   <LINK REL="Next"  HREF="000135.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status</H1>
+    <B>Allen King</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20status&In-Reply-To=%3C44489F3E.5000205%40a-king.us%3E"
+       TITLE="[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status">allen at a-king.us
+       </A><BR>
+    <I>Fri Apr 21 11:00:46 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000139.html">[Supertux-devel] (no subject)
+</A></li>
+        <LI>Next message: <A HREF="000135.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#134">[ date ]</a>
+              <a href="thread.html#134">[ thread ]</a>
+              <a href="subject.html#134">[ subject ]</a>
+              <a href="author.html#134">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've been working on the &quot;Remote Control&quot; changes to Supertux that we 
+talked about last week, and have a first version that works -- I have a 
+program that supplies button presses from a canned list to supertux over 
+a port, and supertux returns a list of all the surfaces drawn, with 
+texture file names.  The changes are still fluid, so I'm inclined not 
+going to release any patches right yet.
+
+I told Matze I would next make a patch for platform independent 
+repeatable random numbers, and I am well on my way to completing that.  
+To finish,  I have some (seven) questions on the mods, which I would 
+like responses to (the first 3 are generic fishing and educational, on 
+the last 4 I need detailed answers):
+
+BASIC DESIGN:
+
+    1) allows for two random generator modes, under control of the
+    configuration file: 
+
+        a. If a (random_seed &lt;decimal number&gt;) line is present in the
+        configuration file, it is used used as the random seed to start
+        the run. 
+
+        b. If the above line isn't there, the seed obtained from time()
+        in the usual way, and is additionally printed, so it can later
+        be pasted into the configuration file if the run wants to be
+        reproduced.
+
+    QUESTION #1: seem reasonable?
+
+
+    2)  Files [.cpp/.hpp] for a platform-independent class RandomNumbers
+    were added.  They were transliterated from C sources found at
+    <A HREF="http://www.jbox.dk/sanos/source/lib/random.c.html.">http://www.jbox.dk/sanos/source/lib/random.c.html.</A>  A wizard friend
+    of mine claimed this to be &quot;the fastest and best quality&quot; around. 
+
+    QUESTION #2: any reason not to proceed this way? Is copyleft okay
+    for supertux?
+
+
+    3) I've included RandomNumbers in a wrapper file &quot;rand.hpp&quot; which
+    redefines rand() and srand() for general consumption by supertux.
+    WARNING: Supertux files which call rand() or srand() and which do
+    NOT include rand.hpp will use the old rand facility, which will be
+    neither initialized correctly, controllable by config, nor platform
+    independent.  So this would not happen, I buried an include for
+    rand.hpp deep in game_object.hpp, which is included by all the &quot;bad
+    guys&quot;.  I also (redundantly) added similar includes in all .cpp
+    files which contained calls to [s]rand(), with a shameless
+    promotional comment, so developers would get the idea.
+
+    QUESTION #3: any objections to this?  suggestions of better ways
+    (e.g. changing calls to rand to BlaBlaRand, and redefining rand()
+    and srand() to print helpful errors?
+
+SUPERTUX FUNCTIONALITY:
+
+    4) There is a call to srand() in player.cpp, which occurs after a
+    player is killed.  I do not understand why it would be necessary to
+    do this -- it seems totally superfluous, but with my very limited
+    knowledge am way too afraid to comment it out.  It would be great if
+    it could go!  As it stands now, random number repeatability  ceases
+    after the first time Tux dies.
+
+    QUESTION #4 (THIS IS THE REASON I WROTE THIS EMAIL): Could someone
+    verify that this call was just put in by someone who didn't
+    understand random numbers (or not)?  If so, the solution is simple. 
+    If not, not.
+
+
+    5) There is another call to srand() in sqstdmath.cpp, but nobody in
+    supertux-ville seems to call the routine that contains it.  I added
+    an throw of runtime_error to discourage its future use. 
+
+    QUESTION #5: Is this okay, or too harsh.
+
+
+    6) I was thinking of adding a commented-out setting of random_seed
+    in the default ~/.supertux/config . (I noted that that was made for
+    me when I first ran supertux, but a cursory scan didn't show me how.)
+
+    QUESTION #6:  Can someone help me determine how I would modify the
+    default ~/.supertux/config?  I will do this if someone does.
+
+
+    7)  One could turn on/off the use of platform-independent
+    random_numbers with a ./configure --&lt;option&gt; . 
+
+    QUESTION #7: Is it worth doing?  Enough so that someone could
+    outline the requisite changes to  configure.ac (and friends).
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060421/c0e51a61/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060421/c0e51a61/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000139.html">[Supertux-devel] (no subject)
+</A></li>
+	<LI>Next message: <A HREF="000135.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#134">[ date ]</a>
+              <a href="thread.html#134">[ thread ]</a>
+              <a href="subject.html#134">[ subject ]</a>
+              <a href="author.html#134">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

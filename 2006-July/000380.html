@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src src/gui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3909%20-%20in%20trunk/supertux%3A%20data/locale%20src%0A%20src/gui&In-Reply-To=%3C44AD40AC.5030306%40braunis.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000379.html">
+   <LINK REL="Next"  HREF="000381.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src src/gui</H1>
+    <B>Matze Braun</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3909%20-%20in%20trunk/supertux%3A%20data/locale%20src%0A%20src/gui&In-Reply-To=%3C44AD40AC.5030306%40braunis.de%3E"
+       TITLE="[Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src src/gui">matze at braunis.de
+       </A><BR>
+    <I>Thu Jul  6 18:56:12 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000379.html">[Supertux-devel] list, please.
+</A></li>
+        <LI>Next message: <A HREF="000381.html">[Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src src/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#380">[ date ]</a>
+              <a href="thread.html#380">[ thread ]</a>
+              <a href="subject.html#380">[ subject ]</a>
+              <a href="author.html#380">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>sommer at BerliOS wrote:
+&gt;<i> Author: sommer
+</I>&gt;<i> Date: 2006-07-06 00:42:39 +0200 (Thu, 06 Jul 2006)
+</I>&gt;<i> New Revision: 3909
+</I>&gt;<i>
+</I>&gt;<i> Modified:
+</I>&gt;<i>    trunk/supertux/data/locale/de.po
+</I>&gt;<i>    trunk/supertux/src/game_session.cpp
+</I>&gt;<i>    trunk/supertux/src/gui/menu.cpp
+</I>&gt;<i>    trunk/supertux/src/player_status.cpp
+</I>&gt;<i>    trunk/supertux/src/resources.cpp
+</I>&gt;<i>    trunk/supertux/src/statistics.cpp
+</I>&gt;<i> Log:
+</I>&gt;<i> Changed sprintfs to snprintfs, updated translation
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>...
+&gt;<i>  
+</I>&gt;<i> +namespace {
+</I>&gt;<i> +  inline const char* chain(const char* c1, const char* c2) {
+</I>&gt;<i> +    return (std::string(c1) + std::string(c2)).c_str();
+</I>&gt;<i> +  }
+</I>&gt;<i> +  inline const char* chain(const char* c1, const char* c2, const char* c3) {
+</I>&gt;<i> +    return (std::string(c1) + std::string(c2) + std::string(c3)).c_str();
+</I>&gt;<i> +  }
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i>   
+</I>That looks like a memory error. The strings will get destructed before 
+the function returns, and then the value of c_str() will be invalid (it 
+probably works because there's no time that something else fills the 
+memory until the stuff is used. But this is definately very wrong.
+
+Greetings,
+    Matze
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000379.html">[Supertux-devel] list, please.
+</A></li>
+	<LI>Next message: <A HREF="000381.html">[Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src src/gui
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#380">[ date ]</a>
+              <a href="thread.html#380">[ thread ]</a>
+              <a href="subject.html#380">[ subject ]</a>
+              <a href="author.html#380">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

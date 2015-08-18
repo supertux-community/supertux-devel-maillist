@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Performance on XP
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-December/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Performance%20on%20XP&In-Reply-To=%3C45948918.1080003%40a-king.us%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000615.html">
+   <LINK REL="Next"  HREF="000626.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Performance on XP</H1>
+    <B>Allen King</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Performance%20on%20XP&In-Reply-To=%3C45948918.1080003%40a-king.us%3E"
+       TITLE="[Supertux-devel] Performance on XP">allen at a-king.us
+       </A><BR>
+    <I>Fri Dec 29 04:18:48 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000615.html">[Supertux-devel] Performance on XP
+</A></li>
+        <LI>Next message: <A HREF="000626.html">[Supertux-devel] Performance on XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#625">[ date ]</a>
+              <a href="thread.html#625">[ thread ]</a>
+              <a href="subject.html#625">[ subject ]</a>
+              <a href="author.html#625">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've been doing a bunch of work, checking out the various suggestions:
+
+===== 1. Odin Omdal H&#248;rthe wrote:
+&gt;<i> ...
+</I>&gt;<i> This is a problem in the code as far as I have understood. Morten
+</I>&gt;<i> Hustveit wrote a patch fixing it - but I don't think it got into the
+</I>&gt;<i> code-base before 0.3.0. His 4 core Xeon with an X1800 ATI-card got
+</I>&gt;<i> truly horrible performance (due to the sleeping in-game). It looks as
+</I>&gt;<i> if the better machine you got - the worse the performance gets
+</I>&gt;<i> (because sleeping is extremely little precise, and a fast machine has
+</I>&gt;<i> to do many, many sleeps in order to get a 60fps framerate instead of
+</I>&gt;<i> 3000 (as Morten's machine got)).
+</I>&gt;<i>
+</I>&gt;<i> The patch also fixes some poor jumping-behaviour - and I really find
+</I>&gt;<i> the game more enjoyable after applying it. The patch and email never
+</I>&gt;<i> made it to the list. However, it should reside at
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://www.ping.uio.no/~mortehu/jump-and-busy-frameloop.patch">http://www.ping.uio.no/~mortehu/jump-and-busy-frameloop.patch</A>
+</I>&gt;<i>
+</I>&gt;<i> Since you suffer the same problem, I will paste Morten's email below:
+</I>&gt;<i>
+</I>&gt;<i> ...
+</I>&gt;<i>   
+</I>I had great hopes for this patch, but found that something else is 
+causing the slow frame rate, and the patch doesn't help that at all.  
+The patch does help if one HAD to live with slow frame rates:  a) The 
+velocities are more like those of 0.1.3 (although horribly jerkey at 
+2.5fps).  b) It also seems to drop fewer keys.   (But I can't live with 
+slow frame rates !^)
+
+
+===== 2. Armin Eulenstein wrote:
+&gt;<i> I got 0.3.0 running under Windows XP with SP2 very smooth at 60fps. I'm
+</I>&gt;<i> using an Athlon XP 2200+; a old Geforce 2 MX400 Graphics card and got
+</I>&gt;<i> 1024mb RAM. 
+</I>Seemingly similar configurations.  I'm running XP Pro, and a different 
+graphics card, but...
+
+I thought for a minute that running SuperTux in a guest VMWare virtual 
+machine might be causing the problem, so I installed it in the main 
+(host) machine.  Then just to be sure, I uninstalled VMWare and 
+rebooted.  All results were the same -- 0.3.0 ran at 2.5fps!
+
+&gt;<i> SuperTux creates logfiles at the point where you start the
+</I>&gt;<i> game, possibly you can find your problem at there.
+</I>&gt;<i>   
+</I>On some runs, I get the message in stderr.txt: &quot;Restarting audio source 
+because of buffer underrun&quot;.  Other runs are clean.  Nothing ups the 
+frame rate, even if I turn off sounds and music in the config file.
+
+===== 3. Wolfgang Becker wrote:
+&gt;<i> ...
+</I>&gt;<i> Maybe a 64 bit problem? Supertux runs fine on my 950 MHz Athlon with
+</I>&gt;<i> Geforce 3, even if I'm running XP. On my parents' laptop (P4, with
+</I>&gt;<i> some ATI mobile, much faster than my box), it works, too but only
+</I>&gt;<i> in windowed mode. Fullscreen flickers really bad which makes it
+</I>&gt;<i> unplayable.
+</I>&gt;<i> ...
+</I>&gt;<i>   
+</I>
+I installed Supertux-0.3.0-win32-setup.exe on an older 32-bit 800MHz 
+Pentium III laptop running XP Pro SP2, with very similar results:
+
+                                   Tower                 Laptop. A XXX
+0.3.0:                         2.5fps                  1.2fps!  Abysmal.
+0.1.3 w OpenGL:      ~10fps                 ~7fps
+0.1.3 no OpenGL:     &gt;30fps                 &gt;30fps
+
+(The tower is the machine I've been reporting on up to now.)  0.1.3 
+seems to slow way down using OpenGL. 0.3.0 seems 4-6x slower than 
+0.1.3.   (Rates are approximate using a stop watch on 50 frames, since 
+the fps meter didn't seem to work.)
+
+So it's looking like an OpenGL issue.  Which brings me to:
+
+===== 4. The Digital Pioneer wrote:
+&gt;<i> ...
+</I>&gt;<i> But seriously... I'll be trying 0.3.0 on windoze soon. I'll be 
+</I>&gt;<i> downloading it presently, so I'll have more results soon. About all I 
+</I>&gt;<i> can recommend is checking that your OGL is working properly (I don't 
+</I>&gt;<i> see why it wouldn't be) and that nothing else is getting in Supertux's 
+</I>&gt;<i> way.
+</I>&gt;<i> ...
+</I>So I downloaded the latest driver from nVIDIA, which proports to have 
+&quot;Microsoft&#174; DirectX&#174; 9.0c and OpenGL&#174; 2.0 support&quot;, from 
+<A HREF="http://www.nvidia.com/object/winxp_2k_93.71.html">http://www.nvidia.com/object/winxp_2k_93.71.html</A> .  Still 2.5fps :-(
+
+I'm presuming SuperTux is happy with OpenGL&#174; 2.0 support, but can't tell 
+because supertux.berlios.de is down.
+
+To figure out how to tune OpenGL, I googled opengl tuning and got an 
+ati.amd.com/developer/gdc/Performance*Tuning*.pdf.   It suggested 
+varying the frame buffer, and seeing its affect on fps, and I found that 
+performance is frame buffer limited -- it renders about 1.5M Pixels Per 
+Second (pps), actually it varies a little, 1.4-1.9 M pps:
+
+800x600 -- 4fps            480,000      1.92M pps
+400x300 -- 12.3fps       120,000      1.48M pps
+300x225 -- 20fps            67,500      1.35M pps
+
+===== 5. I'm guessin hardware acceleration is turned off, or something.  
+Although display properties show hardware acceleration at full.  Now I'm 
+not sure where to go from here.  Suggestions.
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20061228/559e399d/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20061228/559e399d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000615.html">[Supertux-devel] Performance on XP
+</A></li>
+	<LI>Next message: <A HREF="000626.html">[Supertux-devel] Performance on XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#625">[ date ]</a>
+              <a href="thread.html#625">[ thread ]</a>
+              <a href="subject.html#625">[ subject ]</a>
+              <a href="author.html#625">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

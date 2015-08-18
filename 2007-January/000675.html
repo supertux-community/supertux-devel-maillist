@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Problems with compiling Supertux on Windows
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Problems%20with%20compiling%20Supertux%20on%20Windows&In-Reply-To=%3C45A120BD.2000400%40berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000674.html">
+   <LINK REL="Next"  HREF="000676.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Problems with compiling Supertux on Windows</H1>
+    <B>Ravu al Hemio</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Problems%20with%20compiling%20Supertux%20on%20Windows&In-Reply-To=%3C45A120BD.2000400%40berlios.de%3E"
+       TITLE="[Supertux-devel] Problems with compiling Supertux on Windows">ravu_al_hemio at berlios.de
+       </A><BR>
+    <I>Sun Jan  7 17:33:01 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000674.html">[Supertux-devel] Problems with compiling Supertux on Windows
+</A></li>
+        <LI>Next message: <A HREF="000676.html">[Supertux-devel] Problems with compiling Supertux on Windows
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#675">[ date ]</a>
+              <a href="thread.html#675">[ thread ]</a>
+              <a href="subject.html#675">[ subject ]</a>
+              <a href="author.html#675">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The warning message you receive is non-fatal. The author of autoopts.m4 
+just didn't have the brains to put AG_PATH_AUTTOOPTS into square 
+brackets. (Or the m4 language is stupid. I didn't create packages using 
+autoconf so I don't know.)
+
+As for jam's error messages: right after the first ones appear, press 
+Ctrl+C. (This terminates jam.) Then, copy the first twenty lines of 
+error messages to pastebin and link it over here. GCC is known for 
+trying to work around unknown language elements by just ignoring them, 
+but in most cases, this just generates hundreds of superfluous syntax 
+errors because the unknown element was a type definition or whatnot.
+
+~~ Ondra
+
+Jan Reininghaus wrote:
+&gt;<i>
+</I>&gt;<i> Hello,
+</I>&gt;<i>
+</I>&gt;<i> I am trying to compile Supertux (SVN revision 4531) on a fresh 
+</I>&gt;<i> installation in Windows XP Home with SP2 in VMWare, but I am a newbie 
+</I>&gt;<i> regarding this and having some problems.
+</I>&gt;<i>
+</I>&gt;<i> I tried to follow closely the instructions in the Wiki article 
+</I>&gt;<i> (<A HREF="http://supertux.berlios.de/wiki/index.php/Building_on_Windows">http://supertux.berlios.de/wiki/index.php/Building_on_Windows</A>) with 
+</I>&gt;<i> the exception that I installed MinGW 5.1.2 and 
+</I>&gt;<i> gcc-g++-3.4.5-20060117-1.tar because the versions mentioned in the 
+</I>&gt;<i> article don&#8217;t seem to be available any more.
+</I>&gt;<i>
+</I>&gt;<i> On the execution of ./autogen.sh I receive the following error message:
+</I>&gt;<i>
+</I>&gt;<i> /usr/share/aclocal/autoopts.m4:22: warning: underquoted definition of 
+</I>&gt;<i> AG_PATH_AUTOOPTS
+</I>&gt;<i>
+</I>&gt;<i> On the execution of jam I receive some error messages in a very fast 
+</I>&gt;<i> loop, so I can&#8217;t read them.
+</I>&gt;<i>
+</I>&gt;<i> I have pasted the config.txt here: <A HREF="http://pastebin.com/853526">http://pastebin.com/853526</A> as it 
+</I>&gt;<i> seems to include important information.
+</I>&gt;<i>
+</I>&gt;<i> I would appreciate if somebody could help me with solving the problem.
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000674.html">[Supertux-devel] Problems with compiling Supertux on Windows
+</A></li>
+	<LI>Next message: <A HREF="000676.html">[Supertux-devel] Problems with compiling Supertux on Windows
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#675">[ date ]</a>
+              <a href="thread.html#675">[ thread ]</a>
+              <a href="subject.html#675">[ subject ]</a>
+              <a href="author.html#675">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Tarball file size - lets blame the music...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Tarball%20file%20size%20-%20lets%20blame%20the%20music...&In-Reply-To=%3C45B2ABCA.7020608%40gmx.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000673.html">
+   <LINK REL="Next"  HREF="000730.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Tarball file size - lets blame the music...</H1>
+    <B>Marek M.</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Tarball%20file%20size%20-%20lets%20blame%20the%20music...&In-Reply-To=%3C45B2ABCA.7020608%40gmx.de%3E"
+       TITLE="[Supertux-devel] Tarball file size - lets blame the music...">wansti at gmx.de
+       </A><BR>
+    <I>Sun Jan 21 00:54:50 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000673.html">[Supertux-devel] Tarball file size - lets blame the music...
+</A></li>
+        <LI>Next message: <A HREF="000730.html">[Supertux-devel] Tarball file size - lets blame the music...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#727">[ date ]</a>
+              <a href="thread.html#727">[ thread ]</a>
+              <a href="subject.html#727">[ subject ]</a>
+              <a href="author.html#727">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Actually, I found it pretty easy to get MIDI working. Getting a software
+synthesizer to run was a bit tricky, but no black magic. The problem
+with shipping MIDI is that the music will sound totally different on
+every machine. The music files I'm currently producing are not in the
+General MIDI range, so I'd have to rewrite almost every song. Also, I'm
+rendering them on a thousand-dollar tone generator - I sincerely hope
+that there is no way of getting the same quality for free. :-)
+Anyway, I think that from an artist's point of view, not having the
+slightest idea of what your work will sound like on the players'
+computers is not acceptable, especially when it's just for saving a few
+megabytes. I remember playing old games that came with MIDI files
+because they had to fit on a few floppy disks (for example, old
+LucasArts adventures). I used to complain about how crappy the music was
+because I had a crappy sound card. Rendering the same MIDI files on
+modern hardware makes me feel sympathy for the composers, because only a
+small percentage of the audience really got an idea of what the songs
+were intended to sound like: Namely, other musicians who used the same
+hardware. I discovered that tunes that sounded like cheap background
+music on a SoundBlaster16 were actually works of high composing skill. I
+still have a long way to go before I can write music like they can, but
+I think we should make use of the ways we have now to make the music
+sound as good as possible. I agree that the tarball is pretty big, but
+file size isn't that much of a problem anymore. Especially people who
+play games are used to much bigger downloads.
+
+As for reducing the quality: I currently compress the songs to 160kb
+Ogg, and even with that relatively high quality rate, the difference to
+the uncompressed originals is clearly audible (which really surprised
+me). Especially in the high-frequency range, such as the piano part on
+bossattack.ogg. I'll still have to try using stronger compression but
+I'm sure I won't like the results. Maybe that's just because I've heard
+them uncompressed, and because I know every single note of every song -
+so maybe I'm not the one who should judge over whether the quality is
+sufficient. I'll also try fiddling with my recording chain to squeeze a
+little more quality out of it at the same compression rate. And I guess
+I could go down to 128kb if size really matters to you. :-) But I
+wouldn't like to go below that.
+
+As for the sound track CD that is supposed to be released with Milestone
+2, I'm planning to make it available as a disc image containing the
+uncompressed music. I wonder how that will affect the decision on the
+in-game quality. Will people notice the difference? And if they do, will
+they care? And if they care, will they bother to compress the tracks
+themselves and replace the ones we shipped? Or will they want to know
+why we didn't do so ourselves?
+
+Sorry for the long rant. But I think that the loss of quality that comes
+with stronger compression doesn't justify the few megabytes we'd save.
+
+    Marek
+
+
+Ravu al Hemio wrote:
+&gt;<i> Beg pardon, but Linux and MIDI? I tried to create that relationship a 
+</I>&gt;<i> few years back. Didn't work out. I'm pretty sure Wansti can acknowledge 
+</I>&gt;<i> how hard it is to get it working. And yes, the Roland DLS sound bank 
+</I>&gt;<i> distributed with Windows (and I fear Mac too) makes all the instruments 
+</I>&gt;<i> sound like... it sucks so much I can't come up with a good analogy.
+</I>&gt;<i>
+</I>&gt;<i> As for bruting the music down, &quot;-q -1&quot; of oggenc makes me hear a 
+</I>&gt;<i> difference between the high-frequency abrupt sounds (= the claps in 
+</I>&gt;<i> bossattack.ogg; the whole drum set in cave.ogg, chipdisko.ogg, 
+</I>&gt;<i> forest3.ogg, fortress.ogg and theme.ogg; the flutes in forest.ogg and 
+</I>&gt;<i> forest2.ogg) and I get ugly aural artifacts during the longer chords in 
+</I>&gt;<i> leveldone*.ogg.
+</I>&gt;<i>
+</I>&gt;<i> As for the sizes:
+</I>&gt;<i> -rw-r--r--   1 ondra  ondra     674K Jan  6 10:48 bruted/forest.ogg
+</I>&gt;<i> -rw-r--r--   1 ondra  ondra       2M Apr  9  2006 forest.ogg
+</I>&gt;<i>
+</I>&gt;<i> I boldly state what I always state: &quot;Let's wait for the man in charge.&quot; 
+</I>&gt;<i> Id est: let's wait for Wansti and see if he has any troubles when we 
+</I>&gt;<i> distort his works like this. ;-)
+</I>&gt;<i>
+</I>&gt;<i> ~~ Ondra
+</I>&gt;<i>
+</I>&gt;<i> Ingo Ruhnke wrote:
+</I>&gt;<i>   
+</I>&gt;&gt;<i> sik0fewl just brought up that the filesize of the supertux tarball is
+</I>&gt;&gt;<i> a little extra-large and I agree. A quick look tells us that 24MB are
+</I>&gt;&gt;<i> music, which seems rather wastefull given that the rest is just 12MB
+</I>&gt;&gt;<i> (and even that could probally be cut down quite a bit):
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> -rw-r--r-- 1 ingo ingo 12M 2007-01-06 08:25 supertux-0.3.0-without-music.tar.bz2
+</I>&gt;&gt;<i> -rw-r--r-- 1 ingo ingo 36M 2007-01-06 08:22 supertux-0.3.0.tar.bz2
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> A quick brute force attempt reencoding the music with the lowest
+</I>&gt;&gt;<i> quality setting brought quite a good improvment, havn't tested with
+</I>&gt;&gt;<i> all files, just the forest.ogg one (from 3MB down 1.2MB):
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> -rw-r--r-- 1 ingo ingo 2985475 2006-12-18 00:22 forest-original.ogg
+</I>&gt;&gt;<i> -rw-r--r-- 1 ingo ingo 1176902 2007-01-06 08:32 forest-lowest.ogg
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Sound quality still sounded quite ok, with no noticable artefacts.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Another way would of course be to just use the MIDI files directly in
+</I>&gt;&gt;<i> the game and thus cut down the size of the music to almost none, sound
+</I>&gt;&gt;<i> quality would of course suffer a bit then.
+</I>&gt;&gt;<i>   
+</I>&gt;&gt;<i>     
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>   
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000673.html">[Supertux-devel] Tarball file size - lets blame the music...
+</A></li>
+	<LI>Next message: <A HREF="000730.html">[Supertux-devel] Tarball file size - lets blame the music...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#727">[ date ]</a>
+              <a href="thread.html#727">[ thread ]</a>
+              <a href="subject.html#727">[ subject ]</a>
+              <a href="author.html#727">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

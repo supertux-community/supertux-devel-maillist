@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Problem on building supertux from SVN
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Problem%20on%20building%20supertux%20from%20SVN&In-Reply-To=%3C453689F4.2040400%402006.expires.deltadevelopment.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000550.html">
+   <LINK REL="Next"  HREF="000551.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Problem on building supertux from SVN</H1>
+    <B>Christoph Sommer</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Problem%20on%20building%20supertux%20from%20SVN&In-Reply-To=%3C453689F4.2040400%402006.expires.deltadevelopment.de%3E"
+       TITLE="[Supertux-devel] Problem on building supertux from SVN">supertux at 2006.expires.deltadevelopment.de
+       </A><BR>
+    <I>Wed Oct 18 22:09:24 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000550.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+        <LI>Next message: <A HREF="000551.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#549">[ date ]</a>
+              <a href="thread.html#549">[ thread ]</a>
+              <a href="subject.html#549">[ subject ]</a>
+              <a href="author.html#549">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Krishnamurti L. L. V. Nunes wrote:
+&gt;<i> OpenAL `make install' gives me the following:
+</I>&gt;<i> 
+</I>&gt;<i> ----------------------------------------------------------------------
+</I>&gt;<i> Libraries have been installed in:
+</I>&gt;<i>    /usr/local/lib
+</I>&gt;<i> [...] 
+</I>&gt;<i>    - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+</I>&gt;<i>      during execution
+</I>
+This sounds like a plan. Try running the following commands in bash:
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+./supertux
+
+
+If ./configure took care of adding the correct -L switches this should 
+work. If it does you can still try to make this more permanent (e.g. by 
+adding to your .bashrc, moving the libraries or re-configuring the 
+run-time linker)
+
+
+Regards,
+
+   Christoph
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000550.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+	<LI>Next message: <A HREF="000551.html">[Supertux-devel] Problem on building supertux from SVN
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#549">[ date ]</a>
+              <a href="thread.html#549">[ thread ]</a>
+              <a href="subject.html#549">[ subject ]</a>
+              <a href="author.html#549">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

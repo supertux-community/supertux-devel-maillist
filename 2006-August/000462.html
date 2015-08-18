@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Iceflower implementation
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Iceflower%20implementation&In-Reply-To=%3C83a40700608171614s3bbb43fcjda30d3db3e7ab3b4%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000461.html">
+   <LINK REL="Next"  HREF="000463.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Iceflower implementation</H1>
+    <B>Afief Halumi</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Iceflower%20implementation&In-Reply-To=%3C83a40700608171614s3bbb43fcjda30d3db3e7ab3b4%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] Iceflower implementation">afief.h at gmail.com
+       </A><BR>
+    <I>Fri Aug 18 01:14:20 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000461.html">[Supertux-devel] Iceflower implementation
+</A></li>
+        <LI>Next message: <A HREF="000463.html">[Supertux-devel] Iceflower implementation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#462">[ date ]</a>
+              <a href="thread.html#462">[ thread ]</a>
+              <a href="subject.html#462">[ subject ]</a>
+              <a href="author.html#462">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>Right now, there is now way of telling if the frozen badguy is portable
+</I>&gt;<i>or will hurt tux if he tries to grab it. Btw, if you release Mr Bomb,
+</I>&gt;<i>tux gets hurt, too. If we want tux to throw badguys we need a lot of new
+</I>&gt;<i>images. I can't draw them.
+</I>
+Throwing a badguy would simply mean moving him along some airy path, would
+be fancy if he rotated, but that's not MS2 i guess. I can help with some of
+the needed pictures as the &quot;frozen&quot; part seems to be only a semi transparent
+layer.
+
+&gt;<i>Making some portable and some hurt tux is bad, all
+</I>&gt;<i>frozen badguys should behave similar.
+</I>
+couldn't agree more.
+
+&gt;<i>Next problem is losing fire
+</I>&gt;<i>if taking ice. What about making ice a temporary effect like
+</I>invincibleness?
+
+i think ice could just be as useful as fire, there could be some badguys who
+simply shatter when tux collides with them while frozen(similar to legend of
+zelda when throwing a frozen badguy) others could be carried and/or thrown.
+
+IMHO playing with ice flower is more fun than fire flower, how else would
+tux cross the extra hard ocean levels? of course he has to freez the water
+with ice flower abilities :-P
+
+&gt;<i>Lets not make a SuperTux just a Mario clone
+</I>
+I agree, but taking some of the good mario/joshy ideas can't hurt(if it's
+planned well and discussed here)
+
+Afief
+
+On 8/17/06, Wolfgang Becker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">uafr at gmx.de</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> On 20060817 Afief Halumi &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">afief.h at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; An advantage could be carriable and throwable badguys(if we allow
+</I>&gt;<i> badguys
+</I>&gt;<i> &gt; other than mr.bomb to be carried too), in SMW there was a boss at whom
+</I>&gt;<i> you
+</I>&gt;<i>
+</I>&gt;<i> Right now, there is now way of telling if the frozen badguy is portable
+</I>&gt;<i> or will hurt tux if he tries to grab it. Btw, if you release Mr Bomb,
+</I>&gt;<i> tux gets hurt, too. If we want tux to throw badguys we need a lot of new
+</I>&gt;<i> images. I can't draw them.
+</I>&gt;<i>
+</I>&gt;<i> First of all we need a concept, what the iceflower is supposed to do.
+</I>&gt;<i> Lets see: freeze baddguys, fine with me but wee need a &quot;frozen&quot; image
+</I>&gt;<i> for all of them. Making some portable and some hurt tux is bad, all
+</I>&gt;<i> frozen badguys should behave similar. Next problem is losing fire
+</I>&gt;<i> if taking ice. What about making ice a temporary effect like
+</I>&gt;<i> invincibleness?
+</I>&gt;<i>
+</I>&gt;<i> Do we need ice for MS2?
+</I>&gt;<i>
+</I>&gt;<i> Tsch&#252;&#223;,
+</I>&gt;<i> Wolfgang
+</I>&gt;<i> --
+</I>&gt;<i> Wolfgang Becker  ***  eMail <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">uafr at gmx.de</A>  ***  <A HREF="http://uafr.freeshell.org/">http://uafr.freeshell.org/</A>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060818/16098938/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060818/16098938/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000461.html">[Supertux-devel] Iceflower implementation
+</A></li>
+	<LI>Next message: <A HREF="000463.html">[Supertux-devel] Iceflower implementation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#462">[ date ]</a>
+              <a href="thread.html#462">[ thread ]</a>
+              <a href="subject.html#462">[ subject ]</a>
+              <a href="author.html#462">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

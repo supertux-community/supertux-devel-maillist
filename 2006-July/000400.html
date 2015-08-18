@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Tux's &quot;hot spot&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Tux%27s%20%22hot%20spot%22&In-Reply-To=%3C44B91DF7.3090108%40a-king.us%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000399.html">
+   <LINK REL="Next"  HREF="000401.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Tux's &quot;hot spot&quot;</H1>
+    <B>Allen King</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Tux%27s%20%22hot%20spot%22&In-Reply-To=%3C44B91DF7.3090108%40a-king.us%3E"
+       TITLE="[Supertux-devel] Tux's &quot;hot spot&quot;">allen at a-king.us
+       </A><BR>
+    <I>Sat Jul 15 18:55:19 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000399.html">[Supertux-devel] Tux Single Image Sprite
+</A></li>
+        <LI>Next message: <A HREF="000401.html">[Supertux-devel] Tux's &quot;hot spot&quot;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#400">[ date ]</a>
+              <a href="thread.html#400">[ thread ]</a>
+              <a href="subject.html#400">[ subject ]</a>
+              <a href="author.html#400">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>There's been a &quot;bug&quot; in supertux since I've been using it for the past 6 
+months related to the thread below.  The hot-spot of Tux, which (among 
+other things) determines which brick he hits when he jumps upward, is in 
+the upper LEFT-HAND corner of the Tux icon.  Much more reasonable would 
+be for the hot spot to be in the upper CENTER.  Perhaps this can be 
+fixed when these other changes are rolled in.
+
+I have not energy to develop a patch, so will limit my involvement to 
+being a critical bug finder !^)
+
+-------- Original Message --------
+Subject: 	[Supertux-devel] Tux Single Image Sprite
+Date: 	Thu, 13 Jul 2006 10:04:58 -0400 (EDT)
+From: 	S.Groundwater &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">slacker at gluebox.com</A>&gt;
+Reply-To: 	<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">supertux-devel at bat.berlios.de</A>
+To: 	<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">supertux-devel at lists.berlios.de</A>
+
+
+
+Hello SuperTux Crew.
+
+We have gone back and forth over the last year with respect to making the
+Tux sprite a single image again as opposed to the current four section
+body parts. If anyone here on the ML was around when the split was made, -
+feel free to shed light on why this split was a good idea or why this was
+done.
+
+In discussions on IRC I was commenting on how I would like to basically
+zero out the head and feet and move towards a two sprite solution with a 
+body and an arm sprites. From the graphic side this seems like the easiest
+way to get some relief from the complexities of the current sectional Tux,
+while still retaining a normal look as Tux's carried object gets layered
+between the arms and the body.
+
+IIRC, the other day Grumble had commented in favor of just a single Tux
+sprite.  With additional single graphics for every situation.
+i.e. - BigTux, BigTux with Block, FirehatTux, FirehatTux with Block, etc..
+
+I started the process of making xcf templates for each 'singleTux'
+situation but now I have questions about wether this is a good idea. The
+problem I see is how natural things look and work, especially with regard
+to holding an object and jumping through a 1 tile hole.
+
+On IRC today I discussed this with Sommer and his comments were:
+&quot;I don't know if one complete animation set per type of thing carried is a
+good idea. I'd prefer a generic 'Tux carrying something' animation, which
+the game can then overlay with e.g. MrIceblock. The game can then let Tux
+carry MrIceblock closer to his body when he drops through a 1-tile-hole.&quot;
+
+Please speak up if you have comments on how/why the Tux sprite should work.
+I am leaning back towards my original game plan of body plus arm sprites.
+
+- greetings :p
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+_______________________________________________
+Supertux-devel mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at bat.berlios.de</A>
+<A HREF="http://bat.berlios.de/mailman/listinfo/supertux-devel">http://bat.berlios.de/mailman/listinfo/supertux-devel</A>
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060715/67001509/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060715/67001509/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000399.html">[Supertux-devel] Tux Single Image Sprite
+</A></li>
+	<LI>Next message: <A HREF="000401.html">[Supertux-devel] Tux's &quot;hot spot&quot;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#400">[ date ]</a>
+              <a href="thread.html#400">[ thread ]</a>
+              <a href="subject.html#400">[ subject ]</a>
+              <a href="author.html#400">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

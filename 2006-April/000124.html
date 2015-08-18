@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] &quot;Remote Control&quot; for Supertux
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux&In-Reply-To=%3C1144589259.22029.24.camel%40taylor.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000122.html">
+   <LINK REL="Next"  HREF="000125.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] &quot;Remote Control&quot; for Supertux</H1>
+    <B>Matze Braun</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux&In-Reply-To=%3C1144589259.22029.24.camel%40taylor.local%3E"
+       TITLE="[Supertux-devel] &quot;Remote Control&quot; for Supertux">matze at braunis.de
+       </A><BR>
+    <I>Sun Apr  9 15:27:39 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000122.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux
+</A></li>
+        <LI>Next message: <A HREF="000125.html">[Supertux-devel] use your program
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#124">[ date ]</a>
+              <a href="thread.html#124">[ thread ]</a>
+              <a href="subject.html#124">[ subject ]</a>
+              <a href="author.html#124">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Samstag, den 08.04.2006, 11:17 -0400 schrieb Allen King:
+&gt;<i> Folks of Supertux,
+</I>&gt;<i> 
+</I>&gt;<i>     As part of a machine learning testbed, I want to add a &quot;remote
+</I>&gt;<i> control&quot; API to Supertux.  This will allow another program sitting as
+</I>&gt;<i> a client on a port to Supertux to supply button information for tux
+</I>&gt;<i> and receive back which icons are visible on the screen and where.
+</I>&gt;<i> Because the client program may be slow, it will have to have control
+</I>&gt;<i> the advance of Supertux time, and thus in this mode, Supertux will not
+</I>&gt;<i> be &quot;real time&quot;.  (Perhaps it might even be faster!^)  Repeatability of
+</I>&gt;<i> runs is also desirable, so control of random number seeds must be
+</I>&gt;<i> gained.
+</I>
+In general the current development version should be suitable for your
+tasks. As you probably don't depend on a finished and polished game, you
+should just grab a svn version and use that.
+&gt;<i> 
+</I>&gt;<i>    The following questions to your group are on my mind:
+</I>&gt;<i>      1. What work is ongoing that would help me with this effort?  I
+</I>&gt;<i>         noticed a post about a console.
+</I>
+The console is mainly a debugging tool to execute some commands from
+inside the game and display warnings and errors to users.
+
+&gt;<i>      1. What is the right forum to pick people's brains, with further
+</I>&gt;<i>         design questions? I notice a lot of game-play programming
+</I>&gt;<i>         activity in <A HREF="http://developer.berlios.de/mail/?group_id=3467">http://developer.berlios.de/mail/?group_id=3467</A> ,
+</I>&gt;<i>         but little with the &quot;engine&quot; part.  Are there specific people
+</I>&gt;<i>         who specialize in the &quot;engine&quot; parts of Supertux?  Who are
+</I>&gt;<i>         they? 
+</I>
+By far most activity around supertux happens in our irc channel
+#supertux at irc.freenode.net and in our wiki at
+<A HREF="http://supertux.berlios.de/wiki">http://supertux.berlios.de/wiki</A>
+
+&gt;<i>      1. What would it take to have the &quot;remote control&quot; operation,
+</I>&gt;<i>         given it works and is well structured, be incorporated into
+</I>&gt;<i>         the Supertux codebase? I would supply documentation of the
+</I>&gt;<i>         API, and a minimum diagnostic demo as an example of the API's
+</I>&gt;<i>         use.   Do I just submit a patch and pray, are there &quot;powers to
+</I>&gt;<i>         be&quot; that nod and give me svn access, or what?  
+</I>As already said, svn version already has such an API. We typically grant
+svn access when someone has submitted some good patches and plans to do
+further work on supertux. About develpoment/patching you should take a
+look here:
+
+<A HREF="http://supertux.berlios.de/wiki/index.php/SetupDev">http://supertux.berlios.de/wiki/index.php/SetupDev</A>
+
+<A HREF="http://supertux.berlios.de/wiki/index.php/Download/Subversion">http://supertux.berlios.de/wiki/index.php/Download/Subversion</A>
+
+&gt;<i>      1. From the standpoint of the Supertux community, what is the
+</I>&gt;<i>         desirability of having a &quot;remote control&quot; ability incorporated
+</I>&gt;<i>         into the mainline Supertux code base?  I see the following
+</I>&gt;<i>         advantages: a) automated testing of Supertux, b) increasing
+</I>&gt;<i>         the Supertux user community with people, like myself,
+</I>&gt;<i>         interested in machine learning, and c) &quot;it's easy, why not!&quot;
+</I>&gt;<i>    So I've actually been fiddling with a copy of the supertux source
+</I>&gt;<i> (an svn checkout on 4/6/06).  So far I have built a
+</I>&gt;<i> PortServerController subclass of Controller, instantiated it in
+</I>&gt;<i> supertux in a very simple way (alongside of
+</I>&gt;<i> JoystickKeyboardController), which talks via ports to a lightweight
+</I>&gt;<i> client.   So here is my plan, which I'd like to pick your collective
+</I>&gt;<i> brains about:
+</I>
+Of course we like to see other people using our code and having fun with
+it. And I don't want to discourage you here. But in the main development
+line this remote control seems total overkill and won't help the normal
+players of the game.
+So I'd say you better maintain this stuff as a fork/set of patches to
+the game. I think the Controller API will stay like it is now in the
+future, so you should have few risk that your stuff breaks.
+
+&gt;<i>      1. The plan is to have my PortServerController register using
+</I>&gt;<i>         tux.set_controller, and buttons should &quot;just work&quot;.
+</I>&gt;<i>      2. I was planning on adding two class variable to game_session,
+</I>&gt;<i>         one to fix the increments of time simulated to a fixed value,
+</I>&gt;<i>         and the other to stop simulation to wait for more API
+</I>&gt;<i>         commands. The plan is to add where needed (bracketed by if
+</I>&gt;<i>         statements) the code for non-real time (port) operation.
+</I>&gt;<i>         These notions are currently &quot;fuzzy&quot;, I suspect there are
+</I>&gt;<i>         better ones.
+</I>The simulation is already advances in a fixed time. All the behaviour
+and game logic runs in a logical framerate of 60fps (depending on your
+machine fewer frames might actually get drawn). In the latest svn
+version you can find that code in mainloop.cpp you should be able to
+extend/hack mainloop.cpp to stop the simulation if that is needed.
+
+&gt;<i>      1. How to gather object info to send back is a few days out for
+</I>&gt;<i>         me.  Thought was to add a statusString serialization method to
+</I>&gt;<i>         some of the game object classes, and just package up the
+</I>&gt;<i>         results.  I am interested in a block name/UID which will be
+</I>&gt;<i>         stable over revisions, perhaps some basic properties (like
+</I>&gt;<i>         solid, background, sprite (for tux, bad guys, and coinage),
+</I>&gt;<i>         etc).  Also the game status line.
+</I>well that's something we surely wouldn't like to see in the main
+codebase (more bloat and more work for people who invent new object
+types). At least additional fields/methods pushed into these classes
+would be bad from our point of view. If you keep the code for this stuff
+externally (you could dynamic_cast around and use hashmaps with the
+objects to store additional metadata) then this is of course less
+intrusive.
+
+&gt;<i>      1. The following is last: modifications for random number
+</I>&gt;<i>         generator repeatability would be as follows:  In normal
+</I>&gt;<i>         operation, the random seed (probably selected by time()) would
+</I>&gt;<i>         printed out on a console.  If that run was interesting, it
+</I>&gt;<i>         would be possible to force that seed with config code.  Are
+</I>&gt;<i>         any efforts to this effect already in the code?
+</I>In general we try to keep the behaviour predictable and free of random
+events that we can't really control. The only cases where randomness
+really matters is that Dispenser badguy which has a random mode (which I
+personally would rather see be removed). Making the randomness
+controllable by having a global random number generator that is used
+throughout supertux would also be important for record/playback of
+demos. Patches would be apreciated ;-)
+
+&gt;<i>      1. Does this plan look sane?  Are there other ways to accomplish
+</I>&gt;<i>         my goals which come to mind?  Are there ongoing changes to the
+</I>&gt;<i>         &quot;engine&quot; which I sould know about?
+</I>&gt;<i> 
+</I>&gt;<i> Hope that you can guide my effort, and that my work can contribute to
+</I>&gt;<i> Supertux.  All opinions, thoughts, and help are welcome.
+</I>Maybe it would be best if you try to catch me or someone of the others
+on irc...
+
+Greetings,
+	Matze
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000122.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux
+</A></li>
+	<LI>Next message: <A HREF="000125.html">[Supertux-devel] use your program
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#124">[ date ]</a>
+              <a href="thread.html#124">[ thread ]</a>
+              <a href="subject.html#124">[ subject ]</a>
+              <a href="author.html#124">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

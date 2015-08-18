@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Building Supertux on OS/2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Building%20Supertux%20on%20OS/2&In-Reply-To=%3C35EA2B6B-2801-4780-9FAA-B1921FC23112%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000212.html">
+   <LINK REL="Next"  HREF="000214.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Building Supertux on OS/2</H1>
+    <B>Jayson Kempinger</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Building%20Supertux%20on%20OS/2&In-Reply-To=%3C35EA2B6B-2801-4780-9FAA-B1921FC23112%40gmail.com%3E"
+       TITLE="[Supertux-devel] Building Supertux on OS/2">EvilGlowingApple at gmail.com
+       </A><BR>
+    <I>Mon May  8 05:43:14 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000212.html">[Supertux-devel] Building Supertux on OS/2
+</A></li>
+        <LI>Next message: <A HREF="000214.html">[Supertux-devel] Building Supertux on OS/2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#213">[ date ]</a>
+              <a href="thread.html#213">[ thread ]</a>
+              <a href="subject.html#213">[ subject ]</a>
+              <a href="author.html#213">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Dave,
+	I have the same problem on Mac OS X.  Try running:
+
+mv tools/miniswig/parser.cpp.h tools/miniswig/parser.hpp
+
+before you run jam.
+
+~Jayson
+
+
+- ----------------------------------------------------------------------
+This message is digitally signed with GnuPG.
+<A HREF="http://www.kempinger.homelinux.net/EvilGlowingApple@gmail.com.GPG.html">http://www.kempinger.homelinux.net/EvilGlowingApple@gmail.com.GPG.html</A>
+
+(see <A HREF="http://www.gnupg.org/gph/en/manual.html#AEN136">http://www.gnupg.org/gph/en/manual.html#AEN136</A>
+for information on how to verify this message)
+- ----------------------------------------------------------------------
+
+
+On May 7, 2006, at 11:31 PM, Dave Yeo wrote:
+
+&gt;<i> Hi, I'm trying to build Supertux (latest svn version) on OS/2.  
+</I>&gt;<i> While ver 0.1.3 built out of the box I'm having problems with the  
+</I>&gt;<i> svn version.
+</I>&gt;<i> src/video/font.cpp needs &lt;sys/types.h&gt; for ssize_t
+</I>&gt;<i> The big problem is in tools/miniswig where the error starts like this
+</I>&gt;<i> Compiler is GCC-EMX
+</I>&gt;<i> ...found 753 target(s)...
+</I>&gt;<i> ...updating 8 target(s)...
+</I>&gt;<i> Bison tools\miniswig\parser.cpp tools\miniswig\parser.hpp
+</I>&gt;<i> C++ tools\miniswig\lexer.o
+</I>&gt;<i> tools/miniswig/lexer.cpp:514:22: parser.hpp: No such file or directory
+</I>&gt;<i> tools/miniswig/lexer.cpp:688: error: `YYSTYPE' was not declared in  
+</I>&gt;<i> this scope
+</I>&gt;<i> tools/miniswig/lexer.cpp:688: error: `yylval' was not declared in  
+</I>&gt;<i> this scope
+</I>&gt;<i> tools/miniswig/lexer.cpp:689: error: syntax error before `{' token
+</I>&gt;<i> tools/miniswig/lexer.cpp:691: error: register name not specified for `
+</I>&gt;<i>    char*yy_cp'
+</I>&gt;<i> ...
+</I>&gt;<i>
+</I>&gt;<i> and I can't decide what the problem is. Bison?, jam (which I had to  
+</I>&gt;<i> hack a bit to get it working) or what?
+</I>&gt;<i> Dave, who has a son who loves Supertux
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/supertux-devel">http://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.3 (Darwin)
+
+iD8DBQFEXr5TW6oxcmeg/20RAqa2AJ4pjOrpDap+oxfjVshMIshNOfEC8wCaA0E1
+OUYiUMycjs4a6sqAf8i5Mmk=
+=qXeX
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000212.html">[Supertux-devel] Building Supertux on OS/2
+</A></li>
+	<LI>Next message: <A HREF="000214.html">[Supertux-devel] Building Supertux on OS/2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#213">[ date ]</a>
+              <a href="thread.html#213">[ thread ]</a>
+              <a href="subject.html#213">[ subject ]</a>
+              <a href="author.html#213">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

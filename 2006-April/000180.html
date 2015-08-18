@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] dev version bug
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20dev%20version%20bug&In-Reply-To=%3C44538934.1060103%40a-king.us%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000165.html">
+   <LINK REL="Next"  HREF="000182.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] dev version bug</H1>
+    <B>Allen King</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20dev%20version%20bug&In-Reply-To=%3C44538934.1060103%40a-king.us%3E"
+       TITLE="[Supertux-devel] dev version bug">allen at a-king.us
+       </A><BR>
+    <I>Sat Apr 29 17:41:40 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000165.html">[Supertux-devel] dev version bug
+</A></li>
+        <LI>Next message: <A HREF="000182.html">[Supertux-devel] dev version bug
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#180">[ date ]</a>
+              <a href="thread.html#180">[ thread ]</a>
+              <a href="subject.html#180">[ subject ]</a>
+              <a href="author.html#180">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Joth,
+
+A new patch to fix that problem is in the works, and should be in svn 
+shortly.  Should have been x &lt;= RAND_MAX. For the moment, that line can 
+be commented out, or the &lt; changed to &lt;= .
+
+But the fact that this problem happened at all is curious to me, and I 
+suspect another bug lurking nearby.  In particular, I would like to 
+understand what about your XP setup caused that assertion error.  If 
+RAND_MAX is 0x7fffffff, the largest int32, it would be improbably that 
+time(0) would generate that (unless it's not working).  Or perhaps 
+RAND_MAX is smaller.
+
+If you can patch to the source code, would you replace the routine in 
+random_generator.cpp with
+
+    int RandomGenerator::srand(int x)    {
+        int x0 = x;
+        while (x == 0)                          // random seed of zero means
+            x = time(0);                        // randomize with time
+        printf(&quot;==== srand(%10d) (%10d) RAND_MAX=%x =====\n&quot;, x, x0,
+    RAND_MAX);
+        if (x &lt; RAND_MAX) {
+        }
+        else {                                  // only allow posative
+    31-bit seeds
+            printf(&quot;ERROR: x=%x, x0=%x, RAND_MAX=%x\n&quot;, x, x0, RAND_MAX);
+            assert(0);
+        }
+        RandomGenerator::srandom(x);
+        return x;                               // let caller know seed used
+    }
+
+and recreate the failure.  Send me the command line used to invoke 
+supertux, the failing printout (as you did), a copy of your 
+~/.supertux/config file, and the patched copy of random_seed.cpp.  If 
+you are you capable of debug, the variable config-&gt;random_seed should be 
+traced.  Is it RAND_MAX at the assertion failure?  Who sets it that? 
+
+Thanks for your help on this.
+
+       Allen
+
+
+Jonathan Campbell wrote:
+&gt;<i> Greetings
+</I>&gt;<i>
+</I>&gt;<i> I just finished compiling the development version of SuperTux (the
+</I>&gt;<i> newest build) and tried to launch it. However, it quits after showing
+</I>&gt;<i> a transparent window. The file stderr has the following:
+</I>&gt;<i>
+</I>&gt;<i> [INFO] src/main.cpp:195 [C:\Documents and
+</I>&gt;<i> Settings\Administrator\.supertux] is in the search path
+</I>&gt;<i> [INFO] src/main.cpp:195 [c:\msys\1.0\build\supertux\/data] is in the search path
+</I>&gt;<i> [INFO] src/main.cpp:429 Component 'controller' finished after 0.2 seconds
+</I>&gt;<i> [INFO] src/main.cpp:68 Couldn't load config file: Couldn't open file
+</I>&gt;<i> 'config': The system cannot find the file specified.
+</I>&gt;<i> , using default settings
+</I>&gt;<i> [INFO] src/main.cpp:429 Component 'config' finished after 0 seconds
+</I>&gt;<i> [INFO] src/main.cpp:429 Component 'tinygettext' finished after 0.001 seconds
+</I>&gt;<i> [INFO] src/main.cpp:429 Component 'commandline' finished after 0 seconds
+</I>&gt;<i> [INFO] src/main.cpp:429 Component 'audio' finished after 0.202 seconds
+</I>&gt;<i> [INFO] src/main.cpp:429 Component 'video' finished after 0.278 seconds
+</I>&gt;<i> [INFO] src/main.cpp:429 Component 'scripting' finished after 0.005 seconds
+</I>&gt;<i> [DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.059 seconds
+</I>&gt;<i> [INFO] src/main.cpp:429 Component 'resources' finished after 0.236 seconds
+</I>&gt;<i> Assertion failed: x &lt; RAND_MAX, file src/random_generator.cpp, line 57
+</I>&gt;<i>
+</I>&gt;<i> I'm running Windows XP with all updates installed. To compile it, I
+</I>&gt;<i> followed the instructions on this page on the wiki:
+</I>&gt;<i> <A HREF="http://supertux.berlios.de/wiki/index.php/Building_on_Windows">http://supertux.berlios.de/wiki/index.php/Building_on_Windows</A>
+</I>&gt;<i>
+</I>&gt;<i> Any help would be appreciated. I'd really like to see this new version
+</I>&gt;<i> of SuperTux.
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i> Joth Esmo
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/supertux-devel">http://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060429/1974b136/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060429/1974b136/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000165.html">[Supertux-devel] dev version bug
+</A></li>
+	<LI>Next message: <A HREF="000182.html">[Supertux-devel] dev version bug
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#180">[ date ]</a>
+              <a href="thread.html#180">[ thread ]</a>
+              <a href="subject.html#180">[ subject ]</a>
+              <a href="author.html#180">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Installing 0.3.0 Level Editor
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Installing%200.3.0%20Level%20Editor&In-Reply-To=%3C45AF2807.2080609%40berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000721.html">
+   <LINK REL="Next"  HREF="000723.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Installing 0.3.0 Level Editor</H1>
+    <B>AnMaster</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Installing%200.3.0%20Level%20Editor&In-Reply-To=%3C45AF2807.2080609%40berlios.de%3E"
+       TITLE="[Supertux-devel] Installing 0.3.0 Level Editor">anmaster at berlios.de
+       </A><BR>
+    <I>Thu Jan 18 08:55:51 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000721.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+        <LI>Next message: <A HREF="000723.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#722">[ date ]</a>
+              <a href="thread.html#722">[ thread ]</a>
+              <a href="subject.html#722">[ subject ]</a>
+              <a href="author.html#722">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>RPM based distros do really suck... And your mono seems broken as it couldn't
+load one of the libraries that is a part of the editor, libeditor.dll should be
+in the same directory as supertux-editor.exe after running jam. But as you don't
+have your mono built with debugging info it is very hard to interpret the
+backtraces (that is, they are unusable).
+/AnMaster
+
+&gt;<i> ** (supertux-editor.exe:7199): WARNING **: The
+</I>&gt;<i> following assembly referenced from
+</I>&gt;<i> /root/in/supertux/supertux-editor.exe could not be
+</I>&gt;<i> loaded:
+</I>&gt;<i>      Assembly:   libeditor    (assemblyref_index=2)
+</I>&gt;<i>      Version:    0.0.0.0
+</I>&gt;<i>      Public Key: (none)
+</I>&gt;<i> The assembly was not found in the Global Assembly
+</I>&gt;<i> Cache, a path listed in the MONO_PATH environment
+</I>&gt;<i> variable, or in the location of the executing assembly
+</I>&gt;<i> (/root/in/supertux/).
+</I>&gt;<i>
+</I>&gt;<i> ** (supertux-editor.exe:7199): WARNING **: Could not
+</I>&gt;<i> load file or assembly 'libe
+</I>&gt;<i> ditor, Version=0.0.0.0, Culture=neutral' or one of its
+</I>&gt;<i> dependencies.
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000721.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+	<LI>Next message: <A HREF="000723.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#722">[ date ]</a>
+              <a href="thread.html#722">[ thread ]</a>
+              <a href="subject.html#722">[ subject ]</a>
+              <a href="author.html#722">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

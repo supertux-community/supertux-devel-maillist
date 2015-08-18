@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Network play
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Network%20play&In-Reply-To=%3C44D128DB.3040509%402006.expires.deltadevelopment.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000434.html">
+   <LINK REL="Next"  HREF="000436.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Network play</H1>
+    <B>Christoph Sommer</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Network%20play&In-Reply-To=%3C44D128DB.3040509%402006.expires.deltadevelopment.de%3E"
+       TITLE="[Supertux-devel] Network play">supertux at 2006.expires.deltadevelopment.de
+       </A><BR>
+    <I>Thu Aug  3 00:36:11 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000434.html">[Supertux-devel] Network play
+</A></li>
+        <LI>Next message: <A HREF="000436.html">[Supertux-devel] info on supertux
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#435">[ date ]</a>
+              <a href="thread.html#435">[ thread ]</a>
+              <a href="subject.html#435">[ subject ]</a>
+              <a href="author.html#435">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>gnomino wrote:
+&gt;<i> If network play were to be implemented, should each host running the 
+</I>&gt;<i> game to keep a complete set of all the game objects, and then 
+</I>&gt;<i> synchronize them with each other? [...]
+</I>&gt;<i> Or does it make more sense for only one host to hold the state of the 
+</I>&gt;<i> game, and for all the clients on the other hosts to simply send events 
+</I>&gt;<i> to that host and receive (maybe) pre-rendered screens? 
+</I>
+For the game to be playable over the Internet, I am afraid that neither 
+trying to sync two independently running engines nor streaming a live 
+video from the server might be sensible.
+
+Thankfully, lots of smart people already tried coming up with good 
+solutions to the problems of lag, dropped frames and cheating. If you 
+have the time, take a look at &lt;<A HREF="http://www.ra.is/unlagged/">http://www.ra.is/unlagged/</A>&gt; to see how 
+Quake 3 tackles those problems, e.g. by using &quot;dead reckoning&quot;. Also see 
+this site for a solution to serious lag that uses backward 
+reconciliation to figure out what a player actually wanted to do. For a 
+more theoretical approach to solving the problem of lag, read 
+&lt;<A HREF="http://www.resourcecode.de/stuff/clientsideprediction.pdf">http://www.resourcecode.de/stuff/clientsideprediction.pdf</A>&gt;.
+
+
+Kind regards,
+
+   Christoph
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000434.html">[Supertux-devel] Network play
+</A></li>
+	<LI>Next message: <A HREF="000436.html">[Supertux-devel] info on supertux
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#435">[ date ]</a>
+              <a href="thread.html#435">[ thread ]</a>
+              <a href="subject.html#435">[ subject ]</a>
+              <a href="author.html#435">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

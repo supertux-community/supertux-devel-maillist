@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] [Bug #8076] compile error: ambient_sound.hpp: No such file or directory
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%5BBug%20%238076%5D%20compile%20error%3A%20ambient_sound.hpp%3A%20No%20such%20file%20or%20directory&In-Reply-To=%3C200607050635.k656ZxeU009578%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000387.html">
+   <LINK REL="Next"  HREF="000373.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] [Bug #8076] compile error: ambient_sound.hpp: No such file or directory</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%5BBug%20%238076%5D%20compile%20error%3A%20ambient_sound.hpp%3A%20No%20such%20file%20or%20directory&In-Reply-To=%3C200607050635.k656ZxeU009578%40unicorn.berlios.de%3E"
+       TITLE="[Supertux-devel] [Bug #8076] compile error: ambient_sound.hpp: No such file or directory">admin at berlios.de
+       </A><BR>
+    <I>Wed Jul  5 08:35:59 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000387.html">[Supertux-devel] I've found a bug for never had 'Game Over' in Supertux
+</A></li>
+        <LI>Next message: <A HREF="000373.html">[Supertux-devel] [Bug #8054] Icons in objects tool and tile tool panes go white sometimes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#372">[ date ]</a>
+              <a href="thread.html#372">[ thread ]</a>
+              <a href="subject.html#372">[ subject ]</a>
+              <a href="author.html#372">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #8076, was updated on 2006-Jul-04 22:35
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: benau
+Assigned to : none
+Summary: compile error: ambient_sound.hpp: No such file or directory
+
+Details: 
+
+bash-3.00# jam
+...patience...
+...found 1295 target(s)...
+...updating 30 target(s)...
+C++ ./build/i686-pc-linux-gnu/optimize/src/object/ambient_sound.o 
+src/object/ambient_sound.cpp:33:39: scripting/ambient_sound.hpp: No such file or
+ directory
+In file included from src/scripting/wrapper.hpp:10,
+                 from src/scripting/squirrel_util.hpp:26,
+                 from src/object/ambient_sound.cpp:34:
+src/scripting/wrapper.interface.hpp:14:29: ambient_sound.hpp: No such file or di
+rectory
+In file included from src/scripting/squirrel_util.hpp:26,
+                 from src/object/ambient_sound.cpp:34:
+src/scripting/wrapper.hpp:27: error: no type `AmbientSound' in `Scripting'
+src/scripting/wrapper.hpp:27: error: syntax error before `*' token
+src/object/ambient_sound.cpp:119: error: prototype for `void 
+   AmbientSound::hit(Scripting::Player&amp;)' does not match any in class `
+   AmbientSound'
+src/object/ambient_sound.hpp:69: error: candidate is: virtual void 
+   AmbientSound::hit(Player&amp;)
+src/object/ambient_sound.cpp: In member function `virtual void 
+
+   AmbientSound::expose(SQVM*, int)':
+src/object/ambient_sound.cpp:215: error: `AmbientSound' undeclared in namespace 
+   `Scripting'
+src/object/ambient_sound.cpp:215: error: `interface' undeclared (first use this 
+   function)
+src/object/ambient_sound.cpp:215: error: (Each undeclared identifier is 
+   reported only once for each function it appears in.)
+src/object/ambient_sound.cpp:215: error: syntax error before `this'
+
+    g++ -c -o ./build/i686-pc-linux-gnu/optimize/src/object/ambient_sound.o  -I.
+ -I./src -I/usr/include/SDL -D_REENTRANT  -I/usr/X11R6/include -pthread     -Isr
+c/squirrel/include -Isrc/squirrel   -ffast-math -Wall -O3 -g src/object/ambient_
+sound.cpp
+
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=8076&amp;group_id=3467">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=8076&amp;group_id=3467</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000387.html">[Supertux-devel] I've found a bug for never had 'Game Over' in Supertux
+</A></li>
+	<LI>Next message: <A HREF="000373.html">[Supertux-devel] [Bug #8054] Icons in objects tool and tile tool panes go white sometimes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#372">[ date ]</a>
+              <a href="thread.html#372">[ thread ]</a>
+              <a href="subject.html#372">[ subject ]</a>
+              <a href="author.html#372">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

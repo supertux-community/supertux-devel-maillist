@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Jam Fix for 10240-related Errors (patch)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Jam%20Fix%20for%2010240-related%20Errors%20%28patch%29&In-Reply-To=%3C44A5830D.6050008%40digitree.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000354.html">
+   <LINK REL="Next"  HREF="000355.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Jam Fix for 10240-related Errors (patch)</H1>
+    <B>Daniel Hedlund</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Jam%20Fix%20for%2010240-related%20Errors%20%28patch%29&In-Reply-To=%3C44A5830D.6050008%40digitree.org%3E"
+       TITLE="[Supertux-devel] Jam Fix for 10240-related Errors (patch)">daniel at digitree.org
+       </A><BR>
+    <I>Fri Jun 30 22:01:17 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000354.html">[Supertux-devel] authorization request for supertux
+</A></li>
+        <LI>Next message: <A HREF="000355.html">[Supertux-devel] [Bug #7496] error during the compilation of svn version
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#350">[ date ]</a>
+              <a href="thread.html#350">[ thread ]</a>
+              <a href="subject.html#350">[ subject ]</a>
+              <a href="author.html#350">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have made a patch that fixes the 10240-related errors when compiling 
+with Jam (jam-fix-2006-06-30.patch).  The patch has only been tested 
+under Linux at the moment and would be appreciated if anyone under 
+Windows or OS X can let the list know if they have any problems.  
+AnMaster also recommends for anyone with a multi-cpu/core system to see 
+how well it works using multiple threads (ie. jam -j2).
+
+This patch fixes the problem by breaking each of the SuperTux 
+subdirectories into an archive file (.a) and then recombines them at the 
+end to form the supertux executable.  This patch slows down overall 
+compile time, but it should be compatible with most systems.
+
+I have also attached an older patch (jam-fix-gcc4-2006-06-28.patch) I 
+made that fixes the 10240 problems, but only appears to be compatible 
+with GCC 4.x.  The part of the patch that is incompatible is the use of 
+the '@file' syntax which looks in a file for a list of objects to link 
+together.  This patch is much cleaner, but should not be introduced into 
+the official source due to its incompatibilities.
+
+Cheers,
+
+Daniel Hedlund
+<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">daniel at digitree.org</A>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: jam_fix-2006-06-30.patch
+Type: text/x-patch
+Size: 6326 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060630/4faedaa8/attachment.bin">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060630/4faedaa8/attachment.bin</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: jam_fix-gcc4-2006-06-28.patch
+Type: text/x-patch
+Size: 3065 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060630/4faedaa8/attachment-0001.bin">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060630/4faedaa8/attachment-0001.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000354.html">[Supertux-devel] authorization request for supertux
+</A></li>
+	<LI>Next message: <A HREF="000355.html">[Supertux-devel] [Bug #7496] error during the compilation of svn version
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#350">[ date ]</a>
+              <a href="thread.html#350">[ thread ]</a>
+              <a href="subject.html#350">[ subject ]</a>
+              <a href="author.html#350">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

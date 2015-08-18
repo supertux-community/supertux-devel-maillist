@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Objects improvement patch, part 1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Objects%20improvement%20patch%2C%20part%201&In-Reply-To=%3Cff70c5070607230645u2afe00c4oc9676a27925d3fc1%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000404.html">
+   <LINK REL="Next"  HREF="000406.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Objects improvement patch, part 1</H1>
+    <B>tuxdev</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Objects%20improvement%20patch%2C%20part%201&In-Reply-To=%3Cff70c5070607230645u2afe00c4oc9676a27925d3fc1%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] Objects improvement patch, part 1">tuxdev103 at gmail.com
+       </A><BR>
+    <I>Sun Jul 23 15:45:48 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000404.html">[Supertux-devel] [Supertux-commit] r4034 - trunk/supertux/src
+</A></li>
+        <LI>Next message: <A HREF="000406.html">[Supertux-devel] suggestion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#405">[ date ]</a>
+              <a href="thread.html#405">[ thread ]</a>
+              <a href="subject.html#405">[ subject ]</a>
+              <a href="author.html#405">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This patch is essentially what I did to the objects in order to try to
+improve scripting.  The scripting isn't mergeable because it has
+crashing issues, so I tried to make a mergeable patch that only did my
+changes to the object system with somewhat minimal changes to the
+scripting system.
+
+1.  Expanded portable interface to include a boolean &quot;portable&quot;, as
+well as support methods and constructors.
+2.  Expanded GameObject to include a std::string &quot;name&quot;, and added
+support methods and constructors, notably one to allow the field to be
+acquired from a level file.
+3.  Expanded MovingObject to include a boolean &quot;solid&quot;, and added
+support for what would become a scripting interface.
+4.  Removed the &quot;flags&quot; field from GameObject, since it is pointless
+with changes 1 and 3.  Fixed where things broke due to its removal.
+5.  Made AmbientSound inherit from MovingObject instead of GameObject,
+since most things that can actually exist physically in a level should
+be MovingObjects, and I know how that class works.
+6.  Loosened the singletoness of Camera, DisplayEffect, and Player.
+Level doesn't have a host object, so I'm not sure how to handle that.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: objects.patch
+Type: application/octet-stream
+Size: 38452 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060723/c813cb09/attachment.obj">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060723/c813cb09/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000404.html">[Supertux-devel] [Supertux-commit] r4034 - trunk/supertux/src
+</A></li>
+	<LI>Next message: <A HREF="000406.html">[Supertux-devel] suggestion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#405">[ date ]</a>
+              <a href="thread.html#405">[ thread ]</a>
+              <a href="subject.html#405">[ subject ]</a>
+              <a href="author.html#405">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

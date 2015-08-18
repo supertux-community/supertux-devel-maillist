@@ -1,0 +1,23 @@
+From bogus@does.not.exist.com  Wed Mar 14 16:22:03 2012
+From: bogus@does.not.exist.com ()
+Date: Wed, 14 Mar 2012 15:22:03 -0000
+Subject: No subject
+Message-ID: <mailman.0.1331738528.12656.supertux-devel@lists.berlios.de>
+
+parser.cpp cannot be found.
+
+What may be the problem? The configure script found out the
+dependencies successfully.
+
+I have the revision 4408 from SVN (downloaded yesterday), and today I
+have not been able to update. SVN tells me connection refused to
+'svn.berlios.de'.
+
+I could not get usefull information at Supertux Fansite either.
+
+Thank you for any help, and congrats for the fine game!
+
+-- 
+Krishnamurti Lelis Lima Vieira Nunes
+
+

@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Performance on XP
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-December/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Performance%20on%20XP&In-Reply-To=%3C826ffc730612310607l12c9372fu4658c9f9c028a103%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000638.html">
+   <LINK REL="Next"  HREF="000631.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Performance on XP</H1>
+    <B>djwings at gmail.com</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Performance%20on%20XP&In-Reply-To=%3C826ffc730612310607l12c9372fu4658c9f9c028a103%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] Performance on XP">djwings at gmail.com
+       </A><BR>
+    <I>Sun Dec 31 15:07:56 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000638.html">[Supertux-devel] Performance on XP
+</A></li>
+        <LI>Next message: <A HREF="000631.html">[Supertux-devel] Performance on XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#639">[ date ]</a>
+              <a href="thread.html#639">[ thread ]</a>
+              <a href="subject.html#639">[ subject ]</a>
+              <a href="author.html#639">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Maybe it was the graphics card. No offense, but a GeForce 3?
+
+On 12/30/06, Allen King &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">allen at a-king.us</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  Good call!
+</I>&gt;<i>
+</I>&gt;<i> The frame rate improved phenomenally with this patch!  It's in the 45-55
+</I>&gt;<i> fps range, up from 2.4 fps.  I'm not sure what it means for the greater
+</I>&gt;<i> Supertux project's use of OpenGL, and penguins taking over the Gatseian
+</I>&gt;<i> world.  But I'll leave that for others to explore.
+</I>&gt;<i>
+</I>&gt;<i> Note that supertux-nogl.diff did not patch cleanly, with hunk 10 of
+</I>&gt;<i> drawing_context.cpp failing.  I put what seemed like the right change in by
+</I>&gt;<i> hand.  Someone might want to clean that up.  Or not.
+</I>&gt;<i>
+</I>&gt;<i> Thanks for helping me out with this.  It allows me to get my goals met.
+</I>&gt;<i> If there's more testing I can do toward penguin domination, please let me
+</I>&gt;<i> know.
+</I>&gt;<i>
+</I>&gt;<i>        Allen
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">djwings at gmail.com</A> wrote:
+</I>&gt;<i>
+</I>&gt;<i> Hardware accel off?
+</I>&gt;<i> Here's a suggestion: Try recompiling it with the supertux-nogl patch, and
+</I>&gt;<i> tell us what happens. My test machine, with an Athlon XP 1.4GHz and NVidia
+</I>&gt;<i> GeForce 5200FX runs fine on Windows, even though I occasionally get those
+</I>&gt;<i> jerky frames that you described. On Linux (Xubuntu) and the same machine, it
+</I>&gt;<i> works great.
+</I>&gt;<i>
+</I>&gt;<i> On 12/28/06, Allen King &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">allen at a-king.us</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I've been doing a bunch of work, checking out the various suggestions:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ===== 1. Odin Omdal H&#248;rthe wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; This is a problem in the code as far as I have understood. Morten
+</I>&gt;<i> &gt; Hustveit wrote a patch fixing it - but I don't think it got into the
+</I>&gt;<i> &gt; code-base before 0.3.0. His 4 core Xeon with an X1800 ATI-card got
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; truly horrible performance (due to the sleeping in-game). It looks as
+</I>&gt;<i> &gt; if the better machine you got - the worse the performance gets
+</I>&gt;<i> &gt; (because sleeping is extremely little precise, and a fast machine has
+</I>&gt;<i> &gt; to do many, many sleeps in order to get a 60fps framerate instead of
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; 3000 (as Morten's machine got)).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The patch also fixes some poor jumping-behaviour - and I really find
+</I>&gt;<i> &gt; the game more enjoyable after applying it. The patch and email never
+</I>&gt;<i> &gt; made it to the list. However, it should reside at
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="http://www.ping.uio.no/~mortehu/jump-and-busy-frameloop.patch">http://www.ping.uio.no/~mortehu/jump-and-busy-frameloop.patch</A> &lt;<A HREF="http://www.ping.uio.no/%7Emortehu/jump-and-busy-frameloop.patch">http://www.ping.uio.no/%7Emortehu/jump-and-busy-frameloop.patch</A>&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Since you suffer the same problem, I will paste Morten's email below:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  I had great hopes for this patch, but found that something else is
+</I>&gt;<i> &gt; causing the slow frame rate, and the patch doesn't help that at all.  The
+</I>&gt;<i> &gt; patch does help if one HAD to live with slow frame rates:  a) The velocities
+</I>&gt;<i> &gt; are more like those of 0.1.3 (although horribly jerkey at 2.5fps).  b)
+</I>&gt;<i> &gt; It also seems to drop fewer keys.   (But I can't live with slow frame rates
+</I>&gt;<i> &gt; !^)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ===== 2. Armin Eulenstein wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I got 0.3.0 running under Windows XP with SP2 very smooth at 60fps. I'm
+</I>&gt;<i> &gt; using an Athlon XP 2200+; a old Geforce 2 MX400 Graphics card and got
+</I>&gt;<i> &gt; 1024mb RAM.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  Seemingly similar configurations.  I'm running XP Pro, and a different
+</I>&gt;<i> &gt; graphics card, but...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I thought for a minute that running SuperTux in a guest VMWare virtual
+</I>&gt;<i> &gt; machine might be causing the problem, so I installed it in the main (host)
+</I>&gt;<i> &gt; machine.  Then just to be sure, I uninstalled VMWare and rebooted.  All
+</I>&gt;<i> &gt; results were the same -- 0.3.0 ran at 2.5fps!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  SuperTux creates logfiles at the point where you start the
+</I>&gt;<i> &gt; game, possibly you can find your problem at there.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  On some runs, I get the message in stderr.txt: &quot;Restarting audio source
+</I>&gt;<i> &gt; because of buffer underrun&quot;.  Other runs are clean.  Nothing ups the frame
+</I>&gt;<i> &gt; rate, even if I turn off sounds and music in the config file.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ===== 3. Wolfgang Becker wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Maybe a 64 bit problem? Supertux runs fine on my 950 MHz Athlon with
+</I>&gt;<i> &gt; Geforce 3, even if I'm running XP. On my parents' laptop (P4, with
+</I>&gt;<i> &gt; some ATI mobile, much faster than my box), it works, too but only
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; in windowed mode. Fullscreen flickers really bad which makes it
+</I>&gt;<i> &gt; unplayable.
+</I>&gt;<i> &gt; ...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I installed Supertux-0.3.0-win32-setup.exe on an older 32-bit 800MHz
+</I>&gt;<i> &gt; Pentium III laptop running XP Pro SP2, with very similar results:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;                                    Tower                 Laptop. A XXX
+</I>&gt;<i> &gt; 0.3.0:                         2.5fps                  1.2fps!  Abysmal.
+</I>&gt;<i> &gt; 0.1.3 w OpenGL:      ~10fps                 ~7fps
+</I>&gt;<i> &gt; 0.1.3 no OpenGL:     &gt;30fps                 &gt;30fps
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; (The tower is the machine I've been reporting on up to now.)  0.1.3seems to slow way down using OpenGL.
+</I>&gt;<i> &gt; 0.3.0 seems 4-6x slower than 0.1.3.   (Rates are approximate using a
+</I>&gt;<i> &gt; stop watch on 50 frames, since the fps meter didn't seem to work.)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; So it's looking like an OpenGL issue.  Which brings me to:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ===== 4. The Digital Pioneer wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ...
+</I>&gt;<i> &gt; But seriously... I'll be trying 0.3.0 on windoze soon. I'll be
+</I>&gt;<i> &gt; downloading it presently, so I'll have more results soon. About all I can
+</I>&gt;<i> &gt; recommend is checking that your OGL is working properly (I don't see why it
+</I>&gt;<i> &gt; wouldn't be) and that nothing else is getting in Supertux's way.
+</I>&gt;<i> &gt; ...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; So I downloaded the latest driver from nVIDIA, which proports to have
+</I>&gt;<i> &gt; &quot;Microsoft(r) DirectX(r) 9.0c and OpenGL(r) 2.0 support&quot;, from
+</I>&gt;<i> &gt; <A HREF="http://www.nvidia.com/object/winxp_2k_93.71.html">http://www.nvidia.com/object/winxp_2k_93.71.html</A> .  Still 2.5fps :-(
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I'm presuming SuperTux is happy with OpenGL(r) 2.0 support, but can't tell
+</I>&gt;<i> &gt; because supertux.berlios.de is down.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; To figure out how to tune OpenGL, I googled opengl tuning and got an ati.amd.com/developer/gdc/Performance
+</I>&gt;<i> &gt; *Tuning*.pdf.   It suggested varying the frame buffer, and seeing its
+</I>&gt;<i> &gt; affect on fps, and I found that performance is frame buffer limited -- it
+</I>&gt;<i> &gt; renders about 1.5M Pixels Per Second (pps), actually it varies a little,
+</I>&gt;<i> &gt; 1.4-1.9 M pps:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; 800x600 -- 4fps            480,000      1.92M pps
+</I>&gt;<i> &gt; 400x300 -- 12.3fps       120,000      1.48M pps
+</I>&gt;<i> &gt; 300x225 -- 20fps            67,500      1.35M pps
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ===== 5. I'm guessin hardware acceleration is turned off, or something.
+</I>&gt;<i> &gt; Although display properties show hardware acceleration at full.  Now I'm not
+</I>&gt;<i> &gt; sure where to go from here.  Suggestions.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Supertux-devel mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.dehttps</A>://lists.berlios.de/mailman/listinfo/supertux-devel
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20061231/b1c9d634/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20061231/b1c9d634/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000638.html">[Supertux-devel] Performance on XP
+</A></li>
+	<LI>Next message: <A HREF="000631.html">[Supertux-devel] Performance on XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#639">[ date ]</a>
+              <a href="thread.html#639">[ thread ]</a>
+              <a href="subject.html#639">[ subject ]</a>
+              <a href="author.html#639">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

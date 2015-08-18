@@ -1,0 +1,812 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Iceflower implementation
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-August/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Iceflower%20implementation&In-Reply-To=%3C826ffc730608151634y2416e01ehb4ac87b601eee104%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000455.html">
+   <LINK REL="Next"  HREF="000457.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Iceflower implementation</H1>
+    <B>djwings at gmail.com</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Iceflower%20implementation&In-Reply-To=%3C826ffc730608151634y2416e01ehb4ac87b601eee104%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] Iceflower implementation">djwings at gmail.com
+       </A><BR>
+    <I>Wed Aug 16 01:34:17 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000455.html">[Supertux-devel] Iceflower implementation
+</A></li>
+        <LI>Next message: <A HREF="000457.html">[Supertux-devel] Iceflower implementation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#456">[ date ]</a>
+              <a href="thread.html#456">[ thread ]</a>
+              <a href="subject.html#456">[ subject ]</a>
+              <a href="author.html#456">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>But is it used in any levels? Good idea, I had no clue the flower was
+unimplemented until now!
+
+On 8/15/06, gnomino &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">gnomino at hotmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hello,
+</I>&gt;<i> This is a patch against rev. 4186 that implements iceflower. Icebullets
+</I>&gt;<i> can freeze some badguys (only the ones I could find sprite images for).
+</I>&gt;<i> Mr. Bombs can be carried around while frozen, as said on the wiki. When
+</I>&gt;<i> an icebullet hits an already frozen badguy, it bounces off him.
+</I>&gt;<i> Firebullets will unfreeze frozen badguys. All non-freezable badguys are
+</I>&gt;<i> killed by any type of bullet.
+</I>&gt;<i> (Is this the right behavior?)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Index: src/badguy/spiky.hpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/spiky.hpp        (revision 4186)
+</I>&gt;<i> +++ src/badguy/spiky.hpp        (working copy)
+</I>&gt;<i> @@ -30,6 +30,9 @@
+</I>&gt;<i>    void write(lisp::Writer&amp; writer);
+</I>&gt;<i>    virtual Spiky* clone() const { return new Spiky(*this); }
+</I>&gt;<i>
+</I>&gt;<i> +  void freeze();
+</I>&gt;<i> +  bool is_freezable() const;
+</I>&gt;<i> +
+</I>&gt;<i> private:
+</I>&gt;<i> };
+</I>&gt;<i>
+</I>&gt;<i> Index: src/badguy/jumpy.hpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/jumpy.hpp        (revision 4186)
+</I>&gt;<i> +++ src/badguy/jumpy.hpp        (working copy)
+</I>&gt;<i> @@ -33,6 +33,9 @@
+</I>&gt;<i>    void write(lisp::Writer&amp; writer);
+</I>&gt;<i>    void active_update(float);
+</I>&gt;<i>
+</I>&gt;<i> +  void freeze();
+</I>&gt;<i> +  bool is_freezable() const;
+</I>&gt;<i> +
+</I>&gt;<i>    virtual Jumpy* clone() const { return new Jumpy(*this); }
+</I>&gt;<i>
+</I>&gt;<i> private:
+</I>&gt;<i> Index: src/badguy/badguy.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/badguy.cpp       (revision 4186)
+</I>&gt;<i> +++ src/badguy/badguy.cpp       (working copy)
+</I>&gt;<i> @@ -34,7 +34,7 @@
+</I>&gt;<i> static const float Y_OFFSCREEN_DISTANCE = 1200;
+</I>&gt;<i>
+</I>&gt;<i> BadGuy::BadGuy(const Vector&amp; pos, const std::string&amp; sprite_name, int
+</I>&gt;<i> layer)
+</I>&gt;<i> -  : MovingSprite(pos, sprite_name, layer, COLGROUP_DISABLED),
+</I>&gt;<i> countMe(true), dir(LEFT), start_dir(AUTO), state(STATE_INIT),
+</I>&gt;<i> on_ground_flag(false)
+</I>&gt;<i> +  : MovingSprite(pos, sprite_name, layer, COLGROUP_DISABLED),
+</I>&gt;<i> countMe(true), dir(LEFT), start_dir(AUTO), frozen(false), state(STATE_INIT),
+</I>&gt;<i> on_ground_flag(false)
+</I>&gt;<i> {
+</I>&gt;<i>    start_position = bbox.p1;
+</I>&gt;<i>
+</I>&gt;<i> @@ -43,7 +43,7 @@
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> BadGuy::BadGuy(const Vector&amp; pos, Direction direction, const std::string&amp;
+</I>&gt;<i> sprite_name, int layer)
+</I>&gt;<i> -  : MovingSprite(pos, sprite_name, layer, COLGROUP_DISABLED),
+</I>&gt;<i> countMe(true), dir(direction), start_dir(direction), state(STATE_INIT),
+</I>&gt;<i> on_ground_flag(false)
+</I>&gt;<i> +  : MovingSprite(pos, sprite_name, layer, COLGROUP_DISABLED),
+</I>&gt;<i> countMe(true), dir(direction), start_dir(direction), frozen(false),
+</I>&gt;<i> state(STATE_INIT), on_ground_flag(false)
+</I>&gt;<i> {
+</I>&gt;<i>    start_position = bbox.p1;
+</I>&gt;<i>
+</I>&gt;<i> @@ -52,7 +52,7 @@
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> BadGuy::BadGuy(const lisp::Lisp&amp; reader, const std::string&amp; sprite_name,
+</I>&gt;<i> int layer)
+</I>&gt;<i> -  : MovingSprite(reader, sprite_name, layer, COLGROUP_DISABLED),
+</I>&gt;<i> countMe(true), dir(LEFT), start_dir(AUTO), state(STATE_INIT),
+</I>&gt;<i> on_ground_flag(false)
+</I>&gt;<i> +  : MovingSprite(reader, sprite_name, layer, COLGROUP_DISABLED),
+</I>&gt;<i> countMe(true), dir(LEFT), start_dir(AUTO), frozen(false), state(STATE_INIT),
+</I>&gt;<i> on_ground_flag(false)
+</I>&gt;<i> {
+</I>&gt;<i>    start_position = bbox.p1;
+</I>&gt;<i>
+</I>&gt;<i> @@ -222,6 +222,8 @@
+</I>&gt;<i>      return ABORT_MOVE;
+</I>&gt;<i>    }
+</I>&gt;<i>
+</I>&gt;<i> +  if(frozen)
+</I>&gt;<i> +    unfreeze();
+</I>&gt;<i>    player.kill(false);
+</I>&gt;<i>    return FORCE_MOVE;
+</I>&gt;<i> }
+</I>&gt;<i> @@ -241,8 +243,16 @@
+</I>&gt;<i> HitResponse
+</I>&gt;<i> BadGuy::collision_bullet(Bullet&amp; bullet, const CollisionHit&amp; )
+</I>&gt;<i> {
+</I>&gt;<i> +  if(frozen) {
+</I>&gt;<i> +    if(bullet.get_type() == FIRE_BONUS)
+</I>&gt;<i> +      unfreeze();
+</I>&gt;<i> +    else
+</I>&gt;<i> +      return FORCE_MOVE;
+</I>&gt;<i> +  } else if(bullet.get_type() == ICE_BONUS &amp;&amp; is_freezable()) {
+</I>&gt;<i> +    freeze();
+</I>&gt;<i> +  } else
+</I>&gt;<i> +    kill_fall();
+</I>&gt;<i>    bullet.remove_me();
+</I>&gt;<i> -  kill_fall();
+</I>&gt;<i>    return ABORT_MOVE;
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> @@ -425,3 +435,29 @@
+</I>&gt;<i> {
+</I>&gt;<i>    return on_ground_flag;
+</I>&gt;<i> }
+</I>&gt;<i> +
+</I>&gt;<i> +void
+</I>&gt;<i> +BadGuy::freeze()
+</I>&gt;<i> +{
+</I>&gt;<i> +  set_group(COLGROUP_MOVING_STATIC);
+</I>&gt;<i> +  frozen = true;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +void
+</I>&gt;<i> +BadGuy::unfreeze()
+</I>&gt;<i> +{
+</I>&gt;<i> +  set_group(COLGROUP_MOVING);
+</I>&gt;<i> +  frozen = false;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +bool
+</I>&gt;<i> +BadGuy::is_freezable() const
+</I>&gt;<i> +{
+</I>&gt;<i> +  return false;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +bool
+</I>&gt;<i> +BadGuy::is_frozen() const
+</I>&gt;<i> +{
+</I>&gt;<i> +  return frozen;
+</I>&gt;<i> +}
+</I>&gt;<i> Index: src/badguy/sspiky.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/sspiky.cpp       (revision 4186)
+</I>&gt;<i> +++ src/badguy/sspiky.cpp       (working copy)
+</I>&gt;<i> @@ -106,4 +106,18 @@
+</I>&gt;<i>    }
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> +void
+</I>&gt;<i> +SSpiky::freeze()
+</I>&gt;<i> +{
+</I>&gt;<i> +  WalkingBadguy::freeze();
+</I>&gt;<i> +  sprite-&gt;set_action(dir == LEFT ? &quot;iced-left&quot; : &quot;iced-right&quot;);
+</I>&gt;<i> +  state = SSPIKY_WALKING; // if we get hit while sleeping, wake up :)
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +bool
+</I>&gt;<i> +SSpiky::is_freezable() const
+</I>&gt;<i> +{
+</I>&gt;<i> +  return true;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> IMPLEMENT_FACTORY(SSpiky, &quot;sspiky&quot;)
+</I>&gt;<i> Index: src/badguy/mrbomb.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/mrbomb.cpp       (revision 4186)
+</I>&gt;<i> +++ src/badguy/mrbomb.cpp       (working copy)
+</I>&gt;<i> @@ -28,6 +28,7 @@
+</I>&gt;<i> {
+</I>&gt;<i>    walk_speed = 80;
+</I>&gt;<i>    max_drop_height = 0;
+</I>&gt;<i> +  grabbed = false;
+</I>&gt;<i>
+</I>&gt;<i>    //Check if we need another sprite
+</I>&gt;<i>    if( !reader.get( &quot;sprite&quot;, sprite_name ) ){
+</I>&gt;<i> @@ -47,6 +48,7 @@
+</I>&gt;<i> {
+</I>&gt;<i>    walk_speed = 80;
+</I>&gt;<i>    max_drop_height = 0;
+</I>&gt;<i> +  grabbed = false;
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> void
+</I>&gt;<i> @@ -57,6 +59,22 @@
+</I>&gt;<i>    writer.end_list(&quot;mrbomb&quot;);
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> +HitResponse
+</I>&gt;<i> +MrBomb::collision(GameObject&amp; object, const CollisionHit&amp; hit)
+</I>&gt;<i> +{
+</I>&gt;<i> +  if(grabbed)
+</I>&gt;<i> +    return FORCE_MOVE;
+</I>&gt;<i> +  return WalkingBadguy::collision(object, hit);
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +HitResponse
+</I>&gt;<i> +MrBomb::collision_player(Player&amp; player, const CollisionHit&amp; hit)
+</I>&gt;<i> +{
+</I>&gt;<i> +  if(grabbed)
+</I>&gt;<i> +    return FORCE_MOVE;
+</I>&gt;<i> +  return WalkingBadguy::collision_player(player, hit);
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> bool
+</I>&gt;<i> MrBomb::collision_squished(Player&amp; player)
+</I>&gt;<i> {
+</I>&gt;<i> @@ -67,6 +85,14 @@
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> void
+</I>&gt;<i> +MrBomb::active_update(float elapsed_time)
+</I>&gt;<i> +{
+</I>&gt;<i> +  if(grabbed)
+</I>&gt;<i> +    return;
+</I>&gt;<i> +  WalkingBadguy::active_update(elapsed_time);
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +void
+</I>&gt;<i> MrBomb::kill_fall()
+</I>&gt;<i> {
+</I>&gt;<i>    remove_me();
+</I>&gt;<i> @@ -75,4 +101,42 @@
+</I>&gt;<i>    bomb-&gt;explode();
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> +void
+</I>&gt;<i> +MrBomb::grab(MovingObject&amp;, const Vector&amp; pos, Direction dir)
+</I>&gt;<i> +{
+</I>&gt;<i> +  assert(frozen);
+</I>&gt;<i> +  movement = pos - get_pos();
+</I>&gt;<i> +  this-&gt;dir = dir;
+</I>&gt;<i> +  sprite-&gt;set_action(dir == LEFT ? &quot;iced-left&quot; : &quot;iced-right&quot;);
+</I>&gt;<i> +  set_group(COLGROUP_DISABLED);
+</I>&gt;<i> +  grabbed = true;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +void
+</I>&gt;<i> +MrBomb::ungrab(MovingObject&amp; , Direction dir)
+</I>&gt;<i> +{
+</I>&gt;<i> +  this-&gt;dir = dir;
+</I>&gt;<i> +  set_group(COLGROUP_MOVING);
+</I>&gt;<i> +  grabbed = false;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +void
+</I>&gt;<i> +MrBomb::freeze()
+</I>&gt;<i> +{
+</I>&gt;<i> +  WalkingBadguy::freeze();
+</I>&gt;<i> +  sprite-&gt;set_action(dir == LEFT ? &quot;iced-left&quot; : &quot;iced-right&quot;);
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +bool
+</I>&gt;<i> +MrBomb::is_freezable() const
+</I>&gt;<i> +{
+</I>&gt;<i> +  return true;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +bool
+</I>&gt;<i> +MrBomb::is_portable() const
+</I>&gt;<i> +{
+</I>&gt;<i> +  return frozen;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> IMPLEMENT_FACTORY(MrBomb, &quot;mrbomb&quot;)
+</I>&gt;<i> Index: src/badguy/walking_badguy.hpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/walking_badguy.hpp       (revision 4186)
+</I>&gt;<i> +++ src/badguy/walking_badguy.hpp       (working copy)
+</I>&gt;<i> @@ -37,6 +37,8 @@
+</I>&gt;<i>    void active_update(float elapsed_time);
+</I>&gt;<i>    void collision_solid(const CollisionHit&amp; hit);
+</I>&gt;<i>    HitResponse collision_badguy(BadGuy&amp; badguy, const CollisionHit&amp; hit);
+</I>&gt;<i> +  void freeze();
+</I>&gt;<i> +  void unfreeze();
+</I>&gt;<i>
+</I>&gt;<i> protected:
+</I>&gt;<i>    void turn_around();
+</I>&gt;<i> Index: src/badguy/fish.hpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/fish.hpp (revision 4186)
+</I>&gt;<i> +++ src/badguy/fish.hpp (working copy)
+</I>&gt;<i> @@ -37,6 +37,10 @@
+</I>&gt;<i>    void write(lisp::Writer&amp; );
+</I>&gt;<i>    void active_update(float);
+</I>&gt;<i>
+</I>&gt;<i> +  void freeze();
+</I>&gt;<i> +  void unfreeze();
+</I>&gt;<i> +  bool is_freezable() const;
+</I>&gt;<i> +
+</I>&gt;<i>    virtual Fish* clone() const { return new Fish(*this); }
+</I>&gt;<i>
+</I>&gt;<i> private:
+</I>&gt;<i> Index: src/badguy/spiky.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/spiky.cpp        (revision 4186)
+</I>&gt;<i> +++ src/badguy/spiky.cpp        (working copy)
+</I>&gt;<i> @@ -36,4 +36,17 @@
+</I>&gt;<i>    writer.end_list(&quot;spiky&quot;);
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> +void
+</I>&gt;<i> +Spiky::freeze()
+</I>&gt;<i> +{
+</I>&gt;<i> +  WalkingBadguy::freeze();
+</I>&gt;<i> +  sprite-&gt;set_action(dir == LEFT ? &quot;iced-left&quot; : &quot;iced-right&quot;);
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +bool
+</I>&gt;<i> +Spiky::is_freezable() const
+</I>&gt;<i> +{
+</I>&gt;<i> +  return true;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> IMPLEMENT_FACTORY(Spiky, &quot;spiky&quot;)
+</I>&gt;<i> Index: src/badguy/dispenser.hpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/dispenser.hpp    (revision 4186)
+</I>&gt;<i> +++ src/badguy/dispenser.hpp    (working copy)
+</I>&gt;<i> @@ -32,6 +32,10 @@
+</I>&gt;<i>    void write(lisp::Writer&amp; writer);
+</I>&gt;<i>    void active_update(float elapsed_time);
+</I>&gt;<i>
+</I>&gt;<i> +  void freeze();
+</I>&gt;<i> +  void unfreeze();
+</I>&gt;<i> +  bool is_freezable() const;
+</I>&gt;<i> +
+</I>&gt;<i>    virtual Dispenser* clone() const { return new Dispenser(*this); }
+</I>&gt;<i>
+</I>&gt;<i> protected:
+</I>&gt;<i> Index: src/badguy/jumpy.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/jumpy.cpp        (revision 4186)
+</I>&gt;<i> +++ src/badguy/jumpy.cpp        (working copy)
+</I>&gt;<i> @@ -63,7 +63,7 @@
+</I>&gt;<i>        groundhit_pos_set = true;
+</I>&gt;<i>      }
+</I>&gt;<i>
+</I>&gt;<i> -    physic.set_velocity_y(JUMPSPEED);
+</I>&gt;<i> +    physic.set_velocity_y(frozen ? 0 : JUMPSPEED);
+</I>&gt;<i>      // TODO create a nice sound for this...
+</I>&gt;<i>      //sound_manager-&gt;play(&quot;sounds/skid.wav&quot;);
+</I>&gt;<i>    } else if(chit.top) {
+</I>&gt;<i> @@ -78,6 +78,9 @@
+</I>&gt;<i> {
+</I>&gt;<i>    BadGuy::active_update(elapsed_time);
+</I>&gt;<i>
+</I>&gt;<i> +  if(frozen)
+</I>&gt;<i> +    return;
+</I>&gt;<i> +
+</I>&gt;<i>    Player* player = this-&gt;get_nearest_player();
+</I>&gt;<i>    if (player)
+</I>&gt;<i>    {
+</I>&gt;<i> @@ -99,4 +102,18 @@
+</I>&gt;<i>      sprite-&gt;set_action(dir == LEFT ? &quot;left-down&quot; : &quot;right-down&quot;);
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> +void
+</I>&gt;<i> +Jumpy::freeze()
+</I>&gt;<i> +{
+</I>&gt;<i> +  BadGuy::freeze();
+</I>&gt;<i> +  physic.set_velocity_y(std::max(0.0f, physic.get_velocity_y()));
+</I>&gt;<i> +  sprite-&gt;set_action(dir == LEFT ? &quot;left-iced&quot; : &quot;right-iced&quot;);
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +bool
+</I>&gt;<i> +Jumpy::is_freezable() const
+</I>&gt;<i> +{
+</I>&gt;<i> +  return true;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> IMPLEMENT_FACTORY(Jumpy, &quot;jumpy&quot;)
+</I>&gt;<i> Index: src/badguy/badguy.hpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/badguy.hpp       (revision 4186)
+</I>&gt;<i> +++ src/badguy/badguy.hpp       (working copy)
+</I>&gt;<i> @@ -93,6 +93,20 @@
+</I>&gt;<i>     * during runtime. */
+</I>&gt;<i>    bool countMe;
+</I>&gt;<i>
+</I>&gt;<i> +  /**
+</I>&gt;<i> +   * Called when hit by an ice bullet, and is_freezable() returns true.
+</I>&gt;<i> +   */
+</I>&gt;<i> +  virtual void freeze();
+</I>&gt;<i> +
+</I>&gt;<i> +  /**
+</I>&gt;<i> +   * Called to unfreeze the badguy.
+</I>&gt;<i> +   */
+</I>&gt;<i> +  virtual void unfreeze();
+</I>&gt;<i> +
+</I>&gt;<i> +  virtual bool is_freezable() const;
+</I>&gt;<i> +
+</I>&gt;<i> +  bool is_frozen() const;
+</I>&gt;<i> +
+</I>&gt;<i> protected:
+</I>&gt;<i>    enum State {
+</I>&gt;<i>      STATE_INIT,
+</I>&gt;<i> @@ -185,6 +199,8 @@
+</I>&gt;<i>     */
+</I>&gt;<i>    bool on_ground();
+</I>&gt;<i>
+</I>&gt;<i> +  bool frozen;
+</I>&gt;<i> +
+</I>&gt;<i> private:
+</I>&gt;<i>    void try_activate();
+</I>&gt;<i>
+</I>&gt;<i> Index: src/badguy/sspiky.hpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/sspiky.hpp       (revision 4186)
+</I>&gt;<i> +++ src/badguy/sspiky.hpp       (working copy)
+</I>&gt;<i> @@ -33,6 +33,9 @@
+</I>&gt;<i>    HitResponse collision_badguy(BadGuy&amp; badguy, const CollisionHit&amp; hit);
+</I>&gt;<i>    void active_update(float elapsed_time);
+</I>&gt;<i>
+</I>&gt;<i> +  void freeze();
+</I>&gt;<i> +  bool is_freezable() const;
+</I>&gt;<i> +
+</I>&gt;<i>    virtual SSpiky* clone() const { return new SSpiky(*this); }
+</I>&gt;<i>
+</I>&gt;<i> protected:
+</I>&gt;<i> Index: src/badguy/mrbomb.hpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/mrbomb.hpp       (revision 4186)
+</I>&gt;<i> +++ src/badguy/mrbomb.hpp       (working copy)
+</I>&gt;<i> @@ -21,8 +21,9 @@
+</I>&gt;<i> #define __MRBOMB_H__
+</I>&gt;<i>
+</I>&gt;<i> #include &quot;walking_badguy.hpp&quot;
+</I>&gt;<i> +#include &quot;object/portable.hpp&quot;
+</I>&gt;<i>
+</I>&gt;<i> -class MrBomb : public WalkingBadguy
+</I>&gt;<i> +class MrBomb : public WalkingBadguy, public Portable
+</I>&gt;<i> {
+</I>&gt;<i> public:
+</I>&gt;<i>    MrBomb(const lisp::Lisp&amp; reader);
+</I>&gt;<i> @@ -30,11 +31,25 @@
+</I>&gt;<i>
+</I>&gt;<i>    void write(lisp::Writer&amp; writer);
+</I>&gt;<i>    void kill_fall();
+</I>&gt;<i> +  HitResponse collision(GameObject&amp; object, const CollisionHit&amp; hit);
+</I>&gt;<i> +  HitResponse collision_player(Player&amp; player, const CollisionHit&amp; hit);
+</I>&gt;<i>
+</I>&gt;<i> +  void active_update(float elapsed_time);
+</I>&gt;<i> +
+</I>&gt;<i> +  void grab(MovingObject&amp; object, const Vector&amp; pos, Direction dir);
+</I>&gt;<i> +  void ungrab(MovingObject&amp; object, Direction dir);
+</I>&gt;<i> +  bool is_portable() const;
+</I>&gt;<i> +
+</I>&gt;<i> +  void freeze();
+</I>&gt;<i> +  bool is_freezable() const;
+</I>&gt;<i> +
+</I>&gt;<i>    virtual MrBomb* clone() const { return new MrBomb(*this); }
+</I>&gt;<i>
+</I>&gt;<i> protected:
+</I>&gt;<i>    bool collision_squished(Player&amp; player);
+</I>&gt;<i> +
+</I>&gt;<i> +private:
+</I>&gt;<i> +  bool grabbed;
+</I>&gt;<i> };
+</I>&gt;<i>
+</I>&gt;<i> #endif
+</I>&gt;<i> Index: src/badguy/walking_badguy.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/walking_badguy.cpp       (revision 4186)
+</I>&gt;<i> +++ src/badguy/walking_badguy.cpp       (working copy)
+</I>&gt;<i> @@ -48,6 +48,8 @@
+</I>&gt;<i> void
+</I>&gt;<i> WalkingBadguy::activate()
+</I>&gt;<i> {
+</I>&gt;<i> +  if(frozen)
+</I>&gt;<i> +    return;
+</I>&gt;<i>    sprite-&gt;set_action(dir == LEFT ? walk_left_action : walk_right_action);
+</I>&gt;<i>    bbox.set_size(sprite-&gt;get_current_hitbox_width(),
+</I>&gt;<i> sprite-&gt;get_current_hitbox_height());
+</I>&gt;<i>    physic.set_velocity_x(dir == LEFT ? -walk_speed : walk_speed);
+</I>&gt;<i> @@ -97,7 +99,23 @@
+</I>&gt;<i> void
+</I>&gt;<i> WalkingBadguy::turn_around()
+</I>&gt;<i> {
+</I>&gt;<i> +  if(frozen)
+</I>&gt;<i> +    return;
+</I>&gt;<i>    dir = dir == LEFT ? RIGHT : LEFT;
+</I>&gt;<i>    sprite-&gt;set_action(dir == LEFT ? walk_left_action : walk_right_action);
+</I>&gt;<i> -  physic.set_velocity_x(dir == LEFT ? -walk_speed : walk_speed);
+</I>&gt;<i> +  physic.set_velocity_x(-physic.get_velocity_x());
+</I>&gt;<i> }
+</I>&gt;<i> +
+</I>&gt;<i> +void
+</I>&gt;<i> +WalkingBadguy::freeze()
+</I>&gt;<i> +{
+</I>&gt;<i> +  BadGuy::freeze();
+</I>&gt;<i> +  physic.set_velocity_x(0);
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +void
+</I>&gt;<i> +WalkingBadguy::unfreeze()
+</I>&gt;<i> +{
+</I>&gt;<i> +  BadGuy::unfreeze();
+</I>&gt;<i> +  WalkingBadguy::activate();
+</I>&gt;<i> +}
+</I>&gt;<i> Index: src/badguy/fish.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/fish.cpp (revision 4186)
+</I>&gt;<i> +++ src/badguy/fish.cpp (working copy)
+</I>&gt;<i> @@ -91,7 +91,8 @@
+</I>&gt;<i>
+</I>&gt;<i>      // stop when we have reached the stop position
+</I>&gt;<i>      if (get_pos().y &gt;= stop_y) {
+</I>&gt;<i> -      start_waiting();
+</I>&gt;<i> +      if(!frozen)
+</I>&gt;<i> +        start_waiting();
+</I>&gt;<i>        movement = Vector(0, 0);
+</I>&gt;<i>      }
+</I>&gt;<i>
+</I>&gt;<i> @@ -109,7 +110,8 @@
+</I>&gt;<i>    }
+</I>&gt;<i>
+</I>&gt;<i>    // set sprite
+</I>&gt;<i> -  sprite-&gt;set_action(physic.get_velocity_y() &lt; 0 ? &quot;normal&quot; : &quot;down&quot;);
+</I>&gt;<i> +  if(!frozen)
+</I>&gt;<i> +    sprite-&gt;set_action(physic.get_velocity_y() &lt; 0 ? &quot;normal&quot; : &quot;down&quot;);
+</I>&gt;<i>
+</I>&gt;<i>    // we can't afford flying out of the tilemap, 'cause the engine would
+</I>&gt;<i> remove us.
+</I>&gt;<i>    if ((get_pos().y - 31.8) &lt; 0) // too high, let us fall
+</I>&gt;<i> @@ -136,4 +138,25 @@
+</I>&gt;<i>    set_group(COLGROUP_MOVING);
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> +void
+</I>&gt;<i> +Fish::freeze()
+</I>&gt;<i> +{
+</I>&gt;<i> +  BadGuy::freeze();
+</I>&gt;<i> +  sprite-&gt;set_action(physic.get_velocity_y() &lt; 0 ? &quot;iced&quot; : &quot;iced-down&quot;);
+</I>&gt;<i> +  waiting.stop();
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +void
+</I>&gt;<i> +Fish::unfreeze()
+</I>&gt;<i> +{ // does this happen at all? (or do fishes die when they fall frozen?)
+</I>&gt;<i> +  BadGuy::unfreeze();
+</I>&gt;<i> +  start_waiting();
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +bool
+</I>&gt;<i> +Fish::is_freezable() const
+</I>&gt;<i> +{
+</I>&gt;<i> +  return true;
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> IMPLEMENT_FACTORY(Fish, &quot;fish&quot;)
+</I>&gt;<i> Index: src/badguy/dispenser.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/badguy/dispenser.cpp    (revision 4186)
+</I>&gt;<i> +++ src/badguy/dispenser.cpp    (working copy)
+</I>&gt;<i> @@ -60,6 +60,8 @@
+</I>&gt;<i> void
+</I>&gt;<i> Dispenser::activate()
+</I>&gt;<i> {
+</I>&gt;<i> +   if(frozen)
+</I>&gt;<i> +     return;
+</I>&gt;<i>     dispense_timer.start(cycle, true);
+</I>&gt;<i>     launch_badguy();
+</I>&gt;<i> }
+</I>&gt;<i> @@ -122,4 +124,23 @@
+</I>&gt;<i>    }
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> +void
+</I>&gt;<i> +Dispenser::freeze()
+</I>&gt;<i> +{
+</I>&gt;<i> +  BadGuy::freeze();
+</I>&gt;<i> +  dispense_timer.stop();
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +void
+</I>&gt;<i> +Dispenser::unfreeze()
+</I>&gt;<i> +{
+</I>&gt;<i> +  BadGuy::unfreeze();
+</I>&gt;<i> +  activate();
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> +bool
+</I>&gt;<i> +Dispenser::is_freezable() const
+</I>&gt;<i> +{
+</I>&gt;<i> +  return true;
+</I>&gt;<i> +}
+</I>&gt;<i> IMPLEMENT_FACTORY(Dispenser, &quot;dispenser&quot;)
+</I>&gt;<i> Index: src/object/bullet.hpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/object/bullet.hpp       (revision 4186)
+</I>&gt;<i> +++ src/object/bullet.hpp       (working copy)
+</I>&gt;<i> @@ -23,22 +23,29 @@
+</I>&gt;<i> #include &quot;moving_object.hpp&quot;
+</I>&gt;<i> #include &quot;physic.hpp&quot;
+</I>&gt;<i> #include &quot;sprite/sprite.hpp&quot;
+</I>&gt;<i> +#include &quot;player_status.hpp&quot;
+</I>&gt;<i>
+</I>&gt;<i> class Bullet : public MovingObject
+</I>&gt;<i> {
+</I>&gt;<i> public:
+</I>&gt;<i> -  Bullet(const Vector&amp; pos, float xm, int dir);
+</I>&gt;<i> +  Bullet(const Vector&amp; pos, float xm, int dir, BonusType type);
+</I>&gt;<i>    ~Bullet();
+</I>&gt;<i>
+</I>&gt;<i>    void update(float elapsed_time);
+</I>&gt;<i>    void draw(DrawingContext&amp; context);
+</I>&gt;<i>    void collision_solid(const CollisionHit&amp; hit);
+</I>&gt;<i>    HitResponse collision(GameObject&amp; other, const CollisionHit&amp; hit);
+</I>&gt;<i> +
+</I>&gt;<i> +  BonusType get_type()
+</I>&gt;<i> +  {
+</I>&gt;<i> +    return type;
+</I>&gt;<i> +  }
+</I>&gt;<i>
+</I>&gt;<i> private:
+</I>&gt;<i>    int life_count;
+</I>&gt;<i>    Physic physic;
+</I>&gt;<i>    std::auto_ptr&lt;Sprite&gt; sprite;
+</I>&gt;<i> +  BonusType type;
+</I>&gt;<i> };
+</I>&gt;<i>
+</I>&gt;<i> #endif
+</I>&gt;<i> Index: src/object/player.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/object/player.cpp       (revision 4186)
+</I>&gt;<i> +++ src/object/player.cpp       (working copy)
+</I>&gt;<i> @@ -591,7 +591,7 @@
+</I>&gt;<i>    handle_vertical_input();
+</I>&gt;<i>
+</I>&gt;<i>    /* Shoot! */
+</I>&gt;<i> -  if (controller-&gt;pressed(Controller::ACTION) &amp;&amp; player_status-&gt;bonus ==
+</I>&gt;<i> FIRE_BONUS) {
+</I>&gt;<i> +  if (controller-&gt;pressed(Controller::ACTION) &amp;&amp; (player_status-&gt;bonus ==
+</I>&gt;<i> FIRE_BONUS || player_status-&gt;bonus == ICE_BONUS)) {
+</I>&gt;<i>      if(Sector::current()-&gt;add_bullet(
+</I>&gt;<i>           get_pos() + ((dir == LEFT)? Vector(0, bbox.get_height()/2)
+</I>&gt;<i>                        : Vector(32, bbox.get_height()/2)),
+</I>&gt;<i> Index: src/object/bullet.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/object/bullet.cpp       (revision 4186)
+</I>&gt;<i> +++ src/object/bullet.cpp       (working copy)
+</I>&gt;<i> @@ -33,17 +33,21 @@
+</I>&gt;<i>    const float BULLET_STARTING_YM = 0;
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> -Bullet::Bullet(const Vector&amp; pos, float xm, int dir)
+</I>&gt;<i> -  : life_count(3)
+</I>&gt;<i> +Bullet::Bullet(const Vector&amp; pos, float xm, int dir, BonusType type)
+</I>&gt;<i> +  : life_count(3), type(type)
+</I>&gt;<i> {
+</I>&gt;<i> -  sprite.reset
+</I>&gt;<i> (sprite_manager-&gt;create(&quot;images/objects/bullets/firebullet.sprite&quot;));
+</I>&gt;<i> +  float speed = dir == RIGHT ? BULLET_XM : -BULLET_XM;
+</I>&gt;<i> +  physic.set_velocity_x(speed + xm);
+</I>&gt;<i>
+</I>&gt;<i> +  if(type == FIRE_BONUS) {
+</I>&gt;<i> +    sprite.reset
+</I>&gt;<i> (sprite_manager-&gt;create(&quot;images/objects/bullets/firebullet.sprite&quot;));
+</I>&gt;<i> +  } else if(type == ICE_BONUS) {
+</I>&gt;<i> +    life_count = 10;
+</I>&gt;<i> +    sprite.reset
+</I>&gt;<i> (sprite_manager-&gt;create(&quot;images/objects/bullets/icebullet.sprite&quot;));
+</I>&gt;<i> +  }
+</I>&gt;<i> +
+</I>&gt;<i>    bbox.set_pos(pos);
+</I>&gt;<i>    bbox.set_size(sprite-&gt;get_current_hitbox_width(),
+</I>&gt;<i> sprite-&gt;get_current_hitbox_height());
+</I>&gt;<i> -
+</I>&gt;<i> -  float speed = dir == RIGHT ? BULLET_XM : -BULLET_XM;
+</I>&gt;<i> -  physic.set_velocity_x(speed + xm);
+</I>&gt;<i> -  physic.set_velocity_y(BULLET_STARTING_YM);
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> Bullet::~Bullet()
+</I>&gt;<i> @@ -83,7 +87,11 @@
+</I>&gt;<i>      physic.set_velocity_y(-physic.get_velocity_y());
+</I>&gt;<i>      life_count--;
+</I>&gt;<i>    } else if(hit.left || hit.right) {
+</I>&gt;<i> -    remove_me();
+</I>&gt;<i> +    if(type == ICE_BONUS) {
+</I>&gt;<i> +      physic.set_velocity_x(-physic.get_velocity_x());
+</I>&gt;<i> +      life_count--;
+</I>&gt;<i> +    } else
+</I>&gt;<i> +      remove_me();
+</I>&gt;<i>    }
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> Index: src/sector.cpp
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- src/sector.cpp      (revision 4186)
+</I>&gt;<i> +++ src/sector.cpp      (working copy)
+</I>&gt;<i> @@ -1283,9 +1283,12 @@
+</I>&gt;<i>    // TODO remove this function and move these checks elsewhere...
+</I>&gt;<i>
+</I>&gt;<i>    Bullet* new_bullet = 0;
+</I>&gt;<i> -  if((int)bullets.size() &gt;= player_status-&gt;max_fire_bullets)
+</I>&gt;<i> +  if((player_status-&gt;bonus == FIRE_BONUS &amp;&amp;
+</I>&gt;<i> +      (int)bullets.size() &gt;= player_status-&gt;max_fire_bullets) ||
+</I>&gt;<i> +     (player_status-&gt;bonus == ICE_BONUS &amp;&amp;
+</I>&gt;<i> +      (int)bullets.size() &gt;= player_status-&gt;max_ice_bullets))
+</I>&gt;<i>      return false;
+</I>&gt;<i> -  new_bullet = new Bullet(pos, xm, dir);
+</I>&gt;<i> +  new_bullet = new Bullet(pos, xm, dir, player_status-&gt;bonus);
+</I>&gt;<i>    add_object(new_bullet);
+</I>&gt;<i>
+</I>&gt;<i>    sound_manager-&gt;play(&quot;sounds/shoot.wav&quot;);
+</I>&gt;<i> Index: data/images/objects/bullets/icebullet.sprite
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- data/images/objects/bullets/icebullet.sprite        (revision 4186)
+</I>&gt;<i> +++ data/images/objects/bullets/icebullet.sprite        (working copy)
+</I>&gt;<i> @@ -1,6 +1,6 @@
+</I>&gt;<i> (supertux-sprite
+</I>&gt;<i>   (action
+</I>&gt;<i> -  (hitbox 12 12 0 0)
+</I>&gt;<i> +  (hitbox 2 2 12 10)
+</I>&gt;<i>    (fps 20)
+</I>&gt;<i>    (images &quot;ice_bullet.png&quot;)
+</I>&gt;<i>   )
+</I>&gt;<i> Index: data/scripts/console.nut
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- data/scripts/console.nut    (revision 4186)
+</I>&gt;<i> +++ data/scripts/console.nut    (working copy)
+</I>&gt;<i> @@ -24,6 +24,11 @@
+</I>&gt;<i>         sector.Tux.add_bonus(&quot;fireflower&quot;);
+</I>&gt;<i> }
+</I>&gt;<i>
+</I>&gt;<i> +function ice()
+</I>&gt;<i> +{
+</I>&gt;<i> +       sector.Tux.add_bonus(&quot;iceflower&quot;);
+</I>&gt;<i> +}
+</I>&gt;<i> +
+</I>&gt;<i> function shrink()
+</I>&gt;<i> {
+</I>&gt;<i>         sector.Tux.add_bonus(&quot;none&quot;);
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060815/00d6bd84/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060815/00d6bd84/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000455.html">[Supertux-devel] Iceflower implementation
+</A></li>
+	<LI>Next message: <A HREF="000457.html">[Supertux-devel] Iceflower implementation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#456">[ date ]</a>
+              <a href="thread.html#456">[ thread ]</a>
+              <a href="subject.html#456">[ subject ]</a>
+              <a href="author.html#456">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

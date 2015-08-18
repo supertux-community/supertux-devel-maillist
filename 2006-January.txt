@@ -1,0 +1,763 @@
+From christian at mvonessen.de  Sat Jan  7 14:45:05 2006
+From: christian at mvonessen.de (Christian von Essen)
+Date: Sat, 7 Jan 2006 13:45:05 +0000
+Subject: [Supertux-devel] Is this game still under active development?
+Message-ID: <20060107134505.GA9494@mvonessen.de>
+
+Hi,
+
+The game has made a lot of progress while being the Project
+of the month at happypenguin.org.
+Now I wonder, if the game is still under active development,
+or if it is dead now?
+
+Christian von Essen
+
+
+From wansti at gmx.de  Sat Jan  7 13:58:27 2006
+From: wansti at gmx.de (Marek)
+Date: Sat, 07 Jan 2006 13:58:27 +0100
+Subject: [Supertux-devel] Is this game still under active development?
+In-Reply-To: <20060107134505.GA9494@mvonessen.de>
+References: <20060107134505.GA9494@mvonessen.de>
+Message-ID: <43BFBAF3.1060402@gmx.de>
+
+Hi,
+the game is still under development, rather slowly at the moment, but
+steadily nontheless. Latest changes in the development version include a
+major bugfix in the collision code, a new piece of music and lots of
+forest artwork.
+
+    Marek
+
+Christian von Essen wrote:
+
+>Hi,
+>
+>The game has made a lot of progress while being the Project
+>of the month at happypenguin.org.
+>Now I wonder, if the game is still under active development,
+>or if it is dead now?
+>
+>Christian von Essen
+>  
+>
+
+
+
+From christian at mvonessen.de  Mon Jan  9 15:33:43 2006
+From: christian at mvonessen.de (Christian von Essen)
+Date: Mon, 9 Jan 2006 14:33:43 +0000
+Subject: [Supertux-devel] Rev 2975 gives black screen
+Message-ID: <20060109143343.GA20392@mvonessen.de>
+
+Hi,
+
+I downloaded the source via SVN, because I wanted to play with it a
+little. It compiles without giving error,
+it runs with complaining about 2 invalid buttons in the buttonmap,
+and the supertux themes is being played. But I don't get anything
+rendered onto the open window, no menu, nothing.
+
+I run supertux from within the trunk/supertux directory.
+The source has been compiled with the default options and debugging
+turned on.
+
+I'm running debian etch and compiled with gcc 4.0.
+
+Any suggestions?
+
+Christian von Essen
+
+
+From christian at mvonessen.de  Mon Jan  9 18:18:28 2006
+From: christian at mvonessen.de (Christian von Essen)
+Date: Mon, 9 Jan 2006 17:18:28 +0000
+Subject: [Supertux-devel] Problem solved
+Message-ID: <20060109171828.GA7567@mvonessen.de>
+
+Turned out to be a problem on my site.
+
+Thanks anyway.
+
+Christian von Essen
+
+
+From roger77 at optonline.net  Sun Jan  1 17:58:12 2006
+From: roger77 at optonline.net (ROGER RAM)
+Date: Sun, 01 Jan 2006 11:58:12 -0500
+Subject: [Supertux-devel] hi
+Message-ID: <000601c60ef4$8d6407f0$55c45743@sadman>
+
+love the game I hope there will be more people doing the samething like you. 
+can you put a ninja level so I could beat up on ninjas and a cementary and a hunted house level so I could beat up on monsters and zombies. 
+
+Level Ideals
+1. japan level-battle ninja and the shogun king.
+2. cementary and hunted house level- battle zombies and battle voodoo king and then go to the hunted house to beat up on ghosts and demons and then battle the boss satan jr.
+3. robotics lab- to battle cyborg,mutants and other experiments gone mess up and battle the boss robo dino half raptor and half werewolf.
+
+Your friend and fan
+Roger Ram
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060101/ec517e88/attachment.html>
+
+From gerard.hirsch at free.fr  Mon Jan  2 12:09:00 2006
+From: gerard.hirsch at free.fr (gerard hirsch)
+Date: Mon, 02 Jan 2006 12:09:00 +0100
+Subject: [Supertux-devel] supertux
+Message-ID: <43B909CC.9000206@free.fr>
+
+guten tag und happy new year
+
+ich habe ein kleine probl?me
+ich habe linux mandriva 2006 und supetux
+get nicht
+wan ich mach an er bleibt 1 seconde und get
+ab
+ich habe schon probiert uninstal und wieder
+install viele mahl , das r?solution ,uva
+von wie kant das sein ?
+viele dank f?r ihre andworth
+G.Hirsch  (elsass frankreich)
+
+
+From jeremya3690 at yahoo.com  Wed Jan  4 14:45:50 2006
+From: jeremya3690 at yahoo.com (Jeremy Adkins)
+Date: Wed, 4 Jan 2006 05:45:50 -0800 (PST)
+Subject: [Supertux-devel] Super Tux
+Message-ID: <20060104134550.92827.qmail@web35611.mail.mud.yahoo.com>
+
+Hey i am a big fan of supertux. I have beaten way too many times. And i just wanted to know if you have already started working on supertux 2.Thanks keep up the good work.
+
+
+    Jeremy Adkins
+  www.jeremyadkins.co.nr
+                                 
+
+
+
+			
+---------------------------------
+Yahoo! Photos
+ Ring in the New Year with Photo Calendars. Add photos, events, holidays, whatever.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060104/daf0789e/attachment.html>
+
+From flipricer at aim.com  Thu Jan  5 00:52:58 2006
+From: flipricer at aim.com (flipricer at aim.com)
+Date: Wed, 04 Jan 2006 18:52:58 -0500
+Subject: [Supertux-devel] Supertux Comments and Suggestions/Bugs
+Message-ID: <8C7DFA12002DA74-D24-A813@FWM-M37.sysops.aol.com>
+
+Hi there! I have the latest version of SuperTux for the PSP (PSP 
+Edition). I have noticed a bug which you would probably want to fix. 
+When you're at the map, choosing which level you want to go to, and you 
+highlight some of the levels, the penguin brings you back a level. For 
+example, when I bring my penguin to the dot of the level "Tobgle Road", 
+it brings it back to the level "Via Nostalgica". Do you know if you can 
+fix this bug (if it is a bug or if it's part of the game).  The only 
+way for me to bypass it is to go to the level and quickly press X or 
+quickly go to the next level. As a suggestion, do you know if you can 
+make the snowball (the one that increases your size) move a little 
+slower since it moves pretty fast. It's sometimes not enough time to 
+actual react towards getting it since it's a surprise. Also, when 
+you're invincible from the star, when you return back to normal, do you 
+know if you could have some sort of warning, such as that song going 
+faster so that you know that your invincibility is running out? Plus, 
+when you have the ability to shoot the little snowballs (when you're 
+red), do you know if you can make the snowballs travel a little slower 
+and bounce less so that it would be easier to hit the opponent? It's 
+kinda hard to hit them with the speed it's going and how much it 
+bounces. Another thing would be the long load time it takes to go to 
+the bonus section, but I guess that's part of the game. Other than 
+those things, I think it's fine. Good game, hope you update it, and 
+keep up the good work. I've been enjoying it so far! Please take this 
+in consideration! Thanks for reading, and good luck in the future!
+________________________________________________________________________
+Check Out the new free AIM(R) Mail -- 2 GB of storage and 
+industry-leading spam and email virus protection.
+
+
+
+From christian at mvonessen.de  Fri Jan  6 20:40:26 2006
+From: christian at mvonessen.de (Christian von Essen)
+Date: Fri, 6 Jan 2006 19:40:26 +0000
+Subject: [Supertux-devel] Is this game still being developed?
+Message-ID: <20060106194026.GA20229@mvonessen.de>
+
+Hi,
+
+After the GoTM phase of development, activity seems to have
+decreased to almost nothing.
+Is this game still being actively developed,
+or is it dead now?
+
+Christian von Essen
+
+
+From buckt66 at imap.cc  Fri Jan  6 22:47:38 2006
+From: buckt66 at imap.cc (buckt66 at imap.cc)
+Date: Fri, 06 Jan 2006 13:47:38 -0800
+Subject: [Supertux-devel] SuperTux Levels
+Message-ID: <1136584058.31144.251269381@webmail.messagingengine.com>
+
+Hi,
+
+I just made some levels for fun. They still need tome touching-up, but I
+wanted to know what you thought? Two of them are hard, one is easy. I
+felt most of the SuperTux levels were too easy, and I could design some
+hard/boss levels if you wanted. Tell me what you think (I used Mac OS X
+so I hope the files work).
+
+Regards,
+
+T. Buck
+-- 
+  
+  buckt66 at imap.cc
+
+-- 
+http://www.fastmail.fm - Access your email from home and the web
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level1.stl
+Type: application/octet-stream
+Size: 49358 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060106/f61f5bae/attachment.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level2.stl
+Type: application/octet-stream
+Size: 33692 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060106/f61f5bae/attachment-0001.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level3.stl
+Type: application/octet-stream
+Size: 46607 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060106/f61f5bae/attachment-0002.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level1.stl
+Type: application/octet-stream
+Size: 49358 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060106/f61f5bae/attachment-0003.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level2.stl
+Type: application/octet-stream
+Size: 33692 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060106/f61f5bae/attachment-0004.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level3.stl
+Type: application/octet-stream
+Size: 46607 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060106/f61f5bae/attachment-0005.obj>
+
+From guy.bergerat at wanadoo.fr  Mon Jan  9 14:54:36 2006
+From: guy.bergerat at wanadoo.fr (GUY BERGERAT)
+Date: Mon, 9 Jan 2006 14:54:36 +0100
+Subject: [Supertux-devel] Merci beaucoup !
+Message-ID: <883D0506-BBF9-440B-8984-029BDBFD3273@wanadoo.fr>
+
+Hello,
+
+Just to say : thank you very much indeed !
+
+Au revoir, ? bient?t,
+
+Guy.
+
+
+
+From wansti at gmx.de  Fri Jan 13 18:26:58 2006
+From: wansti at gmx.de (Marek)
+Date: Fri, 13 Jan 2006 18:26:58 +0100
+Subject: [Supertux-devel] Supertux Comments and Suggestions/Bugs
+In-Reply-To: <8C7DFA12002DA74-D24-A813@FWM-M37.sysops.aol.com>
+References: <8C7DFA12002DA74-D24-A813@FWM-M37.sysops.aol.com>
+Message-ID: <43C7E2E2.5010305@gmx.de>
+
+Hi!
+The bugs you describe appear to be only in the PSP version, which was
+not created by us. You should directly contact the author of the PSP
+port you are using. The invincibility warning has already been
+implemented and will be in the next (PC/Mac) version of the game.
+
+    Marek
+
+flipricer at aim.com wrote:
+
+> Hi there! I have the latest version of SuperTux for the PSP (PSP
+> Edition). I have noticed a bug which you would probably want to fix.
+> When you're at the map, choosing which level you want to go to, and
+> you highlight some of the levels, the penguin brings you back a level.
+> For example, when I bring my penguin to the dot of the level "Tobgle
+> Road", it brings it back to the level "Via Nostalgica". Do you know if
+> you can fix this bug (if it is a bug or if it's part of the game). 
+> The only way for me to bypass it is to go to the level and quickly
+> press X or quickly go to the next level. As a suggestion, do you know
+> if you can make the snowball (the one that increases your size) move a
+> little slower since it moves pretty fast. It's sometimes not enough
+> time to actual react towards getting it since it's a surprise. Also,
+> when you're invincible from the star, when you return back to normal,
+> do you know if you could have some sort of warning, such as that song
+> going faster so that you know that your invincibility is running out?
+> Plus, when you have the ability to shoot the little snowballs (when
+> you're red), do you know if you can make the snowballs travel a little
+> slower and bounce less so that it would be easier to hit the opponent?
+> It's kinda hard to hit them with the speed it's going and how much it
+> bounces. Another thing would be the long load time it takes to go to
+> the bonus section, but I guess that's part of the game. Other than
+> those things, I think it's fine. Good game, hope you update it, and
+> keep up the good work. I've been enjoying it so far! Please take this
+> in consideration! Thanks for reading, and good luck in the future!
+> ________________________________________________________________________
+> Check Out the new free AIM(R) Mail -- 2 GB of storage and
+> industry-leading spam and email virus protection.
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+
+
+-- 
+-----BEGIN GEEK CODE BLOCK-----
+Version: 3.1
+GCS/MU dpu s:+ a-- C++(++++) UL++>++++ P++$ L+++>+++++ E- W++ N o? K- w---
+O M+@ V- !PS !PE Y+ PGP++ t--- 5-- X- R+@ tv-- b+ DI+ D+>++++
+G++ e++>++++@ h--- r++(+++) y+++
+------END GEEK CODE BLOCK------ 
+
+
+
+From wansti at gmx.de  Fri Jan 13 18:31:02 2006
+From: wansti at gmx.de (Marek)
+Date: Fri, 13 Jan 2006 18:31:02 +0100
+Subject: [Supertux-devel] supertux
+In-Reply-To: <43B909CC.9000206@free.fr>
+References: <43B909CC.9000206@free.fr>
+Message-ID: <43C7E3D6.6090600@gmx.de>
+
+Hello!
+Maybe it's the graphics/OpenGL setting. Try starting the game with
+"supertux --sdl" and see if that helps.
+Greeting to France,
+
+    Marek
+
+Hallo!
+Vielleicht liegt es an der Grafikeinstellung/OpenGL. Versuche das Spiel
+mit "supertux --sdl" zu starten.
+Gruesse nach Frankreich,
+
+    Marek
+
+
+gerard hirsch wrote:
+
+> guten tag und happy new year
+>
+> ich habe ein kleine probl?me
+> ich habe linux mandriva 2006 und supetux
+> get nicht
+> wan ich mach an er bleibt 1 seconde und get
+> ab
+> ich habe schon probiert uninstal und wieder
+> install viele mahl , das r?solution ,uva
+> von wie kant das sein ?
+> viele dank f?r ihre andworth
+> G.Hirsch  (elsass frankreich)
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+
+
+
+From accola at gmail.com  Sat Jan 14 04:03:57 2006
+From: accola at gmail.com (Cameron Accola)
+Date: Fri, 13 Jan 2006 22:03:57 -0500
+Subject: [Supertux-devel] add me
+Message-ID: <8DF24E92-85F1-41EF-A577-F50F0790425F@gmail.com>
+
+
+
+From ajbaker at gvtc.com  Sun Jan 15 01:47:01 2006
+From: ajbaker at gvtc.com (Angela Baker)
+Date: Sat, 14 Jan 2006 18:47:01 -0600
+Subject: [Supertux-devel] (no subject)
+Message-ID: <000801c6196d$329d0a00$6500a8c0@Angela>
+
+Super Tux is one of my favorite games, and i cant find a way to play it free online without downloading it. Thanks. 
+
+When you get this email, please email me back at :
+
+                                             malloryjean_020 at yahoo.com
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060114/f98ed801/attachment.html>
+
+From wansti at gmx.de  Mon Jan 16 00:08:47 2006
+From: wansti at gmx.de (Marek)
+Date: Mon, 16 Jan 2006 00:08:47 +0100
+Subject: [Supertux-devel] (no subject)
+In-Reply-To: <000801c6196d$329d0a00$6500a8c0@Angela>
+References: <000801c6196d$329d0a00$6500a8c0@Angela>
+Message-ID: <43CAD5FF.40402@gmx.de>
+
+Hi!
+Nice to hear you like the game!
+The only way to play SuperTux is to download a SuperTux package for the
+operating system you are using and install it. There's no way to play it
+online. Of course, you can download the game for free at the download page:
+
+http://supertux.berlios.de/wiki/index.php/Download/Installation
+
+Greetings,
+    Marek
+
+
+Angela Baker wrote:
+
+> Super Tux is one of my favorite games, and i cant find a way to play
+> it free online without downloading it. Thanks.
+>  
+> When you get this email, please email me back at :
+>  
+>                                              malloryjean_020 at yahoo.com
+> <mailto:malloryjean_020 at yahoo.com>
+
+
+
+
+From luckmiz at hotmail.com  Fri Jan 20 05:22:07 2006
+From: luckmiz at hotmail.com (Nicola Murray)
+Date: Fri, 20 Jan 2006 14:22:07 +1000
+Subject: [Supertux-devel] Game
+Message-ID: <BAY102-DAV16E05CC6E1B3B7D0568A70A01F0@phx.gbl>
+
+Hi,
+
+    We loved your game, and were wondering if we could get your permission to put it on our website (for download), with the appropriate credit given, of course. Our website is still in the planning stages; if you would like more details on it, please mail luckmiz at hotmail.com.
+ Your time is much appreciated,
+
+ Yours sincerely,
+ Nicola and Sophie
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060120/3e14e25c/attachment.html>
+
+From harigov at gmail.com  Mon Jan 23 18:52:54 2006
+From: harigov at gmail.com (Hariprasad Govardhanam)
+Date: Mon, 23 Jan 2006 23:22:54 +0530
+Subject: [Supertux-devel] Game
+In-Reply-To: <BAY102-DAV16E05CC6E1B3B7D0568A70A01F0@phx.gbl>
+References: <BAY102-DAV16E05CC6E1B3B7D0568A70A01F0@phx.gbl>
+Message-ID: <8c53aa0f0601230952w138df562wa65aae44d7ef62ff@mail.gmail.com>
+
+Reply from a would be developer of supertux:(to relieve strain from
+developers)
+
+        Happy to hear that people love our game. You are allowed to keep the
+game on your website, and distribute it. But be sure to read the license
+agreements before doing so. SuperTux is released under GNU GPL. Read
+"COPYING" file.
+
+                Good luck
+
+On 1/20/06, Nicola Murray <luckmiz at hotmail.com> wrote:
+>
+> Hi,
+>
+>     We loved your game, and were wondering if we could get your permission
+> to put it on our website (for download), with the appropriate credit given,
+> of course. Our website is still in the planning stages; if you would like
+> more details on it, please mail luckmiz at hotmail.com.
+>  Your time is much appreciated,
+>
+>  Yours sincerely,
+>  Nicola and Sophie
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060123/a44cd2e3/attachment.html>
+
+From thommy at globo.com  Tue Jan 24 01:39:23 2006
+From: thommy at globo.com (Thomaz de Oliveira dos Reis)
+Date: Mon, 23 Jan 2006 22:39:23 -0200
+Subject: [Supertux-devel] Sugestion
+In-Reply-To: <8c53aa0f0601230952w138df562wa65aae44d7ef62ff@mail.gmail.com>
+References: <BAY102-DAV16E05CC6E1B3B7D0568A70A01F0@phx.gbl> <8c53aa0f0601230952w138df562wa65aae44d7ef62ff@mail.gmail.com>
+Message-ID: <43D5773B.6020404@globo.com>
+
+What do you think, in the SVN version... change those "telephone" for 
+some "GNU guru" ??
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: gnu.jpg
+Type: image/jpeg
+Size: 33742 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060123/4b3bbe5f/attachment.jpg>
+
+From slacker at gluebox.com  Tue Jan 24 16:15:24 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Tue, 24 Jan 2006 10:15:24 -0500 (EST)
+Subject: [Supertux-devel] Sugestion
+In-Reply-To: <43D5773B.6020404@globo.com>
+References: <BAY102-DAV16E05CC6E1B3B7D0568A70A01F0@phx.gbl>   
+    <8c53aa0f0601230952w138df562wa65aae44d7ef62ff@mail.gmail.com>   
+    <43D5773B.6020404@globo.com>
+Message-ID: <59933.146.145.190.179.1138115724.squirrel@gluebox.com>
+
+Hey Thomaz.
+
+Thanks for the suggestion. I agree it might be fun to have the GNU
+character in the game. I think the current plan for the most part is to
+not include any outside characters that are recognizable. If we were to
+add in some of Tux's friends to the game the GNU character would get my
+vote.
+
+Also, I think we will be switching the info block (telephone) back to
+either a ! or a combination of !+?. The telephone may still be used in a
+few hidden/special areas.
+
+- gwater
+
+> What do you think, in the SVN version... change those "telephone" for
+some "GNU guru" ??
+
+
+
+
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From gareuselesinge at debian.org  Sat Jan 28 20:20:19 2006
+From: gareuselesinge at debian.org (Enrico Tassi)
+Date: Sat, 28 Jan 2006 20:20:19 +0100
+Subject: [Supertux-devel] compilation on amd64
+Message-ID: <20060128192019.GA28245@garfield>
+
+compiling the svn code on amd64 I get:
+
+src/squirrel/squirrel/sqclass.h:32: error: cast from ?void*? to ?int?
+loses precision
+
+repeated many times. on amd64 int are 32bits while pointers 64bits.
+
+ciao
+-- 
+Enrico Tassi
+
+
+From gareuselesinge at debian.org  Sat Jan 28 20:24:24 2006
+From: gareuselesinge at debian.org (Enrico Tassi)
+Date: Sat, 28 Jan 2006 20:24:24 +0100
+Subject: [Supertux-devel] compilation on amd64
+In-Reply-To: <20060128192019.GA28245@garfield>
+References: <20060128192019.GA28245@garfield>
+Message-ID: <20060128192424.GA28511@garfield>
+
+On Sat, Jan 28, 2006 at 08:20:19PM +0100, Enrico Tassi wrote:
+> compiling the svn code on amd64 I get:
+> 
+> src/squirrel/squirrel/sqclass.h:32: error: cast from ?void*? to ?int?
+> loses precision
+> 
+> repeated many times. on amd64 int are 32bits while pointers 64bits.
+
+I forgot the patch.
+
+-- 
+Enrico Tassi
+-------------- next part --------------
+Index: src/squirrel/squirrel/sqclass.cpp
+===================================================================
+--- src/squirrel/squirrel/sqclass.cpp	(revision 3039)
++++ src/squirrel/squirrel/sqclass.cpp	(working copy)
+@@ -66,7 +66,7 @@
+ 				_methods.push_back(m);
+ 			}
+ 			else {
+-				_methods[(int)_userpointer(temp)].val = val;
++				_methods[(long int)_userpointer(temp)].val = val;
+ 			}
+ 		}
+ 		return true;
+@@ -90,7 +90,7 @@
+ 	int idx = _members->Next(refpos,outkey,oval);
+ 	if(idx != -1) {
+ 		if(type(oval) != OT_INTEGER) {
+-			outval = _methods[(int)_userpointer(oval)].val;
++			outval = _methods[(long int)_userpointer(oval)].val;
+ 		}
+ 		else {
+ 			outval = _defaultvalues[_integer(oval)].val;
+@@ -106,7 +106,7 @@
+ 		if(type(idx) == OT_INTEGER)
+ 			_defaultvalues[_integer(idx)].attrs = val;
+ 		else
+-			_methods[(int)_userpointer(idx)].attrs = val;
++			_methods[(long int)_userpointer(idx)].attrs = val;
+ 		return true;
+ 	}
+ 	return false;
+@@ -116,7 +116,7 @@
+ {
+ 	SQObjectPtr idx;
+ 	if(_members->Get(key,idx)) {
+-		outval = (type(idx) == OT_INTEGER?_defaultvalues[_integer(idx)].attrs:_methods[(int)_userpointer(idx)].attrs);
++		outval = (type(idx) == OT_INTEGER?_defaultvalues[_integer(idx)].attrs:_methods[(long int)_userpointer(idx)].attrs);
+ 		return true;
+ 	}
+ 	return false;
+Index: src/squirrel/squirrel/sqclass.h
+===================================================================
+--- src/squirrel/squirrel/sqclass.h	(revision 3039)
++++ src/squirrel/squirrel/sqclass.h	(working copy)
+@@ -29,7 +29,7 @@
+ 	bool NewSlot(const SQObjectPtr &key,const SQObjectPtr &val);
+ 	bool Get(const SQObjectPtr &key,SQObjectPtr &val) {
+ 		if(_members->Get(key,val)) {
+-			val = (type(val) == OT_INTEGER?_defaultvalues[_integer(val)].val:_methods[(int)_userpointer(val)].val);
++			val = (type(val) == OT_INTEGER?_defaultvalues[_integer(val)].val:_methods[(long int)_userpointer(val)].val);
+ 			return true;
+ 		}
+ 		return false;
+@@ -73,7 +73,7 @@
+ 	~SQInstance();
+ 	bool Get(const SQObjectPtr &key,SQObjectPtr &val)  {
+ 		if(_class->_members->Get(key,val)) {
+-			val = (type(val) == OT_INTEGER?_values[_integer(val)]:_class->_methods[(int)_userpointer(val)].val);
++			val = (type(val) == OT_INTEGER?_values[_integer(val)]:_class->_methods[(long int)_userpointer(val)].val);
+ 			return true;
+ 		}
+ 		return false;
+
+From gregory.t.brown at gmail.com  Sun Jan 29 00:10:21 2006
+From: gregory.t.brown at gmail.com (Gregory Brown)
+Date: Sat, 28 Jan 2006 18:10:21 -0500
+Subject: [Supertux-devel] Interested in playing around with the Supertux code
+Message-ID: <b37300880601281510g63b0f17chcbd2cc6e77d7df18@mail.gmail.com>
+
+Hi all... I just grabbed supertux and am going to be playing around
+with it and possibly wrapping it with some Ruby and providing some
+modification bindings...
+
+I'm curious... do you have any developer documentation available aside
+from what is in SVN?
+
+Anything that would be a good starting point for looking into the
+system would be much appreciated.
+
+My C++ is less than stellar, but I know how to write Ruby bindings and
+am quite proficient in Ruby....
+
+This is just a little side project that I was thinking of doing in my
+spare time, but if anything interesting comes of it, i'll happily
+share it.
+
+
+From wansti at gmx.de  Sun Jan 29 12:14:27 2006
+From: wansti at gmx.de (Marek)
+Date: Sun, 29 Jan 2006 11:14:27 +0000
+Subject: [Supertux-devel] Re: [Supertux-commit] r3038 - in trunk/supertux: .	data/levels/test
+ data/speech
+In-Reply-To: <1138477586.25881.2.camel@taylor.local>
+References: <200601281217.k0SCHOe6031273@sheep.berlios.de> <1138477586.25881.2.camel@taylor.local>
+Message-ID: <43DCA393.5090304@gmx.de>
+
+That's easy, simply add a reference to a keyword or scripted object that
+doesn't exist, i.e. write TUX.something instead of SUPERTUX.something or
+set_position() instead of set_pos(). Both crashed the game when the line
+was executed, locking screen resolution, mouse and keyboard.
+
+Matze Braun wrote:
+
+>Can you send me an example of a script that crashs your xserver?
+>
+>Greetings,
+>	Matze
+>
+>Am Samstag, den 28.01.2006, 13:17 +0100 schrieb wansti at BerliOS:
+>  
+>
+>>Author: wansti
+>>Date: 2006-01-28 13:17:11 +0100 (Sat, 28 Jan 2006)
+>>New Revision: 3038
+>>
+>>Added:
+>>   trunk/supertux/data/speech/penny_runt_01.ogg
+>>   trunk/supertux/data/speech/tux_hello.ogg
+>>   trunk/supertux/data/speech/tux_murp_01.ogg
+>>   trunk/supertux/data/speech/tux_upset.ogg
+>>Modified:
+>>   trunk/supertux/FIXME
+>>   trunk/supertux/data/levels/test/default.nut
+>>   trunk/supertux/data/levels/test/intro2.stl
+>>   trunk/supertux/data/speech/tux_rap.ogg
+>>Log:
+>>more work on intro cutscene
+>>
+>>
+>>Modified: trunk/supertux/FIXME
+>>===================================================================
+>>--- trunk/supertux/FIXME	2006-01-24 03:09:38 UTC (rev 3037)
+>>+++ trunk/supertux/FIXME	2006-01-28 12:17:11 UTC (rev 3038)
+>>@@ -3,7 +3,6 @@
+>> Just put them here so you don't forget.
+>> ---
+>> 
+>>-Tux is invisible!
+>>-Some sound effects (growup, being hit) loop endlessly
+>>+Errors in scripts crash X-Server (very annoying, please fix)
+>> Some levels don't have the music path set correctly
+>> Revert Tux to single image sprite
+>>    
+>>
+
+
+
+From creardon at eastlink.ca  Mon Jan 30 20:03:17 2006
+From: creardon at eastlink.ca (Chris Reardon)
+Date: Mon, 30 Jan 2006 15:03:17 -0400
+Subject: [Supertux-devel] Supertux
+Message-ID: <C003DB35.1183%creardon@eastlink.ca>
+
+What a wonderful game. I just completed it. I don?t think I discovered all
+the hidden features, though. You folks should sell the game ? I?d certainly
+pay the going price.
+
+Can?t wait for the next voyage.
+
+Thanks
+
+Chris Reardon
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060130/bfbcd7cb/attachment.html>
+

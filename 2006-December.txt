@@ -1,0 +1,2551 @@
+From goldenpiranha at gmail.com  Sun Dec  3 22:00:01 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Sun, 3 Dec 2006 13:00:01 -0800
+Subject: [Supertux-devel] Dead?????? and how long???
+Message-ID: <bcd1d8470612031300y446e7a33s3bffd16d7c5abec6@mail.gmail.com>
+
+Is this project dead? I haven't got any mail for 1 month...
+
+Is there an updated statement on when Milestone 2 will come out????
+
+thx
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061203/6c355741/attachment.html>
+
+From anmaster at berlios.de  Mon Dec  4 17:04:53 2006
+From: anmaster at berlios.de (Arvid Norlander)
+Date: Mon, 04 Dec 2006 17:04:53 +0100
+Subject: [Supertux-devel] Dead?????? and how long???
+In-Reply-To: <bcd1d8470612031300y446e7a33s3bffd16d7c5abec6@mail.gmail.com>
+References: <bcd1d8470612031300y446e7a33s3bffd16d7c5abec6@mail.gmail.com>
+Message-ID: <45744725.8070602@berlios.de>
+
+No SuperTux isn't dead. And as it says on the wiki: MS2 will be out when it is
+done. Btw, the IRC channel is often more active than the mailing list
+/AnMaster
+
+Danny Bittman wrote:
+> Is this project dead? I haven't got any mail for 1 month...
+> 
+> Is there an updated statement on when Milestone 2 will come out????
+> 
+> thx
+
+
+From DirtY.iCE.hu at gmail.com  Mon Dec 11 19:21:27 2006
+From: DirtY.iCE.hu at gmail.com (DirtY iCE)
+Date: Mon, 11 Dec 2006 19:21:27 +0100
+Subject: [Supertux-devel] Hungarian translation update + world1 intro patch
+Message-ID: <457DA1A7.3030509@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi everybody,
+This is an update to the hungarian translation, and a patch to the
+world1's intro (translatable text + fadein/out effect in supertux logo
+(this required some coding in the engine :) )
+DirtY iCE
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFFfaGnoJZDkXYAf9kRAgjAAKCwH3G22JfG/SWjFYhrtJeWtsLbNQCcDjlw
+nxzGxY/EoGjkAp5tJGac2/E=
+=17Uq
+-----END PGP SIGNATURE-----
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: hungarian_trans_upd.diff
+Type: text/x-patch
+Size: 4962 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061211/7bd9bebb/attachment.bin>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: intro_fadeinout.diff
+Type: text/x-patch
+Size: 6869 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061211/7bd9bebb/attachment-0001.bin>
+
+From odin.omdal at gmail.com  Thu Dec 14 17:34:48 2006
+From: odin.omdal at gmail.com (=?ISO-8859-1?Q?Odin_Omdal_H=F8rthe?=)
+Date: Thu, 14 Dec 2006 17:34:48 +0100
+Subject: [Supertux-devel] [PATCH] Allow to Escape out of die- and
+	finish-sequences
+Message-ID: <5785596e0612140834i2c9e24eer6477244faa997ea4@mail.gmail.com>
+
+Hello,
+
+a short patch which enables hitting Esc in order to get past the
+(boring when you play a lot) dying-sequence. It also let's you get out
+of the finish-sequence at the end of the map.
+
+It's a small patch which only makes the timers go to ~0.00001
+(FLT_EPSILON) so that the normal game logic can do what they need to
+do. In this way I'm surpe it doesn't harm the code in any way.
+
+This is my first patch, ever, so please say if you find something wrong.
+
+Thank you for a great game, my baby sister loves it.
+
+-- 
+Beste helsing,
+Odin H?rthe Omdal <odin.omdal at gmail.com>
+http://www.velmont.net
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: allow-esc-out-of-sequence.patch
+Type: text/x-patch
+Size: 666 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061214/046387c3/attachment.bin>
+
+From uafr at gmx.de  Thu Dec 14 22:56:19 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Thu, 14 Dec 2006 22:56:19 +0100
+Subject: [Supertux-devel] MS1.9/0.3.0
+Message-ID: <20061214215619.GA6747@greg.local>
+
+Hi,
+
+No, it's not done yet. But it's more fun than MS1.
+http://supertux.berlios.de/wiki/index.php/Milestone_1.9
+
+The plan is to release 0.3.0 before Christmas. So this weekend on
+Saturday we'll have to build some packages (and do some last minute
+bug fixing). I'll be in #supertux at about 14:30 UTC on Saturday. I
+know, that's not Christmas yet, but nobody had after the weekend.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From odin.omdal at gmail.com  Fri Dec 15 13:27:53 2006
+From: odin.omdal at gmail.com (=?ISO-8859-1?Q?Odin_Omdal_H=F8rthe?=)
+Date: Fri, 15 Dec 2006 13:27:53 +0100
+Subject: [Supertux-devel] MS1.9/0.3.0
+In-Reply-To: <20061214215619.GA6747@greg.local>
+References: <20061214215619.GA6747@greg.local>
+Message-ID: <5785596e0612150427s14fd1dd0wd54706f41290152b@mail.gmail.com>
+
+On 12/14/06, Wolfgang Becker <uafr at gmx.de> wrote:
+> The plan is to release 0.3.0 before Christmas. So this weekend on
+> Saturday we'll have to build some packages (and do some last minute
+> bug fixing). I'll be in #supertux at about 14:30 UTC on Saturday. I
+> know, that's not Christmas yet, but nobody had after the weekend.
+
+Will my patch get into 0.3.0?
+
+And, much more importantly - the hacker at my left side sent in a
+patch before me yesterday. However, it seems it never got on the list
+- the spam-filter may have catched it because he used a formal
+greeting. That patch is much bigger one, which fixes three core
+bothering things we didn't like when running Supertux.
+
+I can ask him to send it again - however, I guess you've got the mail
+in a spam-queue. :-)
+
+Hope his patch can find the way, I find Supertux more playable with
+the jump-enhancement.
+-- 
+Beste helsing,
+Odin H?rthe Omdal <odin.omdal at gmail.com>
+http://www.velmont.net
+
+
+From uafr at gmx.de  Fri Dec 15 20:15:52 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Fri, 15 Dec 2006 20:15:52 +0100
+Subject: [Supertux-devel] MS1.9/0.3.0
+In-Reply-To: <5785596e0612150427s14fd1dd0wd54706f41290152b@mail.gmail.com>
+References: <20061214215619.GA6747@greg.local>
+	<5785596e0612150427s14fd1dd0wd54706f41290152b@mail.gmail.com>
+Message-ID: <20061215191552.GB5198@greg.local>
+
+On 20061215 Odin Omdal H?rthe <odin.omdal at gmail.com> wrote:
+> I can ask him to send it again - however, I guess you've got the mail
+> in a spam-queue. :-)
+
+Better upload the patch to http://developer.berlios.de/patch/?group_id=3467
+instead of mailing it to the list. That way we know where to look for it
+and see if someone already applied it to svn.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From rflegel at gmail.com  Fri Dec 15 20:20:42 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Fri, 15 Dec 2006 13:20:42 -0600
+Subject: [Supertux-devel] MS1.9/0.3.0
+In-Reply-To: <20061215191552.GB5198@greg.local>
+References: <20061214215619.GA6747@greg.local>
+	<5785596e0612150427s14fd1dd0wd54706f41290152b@mail.gmail.com>
+	<20061215191552.GB5198@greg.local>
+Message-ID: <5a5496320612151120s74ece9f3ibca9df8fc5a0c6a5@mail.gmail.com>
+
+On 12/15/06, Wolfgang Becker <uafr at gmx.de> wrote:
+> On 20061215 Odin Omdal H?rthe <odin.omdal at gmail.com> wrote:
+> > I can ask him to send it again - however, I guess you've got the mail
+> > in a spam-queue. :-)
+>
+> Better upload the patch to http://developer.berlios.de/patch/?group_id=3467
+> instead of mailing it to the list. That way we know where to look for it
+> and see if someone already applied it to svn.
+
+Does anybody monitor that, though? :P
+
+
+From digitalpioneer at gmail.com  Fri Dec 15 20:32:10 2006
+From: digitalpioneer at gmail.com (The Digital Pioneer)
+Date: Sat, 16 Dec 2006 13:32:10 +1800
+Subject: [Supertux-devel] MS1.9/0.3.0
+In-Reply-To: <5a5496320612151120s74ece9f3ibca9df8fc5a0c6a5@mail.gmail.com>
+References: <20061214215619.GA6747@greg.local>
+	<5785596e0612150427s14fd1dd0wd54706f41290152b@mail.gmail.com>
+	<20061215191552.GB5198@greg.local>
+	<5a5496320612151120s74ece9f3ibca9df8fc5a0c6a5@mail.gmail.com>
+Message-ID: <ffce06340612151132n3c6bdf80re735955569a35f58@mail.gmail.com>
+
+They do when you post a patch then send a link on here. :)
+
+-- 
+Thanks,
+
+The Digital Pioneer
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061216/3f3f9fa5/attachment.html>
+
+From rflegel at gmail.com  Fri Dec 15 20:57:32 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Fri, 15 Dec 2006 13:57:32 -0600
+Subject: [Supertux-devel] MS1.9/0.3.0
+In-Reply-To: <ffce06340612151132n3c6bdf80re735955569a35f58@mail.gmail.com>
+References: <20061214215619.GA6747@greg.local>
+	<5785596e0612150427s14fd1dd0wd54706f41290152b@mail.gmail.com>
+	<20061215191552.GB5198@greg.local>
+	<5a5496320612151120s74ece9f3ibca9df8fc5a0c6a5@mail.gmail.com>
+	<ffce06340612151132n3c6bdf80re735955569a35f58@mail.gmail.com>
+Message-ID: <5a5496320612151157w5ab1bef5xe85670dbf0e18e76@mail.gmail.com>
+
+On 12/15/06, The Digital Pioneer <digitalpioneer at gmail.com> wrote:
+> They do when you post a patch then send a link on here. :)
+
+That's why most people just post them here. Although some patches do
+tend to get lost here :P.
+
+I wonder what would be involved to get Trac set up on berlios. Maybe
+I'll try it over the break :)
+
+-- 
+Ryan
+
+
+From uafr at gmx.de  Fri Dec 15 23:30:59 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Fri, 15 Dec 2006 23:30:59 +0100
+Subject: [Supertux-devel] MS1.9/0.3.0
+In-Reply-To: <5a5496320612151120s74ece9f3ibca9df8fc5a0c6a5@mail.gmail.com>
+References: <20061214215619.GA6747@greg.local>
+	<5785596e0612150427s14fd1dd0wd54706f41290152b@mail.gmail.com>
+	<20061215191552.GB5198@greg.local>
+	<5a5496320612151120s74ece9f3ibca9df8fc5a0c6a5@mail.gmail.com>
+Message-ID: <20061215223059.GB5628@greg.local>
+
+On 20061215 Ryan Flegel <rflegel at gmail.com> wrote:
+> Does anybody monitor that, though? :P
+
+I do. That is, I let Liferea do it.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From tuxdev103 at gmail.com  Sat Dec 16 01:28:45 2006
+From: tuxdev103 at gmail.com (Tim Goya)
+Date: Fri, 15 Dec 2006 16:28:45 -0800
+Subject: [Supertux-devel] Patch resubmit
+Message-ID: <ff70c5070612151628p4f6254fen1949e7f5b1e95a0d@mail.gmail.com>
+
+Fixes issue where you can disrupt entering a level indefinately by
+pressing the enter level key while the screen effect is happening.
+This patch is a bit old.  All I really did was define a guard variable
+so that keypresses do not have any effect while the screen effect is
+active.  If there is a better way, please implement that instead.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level-enter.patch
+Type: application/octet-stream
+Size: 7573 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061215/8f31b9c5/attachment.obj>
+
+From uafr at gmx.de  Sat Dec 16 14:55:41 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Sat, 16 Dec 2006 14:55:41 +0100
+Subject: [Supertux-devel] [PATCH] Allow to Escape out of die- and
+	finish-sequences
+In-Reply-To: <5785596e0612140834i2c9e24eer6477244faa997ea4@mail.gmail.com>
+References: <5785596e0612140834i2c9e24eer6477244faa997ea4@mail.gmail.com>
+Message-ID: <20061216135541.GA9110@greg.local>
+
+On 20061214 Odin Omdal H?rthe <odin.omdal at gmail.com> wrote:
+> a short patch which enables hitting Esc in order to get past the
+> (boring when you play a lot) dying-sequence. It also let's you get out
+> of the finish-sequence at the end of the map.
+
+Committed revision 4461.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From supertux at 2006.expires.deltadevelopment.de  Sat Dec 16 15:49:12 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Sat, 16 Dec 2006 15:49:12 +0100
+Subject: [Supertux-devel] Hungarian translation update + world1 intro
+ patch
+In-Reply-To: <457DA1A7.3030509@gmail.com>
+References: <457DA1A7.3030509@gmail.com>
+Message-ID: <45840768.2020608@2006.expires.deltadevelopment.de>
+
+DirtY iCE wrote:
+> This is an update to the hungarian translation, and a patch to the
+> world1's intro (translatable text + fadein/out effect in supertux logo
+
+Committed as r4463 - thanks!
+
+
+  Christoph
+
+
+From supertux at 2006.expires.deltadevelopment.de  Mon Dec 18 01:47:03 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Mon, 18 Dec 2006 01:47:03 +0100
+Subject: [Supertux-devel] SuperTux 0.3.0 released
+Message-ID: <4585E507.6050405@2006.expires.deltadevelopment.de>
+
+Hi everybody,
+
+--8<--- Release notes --8<---
+
+Supertux Release 0.3.0 (2006-12-17)
+
+Just in time for Christmas, we bring you SuperTux 0.3.0, a preview
+of SuperTux Milestone 2.
+
+This build doesn't contain all levels planned for Milestone 2 and
+its story is by no means complete, but the game is already fun to
+play.
+
+SuperTux 0.3.0 features:
+
+    * new, OpenGL- and OpenAL-based engine
+    * final boss for Icy Island
+    * brand new Forest World with new badguys and new game objects
+    * new and improved soundtrack, immersive sound effects
+    * much more...
+
+The changes in more detail: The SuperTux engine was nearly
+completely rewritten. The game is translatable now, a new camera
+algorithm allows scrolling in all four directions. Collision
+detection supports slopes and moving objects now. We have scripting
+support for dynamic level events and animations. New game objects
+include trampolines, switches, portable stones, upside-down
+levels, wind, moving platforms and particle effects. The sound
+system is now OpenAL-based with an improved soundtrack now played
+from Ogg/Vorbis-files, which were pre-rendered on a high-class
+synthesizer.
+
+This is also a call for artists and coders: If you like the game in
+its current state, join us and help us finish Milestone 2!
+
+--8<--- End release notes --8<---
+
+You can find the source package (as well as binaries) on SuperTux'
+BerliOS project page:
+
+http://developer.berlios.de/projects/supertux/
+
+
+Regards,
+
+  Christoph
+
+
+From evilglowingapple at gmail.com  Mon Dec 18 02:56:10 2006
+From: evilglowingapple at gmail.com (Jayson Kempinger)
+Date: Sun, 17 Dec 2006 19:56:10 -0600
+Subject: [Supertux-devel] SuperTux 0.3.0 released
+In-Reply-To: <4585E507.6050405@2006.expires.deltadevelopment.de>
+References: <4585E507.6050405@2006.expires.deltadevelopment.de>
+Message-ID: <26427C68-D061-4ACF-A2DB-CCD9FA52B7D2@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi, found a bug when building on Mac.  On line 169 of src/main.cpp,  
+msg_warning should be log_warning (I think).  Seems to work with  
+log_warning, but fails with msg_warning (since it's not declared).
+
+~Jayson
+
+- --
+This message is digitally signed with GnuPG:
+http://www.kempinger.us/gpg.php?eid=2
+
+
+On Dec 17, 2006, at 6:47 PM, Christoph Sommer wrote:
+
+> Hi everybody,
+>
+> --8<--- Release notes --8<---
+>
+> Supertux Release 0.3.0 (2006-12-17)
+>
+> Just in time for Christmas, we bring you SuperTux 0.3.0, a preview
+> of SuperTux Milestone 2.
+>
+> This build doesn't contain all levels planned for Milestone 2 and
+> its story is by no means complete, but the game is already fun to
+> play.
+>
+> SuperTux 0.3.0 features:
+>
+>     * new, OpenGL- and OpenAL-based engine
+>     * final boss for Icy Island
+>     * brand new Forest World with new badguys and new game objects
+>     * new and improved soundtrack, immersive sound effects
+>     * much more...
+>
+> The changes in more detail: The SuperTux engine was nearly
+> completely rewritten. The game is translatable now, a new camera
+> algorithm allows scrolling in all four directions. Collision
+> detection supports slopes and moving objects now. We have scripting
+> support for dynamic level events and animations. New game objects
+> include trampolines, switches, portable stones, upside-down
+> levels, wind, moving platforms and particle effects. The sound
+> system is now OpenAL-based with an improved soundtrack now played
+> from Ogg/Vorbis-files, which were pre-rendered on a high-class
+> synthesizer.
+>
+> This is also a call for artists and coders: If you like the game in
+> its current state, join us and help us finish Milestone 2!
+>
+> --8<--- End release notes --8<---
+>
+> You can find the source package (as well as binaries) on SuperTux'
+> BerliOS project page:
+>
+> http://developer.berlios.de/projects/supertux/
+>
+>
+> Regards,
+>
+>   Christoph
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFhfU7W6oxcmeg/20RAtx+AJ9Xvz6IoVcMHx76otxSWjB9PB0WAwCghpU/
+rsIQiO+NKrt8wUoG9KXlwPU=
+=1IM8
+-----END PGP SIGNATURE-----
+
+
+From ghanizadeh.eugene at gmail.com  Tue Dec 19 11:15:19 2006
+From: ghanizadeh.eugene at gmail.com (Eugene Ghanizadeh)
+Date: Tue, 19 Dec 2006 13:45:19 +0330
+Subject: [Supertux-devel] Dear developers
+Message-ID: <47a9ff3f0612190215i14cb497wa87f7c12253ae672@mail.gmail.com>
+
+First I'd like to have a piece of source code of last supertux released,
+because I could not find any.
+Second, I had a great suggestion for all to change the purposes of the
+MileStone 2. I think instead of adding some enemies, tile sets, etc, it is
+better to add the such facilities in the new editors, so that the new sets
+will automatically be generated faster and better.
+At last, I've generated some new tile sets which I'd like to know the
+facilities to be released and mostly the quality of them for new versions.
+
+Thanks.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061219/a7dd9b10/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Tue Dec 19 12:42:51 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Tue, 19 Dec 2006 12:42:51 +0100
+Subject: [Supertux-devel] Dear developers
+In-Reply-To: <47a9ff3f0612190215i14cb497wa87f7c12253ae672@mail.gmail.com>
+References: <47a9ff3f0612190215i14cb497wa87f7c12253ae672@mail.gmail.com>
+Message-ID: <4587D03B.8020600@2006.expires.deltadevelopment.de>
+
+Eugene Ghanizadeh wrote:
+> First I'd like to have a piece of source code of last supertux released,
+> because I could not find any.
+
+Hi Eugene,
+
+--8<--- Release notes --8<---
+
+Supertux Release 0.3.0 (2006-12-17)
+
+Just in time for Christmas, we bring you SuperTux 0.3.0, a preview
+of SuperTux Milestone 2.
+
+This build doesn't contain all levels planned for Milestone 2 and
+its story is by no means complete, but the game is already fun to
+play.
+
+SuperTux 0.3.0 features:
+
+    * new, OpenGL- and OpenAL-based engine
+    * final boss for Icy Island
+    * brand new Forest World with new badguys and new game objects
+    * new and improved soundtrack, immersive sound effects
+    * much more...
+
+The changes in more detail: The SuperTux engine was nearly
+completely rewritten. The game is translatable now, a new camera
+algorithm allows scrolling in all four directions. Collision
+detection supports slopes and moving objects now. We have scripting
+support for dynamic level events and animations. New game objects
+include trampolines, switches, portable stones, upside-down
+levels, wind, moving platforms and particle effects. The sound
+system is now OpenAL-based with an improved soundtrack now played
+from Ogg/Vorbis-files, which were pre-rendered on a high-class
+synthesizer.
+
+This is also a call for artists and coders: If you like the game in
+its current state, join us and help us finish Milestone 2!
+
+--8<--- End release notes --8<---
+
+You can find the source package (as well as binaries) on SuperTux'
+BerliOS project page:
+
+http://developer.berlios.de/projects/supertux/
+
+
+Regards,
+
+  Christoph
+
+
+
+From rflegel at gmail.com  Tue Dec 19 19:04:59 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Tue, 19 Dec 2006 12:04:59 -0600
+Subject: [Supertux-devel] Stale autopackage file?
+Message-ID: <5a5496320612191004i3be94109o27eb565aadfbec98@mail.gmail.com>
+
+I notice that there are now two autopackage release files. Should
+someone (I can do it) delete the first release?
+
+I want to make sure before I go ahead and remove it.
+
+-- 
+Ryan
+
+
+From uafr at gmx.de  Tue Dec 19 22:28:35 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Tue, 19 Dec 2006 22:28:35 +0100
+Subject: [Supertux-devel] Stale autopackage file?
+In-Reply-To: <5a5496320612191004i3be94109o27eb565aadfbec98@mail.gmail.com>
+References: <5a5496320612191004i3be94109o27eb565aadfbec98@mail.gmail.com>
+Message-ID: <20061219212834.GA7164@greg.local>
+
+On 20061219 Ryan Flegel <rflegel at gmail.com> wrote:
+> I notice that there are now two autopackage release files. Should
+> someone (I can do it) delete the first release?
+
+Does the new supertux-0.3.0a.x86.package also work on
+systems where supertux-0.3.0.x86.package was working?
+All I can tell it that the "a" package is working on my
+debian testing box, the other is not.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From rflegel at gmail.com  Tue Dec 19 22:54:12 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Tue, 19 Dec 2006 15:54:12 -0600
+Subject: [Supertux-devel] Stale autopackage file?
+In-Reply-To: <20061219212834.GA7164@greg.local>
+References: <5a5496320612191004i3be94109o27eb565aadfbec98@mail.gmail.com>
+	<20061219212834.GA7164@greg.local>
+Message-ID: <5a5496320612191354i743bb6adma9c337a938fca566@mail.gmail.com>
+
+On 12/19/06, Wolfgang Becker <uafr at gmx.de> wrote:
+> On 20061219 Ryan Flegel <rflegel at gmail.com> wrote:
+> > I notice that there are now two autopackage release files. Should
+> > someone (I can do it) delete the first release?
+>
+> Does the new supertux-0.3.0a.x86.package also work on
+> systems where supertux-0.3.0.x86.package was working?
+> All I can tell it that the "a" package is working on my
+> debian testing box, the other is not.
+
+That's a good question. I guess we'll wait to see if there's any feedback.
+
+-- 
+Ryan
+
+
+From matze at braunis.de  Wed Dec 20 10:11:22 2006
+From: matze at braunis.de (Matthias Braun)
+Date: Wed, 20 Dec 2006 10:11:22 +0100 (MET)
+Subject: [Supertux-devel] Dear developers
+In-Reply-To: <47a9ff3f0612190215i14cb497wa87f7c12253ae672@mail.gmail.com>
+References: <47a9ff3f0612190215i14cb497wa87f7c12253ae672@mail.gmail.com>
+Message-ID: <1166605836.3228.6.camel@koobeton.local>
+
+If I understood your email correctly then you want to add new tilesets
+to the game? The tilesets are not hardcoded into the game as you
+suspected, but you have to add them in a textfile. You can open the
+tiles.strf file in the data/images directory with any text editor and
+add your own tilesets there. They will appear in the editor and the game
+then. You can find some informations about the fileformat in the wiki
+here:
+
+http://supertux.berlios.de/wiki/index.php/Tile
+http://supertux.berlios.de/wiki/index.php/S-expr
+
+We'd be happy to see your tilesets, would be nice if you could send them
+to this mailing list :)
+
+Greetings,
+	Matze
+
+Am Dienstag, den 19.12.2006, 13:45 +0330 schrieb Eugene Ghanizadeh:
+> First I'd like to have a piece of source code of last supertux
+> released, because I could not find any.
+> Second, I had a great suggestion for all to change the purposes of the
+> MileStone 2. I think instead of adding some enemies, tile sets, etc,
+> it is better to add the such facilities in the new editors, so that
+> the new sets will automatically be generated faster and better.
+> At last, I've generated some new tile sets which I'd like to know the
+> facilities to be released and mostly the quality of them for new
+> versions.
+> 
+> Thanks.
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+From jothesmo at gmail.com  Fri Dec 22 01:19:33 2006
+From: jothesmo at gmail.com (Joth Esmo)
+Date: Thu, 21 Dec 2006 19:19:33 -0500
+Subject: [Supertux-devel] Download?
+Message-ID: <e5aaa77a0612211619j305fa5f4h4da72b74a23f7683@mail.gmail.com>
+
+I was wondering; is there an executable file (installer) available for
+the Mac? There was one for 0.1.3, am I missing something, or has it
+not yet been posted?
+
+
+From uafr at gmx.de  Fri Dec 22 17:03:41 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Fri, 22 Dec 2006 17:03:41 +0100
+Subject: [Supertux-devel] Download?
+In-Reply-To: <e5aaa77a0612211619j305fa5f4h4da72b74a23f7683@mail.gmail.com>
+References: <e5aaa77a0612211619j305fa5f4h4da72b74a23f7683@mail.gmail.com>
+Message-ID: <20061222160341.GA7389@greg.local>
+
+On 20061222 Joth Esmo <jothesmo at gmail.com> wrote:
+> I was wondering; is there an executable file (installer) available for
+> the Mac? There was one for 0.1.3, am I missing something, or has it
+> not yet been posted?
+
+AFAIK no developer has a Mac. So we can't create or test
+packages for that platform.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From ghanizadeh.eugene at gmail.com  Sat Dec 23 08:30:01 2006
+From: ghanizadeh.eugene at gmail.com (Eugene Ghanizadeh)
+Date: Sat, 23 Dec 2006 11:00:01 +0330
+Subject: [Supertux-devel] Dear Developers
+Message-ID: <47a9ff3f0612222330w69e5c220oc7285ff01da71f38@mail.gmail.com>
+
+I've started a new patch for Milestone 1 (0.1.3) with new
+tilesets, story and levels. The source and the engines of the
+game are the same, and just some graphic features have been
+added (about 9 new tile modules). The graphic works and the
+story line has been done. But the levels are still to be created,
+and I'd like any level designer to help me completing this patch.
+I will upload the basic version (without the levels made) asap,
+but it may take a while , the size of the patch is alot and my internet
+connection
+speed is not enough, so when I succeed enough upload speed, I will
+send it.
+
+Thanks
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061223/32aeaea0/attachment.html>
+
+From herrritschwumm at gmx.de  Fri Dec 22 11:04:10 2006
+From: herrritschwumm at gmx.de (Herr Ritshwumm)
+Date: Fri, 22 Dec 2006 12:04:10 +0200
+Subject: [Supertux-devel] Little world 2 patch
+Message-ID: <200612221204.10854.herrritschwumm@gmx.de>
+
+Hi,
+
+I created that little patch for version 0.2.
+It fixes the the level off the path and some tiles of the border between 
+normal and ghostforest should fit better now.
+
+Have a nice christmas,
+
+Peter
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: patch01.patch
+Type: text/x-diff
+Size: 2232 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061222/2cb6e2dd/attachment.patch>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: ghostwood.png
+Type: image/png
+Size: 102888 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061222/2cb6e2dd/attachment.png>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: darker_forest.png
+Type: image/png
+Size: 517501 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061222/2cb6e2dd/attachment-0001.png>
+
+From matze at braunis.de  Sat Dec 23 17:55:12 2006
+From: matze at braunis.de (Matthias Braun)
+Date: Sat, 23 Dec 2006 17:55:12 +0100 (MET)
+Subject: [Supertux-devel] Download?
+In-Reply-To: <e5aaa77a0612211619j305fa5f4h4da72b74a23f7683@mail.gmail.com>
+References: <e5aaa77a0612211619j305fa5f4h4da72b74a23f7683@mail.gmail.com>
+Message-ID: <1166892911.3439.1.camel@koobeton.local>
+
+You have to wait until someone creates one. The core developers only own
+windows and linux machines, so we can't create (and esp. test) binary
+installers for other systems. It'll probably take a few weeks/months
+untill volunteers do the work of creating packages for other systems.
+
+Greetings,
+	Matze
+
+Am Donnerstag, den 21.12.2006, 19:19 -0500 schrieb Joth Esmo:
+> I was wondering; is there an executable file (installer) available for
+> the Mac? There was one for 0.1.3, am I missing something, or has it
+> not yet been posted?
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+From ghanizadeh.eugene at gmail.com  Mon Dec 25 08:42:08 2006
+From: ghanizadeh.eugene at gmail.com (Eugene Ghanizadeh)
+Date: Mon, 25 Dec 2006 11:12:08 +0330
+Subject: [Supertux-devel] Following the Last Mail:
+Message-ID: <47a9ff3f0612242342p31bfde1aw96a3ccbb1a6872ae@mail.gmail.com>
+
+Sorry for incomplete upload, I forgot to upload the complete needed files.
+Here I've attached the rest of the files needed for a complete level
+designing. It includes the new backgrounds and a level subset including 10
+levels representing the main idea of usage of the tiles and backgrounds, and
+maybe each a design. The tiles are not used in orded of tilegroups, although
+I've tried to do so, but the lack of space did not let. But the level
+designs will completely introduce the usages I was desinging the tiles for.
+
+I repeat, I will welcome any level designer using these designs and tilesets
+and helping me finishing this patch.
+
+Thanks.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061225/43a2d682/attachment.html>
+
+From goldenpiranha at gmail.com  Mon Dec 25 15:33:47 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Mon, 25 Dec 2006 06:33:47 -0800
+Subject: [Supertux-devel] Multiplayer?
+Message-ID: <bcd1d8470612250633x56eaca82i664bd706e1c988f9@mail.gmail.com>
+
+Are you going to make a multiplayer option? to me that would be really cool.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061225/d1e443a5/attachment.html>
+
+From tuxdev103 at gmail.com  Mon Dec 25 15:51:17 2006
+From: tuxdev103 at gmail.com (Tim Goya)
+Date: Mon, 25 Dec 2006 06:51:17 -0800
+Subject: [Supertux-devel] Multiplayer?
+In-Reply-To: <bcd1d8470612250633x56eaca82i664bd706e1c988f9@mail.gmail.com>
+References: <bcd1d8470612250633x56eaca82i664bd706e1c988f9@mail.gmail.com>
+Message-ID: <ff70c5070612250651k2a9ee65aqade13dc029eff730@mail.gmail.com>
+
+As stated in the the Wiki,  there will be no multiplayer until the
+main single player game is finished.  We aren't closed to receiving a
+patch to implement multiplayer.  In fact, I think there is an
+unofficial branch to do just that.  I have no clue where it is exactly
+or what state of life it is in.
+
+Timothy Goya
+
+
+From evilglowingapple at gmail.com  Tue Dec 26 03:16:35 2006
+From: evilglowingapple at gmail.com (Jayson Kempinger)
+Date: Mon, 25 Dec 2006 20:16:35 -0600
+Subject: [Supertux-devel] Download?
+In-Reply-To: <1166892911.3439.1.camel@koobeton.local>
+References: <e5aaa77a0612211619j305fa5f4h4da72b74a23f7683@mail.gmail.com>
+	<1166892911.3439.1.camel@koobeton.local>
+Message-ID: <0AE0A7C2-314C-47D4-9D4D-0CAAA69FF66B@gmail.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+I'm been using the SVN version of SuperTux on Mac OS X for some time  
+now.  I am working on making a binary of 0.3.0, but have never made  
+an OpenGL app into a .app bundle.  So far it looks to be working, but  
+as I have a Mac Book Pro it's built for Intel.  I'm working on a  
+universal binary, but since Fink doesn't support fat binaries I'm  
+going to have to install some dependencies manually.  I don't have  
+internet (other than the coffee shops and relatives' houses) over the  
+Christmas and New Year's holidays, so I won't be able to work on it  
+too much.  Once I get one finished I'll send it to the devs to post  
+up on Berlios, but if someone has more experience building .app  
+bundles like this and building fat libraries for ppc & x86, feel free  
+to submit a binary sooner.
+
+~Jayson
+
+- --
+This message is digitally signed with GnuPG:
+http://www.kempinger.us/gpg.php?eid=2
+
+
+On Dec 23, 2006, at 10:55 AM, Matthias Braun wrote:
+
+> You have to wait until someone creates one. The core developers  
+> only own
+> windows and linux machines, so we can't create (and esp. test) binary
+> installers for other systems. It'll probably take a few weeks/months
+> untill volunteers do the work of creating packages for other systems.
+>
+> Greetings,
+> 	Matze
+>
+> Am Donnerstag, den 21.12.2006, 19:19 -0500 schrieb Joth Esmo:
+>> I was wondering; is there an executable file (installer) available  
+>> for
+>> the Mac? There was one for 0.1.3, am I missing something, or has it
+>> not yet been posted?
+>> _______________________________________________
+>> Supertux-devel mailing list
+>> Supertux-devel at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFFkIYDW6oxcmeg/20RAlAlAKCtOsUowQkgZiiwwA59luyTca4DbwCeM8xS
+KYtxrtNAIs2YVZ/Ttayf2qo=
+=5fir
+-----END PGP SIGNATURE-----
+
+
+From goldenpiranha at gmail.com  Tue Dec 26 07:26:26 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Mon, 25 Dec 2006 22:26:26 -0800
+Subject: [Supertux-devel] Multiplayer?
+In-Reply-To: <ff70c5070612250651k2a9ee65aqade13dc029eff730@mail.gmail.com>
+References: <bcd1d8470612250633x56eaca82i664bd706e1c988f9@mail.gmail.com>
+	<ff70c5070612250651k2a9ee65aqade13dc029eff730@mail.gmail.com>
+Message-ID: <bcd1d8470612252226v38d8c9f3v4d468fe6ed57beb6@mail.gmail.com>
+
+sorry, I didn't read the wiki, but I sometimes will come up with ideas and
+not check
+
+thx anyway
+
+On 12/25/06, Tim Goya <tuxdev103 at gmail.com> wrote:
+>
+> As stated in the the Wiki,  there will be no multiplayer until the
+> main single player game is finished.  We aren't closed to receiving a
+> patch to implement multiplayer.  In fact, I think there is an
+> unofficial branch to do just that.  I have no clue where it is exactly
+> or what state of life it is in.
+>
+> Timothy Goya
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061225/8a47ceb9/attachment.html>
+
+From digitalpioneer at gmail.com  Tue Dec 26 17:52:41 2006
+From: digitalpioneer at gmail.com (The Digital Pioneer)
+Date: Tue, 26 Dec 2006 10:52:41 -0600
+Subject: [Supertux-devel] Following the Last Mail:
+In-Reply-To: <47a9ff3f0612242342p31bfde1aw96a3ccbb1a6872ae@mail.gmail.com>
+References: <47a9ff3f0612242342p31bfde1aw96a3ccbb1a6872ae@mail.gmail.com>
+Message-ID: <ffce06340612260852g5aa0ba9u62b11bfa412e9cc5@mail.gmail.com>
+
+Did the list bounce the attachments? I don't see any.
+
+-- 
+Thanks,
+
+The Digital Pioneer
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061226/48f4af22/attachment.html>
+
+From allen at a-king.us  Wed Dec 27 05:00:25 2006
+From: allen at a-king.us (Allen King)
+Date: Tue, 26 Dec 2006 23:00:25 -0500
+Subject: [Supertux-devel] Performance on XP
+Message-ID: <4591EFD9.9030706@a-king.us>
+
+
+   Supertux-0.3.0-win32-setup.exe running under Windows XP is so 
+horribly laggy that it is unplayable.  Do other people have that 
+experience, or am I doing something wrong?  I hope this group isn't 
+ignoring the most popular OS in the world!  Even though I HATE Microsoft 
+and XP, I would love to see a penguins take over windows boxes.  It 
+would be a symbolic victory.  
+
+   Sorry if I'm asking a perennial question, but I've seen only one 
+reference to supertux being slow on www.supertux.info/forums, and 
+manually searched back months on 
+http://lists.berlios.de/pipermail/supertux-devel with no hits. (Will 
+someone, PLEASE put a search all function on that site!)  Is there 
+something I could do to improve the performance? A new OpenGL? New 
+drivers.   I'd be happy to perform experiments if someone has a good 
+idea of what and can make suggestions. I have some of my code in 
+Supertux already.  If I get some help, I'll even write it up in the Wiki.
+
+DETAILS:
+   When I run supertux-0.1.3-setup.exe, I get totally acceptable 
+performance.  But 0.3.0 has a 2 frames per second draw rate, and takes 
+100% of the CPU (a 3000+ Athalon 64 with 1.5GB of RAM with NVIDIA 
+GeForce3 Ti200 video).  Is there a major change between the versions, 
+esp in their use of OpenGL, that slows down 0.3 over 0.1.3?  When I 
+native compile the latest supertux from svn, the performance is equally 
+poor. 
+
+       Allen
+
+P.S.: My personal motivation is that my grandson is a great Supertux 
+player, but knows/has only XP.  At a precocious 5 years old, he's though 
+of a couple ways to make the game "better".  I want to make some of 
+these changes for him, so he experiences what programming can do that.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061226/2ff5ed7e/attachment.html>
+
+From digitalpioneer at gmail.com  Wed Dec 27 06:21:01 2006
+From: digitalpioneer at gmail.com (The Digital Pioneer)
+Date: Wed, 27 Dec 2006 23:21:01 +1800
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <4591EFD9.9030706@a-king.us>
+References: <4591EFD9.9030706@a-king.us>
+Message-ID: <ffce06340612262121r7b86e96by218d2f7ae152aef2@mail.gmail.com>
+
+> Even though I HATE Microsoft and XP, I would love to see a penguins take
+> over windows boxes.  It would be a symbolic victory.
+>
+
+<Sniff> That was... <sniff> beautiful!
+
+
+But seriously... I'll be trying 0.3.0 on windoze soon. I'll be downloading
+it presently, so I'll have more results soon. About all I can recommend is
+checking that your OGL is working properly (I don't see why it wouldn't be)
+and that nothing else is getting in Supertux's way. I've never really tried
+running a windoze GUI app from cmd, but you might try it and see if it gives
+any errors. On that system, I wouldn't think anything would run slowly, but
+we are dealing with windoze here..... ;)
+
+Also, what kind of changes have you made? Anything interesting? :)
+
+-- 
+Thanks,
+
+The Digital Pioneer
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061227/7b6f2ae7/attachment.html>
+
+From ghanizadeh.eugene at gmail.com  Wed Dec 27 09:15:47 2006
+From: ghanizadeh.eugene at gmail.com (Eugene Ghanizadeh)
+Date: Wed, 27 Dec 2006 11:45:47 +0330
+Subject: [Supertux-devel] Following the Last Mail:
+In-Reply-To: <ffce06340612260852g5aa0ba9u62b11bfa412e9cc5@mail.gmail.com>
+References: <47a9ff3f0612242342p31bfde1aw96a3ccbb1a6872ae@mail.gmail.com>
+	<ffce06340612260852g5aa0ba9u62b11bfa412e9cc5@mail.gmail.com>
+Message-ID: <47a9ff3f0612270015j41b9ce64xbd095bb9ee770117@mail.gmail.com>
+
+Dear Digital Pioneer
+
+If you have not seen any attachments, it might have done so.
+If you like i could mail you the patch attachments.
+
+On 12/26/06, The Digital Pioneer <digitalpioneer at gmail.com> wrote:
+>
+> Did the list bounce the attachments? I don't see any.
+>
+> --
+> Thanks,
+>
+> The Digital Pioneer
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061227/4b3d9486/attachment.html>
+
+From ghanizadeh.eugene at gmail.com  Wed Dec 27 09:17:49 2006
+From: ghanizadeh.eugene at gmail.com (Eugene Ghanizadeh)
+Date: Wed, 27 Dec 2006 11:47:49 +0330
+Subject: [Supertux-devel] Dear Developers
+Message-ID: <47a9ff3f0612270017v1bebfe45g3ee171a32cd21d82@mail.gmail.com>
+
+Is there any new address for downloading supertux-0.3.0 source package?
+BerliOs no more has the packages, they are "Gone".
+
+Thanks
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061227/212eeb01/attachment.html>
+
+From eulenstein5000 at gmx.de  Wed Dec 27 12:55:56 2006
+From: eulenstein5000 at gmx.de (Armin Eulenstein)
+Date: Wed, 27 Dec 2006 12:55:56 +0100
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <4591EFD9.9030706@a-king.us>
+References: <4591EFD9.9030706@a-king.us>
+Message-ID: <45925F4C.4090204@gmx.de>
+
+I got 0.3.0 running under Windows XP with SP2 very smooth at 60fps. I'm
+using an Athlon XP 2200+; a old Geforce 2 MX400 Graphics card and got
+1024mb RAM. SuperTux creates logfiles at the point where you start the
+game, possibly you can find your problem at there.
+
+Besides:
+Is this blooming effect, then it's snow and I run fast, a bug or a feature?
+
+PS Sorry for my worst english, but I'm not a native.
+
+
+From odin.omdal at gmail.com  Wed Dec 27 17:06:14 2006
+From: odin.omdal at gmail.com (=?ISO-8859-1?Q?Odin_Omdal_H=F8rthe?=)
+Date: Wed, 27 Dec 2006 17:06:14 +0100
+Subject: [Supertux-devel] Following the Last Mail:
+In-Reply-To: <47a9ff3f0612270015j41b9ce64xbd095bb9ee770117@mail.gmail.com>
+References: <47a9ff3f0612242342p31bfde1aw96a3ccbb1a6872ae@mail.gmail.com>
+	<ffce06340612260852g5aa0ba9u62b11bfa412e9cc5@mail.gmail.com>
+	<47a9ff3f0612270015j41b9ce64xbd095bb9ee770117@mail.gmail.com>
+Message-ID: <5785596e0612270806v6523f1fcvf161311b126ab9c3@mail.gmail.com>
+
+On 12/27/06, Eugene Ghanizadeh <ghanizadeh.eugene at gmail.com> wrote:
+>  If you have not seen any attachments, it might have done so.
+>  If you like i could mail you the patch attachments.
+
+Maybe you should put it on a webserver so all of us can see?
+-- 
+Beste helsing,
+Odin H?rthe Omdal <odin.omdal at gmail.com>
+http://www.velmont.net
+
+
+From odin.omdal at gmail.com  Wed Dec 27 17:32:03 2006
+From: odin.omdal at gmail.com (=?ISO-8859-1?Q?Odin_Omdal_H=F8rthe?=)
+Date: Wed, 27 Dec 2006 17:32:03 +0100
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <4591EFD9.9030706@a-king.us>
+References: <4591EFD9.9030706@a-king.us>
+Message-ID: <5785596e0612270832n13828444n95ec3f02c07205ef@mail.gmail.com>
+
+On 12/27/06, Allen King <allen at a-king.us> wrote:
+>     Supertux-0.3.0-win32-setup.exe running under Windows XP is so horribly
+> laggy that it is unplayable.  Do other people have that experience, or am I
+> doing something wrong?  I hope this group isn't ignoring the most popular OS
+> in the world!  Even though I HATE Microsoft and XP, I would love to see a
+> penguins take over windows boxes.  It would be a symbolic victory.
+
+This is a problem in the code as far as I have understood. Morten
+Hustveit wrote a patch fixing it - but I don't think it got into the
+code-base before 0.3.0. His 4 core Xeon with an X1800 ATI-card got
+truly horrible performance (due to the sleeping in-game). It looks as
+if the better machine you got - the worse the performance gets
+(because sleeping is extremely little precise, and a fast machine has
+to do many, many sleeps in order to get a 60fps framerate instead of
+3000 (as Morten's machine got)).
+
+The patch also fixes some poor jumping-behaviour - and I really find
+the game more enjoyable after applying it. The patch and email never
+made it to the list. However, it should reside at
+
+http://www.ping.uio.no/~mortehu/jump-and-busy-frameloop.patch
+
+Since you suffer the same problem, I will paste Morten's email below:
+
+--------------------- 8< -----------------
+
+Morten Hustveit <morten at rashbox.org> 	
+to supertux-devel, odinho
+
+Busy frameloop and jump patch
+--
+
+I tried out Supertux for the first time a few hours ago.  I immediately
+noticed several annoying things:
+
+ - There is a sleep in the mainloop
+ - When doing small jumps, the animation looks odd
+ - If you press the jump button immediately before landing, Tux won't jump
+
+The sleep in the mainloop makes the framerate really unstable on some
+machines.  I have a four core Xeon 2.66 GHz + Radeon X1900, and
+experienced extremely varying framerates, sometimes below 30 fps.  You
+should do what most OpenGL games do: busy loop.
+
+I also had to change the framerate counter, since it showed an average
+instead of the speed of the last frame.  If you do the latter instead,
+it's easier to see when the framerate is unstable.  Additionally, I had to
+add support for gettimeofday (when present), since I got framerates in
+excess of 3000 fps (and SDL_GetTicks has only millisecond precision).
+
+I also made a change to the controller code, so it counts how long each
+key has been pressed.  This can be used for many gameplay related
+features.  Another reason for modifying the mainloop was making this work
+with high precision.
+
+After changing the controller code, I could make the jump animation look
+smooth, and make it much easier to jump immediately after hitting the
+ground.  This is especially noticable when running and jumping on small
+platforms.  (Without this patch, you are likely to fail to jump and just
+run into the abyss).
+
+The patch is attached.
+
+--
+Morten Hustveit
+
+--------------------- 8< -----------------
+
+-- 
+Beste helsing,
+Odin H?rthe Omdal <odin.omdal at gmail.com>
+http://www.velmont.net
+
+
+From digitalpioneer at gmail.com  Wed Dec 27 19:05:52 2006
+From: digitalpioneer at gmail.com (The Digital Pioneer)
+Date: Thu, 28 Dec 2006 12:05:52 +1800
+Subject: [Supertux-devel] Following the Last Mail:
+In-Reply-To: <5785596e0612270806v6523f1fcvf161311b126ab9c3@mail.gmail.com>
+References: <47a9ff3f0612242342p31bfde1aw96a3ccbb1a6872ae@mail.gmail.com>
+	<ffce06340612260852g5aa0ba9u62b11bfa412e9cc5@mail.gmail.com>
+	<47a9ff3f0612270015j41b9ce64xbd095bb9ee770117@mail.gmail.com>
+	<5785596e0612270806v6523f1fcvf161311b126ab9c3@mail.gmail.com>
+Message-ID: <ffce06340612271005g3fadf60csac8c62b039e90fff@mail.gmail.com>
+
+Send 'em to me, and I'll be happy to host 'em but my webhost sux, so you
+can't do a direct download. I'm sure someone has a better service. :)
+
+-- 
+Thanks,
+
+The Digital Pioneer
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061228/7b91648a/attachment.html>
+
+From uafr at gmx.de  Thu Dec 28 20:27:16 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Thu, 28 Dec 2006 20:27:16 +0100
+Subject: [Supertux-devel] Dear Developers
+In-Reply-To: <47a9ff3f0612270017v1bebfe45g3ee171a32cd21d82@mail.gmail.com>
+References: <47a9ff3f0612270017v1bebfe45g3ee171a32cd21d82@mail.gmail.com>
+Message-ID: <20061228192716.GA5210@greg.local>
+
+On 20061228 Eugene Ghanizadeh <ghanizadeh.eugene at gmail.com> wrote:
+> Is there any new address for downloading supertux-0.3.0 source package?
+> BerliOs no more has the packages, they are "Gone".
+
+They should be at berlios. But if berlios is not working
+you can try www.openftp.de/openFTP/STUFF/SuperTux030/
+Do we have other mirrors?
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From uafr at gmx.de  Thu Dec 28 21:04:01 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Thu, 28 Dec 2006 21:04:01 +0100
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <4591EFD9.9030706@a-king.us>
+References: <4591EFD9.9030706@a-king.us>
+Message-ID: <20061228200401.GB7990@greg.local>
+
+On 20061228 Allen King <allen at a-king.us> wrote:
+>   Supertux-0.3.0-win32-setup.exe running under Windows XP is so 
+> horribly laggy that it is unplayable.  Do other people have that 
+
+Works fine here.
+
+> performance.  But 0.3.0 has a 2 frames per second draw rate, and takes 
+> 100% of the CPU (a 3000+ Athalon 64 with 1.5GB of RAM with NVIDIA 
+> GeForce3 Ti200 video).  Is there a major change between the versions, 
+> esp in their use of OpenGL, that slows down 0.3 over 0.1.3?  When I 
+> native compile the latest supertux from svn, the performance is equally 
+> poor. 
+
+Maybe a 64 bit problem? Supertux runs fine on my 950 MHz Athlon with
+Geforce 3, even if I'm running XP. On my parents' laptop (P4, with
+some ATI mobile, much faster than my box), it works, too but only
+in windowed mode. Fullscreen flickers really bad which makes it
+unplayable.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From uafr at gmx.de  Thu Dec 28 21:06:13 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Thu, 28 Dec 2006 21:06:13 +0100
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <45925F4C.4090204@gmx.de>
+References: <4591EFD9.9030706@a-king.us> <45925F4C.4090204@gmx.de>
+Message-ID: <20061228200613.GC7990@greg.local>
+
+On 20061228 Armin Eulenstein <eulenstein5000 at gmx.de> wrote:
+> Besides:
+> Is this blooming effect, then it's snow and I run fast, a bug or a feature?
+
+Can you rephrase that? I don't get it.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From f.vanderloo at gmail.com  Thu Dec 28 21:37:31 2006
+From: f.vanderloo at gmail.com (Frank van der Loo)
+Date: Thu, 28 Dec 2006 21:37:31 +0100
+Subject: [Supertux-devel] Dutch SuperTux translation?
+Message-ID: <f7d079670612281237s5a50e252q39fd130ed02cf997@mail.gmail.com>
+
+Hello,
+
+In case you forgot who I am. I'm the unreachable(?) Dutch translator of
+SuperTux. For some reason I suddenly stopped receiving messages from this
+mailing list.
+
+After I installed the latest version of SuperTux I noticed that the Dutch
+translation was missing and that I was unreachable according to the wiki.
+
+So, can anyone tell me if someone is doing the Dutch translation now. If not
+I'm going to translate SuperTux again (for milestone 2) and can anyone tell
+me the current status of the Dutch translation (Berlios website is down).
+
+
+Frank van der Loo
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061228/3a649b40/attachment.html>
+
+From digitalpioneer at gmail.com  Thu Dec 28 22:22:23 2006
+From: digitalpioneer at gmail.com (The Digital Pioneer)
+Date: Fri, 29 Dec 2006 15:22:23 +1800
+Subject: [Supertux-devel] Dutch SuperTux translation?
+In-Reply-To: <f7d079670612281237s5a50e252q39fd130ed02cf997@mail.gmail.com>
+References: <f7d079670612281237s5a50e252q39fd130ed02cf997@mail.gmail.com>
+Message-ID: <ffce06340612281322x13e6f967ua10f97a547bf3705@mail.gmail.com>
+
+My mom knows dutch. She could probably help, if Frank here becomes
+unreachable again. ;)
+
+-- 
+Thanks,
+
+The Digital Pioneer
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061229/24624185/attachment.html>
+
+From eulenstein5000 at gmx.de  Thu Dec 28 22:35:07 2006
+From: eulenstein5000 at gmx.de (Armin Eulenstein)
+Date: Thu, 28 Dec 2006 22:35:07 +0100
+Subject: [Supertux-devel] Blooming in SuperTux beta?
+In-Reply-To: <20061228200613.GC7990@greg.local>
+References: <4591EFD9.9030706@a-king.us> <45925F4C.4090204@gmx.de>
+	<20061228200613.GC7990@greg.local>
+Message-ID: <4594388B.5080806@gmx.de>
+
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061228/9b43d065/attachment.html>
+
+From odin.omdal at gmail.com  Fri Dec 29 01:46:44 2006
+From: odin.omdal at gmail.com (=?ISO-8859-1?Q?Odin_Omdal_H=F8rthe?=)
+Date: Fri, 29 Dec 2006 01:46:44 +0100
+Subject: [Supertux-devel] Blooming in SuperTux beta?
+In-Reply-To: <4594388B.5080806@gmx.de>
+References: <4591EFD9.9030706@a-king.us> <45925F4C.4090204@gmx.de>
+	<20061228200613.GC7990@greg.local> <4594388B.5080806@gmx.de>
+Message-ID: <5785596e0612281646i3855bc4tc71edf8a904f4369@mail.gmail.com>
+
+On 12/28/06, Armin Eulenstein <eulenstein5000 at gmx.de> wrote:
+>  Take any map with snow in it, now try to run fast and watch the snowflakes.
+> I think that's blooming then the snowflakes are start to smearing. I own a
+> CRT, it's not my monitor ;-).
+
+If someone is unsure about what he means with smearing and bloom;
+Wikipedia is our friend.
+
+http://en.wikipedia.org/wiki/Bloom_%28shader_effect%29
+
+Anyway, now (as there is a requirement for a 3D card) the game can
+really start adding really nice high-tech special effects to the
+renderer ;p
+
+-- 
+Beste helsing,
+Odin H?rthe Omdal <odin.omdal at gmail.com>
+http://www.velmont.net
+
+
+From supertux at 2006.expires.deltadevelopment.de  Fri Dec 29 02:53:57 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Fri, 29 Dec 2006 02:53:57 +0100
+Subject: [Supertux-devel] Dutch SuperTux translation?
+In-Reply-To: <f7d079670612281237s5a50e252q39fd130ed02cf997@mail.gmail.com>
+References: <f7d079670612281237s5a50e252q39fd130ed02cf997@mail.gmail.com>
+Message-ID: <45947535.5000602@2006.expires.deltadevelopment.de>
+
+Hello Frank,
+
+Frank van der Loo wrote:
+> I'm going to translate SuperTux again (for milestone 2) and can anyone tell
+> me the current status of the Dutch translation (Berlios website is down).
+
+The latest Dutch translation I found was for SuperTux 0.1.3, that's why
+I did not include it in 0.3.0 - there were just too many strings missing...
+
+As far as I know, nobody is working on a newer version, so you are very
+welcome to contribute an updated one!
+
+If possible, please use the SVN version as a basis - we have not yet
+decided on what levels to ship with 0.3.1 :-)
+
+
+Kind regards,
+
+  Christoph
+
+
+From allen at a-king.us  Fri Dec 29 04:18:48 2006
+From: allen at a-king.us (Allen King)
+Date: Thu, 28 Dec 2006 22:18:48 -0500
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <5785596e0612270832n13828444n95ec3f02c07205ef@mail.gmail.com>
+References: <4591EFD9.9030706@a-king.us>
+	<5785596e0612270832n13828444n95ec3f02c07205ef@mail.gmail.com>
+Message-ID: <45948918.1080003@a-king.us>
+
+I've been doing a bunch of work, checking out the various suggestions:
+
+===== 1. Odin Omdal H?rthe wrote:
+> ...
+> This is a problem in the code as far as I have understood. Morten
+> Hustveit wrote a patch fixing it - but I don't think it got into the
+> code-base before 0.3.0. His 4 core Xeon with an X1800 ATI-card got
+> truly horrible performance (due to the sleeping in-game). It looks as
+> if the better machine you got - the worse the performance gets
+> (because sleeping is extremely little precise, and a fast machine has
+> to do many, many sleeps in order to get a 60fps framerate instead of
+> 3000 (as Morten's machine got)).
+>
+> The patch also fixes some poor jumping-behaviour - and I really find
+> the game more enjoyable after applying it. The patch and email never
+> made it to the list. However, it should reside at
+>
+> http://www.ping.uio.no/~mortehu/jump-and-busy-frameloop.patch
+>
+> Since you suffer the same problem, I will paste Morten's email below:
+>
+> ...
+>   
+I had great hopes for this patch, but found that something else is 
+causing the slow frame rate, and the patch doesn't help that at all.  
+The patch does help if one HAD to live with slow frame rates:  a) The 
+velocities are more like those of 0.1.3 (although horribly jerkey at 
+2.5fps).  b) It also seems to drop fewer keys.   (But I can't live with 
+slow frame rates !^)
+
+
+===== 2. Armin Eulenstein wrote:
+> I got 0.3.0 running under Windows XP with SP2 very smooth at 60fps. I'm
+> using an Athlon XP 2200+; a old Geforce 2 MX400 Graphics card and got
+> 1024mb RAM. 
+Seemingly similar configurations.  I'm running XP Pro, and a different 
+graphics card, but...
+
+I thought for a minute that running SuperTux in a guest VMWare virtual 
+machine might be causing the problem, so I installed it in the main 
+(host) machine.  Then just to be sure, I uninstalled VMWare and 
+rebooted.  All results were the same -- 0.3.0 ran at 2.5fps!
+
+> SuperTux creates logfiles at the point where you start the
+> game, possibly you can find your problem at there.
+>   
+On some runs, I get the message in stderr.txt: "Restarting audio source 
+because of buffer underrun".  Other runs are clean.  Nothing ups the 
+frame rate, even if I turn off sounds and music in the config file.
+
+===== 3. Wolfgang Becker wrote:
+> ...
+> Maybe a 64 bit problem? Supertux runs fine on my 950 MHz Athlon with
+> Geforce 3, even if I'm running XP. On my parents' laptop (P4, with
+> some ATI mobile, much faster than my box), it works, too but only
+> in windowed mode. Fullscreen flickers really bad which makes it
+> unplayable.
+> ...
+>   
+
+I installed Supertux-0.3.0-win32-setup.exe on an older 32-bit 800MHz 
+Pentium III laptop running XP Pro SP2, with very similar results:
+
+                                   Tower                 Laptop. A XXX
+0.3.0:                         2.5fps                  1.2fps!  Abysmal.
+0.1.3 w OpenGL:      ~10fps                 ~7fps
+0.1.3 no OpenGL:     >30fps                 >30fps
+
+(The tower is the machine I've been reporting on up to now.)  0.1.3 
+seems to slow way down using OpenGL. 0.3.0 seems 4-6x slower than 
+0.1.3.   (Rates are approximate using a stop watch on 50 frames, since 
+the fps meter didn't seem to work.)
+
+So it's looking like an OpenGL issue.  Which brings me to:
+
+===== 4. The Digital Pioneer wrote:
+> ...
+> But seriously... I'll be trying 0.3.0 on windoze soon. I'll be 
+> downloading it presently, so I'll have more results soon. About all I 
+> can recommend is checking that your OGL is working properly (I don't 
+> see why it wouldn't be) and that nothing else is getting in Supertux's 
+> way.
+> ...
+So I downloaded the latest driver from nVIDIA, which proports to have 
+"Microsoft? DirectX? 9.0c and OpenGL? 2.0 support", from 
+http://www.nvidia.com/object/winxp_2k_93.71.html .  Still 2.5fps :-(
+
+I'm presuming SuperTux is happy with OpenGL? 2.0 support, but can't tell 
+because supertux.berlios.de is down.
+
+To figure out how to tune OpenGL, I googled opengl tuning and got an 
+ati.amd.com/developer/gdc/Performance*Tuning*.pdf.   It suggested 
+varying the frame buffer, and seeing its affect on fps, and I found that 
+performance is frame buffer limited -- it renders about 1.5M Pixels Per 
+Second (pps), actually it varies a little, 1.4-1.9 M pps:
+
+800x600 -- 4fps            480,000      1.92M pps
+400x300 -- 12.3fps       120,000      1.48M pps
+300x225 -- 20fps            67,500      1.35M pps
+
+===== 5. I'm guessin hardware acceleration is turned off, or something.  
+Although display properties show hardware acceleration at full.  Now I'm 
+not sure where to go from here.  Suggestions.
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061228/559e399d/attachment.html>
+
+From djwings at gmail.com  Fri Dec 29 14:22:39 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Fri, 29 Dec 2006 08:22:39 -0500
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <45948918.1080003@a-king.us>
+References: <4591EFD9.9030706@a-king.us>
+	<5785596e0612270832n13828444n95ec3f02c07205ef@mail.gmail.com>
+	<45948918.1080003@a-king.us>
+Message-ID: <826ffc730612290522q1ed2f6eeo2876b98610a4d17@mail.gmail.com>
+
+Hardware accel off?
+Here's a suggestion: Try recompiling it with the supertux-nogl patch, and
+tell us what happens. My test machine, with an Athlon XP 1.4GHz and NVidia
+GeForce 5200FX runs fine on Windows, even though I occasionally get those
+jerky frames that you described. On Linux (Xubuntu) and the same machine, it
+works great.
+
+On 12/28/06, Allen King <allen at a-king.us> wrote:
+>
+>  I've been doing a bunch of work, checking out the various suggestions:
+>
+> ===== 1. Odin Omdal H?rthe wrote:
+>
+> ...
+>
+> This is a problem in the code as far as I have understood. Morten
+> Hustveit wrote a patch fixing it - but I don't think it got into the
+> code-base before 0.3.0. His 4 core Xeon with an X1800 ATI-card got
+> truly horrible performance (due to the sleeping in-game). It looks as
+> if the better machine you got - the worse the performance gets
+> (because sleeping is extremely little precise, and a fast machine has
+> to do many, many sleeps in order to get a 60fps framerate instead of
+> 3000 (as Morten's machine got)).
+>
+> The patch also fixes some poor jumping-behaviour - and I really find
+> the game more enjoyable after applying it. The patch and email never
+> made it to the list. However, it should reside at
+>
+> http://www.ping.uio.no/~mortehu/jump-and-busy-frameloop.patch <http://www.ping.uio.no/%7Emortehu/jump-and-busy-frameloop.patch>
+>
+> Since you suffer the same problem, I will paste Morten's email below:
+>
+> ...
+>
+>
+>  I had great hopes for this patch, but found that something else is
+> causing the slow frame rate, and the patch doesn't help that at all.  The
+> patch does help if one HAD to live with slow frame rates:  a) The velocities
+> are more like those of 0.1.3 (although horribly jerkey at 2.5fps).  b) It
+> also seems to drop fewer keys.   (But I can't live with slow frame rates !^)
+>
+>
+> ===== 2. Armin Eulenstein wrote:
+>
+> I got 0.3.0 running under Windows XP with SP2 very smooth at 60fps. I'm
+> using an Athlon XP 2200+; a old Geforce 2 MX400 Graphics card and got
+> 1024mb RAM.
+>
+>  Seemingly similar configurations.  I'm running XP Pro, and a different
+> graphics card, but...
+>
+> I thought for a minute that running SuperTux in a guest VMWare virtual
+> machine might be causing the problem, so I installed it in the main (host)
+> machine.  Then just to be sure, I uninstalled VMWare and rebooted.  All
+> results were the same -- 0.3.0 ran at 2.5fps!
+>
+>  SuperTux creates logfiles at the point where you start the
+> game, possibly you can find your problem at there.
+>
+>  On some runs, I get the message in stderr.txt: "Restarting audio source
+> because of buffer underrun".  Other runs are clean.  Nothing ups the frame
+> rate, even if I turn off sounds and music in the config file.
+>
+> ===== 3. Wolfgang Becker wrote:
+>
+> ...
+>
+> Maybe a 64 bit problem? Supertux runs fine on my 950 MHz Athlon with
+> Geforce 3, even if I'm running XP. On my parents' laptop (P4, with
+> some ATI mobile, much faster than my box), it works, too but only
+> in windowed mode. Fullscreen flickers really bad which makes it
+> unplayable.
+> ...
+>
+>
+> I installed Supertux-0.3.0-win32-setup.exe on an older 32-bit 800MHz
+> Pentium III laptop running XP Pro SP2, with very similar results:
+>
+>                                    Tower                 Laptop. A XXX
+> 0.3.0:                         2.5fps                  1.2fps!  Abysmal.
+> 0.1.3 w OpenGL:      ~10fps                 ~7fps
+> 0.1.3 no OpenGL:     >30fps                 >30fps
+>
+> (The tower is the machine I've been reporting on up to now.)  0.1.3 seems
+> to slow way down using OpenGL. 0.3.0 seems 4-6x slower than 0.1.3.
+> (Rates are approximate using a stop watch on 50 frames, since the fps meter
+> didn't seem to work.)
+>
+> So it's looking like an OpenGL issue.  Which brings me to:
+>
+> ===== 4. The Digital Pioneer wrote:
+>
+> ...
+> But seriously... I'll be trying 0.3.0 on windoze soon. I'll be downloading
+> it presently, so I'll have more results soon. About all I can recommend is
+> checking that your OGL is working properly (I don't see why it wouldn't be)
+> and that nothing else is getting in Supertux's way.
+> ...
+>
+> So I downloaded the latest driver from nVIDIA, which proports to have
+> "Microsoft(r) DirectX(r) 9.0c and OpenGL(r) 2.0 support", from
+> http://www.nvidia.com/object/winxp_2k_93.71.html .  Still 2.5fps :-(
+>
+> I'm presuming SuperTux is happy with OpenGL(r) 2.0 support, but can't tell
+> because supertux.berlios.de is down.
+>
+> To figure out how to tune OpenGL, I googled opengl tuning and got an
+> ati.amd.com/developer/gdc/Performance*Tuning*.pdf.   It suggested varying
+> the frame buffer, and seeing its affect on fps, and I found that performance
+> is frame buffer limited -- it renders about 1.5M Pixels Per Second (pps),
+> actually it varies a little, 1.4-1.9 M pps:
+>
+> 800x600 -- 4fps            480,000      1.92M pps
+> 400x300 -- 12.3fps       120,000      1.48M pps
+> 300x225 -- 20fps            67,500      1.35M pps
+>
+> ===== 5. I'm guessin hardware acceleration is turned off, or something.
+> Although display properties show hardware acceleration at full.  Now I'm not
+> sure where to go from here.  Suggestions.
+>
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061229/48ff8a88/attachment.html>
+
+From f.vanderloo at gmail.com  Fri Dec 29 15:28:38 2006
+From: f.vanderloo at gmail.com (Frank van der Loo)
+Date: Fri, 29 Dec 2006 15:28:38 +0100
+Subject: [Supertux-devel] Dutch SuperTux translation?
+In-Reply-To: <45947535.5000602@2006.expires.deltadevelopment.de>
+References: <f7d079670612281237s5a50e252q39fd130ed02cf997@mail.gmail.com>
+	<45947535.5000602@2006.expires.deltadevelopment.de>
+Message-ID: <f7d079670612290628v5fbd4065u54771243f9b036f4@mail.gmail.com>
+
+Hello Christoph,
+
+I've downloaded the SVN version and ran autogen.sh, configure and jam, but
+it seems like it can't create the messages.pot file in data/locale. This is
+the output:
+XGetText data/levels/bonus1/messages.pot
+XGetText data/levels/bonus2/messages.pot
+XGetText data/levels/misc/messages.pot
+XGetText data/levels/test/messages.pot
+XGetText data/levels/world1/messages.pot
+XGetText data/levels/world2/messages.pot
+XGetText actions too long (max 10240)!
+
+When I checked data/locale, there is no messages.pot in there.
+Googling for the error message didn't result anything. Even upgrading
+gettext to 0.16.1 (the latest version) didn't help.
+Have you got any idea why it doens't work?
+
+
+Frank
+
+
+
+
+On 12/29/06, Christoph Sommer <supertux at 2006.expires.deltadevelopment.de>
+wrote:
+>
+> Hello Frank,
+>
+> Frank van der Loo wrote:
+> > I'm going to translate SuperTux again (for milestone 2) and can anyone
+> tell
+> > me the current status of the Dutch translation (Berlios website is
+> down).
+>
+> The latest Dutch translation I found was for SuperTux 0.1.3, that's why
+> I did not include it in 0.3.0 - there were just too many strings
+> missing...
+>
+> As far as I know, nobody is working on a newer version, so you are very
+> welcome to contribute an updated one!
+>
+> If possible, please use the SVN version as a basis - we have not yet
+> decided on what levels to ship with 0.3.1 :-)
+>
+>
+> Kind regards,
+>
+>   Christoph
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061229/7f71b34c/attachment.html>
+
+From allen at a-king.us  Fri Dec 29 16:13:11 2006
+From: allen at a-king.us (Allen King)
+Date: Fri, 29 Dec 2006 10:13:11 -0500
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <826ffc730612290522q1ed2f6eeo2876b98610a4d17@mail.gmail.com>
+References: <4591EFD9.9030706@a-king.us>	<5785596e0612270832n13828444n95ec3f02c07205ef@mail.gmail.com>	<45948918.1080003@a-king.us>
+	<826ffc730612290522q1ed2f6eeo2876b98610a4d17@mail.gmail.com>
+Message-ID: <45953087.1030001@a-king.us>
+
+So help me out here, if you would. Where is this supertux-nogl patch? I 
+find references in supertux-devel (grepping downloaded files because 
+there is no search function on the archives) in 2/06 of a nogl branch, 
+and then again in 8/06 of a fix to a patch.  ./configure seems to have 
+no "nogl"-like  options.  How exactly would I invoke the supertux-nogl 
+patch?
+
+djwings at gmail.com wrote:
+> Hardware accel off?
+> Here's a suggestion: Try recompiling it with the supertux-nogl patch, 
+> and tell us what happens. My test machine, with an Athlon XP 1.4GHz 
+> and NVidia GeForce 5200FX runs fine on Windows, even though I 
+> occasionally get those jerky frames that you described. On Linux 
+> (Xubuntu) and the same machine, it works great.
+>
+> On 12/28/06, *Allen King* <allen at a-king.us <mailto:allen at a-king.us>> 
+> wrote:
+>
+>     I've been doing a bunch of work, checking out the various suggestions:
+>     ....
+>
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061229/507fad30/attachment.html>
+
+From djwings at gmail.com  Fri Dec 29 16:37:07 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Fri, 29 Dec 2006 10:37:07 -0500
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <45953087.1030001@a-king.us>
+References: <4591EFD9.9030706@a-king.us>
+	<5785596e0612270832n13828444n95ec3f02c07205ef@mail.gmail.com>
+	<45948918.1080003@a-king.us>
+	<826ffc730612290522q1ed2f6eeo2876b98610a4d17@mail.gmail.com>
+	<45953087.1030001@a-king.us>
+Message-ID: <826ffc730612290737y649e5a16v63d95ec0750e4f99@mail.gmail.com>
+
+Last time I checked, there was a file called "supertux-nogl.diff" in the
+source code, either at the root or a level below it, which you could then
+apply with "patch -p1 < supertux-nogl.diff" or something.
+The instructions, from Christoph, who can explain it bettert han I can, are
+here <http://www.deltadevelopment.de/users/christoph/supertux/#2>.
+
+On 12/29/06, Allen King <allen at a-king.us> wrote:
+>
+>  So help me out here, if you would. Where is this supertux-nogl patch? I
+> find references in supertux-devel (grepping downloaded files because there
+> is no search function on the archives) in 2/06 of a nogl branch, and then
+> again in 8/06 of a fix to a patch.  ./configure seems to have no
+> "nogl"-like  options.  How exactly would I invoke the supertux-nogl patch?
+>
+> djwings at gmail.com wrote:
+>
+> Hardware accel off?
+> Here's a suggestion: Try recompiling it with the supertux-nogl patch, and
+> tell us what happens. My test machine, with an Athlon XP 1.4GHz and NVidia
+> GeForce 5200FX runs fine on Windows, even though I occasionally get those
+> jerky frames that you described. On Linux (Xubuntu) and the same machine, it
+> works great.
+>
+> On 12/28/06, Allen King <allen at a-king.us> wrote:
+> >
+> > I've been doing a bunch of work, checking out the various suggestions:
+> > ....
+> >
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061229/944617eb/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Fri Dec 29 16:39:56 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Fri, 29 Dec 2006 16:39:56 +0100
+Subject: [Supertux-devel] Dutch SuperTux translation?
+In-Reply-To: <f7d079670612290628v5fbd4065u54771243f9b036f4@mail.gmail.com>
+References: <f7d079670612281237s5a50e252q39fd130ed02cf997@mail.gmail.com>	<45947535.5000602@2006.expires.deltadevelopment.de>
+	<f7d079670612290628v5fbd4065u54771243f9b036f4@mail.gmail.com>
+Message-ID: <459536CC.5050505@2006.expires.deltadevelopment.de>
+
+Frank van der Loo wrote:
+> I've downloaded the SVN version and ran autogen.sh, configure and jam [...] This is the output:
+> XGetText actions too long (max 10240)!
+
+This is "jam" acting up.
+
+Unfortunately, I cannot fix the Jamfile on my own. There's two
+workarounds I know of:
+
+# patch jam to allow longer Actions
+# check out an older revision ("svn checkout -r4500 ...")
+
+In the meantime, I'll see if I can either get the Jamfiles fixed or am
+able to switch SuperTux to a better build system, i.e. Makefiles.
+
+
+Kind regards,
+
+  Christoph
+
+
+
+From odin.omdal at gmail.com  Sat Dec 30 01:45:58 2006
+From: odin.omdal at gmail.com (=?ISO-8859-1?Q?Odin_Omdal_H=F8rthe?=)
+Date: Sat, 30 Dec 2006 01:45:58 +0100
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <45948918.1080003@a-king.us>
+References: <4591EFD9.9030706@a-king.us>
+	<5785596e0612270832n13828444n95ec3f02c07205ef@mail.gmail.com>
+	<45948918.1080003@a-king.us>
+Message-ID: <5785596e0612291645y48d59f96ibc71d5ffff2e984a@mail.gmail.com>
+
+On 12/29/06, Allen King <allen at a-king.us> wrote:
+>  ===== 2. Armin Eulenstein wrote:
+>  I got 0.3.0 running under Windows XP with SP2 very smooth at 60fps. I'm
+> using an Athlon XP 2200+; a old Geforce 2 MX400 Graphics card and got
+> 1024mb RAM.
+>  Seemingly similar configurations.  I'm running XP Pro, and a different
+> graphics card, but...
+>
+>  I thought for a minute that running SuperTux in a guest VMWare virtual
+> machine might be causing the problem, so I installed it in the main (host)
+> machine.  Then just to be sure, I uninstalled VMWare and rebooted.  All
+> results were the same -- 0.3.0 ran at 2.5fps!
+
+Hum. How was the performance in Linux? No problem at all? So your main
+platform is Linux, and you noticed sluggish performance when testing
+in Win XP?
+
+-- 
+Beste helsing,
+Odin H?rthe Omdal <odin.omdal at gmail.com>
+http://www.velmont.net
+
+
+From ghanizadeh.eugene at gmail.com  Sat Dec 30 08:33:05 2006
+From: ghanizadeh.eugene at gmail.com (Eugene Ghanizadeh)
+Date: Sat, 30 Dec 2006 11:03:05 +0330
+Subject: [Supertux-devel] Again Dear Developers
+Message-ID: <47a9ff3f0612292333oc919fb2u10b14af5974e409@mail.gmail.com>
+
+The packages i uploaded were seemingly bounced, so I will upload them
+somewhere else so you can download. I'll mail the exact address for
+downloading them later.
+
+Thanks
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061230/e809ba02/attachment.html>
+
+From f.vanderloo at gmail.com  Sat Dec 30 14:04:26 2006
+From: f.vanderloo at gmail.com (Frank van der Loo)
+Date: Sat, 30 Dec 2006 14:04:26 +0100
+Subject: [Supertux-devel] Dutch SuperTux translation?
+In-Reply-To: <459536CC.5050505@2006.expires.deltadevelopment.de>
+References: <f7d079670612281237s5a50e252q39fd130ed02cf997@mail.gmail.com>
+	<45947535.5000602@2006.expires.deltadevelopment.de>
+	<f7d079670612290628v5fbd4065u54771243f9b036f4@mail.gmail.com>
+	<459536CC.5050505@2006.expires.deltadevelopment.de>
+Message-ID: <f7d079670612300504g651f0c53vf36f5136cf1141d6@mail.gmail.com>
+
+Ok, good to hear it's not my fault.
+I guess I'll just translate the levels until this is fixed.
+
+
+On 12/29/06, Christoph Sommer <supertux at 2006.expires.deltadevelopment.de>
+wrote:
+>
+> Frank van der Loo wrote:
+> > I've downloaded the SVN version and ran autogen.sh, configure and jam
+> [...] This is the output:
+> > XGetText actions too long (max 10240)!
+>
+> This is "jam" acting up.
+>
+> Unfortunately, I cannot fix the Jamfile on my own. There's two
+> workarounds I know of:
+>
+> # patch jam to allow longer Actions
+> # check out an older revision ("svn checkout -r4500 ...")
+>
+> In the meantime, I'll see if I can either get the Jamfiles fixed or am
+> able to switch SuperTux to a better build system, i.e. Makefiles.
+>
+>
+> Kind regards,
+>
+>   Christoph
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061230/32f39a1e/attachment.html>
+
+From evilglowingapple at gmail.com  Sat Dec 30 22:52:46 2006
+From: evilglowingapple at gmail.com (Jayson Kempinger)
+Date: Sat, 30 Dec 2006 15:52:46 -0600
+Subject: [Supertux-devel] SuperTux 0.3.0 Mac OS X Universal Binary
+Message-ID: <9E280644-225D-41D4-AC4A-6DDEDF8C214C@gmail.com>
+
+Hi,
+
+I've been working on an universal binary of SuperTux 0.3.0 for Mac OS  
+X.  I'm not sure if anyone has submitted one yet (and  
+supertux.berlios.de doesn't seem to be responding for me at the  
+moment), but if not, I now have a working binary available.  There  
+are a few bugs (namely an SDL issue that creates a strange,  
+fluorescent dock icon, and a limitation that forces the app bundle to  
+be named SuperTux.app--if renamed the app won't run unless recompiled  
+with a new path for the data directory coded in main.cpp) but they  
+are minor IMHO.
+
+The binary does need to be tested on a PowerPC platform (as I only  
+have an Intel Mac now).  I am waiting to hear back from a friend that  
+has an old G4 that I could have, but no response yet, so if anyone on  
+the mailing list has a PowerPC Mac and would be willing to test,  
+please let me know.  I can run the game in Rosetta, and it works  
+fine, but the sound is garbled.  I'm hoping this is a Rosetta issue  
+and the app will work fine on both architectures.  Let me know and I  
+can send a copy of the binary to you somehow.
+
+I don't have access to upload the file to Berlios.  Please let me  
+know if (once it's been fully tested) it can be hosted on Berlios and  
+how I could get access to upload it or how I should send it to  
+someone who has access.
+
+Also, please see the attached patch that fixes an issue with some old  
+-DMACOSX code in main.cpp.  It used the variable msg_warning, which  
+was not declared anywhere in it's scope.  I changed it to log_warning  
+and it compiled fine, but probably should be fixed in the SVN version.
+
+~Jayson
+
+
+?
+
+-- 
+This message is digitally signed with GnuPG:`
+http://www.kempinger.us/gpg.php?eid=2
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061230/c7ed441a/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: supertux.macosx-appbundle.patch
+Type: application/octet-stream
+Size: 527 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061230/c7ed441a/attachment.obj>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061230/c7ed441a/attachment-0001.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: PGP.sig
+Type: application/pgp-signature
+Size: 186 bytes
+Desc: This is a digitally signed message part
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061230/c7ed441a/attachment.pgp>
+
+From uafr at gmx.de  Sat Dec 30 23:57:52 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Sat, 30 Dec 2006 23:57:52 +0100
+Subject: [Supertux-devel] Blooming in SuperTux beta?
+In-Reply-To: <4594388B.5080806@gmx.de>
+References: <4591EFD9.9030706@a-king.us> <45925F4C.4090204@gmx.de>
+	<20061228200613.GC7990@greg.local> <4594388B.5080806@gmx.de>
+Message-ID: <20061230225752.GB17570@greg.local>
+
+On 20061228 Armin Eulenstein <eulenstein5000 at gmx.de> wrote:
+> Take any map with snow in it, now try to run fast and watch the
+> snowflakes. I think that's blooming then the snowflakes are start to
+> smearing. I own a CRT, it's not my monitor ;-).<br>
+
+Snow particles like in "09 - Grumbels Sense of Snow.stl"? I don't
+notice anything special, but the again I don't have a CRT.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From uafr at gmx.de  Sun Dec 31 00:11:20 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Sun, 31 Dec 2006 00:11:20 +0100
+Subject: [Supertux-devel] SuperTux 0.3.0 Mac OS X Universal Binary
+In-Reply-To: <9E280644-225D-41D4-AC4A-6DDEDF8C214C@gmail.com>
+References: <9E280644-225D-41D4-AC4A-6DDEDF8C214C@gmail.com>
+Message-ID: <20061230231120.GC17570@greg.local>
+
+On 20061230 Jayson Kempinger <evilglowingapple at gmail.com> wrote:
+> I've been working on an universal binary of SuperTux 0.3.0 for Mac OS  
+> X.  I'm not sure if anyone has submitted one yet (and  
+> supertux.berlios.de doesn't seem to be responding for me at the  
+
+Berlios has some problems. https://developer.berlios.de/projects/supertux/
+is slow but working. The http webserver seems to be down. :-(
+
+http://prdownload.berlios.de/supertux/supertux-0.3.0-macosx.dmg
+from #supertux:
+| Dec 29 21:16:08 <kootenay>  I've posted SuperTux 0.3 to the
+| MacUpdate servers this morning, and it's clocked 700+ downloads so far:
+| http://www.macupdate.com/info.php/id/15007
+
+No idea what kind of Macs can run that binary. 
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From jonas.baehr at web.de  Sun Dec 31 00:55:54 2006
+From: jonas.baehr at web.de (=?ISO-8859-1?Q?Jonas_B=E4hr?=)
+Date: Sun, 31 Dec 2006 00:55:54 +0100
+Subject: [Supertux-devel] SuperTux 0.3.0 Mac OS X Universal Binary
+In-Reply-To: <20061230231120.GC17570@greg.local>
+References: <9E280644-225D-41D4-AC4A-6DDEDF8C214C@gmail.com>
+	<20061230231120.GC17570@greg.local>
+Message-ID: <EBECB3EC-C0BA-4C8C-8081-7A0F99424AB9@web.de>
+
+Hi,
+
+Am 31.12.2006 um 00:11 schrieb Wolfgang Becker:
+
+> On 20061230 Jayson Kempinger <evilglowingapple at gmail.com> wrote:
+>> I've been working on an universal binary of SuperTux 0.3.0 for Mac OS
+>> X.  I'm not sure if anyone has submitted one yet (and
+>> supertux.berlios.de doesn't seem to be responding for me at the
+>
+> Berlios has some problems. https://developer.berlios.de/projects/ 
+> supertux/
+> is slow but working. The http webserver seems to be down. :-(
+>
+> http://prdownload.berlios.de/supertux/supertux-0.3.0-macosx.dmg
+> from #supertux:
+> | Dec 29 21:16:08 <kootenay>  I've posted SuperTux 0.3 to the
+> | MacUpdate servers this morning, and it's clocked 700+ downloads  
+> so far:
+> | http://www.macupdate.com/info.php/id/15007
+>
+> No idea what kind of Macs can run that binary.
+
+I've just tested it on my 1GHz G4 Powerbook (ppc) and it works fine.  
+Sound is working too.
+
+bye,
+Jonas
+
+>
+> Tsch??,
+> Wolfgang
+> -- 
+> Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http:// 
+> uafr.freeshell.org/
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+From allen at a-king.us  Sun Dec 31 01:20:50 2006
+From: allen at a-king.us (Allen King)
+Date: Sat, 30 Dec 2006 19:20:50 -0500
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <826ffc730612290522q1ed2f6eeo2876b98610a4d17@mail.gmail.com>
+References: <4591EFD9.9030706@a-king.us>	<5785596e0612270832n13828444n95ec3f02c07205ef@mail.gmail.com>	<45948918.1080003@a-king.us>
+	<826ffc730612290522q1ed2f6eeo2876b98610a4d17@mail.gmail.com>
+Message-ID: <45970262.4010900@a-king.us>
+
+Good call!
+
+The frame rate improved phenomenally with this patch!  It's in the 45-55 
+fps range, up from 2.4 fps.  I'm not sure what it means for the greater 
+Supertux project's use of OpenGL, and penguins taking over the Gatseian 
+world.  But I'll leave that for others to explore.
+
+Note that supertux-nogl.diff did not patch cleanly, with hunk 10 of 
+drawing_context.cpp failing.  I put what seemed like the right change in 
+by hand.  Someone might want to clean that up.  Or not.
+
+Thanks for helping me out with this.  It allows me to get my goals met.  
+If there's more testing I can do toward penguin domination, please let 
+me know.
+
+       Allen
+
+djwings at gmail.com wrote:
+> Hardware accel off?
+> Here's a suggestion: Try recompiling it with the supertux-nogl patch, 
+> and tell us what happens. My test machine, with an Athlon XP 1.4GHz 
+> and NVidia GeForce 5200FX runs fine on Windows, even though I 
+> occasionally get those jerky frames that you described. On Linux 
+> (Xubuntu) and the same machine, it works great.
+>
+> On 12/28/06, *Allen King* <allen at a-king.us <mailto:allen at a-king.us>> 
+> wrote:
+>
+>     I've been doing a bunch of work, checking out the various suggestions:
+>
+>     ===== 1. Odin Omdal H?rthe wrote:
+>>     ...
+>>     This is a problem in the code as far as I have understood. Morten
+>>     Hustveit wrote a patch fixing it - but I don't think it got into the
+>>     code-base before 0.3.0. His 4 core Xeon with an X1800 ATI-card got
+>>
+>>     truly horrible performance (due to the sleeping in-game). It looks as
+>>     if the better machine you got - the worse the performance gets
+>>     (because sleeping is extremely little precise, and a fast machine has
+>>     to do many, many sleeps in order to get a 60fps framerate instead of
+>>
+>>     3000 (as Morten's machine got)).
+>>
+>>     The patch also fixes some poor jumping-behaviour - and I really find
+>>     the game more enjoyable after applying it. The patch and email never
+>>     made it to the list. However, it should reside at
+>>
+>>
+>>     http://www.ping.uio.no/~mortehu/jump-and-busy-frameloop.patch <http://www.ping.uio.no/%7Emortehu/jump-and-busy-frameloop.patch>
+>>
+>>
+>>     Since you suffer the same problem, I will paste Morten's email below:
+>>
+>>     ...
+>>       
+>     I had great hopes for this patch, but found that something else is
+>     causing the slow frame rate, and the patch doesn't help that at
+>     all.  The patch does help if one HAD to live with slow frame
+>     rates:  a) The velocities are more like those of 0.1.3 (although
+>     horribly jerkey at 2.5fps).  b) It also seems to drop fewer
+>     keys.   (But I can't live with slow frame rates !^)
+>
+>
+>     ===== 2. Armin Eulenstein wrote:
+>>     I got 0.3.0 running under Windows XP with SP2 very smooth at 60fps. I'm
+>>     using an Athlon XP 2200+; a old Geforce 2 MX400 Graphics card and got
+>>     1024mb RAM. 
+>     Seemingly similar configurations.  I'm running XP Pro, and a
+>     different graphics card, but...
+>
+>     I thought for a minute that running SuperTux in a guest VMWare
+>     virtual machine might be causing the problem, so I installed it in
+>     the main (host) machine.  Then just to be sure, I uninstalled
+>     VMWare and rebooted.  All results were the same -- 0.3.0 ran at
+>     2.5fps!
+>
+>>     SuperTux creates logfiles at the point where you start the
+>>     game, possibly you can find your problem at there.
+>>       
+>     On some runs, I get the message in stderr.txt: "Restarting audio
+>     source because of buffer underrun".  Other runs are clean. 
+>     Nothing ups the frame rate, even if I turn off sounds and music in
+>     the config file.
+>
+>     ===== 3. Wolfgang Becker wrote:
+>>     ...
+>>     Maybe a 64 bit problem? Supertux runs fine on my 950 MHz Athlon with
+>>     Geforce 3, even if I'm running XP. On my parents' laptop (P4, with
+>>     some ATI mobile, much faster than my box), it works, too but only
+>>
+>>     in windowed mode. Fullscreen flickers really bad which makes it
+>>     unplayable.
+>>     ...
+>>       
+>
+>     I installed Supertux-0.3.0-win32-setup.exe on an older 32-bit
+>     800MHz Pentium III laptop running XP Pro SP2, with very similar
+>     results:
+>
+>                                        Tower                 Laptop. A XXX
+>     0.3.0:                         2.5fps                  1.2fps! 
+>     Abysmal.
+>     0.1.3 w OpenGL:      ~10fps                 ~7fps
+>     0.1.3 no OpenGL:     >30fps                 >30fps
+>
+>     (The tower is the machine I've been reporting on up to now.) 
+>     0.1.3 seems to slow way down using OpenGL. 0.3.0 seems 4-6x slower
+>     than 0.1.3.   (Rates are approximate using a stop watch on 50
+>     frames, since the fps meter didn't seem to work.)
+>
+>     So it's looking like an OpenGL issue.  Which brings me to:
+>
+>     ===== 4. The Digital Pioneer wrote:
+>>     ...
+>>     But seriously... I'll be trying 0.3.0 on windoze soon. I'll be
+>>     downloading it presently, so I'll have more results soon. About
+>>     all I can recommend is checking that your OGL is working properly
+>>     (I don't see why it wouldn't be) and that nothing else is getting
+>>     in Supertux's way.
+>>     ...
+>     So I downloaded the latest driver from nVIDIA, which proports to
+>     have "Microsoft? DirectX? 9.0c and OpenGL? 2.0 support", from
+>     http://www.nvidia.com/object/winxp_2k_93.71.html .  Still 2.5fps :-(
+>
+>     I'm presuming SuperTux is happy with OpenGL? 2.0 support, but
+>     can't tell because supertux.berlios.de
+>     <http://supertux.berlios.de> is down.
+>
+>     To figure out how to tune OpenGL, I googled opengl tuning and got
+>     an ati.amd.com/developer/gdc/Performance
+>     <http://ati.amd.com/developer/gdc/Performance>*Tuning*.pdf.   It
+>     suggested varying the frame buffer, and seeing its affect on fps,
+>     and I found that performance is frame buffer limited -- it renders
+>     about 1.5M Pixels Per Second (pps), actually it varies a little,
+>     1.4-1.9 M pps:
+>
+>     800x600 -- 4fps            480,000      1.92M pps
+>     400x300 -- 12.3fps       120,000      1.48M pps
+>     300x225 -- 20fps            67,500      1.35M pps
+>
+>     ===== 5. I'm guessin hardware acceleration is turned off, or
+>     something.  Although display properties show hardware acceleration
+>     at full.  Now I'm not sure where to go from here.  Suggestions.
+>
+>
+>
+>     _______________________________________________
+>     Supertux-devel mailing list
+>     Supertux-devel at lists.berlios.de
+>     <mailto:Supertux-devel at lists.berlios.de>
+>     https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>   
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061230/04cf7b9d/attachment.html>
+
+From djwings at gmail.com  Sun Dec 31 15:07:56 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Sun, 31 Dec 2006 09:07:56 -0500
+Subject: [Supertux-devel] Performance on XP
+In-Reply-To: <45970262.4010900@a-king.us>
+References: <4591EFD9.9030706@a-king.us>
+	<5785596e0612270832n13828444n95ec3f02c07205ef@mail.gmail.com>
+	<45948918.1080003@a-king.us>
+	<826ffc730612290522q1ed2f6eeo2876b98610a4d17@mail.gmail.com>
+	<45970262.4010900@a-king.us>
+Message-ID: <826ffc730612310607l12c9372fu4658c9f9c028a103@mail.gmail.com>
+
+Maybe it was the graphics card. No offense, but a GeForce 3?
+
+On 12/30/06, Allen King <allen at a-king.us> wrote:
+>
+>  Good call!
+>
+> The frame rate improved phenomenally with this patch!  It's in the 45-55
+> fps range, up from 2.4 fps.  I'm not sure what it means for the greater
+> Supertux project's use of OpenGL, and penguins taking over the Gatseian
+> world.  But I'll leave that for others to explore.
+>
+> Note that supertux-nogl.diff did not patch cleanly, with hunk 10 of
+> drawing_context.cpp failing.  I put what seemed like the right change in by
+> hand.  Someone might want to clean that up.  Or not.
+>
+> Thanks for helping me out with this.  It allows me to get my goals met.
+> If there's more testing I can do toward penguin domination, please let me
+> know.
+>
+>        Allen
+>
+> djwings at gmail.com wrote:
+>
+> Hardware accel off?
+> Here's a suggestion: Try recompiling it with the supertux-nogl patch, and
+> tell us what happens. My test machine, with an Athlon XP 1.4GHz and NVidia
+> GeForce 5200FX runs fine on Windows, even though I occasionally get those
+> jerky frames that you described. On Linux (Xubuntu) and the same machine, it
+> works great.
+>
+> On 12/28/06, Allen King <allen at a-king.us> wrote:
+> >
+> > I've been doing a bunch of work, checking out the various suggestions:
+> >
+> > ===== 1. Odin Omdal H?rthe wrote:
+> >
+> > ...
+> >
+> > This is a problem in the code as far as I have understood. Morten
+> > Hustveit wrote a patch fixing it - but I don't think it got into the
+> > code-base before 0.3.0. His 4 core Xeon with an X1800 ATI-card got
+> >
+> > truly horrible performance (due to the sleeping in-game). It looks as
+> > if the better machine you got - the worse the performance gets
+> > (because sleeping is extremely little precise, and a fast machine has
+> > to do many, many sleeps in order to get a 60fps framerate instead of
+> >
+> > 3000 (as Morten's machine got)).
+> >
+> > The patch also fixes some poor jumping-behaviour - and I really find
+> > the game more enjoyable after applying it. The patch and email never
+> > made it to the list. However, it should reside at
+> >
+> >
+> > http://www.ping.uio.no/~mortehu/jump-and-busy-frameloop.patch <http://www.ping.uio.no/%7Emortehu/jump-and-busy-frameloop.patch>
+> >
+> >
+> > Since you suffer the same problem, I will paste Morten's email below:
+> >
+> > ...
+> >
+> >
+> >  I had great hopes for this patch, but found that something else is
+> > causing the slow frame rate, and the patch doesn't help that at all.  The
+> > patch does help if one HAD to live with slow frame rates:  a) The velocities
+> > are more like those of 0.1.3 (although horribly jerkey at 2.5fps).  b)
+> > It also seems to drop fewer keys.   (But I can't live with slow frame rates
+> > !^)
+> >
+> >
+> > ===== 2. Armin Eulenstein wrote:
+> >
+> > I got 0.3.0 running under Windows XP with SP2 very smooth at 60fps. I'm
+> > using an Athlon XP 2200+; a old Geforce 2 MX400 Graphics card and got
+> > 1024mb RAM.
+> >
+> >  Seemingly similar configurations.  I'm running XP Pro, and a different
+> > graphics card, but...
+> >
+> > I thought for a minute that running SuperTux in a guest VMWare virtual
+> > machine might be causing the problem, so I installed it in the main (host)
+> > machine.  Then just to be sure, I uninstalled VMWare and rebooted.  All
+> > results were the same -- 0.3.0 ran at 2.5fps!
+> >
+> >  SuperTux creates logfiles at the point where you start the
+> > game, possibly you can find your problem at there.
+> >
+> >  On some runs, I get the message in stderr.txt: "Restarting audio source
+> > because of buffer underrun".  Other runs are clean.  Nothing ups the frame
+> > rate, even if I turn off sounds and music in the config file.
+> >
+> > ===== 3. Wolfgang Becker wrote:
+> >
+> > ...
+> >
+> > Maybe a 64 bit problem? Supertux runs fine on my 950 MHz Athlon with
+> > Geforce 3, even if I'm running XP. On my parents' laptop (P4, with
+> > some ATI mobile, much faster than my box), it works, too but only
+> >
+> > in windowed mode. Fullscreen flickers really bad which makes it
+> > unplayable.
+> > ...
+> >
+> >
+> > I installed Supertux-0.3.0-win32-setup.exe on an older 32-bit 800MHz
+> > Pentium III laptop running XP Pro SP2, with very similar results:
+> >
+> >                                    Tower                 Laptop. A XXX
+> > 0.3.0:                         2.5fps                  1.2fps!  Abysmal.
+> > 0.1.3 w OpenGL:      ~10fps                 ~7fps
+> > 0.1.3 no OpenGL:     >30fps                 >30fps
+> >
+> > (The tower is the machine I've been reporting on up to now.)  0.1.3seems to slow way down using OpenGL.
+> > 0.3.0 seems 4-6x slower than 0.1.3.   (Rates are approximate using a
+> > stop watch on 50 frames, since the fps meter didn't seem to work.)
+> >
+> > So it's looking like an OpenGL issue.  Which brings me to:
+> >
+> > ===== 4. The Digital Pioneer wrote:
+> >
+> > ...
+> > But seriously... I'll be trying 0.3.0 on windoze soon. I'll be
+> > downloading it presently, so I'll have more results soon. About all I can
+> > recommend is checking that your OGL is working properly (I don't see why it
+> > wouldn't be) and that nothing else is getting in Supertux's way.
+> > ...
+> >
+> > So I downloaded the latest driver from nVIDIA, which proports to have
+> > "Microsoft(r) DirectX(r) 9.0c and OpenGL(r) 2.0 support", from
+> > http://www.nvidia.com/object/winxp_2k_93.71.html .  Still 2.5fps :-(
+> >
+> > I'm presuming SuperTux is happy with OpenGL(r) 2.0 support, but can't tell
+> > because supertux.berlios.de is down.
+> >
+> > To figure out how to tune OpenGL, I googled opengl tuning and got an ati.amd.com/developer/gdc/Performance
+> > *Tuning*.pdf.   It suggested varying the frame buffer, and seeing its
+> > affect on fps, and I found that performance is frame buffer limited -- it
+> > renders about 1.5M Pixels Per Second (pps), actually it varies a little,
+> > 1.4-1.9 M pps:
+> >
+> > 800x600 -- 4fps            480,000      1.92M pps
+> > 400x300 -- 12.3fps       120,000      1.48M pps
+> > 300x225 -- 20fps            67,500      1.35M pps
+> >
+> > ===== 5. I'm guessin hardware acceleration is turned off, or something.
+> > Although display properties show hardware acceleration at full.  Now I'm not
+> > sure where to go from here.  Suggestions.
+> >
+> >
+> >
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/supertux-devel
+> >
+> >
+> >
+> ------------------------------
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.dehttps://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061231/b1c9d634/attachment.html>
+
+From jothesmo at gmail.com  Sun Dec 31 18:54:48 2006
+From: jothesmo at gmail.com (Joth Esmo)
+Date: Sun, 31 Dec 2006 12:54:48 -0500
+Subject: [Supertux-devel] SuperTux 0.3.0 Mac OS X Universal Binary
+In-Reply-To: <EBECB3EC-C0BA-4C8C-8081-7A0F99424AB9@web.de>
+References: <9E280644-225D-41D4-AC4A-6DDEDF8C214C@gmail.com>
+	<20061230231120.GC17570@greg.local>
+	<EBECB3EC-C0BA-4C8C-8081-7A0F99424AB9@web.de>
+Message-ID: <e5aaa77a0612310954o2d99b024h1606219693fbbe8a@mail.gmail.com>
+
+Works fine on my G4 iBook. Any thoughts on whether the supertux-editor
+can be ported?
+
+I was playing one of my old levels (made with 0.1.3 -built-in editor)
+on the new 0.3 (surprisingly it worked) and noticed that the gravity
+setting didn't work. Have you taken out gravity, or have you just
+renamed something?
+
+On 12/30/06, Jonas B?hr <jonas.baehr at web.de> wrote:
+> Hi,
+>
+> Am 31.12.2006 um 00:11 schrieb Wolfgang Becker:
+>
+> > On 20061230 Jayson Kempinger <evilglowingapple at gmail.com> wrote:
+> >> I've been working on an universal binary of SuperTux 0.3.0 for Mac OS
+> >> X.  I'm not sure if anyone has submitted one yet (and
+> >> supertux.berlios.de doesn't seem to be responding for me at the
+> >
+> > Berlios has some problems. https://developer.berlios.de/projects/
+> > supertux/
+> > is slow but working. The http webserver seems to be down. :-(
+> >
+> > http://prdownload.berlios.de/supertux/supertux-0.3.0-macosx.dmg
+> > from #supertux:
+> > | Dec 29 21:16:08 <kootenay>  I've posted SuperTux 0.3 to the
+> > | MacUpdate servers this morning, and it's clocked 700+ downloads
+> > so far:
+> > | http://www.macupdate.com/info.php/id/15007
+> >
+> > No idea what kind of Macs can run that binary.
+>
+> I've just tested it on my 1GHz G4 Powerbook (ppc) and it works fine.
+> Sound is working too.
+>
+> bye,
+> Jonas
+>
+> >
+> > Tsch??,
+> > Wolfgang
+> > --
+> > Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://
+> > uafr.freeshell.org/
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.de
+> > https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+
+
+-- 
+jothesmo
+
+

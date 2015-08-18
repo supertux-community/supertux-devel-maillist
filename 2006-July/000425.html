@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Scoring and coins
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Scoring%20and%20coins&In-Reply-To=%3C5a5496320607311028w7e8e9b6bg5df6e2d209b9bd92%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000424.html">
+   <LINK REL="Next"  HREF="000426.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Scoring and coins</H1>
+    <B>Ryan Flegel</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Scoring%20and%20coins&In-Reply-To=%3C5a5496320607311028w7e8e9b6bg5df6e2d209b9bd92%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] Scoring and coins">rflegel at gmail.com
+       </A><BR>
+    <I>Mon Jul 31 19:28:37 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000424.html">[Supertux-devel] Scoring and coins
+</A></li>
+        <LI>Next message: <A HREF="000426.html">[Supertux-devel] Scoring and coins
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#425">[ date ]</a>
+              <a href="thread.html#425">[ thread ]</a>
+              <a href="subject.html#425">[ subject ]</a>
+              <a href="author.html#425">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I never look at the score in any game I play, except for where the
+entire point of the game is the score (eg, pinball). For Supertux the
+goal is to finish the game, not to get a high score, imo. However, we
+do have time trials and coin trials that should add to the
+replayability of the game.
+
+One of the biggest problems with scores, I think, is how to calculate
+it. It's tough to come up with a formula that takes into account
+badguys killed, coins collected and level time. If the formula ever
+needs to be changed, it basically voids all scores from previous
+versions of the game. I think this was one of the main reasons we
+decided to do away with a score.
+
+-- 
+Ryan
+
+On 7/31/06, Marek M. &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">wansti at gmx.de</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> But how would you determine what the best try is, i.e. how would you
+</I>&gt;<i> define &quot;best try&quot;? Anyway, I think this might lead to a lot of
+</I>&gt;<i> confusion, and it would require quite a few lines of additional code.
+</I>&gt;<i> I never cared about scores in any game, not even pinball games where
+</I>&gt;<i> there is basically no other goal to achieve - besides enjoying the game,
+</I>&gt;<i> of course. I wonder how many people really pay attention to the score in
+</I>&gt;<i> Milestone 1...
+</I>&gt;<i>
+</I>&gt;<i>     Marek
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Vivien wrote:
+</I>&gt;<i> &gt; An other way is to add only to score the best try of a level.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;&gt; gnomino wrote:
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt; Why was the score removed? [...] Also, I don't think that lives should be
+</I>&gt;<i> &gt;&gt;&gt; calculated using coins.
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt; SuperTux Milestone 1 did not really have something like &quot;lives&quot;. Just
+</I>&gt;<i> &gt;&gt; like now, you could always continue your journey from the start of the
+</I>&gt;<i> &gt;&gt; last level you played. This has made it the perfect causal-gamer's toy
+</I>&gt;<i> &gt;&gt; to play with during short breaks and contributed to its huge success (or
+</I>&gt;<i> &gt;&gt; so I believe).
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; This concept, however, makes keeping something like &quot;score&quot; pretty much
+</I>&gt;<i> &gt;&gt; impossible. With unlimited tries and retries for any given level, you
+</I>&gt;<i> &gt;&gt; can reach an arbitrary number of points, so we just dropped it.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Kind regards,
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;    Christoph
+</I>&gt;<i> &gt;&gt; _______________________________________________
+</I>&gt;<i> &gt;&gt; Supertux-devel mailing list
+</I>&gt;<i> &gt;&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt;&gt; <A HREF="http://bat.berlios.de/mailman/listinfo/supertux-devel">http://bat.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Supertux-devel mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="http://bat.berlios.de/mailman/listinfo/supertux-devel">http://bat.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://bat.berlios.de/mailman/listinfo/supertux-devel">http://bat.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000424.html">[Supertux-devel] Scoring and coins
+</A></li>
+	<LI>Next message: <A HREF="000426.html">[Supertux-devel] Scoring and coins
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#425">[ date ]</a>
+              <a href="thread.html#425">[ thread ]</a>
+              <a href="subject.html#425">[ subject ]</a>
+              <a href="author.html#425">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

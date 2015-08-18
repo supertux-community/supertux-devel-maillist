@@ -1,0 +1,2201 @@
+From christian_hoff at gmx.net  Tue Aug  1 08:29:46 2006
+From: christian_hoff at gmx.net (Christian Hoff)
+Date: Tue, 01 Aug 2006 08:29:46 +0200
+Subject: [Supertux-devel] World map
+In-Reply-To: <bcd1d8470607291521s2b15ac47k6d5ed58d20fc618d@mail.gmail.com>
+References: <bcd1d8470607291521s2b15ac47k6d5ed58d20fc618d@mail.gmail.com>
+Message-ID: <44CEF4DA.5050909@gmx.net>
+
+Hi Danny,
+
+there are many ways to make a worldmap:
+1. Using an editor like Flexlay for Linux(http://flexlay.berlios.de), 
+but I don't know if flexlay supports worldmap creating, or SWafe for 
+Windows(http://www.christian-hoff.de -> downloads -> SWafe). SWafe will 
+currently not work with the SVN Builds of supertux.
+
+2. Manual creating of a worldmap file: I wouldn't do that, but if you 
+really want, you can use a template file like the Antarctica worldmap 
+and modify it a little. But this is not really a comfortable way and 
+only useful to understand the file format.
+
+In both cases you have to save the worldmap with the extension *.stwm in 
+the (data/) levels/worldmaps subdirectory of your supertux installation. 
+In linux the installation path is normally /usr/games/supertux when 
+working with Supertux 1.3. The SVN versions are normally installing in 
+the user's home directory.
+
+Christian Hoff
+
+Danny Bittman wrote:
+> is there anyway to make a world map?
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>   
+
+
+
+From uafr at gmx.de  Tue Aug  1 15:01:09 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Tue, 1 Aug 2006 15:01:09 +0200
+Subject: [Supertux-devel] World map
+In-Reply-To: <44CEF4DA.5050909@gmx.net>
+References: <bcd1d8470607291521s2b15ac47k6d5ed58d20fc618d@mail.gmail.com>
+	<44CEF4DA.5050909@gmx.net>
+Message-ID: <20060801130109.GA6316@greg.local>
+
+On 20060801 Christian Hoff <christian_hoff at gmx.net> wrote:
+> 2. Manual creating of a worldmap file: I wouldn't do that, but if you 
+> really want, you can use a template file like the Antarctica worldmap 
+> and modify it a little. But this is not really a comfortable way and 
+> only useful to understand the file format.
+
+See the wiki for more informations about the file format.
+http://supertux.berlios.de/wiki/index.php/File_formats#Worldmaps
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From goldenpiranha at gmail.com  Tue Aug  1 17:32:56 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Tue, 1 Aug 2006 08:32:56 -0700
+Subject: [Supertux-devel] World map
+In-Reply-To: <20060801130109.GA6316@greg.local>
+References: <bcd1d8470607291521s2b15ac47k6d5ed58d20fc618d@mail.gmail.com>
+	<44CEF4DA.5050909@gmx.net> <20060801130109.GA6316@greg.local>
+Message-ID: <bcd1d8470608010832s142bb016g85811ef530a9d498@mail.gmail.com>
+
+haha! I ended up doing the second option you gave me! (not easy)
+i used bonus island 2, but it was boring....
+
+On 8/1/06, Wolfgang Becker <uafr at gmx.de> wrote:
+>
+> On 20060801 Christian Hoff <christian_hoff at gmx.net> wrote:
+> > 2. Manual creating of a worldmap file: I wouldn't do that, but if you
+> > really want, you can use a template file like the Antarctica worldmap
+> > and modify it a little. But this is not really a comfortable way and
+> > only useful to understand the file format.
+>
+> See the wiki for more informations about the file format.
+> http://supertux.berlios.de/wiki/index.php/File_formats#Worldmaps
+>
+> Tsch??,
+> Wolfgang
+> --
+> Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060801/e7e7e3af/attachment.html>
+
+From gnomino at hotmail.com  Thu Aug  3 00:01:06 2006
+From: gnomino at hotmail.com (gnomino)
+Date: Wed, 02 Aug 2006 15:01:06 -0700
+Subject: [Supertux-devel] Network play
+Message-ID: <44D120A2.5090806@hotmail.com>
+
+Hello,
+I'm trying to make some changes to the code that will eventually enable 
+the addition of network play. (These changes are mostly getting rid of 
+global variables player_status, camera, Sector::current, etc.)
+If network play were to be implemented, should each host running the 
+game to keep a complete set of all the game objects, and then 
+synchronize them with each other? This would probably be faster, but the 
+clients might end up with inconsistent states (due to network delay, 
+failure, etc.) Also, it would be much easier for one player to "cheat" 
+by modifying their local state. (This probably does not matter most of 
+the time.)
+Or does it make more sense for only one host to hold the state of the 
+game, and for all the clients on the other hosts to simply send events 
+to that host and receive (maybe) pre-rendered screens? This would be 
+much slower but would ensure a robust game state.
+Maybe an intermediate between the two? (I'm trying to figure out how 
+Cameras and Sprites should be treated)
+
+Thanks,
+gnomino
+
+
+From supertux at 2006.expires.deltadevelopment.de  Thu Aug  3 00:36:11 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Thu, 03 Aug 2006 00:36:11 +0200
+Subject: [Supertux-devel] Network play
+In-Reply-To: <44D120A2.5090806@hotmail.com>
+References: <44D120A2.5090806@hotmail.com>
+Message-ID: <44D128DB.3040509@2006.expires.deltadevelopment.de>
+
+gnomino wrote:
+> If network play were to be implemented, should each host running the 
+> game to keep a complete set of all the game objects, and then 
+> synchronize them with each other? [...]
+> Or does it make more sense for only one host to hold the state of the 
+> game, and for all the clients on the other hosts to simply send events 
+> to that host and receive (maybe) pre-rendered screens? 
+
+For the game to be playable over the Internet, I am afraid that neither 
+trying to sync two independently running engines nor streaming a live 
+video from the server might be sensible.
+
+Thankfully, lots of smart people already tried coming up with good 
+solutions to the problems of lag, dropped frames and cheating. If you 
+have the time, take a look at <http://www.ra.is/unlagged/> to see how 
+Quake 3 tackles those problems, e.g. by using "dead reckoning". Also see 
+this site for a solution to serious lag that uses backward 
+reconciliation to figure out what a player actually wanted to do. For a 
+more theoretical approach to solving the problem of lag, read 
+<http://www.resourcecode.de/stuff/clientsideprediction.pdf>.
+
+
+Kind regards,
+
+   Christoph
+
+
+From jofele at gmail.com  Mon Aug  7 23:25:14 2006
+From: jofele at gmail.com (jofele)
+Date: Tue, 8 Aug 2006 09:25:14 +1200
+Subject: [Supertux-devel] info on supertux
+Message-ID: <2afbceee0608071425tf6fac51mccbc3c1b68775e18@mail.gmail.com>
+
+Hi ,
+I would need some info on supertux_0.1.3.orig.tar.gz that I got from a
+debian mirror.
+I am trying to build it as a package for the yoper distribution but
+noticed that debian uses supertux data as a seperate package.
+When I open the tarball I find data there as a folder,that should mean
+this .orig.tar.gz has all supertux needs apart from it's
+dependencies,no?
+Hope to hear from you soon,
+regards,
+Danny
+
+
+From supertux at 2006.expires.deltadevelopment.de  Mon Aug  7 23:52:25 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Mon, 07 Aug 2006 23:52:25 +0200
+Subject: [Supertux-devel] info on supertux
+In-Reply-To: <2afbceee0608071425tf6fac51mccbc3c1b68775e18@mail.gmail.com>
+References: <2afbceee0608071425tf6fac51mccbc3c1b68775e18@mail.gmail.com>
+Message-ID: <44D7B619.3080201@2006.expires.deltadevelopment.de>
+
+Hey Danny,
+
+jofele wrote:
+> I would need some info on supertux_0.1.3.orig.tar.gz that I got from a
+> debian mirror.
+> I [...] noticed that debian uses supertux data as a seperate package.
+> When I open the tarball I find data there as a folder,that should mean
+> this .orig.tar.gz has all supertux needs apart from it's
+> dependencies,no?
+
+I took a peek and it seems to contain everything needed to build and run 
+SuperTux. Seems like supertux_0.1.3.orig.tar.gz is the original tarball 
+downloaded from the SuperTux website with all differences stored in 
+supertux_0.1.3-1.1.diff.gz.
+
+According to <http://packages.debian.org/unstable/games/supertux>, the 
+"supertux" Debian package is maintained by G?rkan Seng?n and Bartosz 
+Fenski, so they should be able to tell you for sure.
+
+Why not just download the tarball from the SuperTux website instead of 
+guessing? You can find it on 
+<http://supertux.berlios.de/wiki/index.php/Download/Installation#Any_system.2FSource_Code> 
+(which links to 
+<http://download.berlios.de/supertux/supertux-0.1.3.tar.bz2>).
+
+
+Regards,
+
+   Christoph
+
+
+From afief.h at gmail.com  Tue Aug  8 16:03:41 2006
+From: afief.h at gmail.com (Afief Halumi)
+Date: Tue, 8 Aug 2006 17:03:41 +0300
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44CE73E8.8090800@gmx.de>
+References: <44CE55CF.2060606@hotmail.com> <44CE697B.9020205@berlios.de>
+	<44CE73E8.8090800@gmx.de>
+Message-ID: <83a40700608080703y2db65298v2a17d5ab6e850e35@mail.gmail.com>
+
+How about adding coins for the multi badguy hits?
+Kill one badguy: get 1 coin
+Kill two badguys: get 2 coins
+Kill three badguys: get 3 coins
+Kill four badguys: get 5 coins
+Kill five badguys: get 8 coins
+(you guys know phibonachy don't you?)
+
+of course this would lead to a problem with the coin gathering score, but i
+think it is a very neat feature.
+
+Love supertux
+Afief
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060808/e203b926/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Tue Aug  8 16:16:09 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Tue, 08 Aug 2006 16:16:09 +0200
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <83a40700608080703y2db65298v2a17d5ab6e850e35@mail.gmail.com>
+References: <44CE55CF.2060606@hotmail.com>
+	<44CE697B.9020205@berlios.de>	<44CE73E8.8090800@gmx.de>
+	<83a40700608080703y2db65298v2a17d5ab6e850e35@mail.gmail.com>
+Message-ID: <44D89CA9.4060109@2006.expires.deltadevelopment.de>
+
+Hey Afief,
+
+Afief Halumi wrote:
+> How about adding coins for the multi badguy hits?
+> Kill one badguy: get 1 coin
+> Kill two badguys: get 2 coins
+> Kill three badguys: get 3 coins
+> Kill four badguys: get 5 coins
+> Kill five badguys: get 8 coins
+> (you guys know phibonachy don't you?)
+
+I think using Fibonacci numbers might be a bit too generous - squishing 
+15 badguys would give you the equivalent of 40 extra lives.
+
+Other than that, I think it's a neat idea.
+
+> of course this would lead to a problem with the coin gathering score, but i
+> think it is a very neat feature.
+
+Let's not add this to the "collected coins" score then - problem solved 
+   :-)
+
+Regards,
+
+   Christoph
+
+
+From rebecca at laudate.ca  Tue Aug  8 16:17:55 2006
+From: rebecca at laudate.ca (Rebecca Gilbert)
+Date: Tue, 08 Aug 2006 10:17:55 -0400
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44D89CA9.4060109@2006.expires.deltadevelopment.de>
+References: <44CE55CF.2060606@hotmail.com>	<44CE697B.9020205@berlios.de>	<44CE73E8.8090800@gmx.de>	<83a40700608080703y2db65298v2a17d5ab6e850e35@mail.gmail.com>
+	<44D89CA9.4060109@2006.expires.deltadevelopment.de>
+Message-ID: <44D89D13.50507@laudate.ca>
+
+No, that would only be if you squished 15 badguys in a row, wouldn't 
+it?  You already get more points per badguy the more badguys you 
+squish/knock out with an ice cube if you don't hit the ground in between.
+
+Rebecca
+
+Christoph Sommer wrote:
+> Hey Afief,
+>
+> Afief Halumi wrote:
+>   
+>> How about adding coins for the multi badguy hits?
+>> Kill one badguy: get 1 coin
+>> Kill two badguys: get 2 coins
+>> Kill three badguys: get 3 coins
+>> Kill four badguys: get 5 coins
+>> Kill five badguys: get 8 coins
+>> (you guys know phibonachy don't you?)
+>>     
+>
+> I think using Fibonacci numbers might be a bit too generous - squishing 
+> 15 badguys would give you the equivalent of 40 extra lives.
+>
+> Other than that, I think it's a neat idea.
+>
+>   
+>> of course this would lead to a problem with the coin gathering score, but i
+>> think it is a very neat feature.
+>>     
+>
+> Let's not add this to the "collected coins" score then - problem solved 
+>    :-)
+>
+> Regards,
+>
+>    Christoph
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>   
+
+-- 
+"Act justly ... love mercy ... walk humbly with your God."
+        -- Micah 6:8
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060808/988c9592/attachment.html>
+
+From afief.h at gmail.com  Tue Aug  8 16:24:49 2006
+From: afief.h at gmail.com (Afief Halumi)
+Date: Tue, 8 Aug 2006 17:24:49 +0300
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44D89D13.50507@laudate.ca>
+References: <44CE55CF.2060606@hotmail.com> <44CE697B.9020205@berlios.de>
+	<44CE73E8.8090800@gmx.de>
+	<83a40700608080703y2db65298v2a17d5ab6e850e35@mail.gmail.com>
+	<44D89CA9.4060109@2006.expires.deltadevelopment.de>
+	<44D89D13.50507@laudate.ca>
+Message-ID: <83a40700608080724u6d9e6217oebee029f2ecf992b@mail.gmail.com>
+
+Yes i was talking about squishing without hitting the ground.
+
+40 lives for squishing 15 badguys? that is too generous indeed, but i can't
+remember a level where i could squish more than 5 badguys without hitting
+the ground(admittedly though, i never tried to squish as many as possible).
+
+We could just start counting from the beginig after every X squishes, that
+also solves the problem.
+
+On 8/8/06, Rebecca Gilbert <rebecca at laudate.ca> wrote:
+>
+>  No, that would only be if you squished 15 badguys in a row, wouldn't it?
+> You already get more points per badguy the more badguys you squish/knock out
+> with an ice cube if you don't hit the ground in between.
+>
+> Rebecca
+>
+>
+> Christoph Sommer wrote:
+>
+> Hey Afief,
+>
+> Afief Halumi wrote:
+>
+>  How about adding coins for the multi badguy hits?
+> Kill one badguy: get 1 coin
+> Kill two badguys: get 2 coins
+> Kill three badguys: get 3 coins
+> Kill four badguys: get 5 coins
+> Kill five badguys: get 8 coins
+> (you guys know phibonachy don't you?)
+>
+>  I think using Fibonacci numbers might be a bit too generous - squishing
+> 15 badguys would give you the equivalent of 40 extra lives.
+>
+> Other than that, I think it's a neat idea.
+>
+>    of course this would lead to a problem with the coin gathering score, but i
+> think it is a very neat feature.
+>
+>  Let's not add this to the "collected coins" score then - problem solved
+>    :-)
+>
+> Regards,
+>
+>    Christoph
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.dehttp://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+> --
+> "Act justly ... love mercy ... walk humbly with your God."
+>         -- Micah 6:8
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060808/faf30181/attachment.html>
+
+From goldenpiranha at gmail.com  Tue Aug  8 17:38:46 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Tue, 8 Aug 2006 08:38:46 -0700
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <83a40700608080724u6d9e6217oebee029f2ecf992b@mail.gmail.com>
+References: <44CE55CF.2060606@hotmail.com> <44CE697B.9020205@berlios.de>
+	<44CE73E8.8090800@gmx.de>
+	<83a40700608080703y2db65298v2a17d5ab6e850e35@mail.gmail.com>
+	<44D89CA9.4060109@2006.expires.deltadevelopment.de>
+	<44D89D13.50507@laudate.ca>
+	<83a40700608080724u6d9e6217oebee029f2ecf992b@mail.gmail.com>
+Message-ID: <bcd1d8470608080838t3a7ac72s787782b243231760@mail.gmail.com>
+
+Well, in some levels that I played, there was a bridge of flying snowballs
+that you had to kill to get across, that ended up to squishing 10
+badguys.....
+
+On 8/8/06, Afief Halumi <afief.h at gmail.com> wrote:
+>
+> Yes i was talking about squishing without hitting the ground.
+>
+> 40 lives for squishing 15 badguys? that is too generous indeed, but i
+> can't remember a level where i could squish more than 5 badguys without
+> hitting the ground(admittedly though, i never tried to squish as many as
+> possible).
+>
+> We could just start counting from the beginig after every X squishes, that
+> also solves the problem.
+>
+>
+> On 8/8/06, Rebecca Gilbert < rebecca at laudate.ca> wrote:
+> >
+> >  No, that would only be if you squished 15 badguys in a row, wouldn't
+> > it?  You already get more points per badguy the more badguys you
+> > squish/knock out with an ice cube if you don't hit the ground in between.
+> >
+> > Rebecca
+> >
+> >
+> > Christoph Sommer wrote:
+> >
+> > Hey Afief,
+> >
+> > Afief Halumi wrote:
+> >
+> >  How about adding coins for the multi badguy hits?
+> > Kill one badguy: get 1 coin
+> > Kill two badguys: get 2 coins
+> > Kill three badguys: get 3 coins
+> > Kill four badguys: get 5 coins
+> > Kill five badguys: get 8 coins
+> >
+> > (you guys know phibonachy don't you?)
+> >
+> >  I think using Fibonacci numbers might be a bit too generous - squishing
+> > 15 badguys would give you the equivalent of 40 extra lives.
+> >
+> > Other than that, I think it's a neat idea.
+> >
+> >    of course this would lead to a problem with the coin gathering score, but i
+> > think it is a very neat feature.
+> >
+> >  Let's not add this to the "collected coins" score then - problem solved
+> >    :-)
+> >
+> > Regards,
+> >
+> >    Christoph
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.dehttp://bat.berlios.de/mailman/listinfo/supertux-devel
+> >
+> >
+> > --
+> > "Act justly ... love mercy ... walk humbly with your God."
+> >         -- Micah 6:8
+> >
+> >
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.de
+> > http://bat.berlios.de/mailman/listinfo/supertux-devel
+> >
+> >
+> >
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060808/c276edbd/attachment.html>
+
+From matze at braunis.de  Tue Aug  8 19:26:18 2006
+From: matze at braunis.de (Matthias Braun)
+Date: Tue, 08 Aug 2006 19:26:18 +0200
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44D89CA9.4060109@2006.expires.deltadevelopment.de>
+References: <44CE55CF.2060606@hotmail.com> <44CE697B.9020205@berlios.de>
+	<44CE73E8.8090800@gmx.de>
+	<83a40700608080703y2db65298v2a17d5ab6e850e35@mail.gmail.com>
+	<44D89CA9.4060109@2006.expires.deltadevelopment.de>
+Message-ID: <1155057978.21734.3.camel@taylor.local>
+
+I'd simply not give coins for this. Just make it a separate score that
+gets displayed in the level statistics. This would mainly be a feature
+to increase replayability for people who already played through the
+whole game. These people will probably have enough lives anyway, so more
+lives/coins isn't really a reward anyway.
+
+Greetings,
+	Matze
+
+Am Dienstag, den 08.08.2006, 16:16 +0200 schrieb Christoph Sommer:
+> Hey Afief,
+> 
+> Afief Halumi wrote:
+> > How about adding coins for the multi badguy hits?
+> > Kill one badguy: get 1 coin
+> > Kill two badguys: get 2 coins
+> > Kill three badguys: get 3 coins
+> > Kill four badguys: get 5 coins
+> > Kill five badguys: get 8 coins
+> > (you guys know phibonachy don't you?)
+> 
+> I think using Fibonacci numbers might be a bit too generous - squishing 
+> 15 badguys would give you the equivalent of 40 extra lives.
+> 
+> Other than that, I think it's a neat idea.
+> 
+> > of course this would lead to a problem with the coin gathering score, but i
+> > think it is a very neat feature.
+> 
+> Let's not add this to the "collected coins" score then - problem solved 
+>    :-)
+> 
+> Regards,
+> 
+>    Christoph
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+From gnomino at hotmail.com  Tue Aug  8 20:18:49 2006
+From: gnomino at hotmail.com (gnomino)
+Date: Tue, 08 Aug 2006 11:18:49 -0700
+Subject: [Supertux-devel] Scoring and coins
+Message-ID: <44D8D589.6020902@hotmail.com>
+
+Why not keep a separate score per level?
+Each replay of a level could create a new score, which could be compared 
+against the old one, in the same way that current statistics are 
+compared. (# of badguys killed, # of secret areas found, etc.)
+
+
+From bubuabu at bubuabu.org  Wed Aug  9 16:09:57 2006
+From: bubuabu at bubuabu.org (Vivien)
+Date: Wed, 9 Aug 2006 16:09:57 +0200
+Subject: [Supertux-devel] A new creature : dog
+Message-ID: <200608091609.57661.bubuabu@bubuabu.org>
+
+I've just make a new badguys : a dog.
+I join the files, but since I not draw very well, the pictures are just for 
+testing the code.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: dog.cpp
+Type: text/x-c++src
+Size: 3752 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060809/a1333427/attachment.cpp>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: dog.hpp
+Type: text/x-c++hdr
+Size: 1456 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060809/a1333427/attachment.hpp>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: attack-left.png
+Type: image/png
+Size: 659 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060809/a1333427/attachment.png>
+-------------- next part --------------
+(supertux-sprite
+  (action
+    (name "left")
+    (hitbox 2 4 63.6 31.9)
+    (images "left-0.png"
+            "left-1.png"
+            "left-2.png")
+  )
+  (action
+    (name "right")
+    (hitbox 2 4 63.6 31.9)
+    (mirror-action "left")
+  )
+  (action
+    (name "attack-left")
+    (hitbox 2 4 63.6 31.9)
+    (images "attack-left.png")
+  )
+  (action
+    (name "attack-right")
+    (hitbox 2 4 63.6 31.9)
+    (mirror-action "attack-left")
+  )
+  (action
+    (name "sleep-left")
+    (hitbox 2 4 63.6 31.9)
+    (images "sleep-left.png")
+  )
+  (action
+    (name "sleep-right")
+    (hitbox 2 4 63.6 31.9)
+    (mirror-action "sleep-left")
+  )
+  (action
+    (name "squished-left")
+    (hitbox 1 -19 63.6 31.9)
+    (images "squished-left.png")
+  )
+  (action
+    (name "squished-right")
+    (hitbox 1 -19 63.6 31.9)
+    (mirror-action "squished-left")
+  )
+)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: left-0.png
+Type: image/png
+Size: 704 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060809/a1333427/attachment-0001.png>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: left-1.png
+Type: image/png
+Size: 693 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060809/a1333427/attachment-0002.png>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: squished-left.png
+Type: image/png
+Size: 1525 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060809/a1333427/attachment-0003.png>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: sleep-left.png
+Type: image/png
+Size: 648 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060809/a1333427/attachment-0004.png>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: left-2.png
+Type: image/png
+Size: 703 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060809/a1333427/attachment-0005.png>
+
+From djwings at gmail.com  Wed Aug  9 18:08:52 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Wed, 9 Aug 2006 12:08:52 -0400
+Subject: [Supertux-devel] A new creature : dog
+In-Reply-To: <200608091609.57661.bubuabu@bubuabu.org>
+References: <200608091609.57661.bubuabu@bubuabu.org>
+Message-ID: <826ffc730608090908u3061f830s589ff0a7f502c1c@mail.gmail.com>
+
+That's okay, pic-wise, because we have someone for everything on the team,
+especially graphics.
+
+On 8/9/06, Vivien <bubuabu at bubuabu.org> wrote:
+>
+> I've just make a new badguys : a dog.
+> I join the files, but since I not draw very well, the pictures are just
+> for
+> testing the code.
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060809/a1ec6fe9/attachment.html>
+
+From djwings at gmail.com  Wed Aug  9 18:43:04 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Wed, 9 Aug 2006 12:43:04 -0400
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44D8D589.6020902@hotmail.com>
+References: <44D8D589.6020902@hotmail.com>
+Message-ID: <826ffc730608090943t18c8713cqc70d38e733cd39ef@mail.gmail.com>
+
+Maybe I'd approve of it if it uses a less sharp curve than a Fibonacci. And
+besides, ice cubes would be lethal. You could easily knock out 10 at once
+with one, which would yield 29 coins and 2 lives. Too broken.
+
+On 8/8/06, gnomino <gnomino at hotmail.com> wrote:
+>
+> Why not keep a separate score per level?
+> Each replay of a level could create a new score, which could be compared
+> against the old one, in the same way that current statistics are
+> compared. (# of badguys killed, # of secret areas found, etc.)
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060809/993ebdc2/attachment.html>
+
+From afief.h at gmail.com  Wed Aug  9 23:07:10 2006
+From: afief.h at gmail.com (Afief Halumi)
+Date: Thu, 10 Aug 2006 00:07:10 +0300
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <826ffc730608090943t18c8713cqc70d38e733cd39ef@mail.gmail.com>
+References: <44D8D589.6020902@hotmail.com>
+	<826ffc730608090943t18c8713cqc70d38e733cd39ef@mail.gmail.com>
+Message-ID: <83a40700608091407j2712a047vce95976c2e27909a@mail.gmail.com>
+
+should ice cube even have the same reward mechanism? i remember in SMW there
+was a level where you could get a life for knocking out a long row of
+badguys right at the begining, but i never checked if it was the same for
+squashing(SMW was my first console game.)
+
+We could always devide the phibonacy result by a constant, that would slow
+it's growth quite a lot since all the items in the sequence are devided by
+that constant.
+
+But i really think hitting with a cube should have a different rewarding
+system.
+
+At any rate, i've just finished my calculus 1 course, shouldn't be hard to
+come up with a sequence that is fair for everybody if you give me some
+pointers what you want to have where(10 badguys=1 life, 20 badguys 5 lifes
+for example). I would love to help the development of supertux.
+
+Afief Halumi
+
+
+On 8/9/06, djwings at gmail.com <djwings at gmail.com> wrote:
+>
+> Maybe I'd approve of it if it uses a less sharp curve than a Fibonacci.
+> And besides, ice cubes would be lethal. You could easily knock out 10 at
+> once with one, which would yield 29 coins and 2 lives. Too broken.
+>
+>
+> On 8/8/06, gnomino <gnomino at hotmail.com > wrote:
+> >
+> > Why not keep a separate score per level?
+> > Each replay of a level could create a new score, which could be compared
+> >
+> > against the old one, in the same way that current statistics are
+> > compared. (# of badguys killed, # of secret areas found, etc.)
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.de
+> > http://bat.berlios.de/mailman/listinfo/supertux-devel
+> >
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060810/d11aa8cf/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Thu Aug 10 00:22:16 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Thu, 10 Aug 2006 00:22:16 +0200
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <83a40700608091407j2712a047vce95976c2e27909a@mail.gmail.com>
+References: <44D8D589.6020902@hotmail.com>	<826ffc730608090943t18c8713cqc70d38e733cd39ef@mail.gmail.com>
+	<83a40700608091407j2712a047vce95976c2e27909a@mail.gmail.com>
+Message-ID: <44DA6018.2000908@2006.expires.deltadevelopment.de>
+
+Hey Afief,
+
+Afief Halumi wrote:
+> should ice cube even have the same reward mechanism? 
+
+In my opinion: No.
+
+Squishing badguys should be encouraged, not shooting them, flipping them 
+over with Mr. Iceblock or the Snail, having them get hit by darts and 
+the like or just letting them fall off a ledge.
+
+
+Regards,
+
+   Christoph
+
+
+From gnomino at hotmail.com  Thu Aug 10 07:36:39 2006
+From: gnomino at hotmail.com (gnomino)
+Date: Wed, 09 Aug 2006 22:36:39 -0700
+Subject: [Supertux-devel] Nogl patch
+Message-ID: <44DAC5E7.9080600@hotmail.com>
+
+Hello,
+The addition of ambient_color handling to the video code broke the nogl 
+patch. This is a patch against rev. 4144 that fixes the nogl patch.
+
+By the way, why is the nogl patch no longer maintained? So far (AFAIK) 
+no key feature requiring OpenGL has been added. I'm sure that the % of 
+players using old, non-OpenGL graphics cards is very little, but it took 
+very little effort to upgrade the nogl patch(es), so I really think that 
+SDL rendering support should be continued.
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: supertux-nogl.diff.diff
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060809/131e5349/attachment.ksh>
+
+From anmaster at berlios.de  Thu Aug 10 19:02:59 2006
+From: anmaster at berlios.de (Arvid Norlander)
+Date: Thu, 10 Aug 2006 19:02:59 +0200
+Subject: [Supertux-devel] Nogl patch
+In-Reply-To: <44DAC5E7.9080600@hotmail.com>
+References: <44DAC5E7.9080600@hotmail.com>
+Message-ID: <44DB66C3.3040405@berlios.de>
+
+As far as I know this is because no one of the devs no longer need it (a bit
+selfish maybe? ;)
+
+gnomino wrote:
+> By the way, why is the nogl patch no longer maintained? So far (AFAIK)
+> no key feature requiring OpenGL has been added. I'm sure that the % of
+> players using old, non-OpenGL graphics cards is very little, but it took
+> very little effort to upgrade the nogl patch(es), so I really think that
+> SDL rendering support should be continued.
+
+
+From gnomino at hotmail.com  Fri Aug 11 00:37:38 2006
+From: gnomino at hotmail.com (gnomino)
+Date: Thu, 10 Aug 2006 15:37:38 -0700
+Subject: [Supertux-devel] Remove add_bullets from Sector
+Message-ID: <44DBB532.4050702@hotmail.com>
+
+Hello,
+This patch removes Sector::add_bullets() (which was marked with TODO), 
+and moves the necessary checks into Player. It also removes 
+Sector::bullets and adds a single integer to Player which is incremented 
+after adding a bullet and decremented in the destructor of Bullet.
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: bullets.diff
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060810/4069781c/attachment.ksh>
+
+From karl at huftis.org  Sun Aug 13 11:25:56 2006
+From: karl at huftis.org (Karl Ove Hufthammer)
+Date: Sun, 13 Aug 2006 11:25:56 +0200
+Subject: [Supertux-devel] Updated Norwegian Nynorsk translation
+Message-ID: <200608131125.56870.karl@huftis.org>
+
+After two years, here's finally an updated Norwegian Nynorsk translation of 
+SuperTux (the game + the first world). Please commit it to CVS.
+
+-- 
+Regards,
+Karl Ove Hufthammer
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: supertux-nn.patch
+Type: text/x-diff
+Size: 32990 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060813/2c238f9a/attachment.patch>
+
+From anmaster at berlios.de  Sun Aug 13 15:19:35 2006
+From: anmaster at berlios.de (Arvid Norlander)
+Date: Sun, 13 Aug 2006 15:19:35 +0200
+Subject: [Supertux-devel] Updated Norwegian Nynorsk translation
+In-Reply-To: <200608131125.56870.karl@huftis.org>
+References: <200608131125.56870.karl@huftis.org>
+Message-ID: <44DF26E7.3090205@berlios.de>
+
+I committed it to svn. It might be interesting for you to know that we changed
+from CVS quite a while ago. ;)
+
+Your patch to supertux.desktop was wrong btw.
+
+Karl Ove Hufthammer wrote:
+> After two years, here's finally an updated Norwegian Nynorsk translation of 
+> SuperTux (the game + the first world). Please commit it to CVS.
+
+
+From gnomino at hotmail.com  Wed Aug 16 00:09:43 2006
+From: gnomino at hotmail.com (gnomino)
+Date: Tue, 15 Aug 2006 15:09:43 -0700
+Subject: [Supertux-devel] Iceflower implementation
+Message-ID: <44E24627.9050805@hotmail.com>
+
+Hello,
+This is a patch against rev. 4186 that implements iceflower. Icebullets 
+can freeze some badguys (only the ones I could find sprite images for). 
+Mr. Bombs can be carried around while frozen, as said on the wiki. When 
+an icebullet hits an already frozen badguy, it bounces off him. 
+Firebullets will unfreeze frozen badguys. All non-freezable badguys are 
+killed by any type of bullet.
+(Is this the right behavior?)
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: iceflower-4186.diff
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060815/4bb35701/attachment.ksh>
+
+From djwings at gmail.com  Wed Aug 16 01:34:17 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Tue, 15 Aug 2006 19:34:17 -0400
+Subject: [Supertux-devel] Iceflower implementation
+In-Reply-To: <44E24627.9050805@hotmail.com>
+References: <44E24627.9050805@hotmail.com>
+Message-ID: <826ffc730608151634y2416e01ehb4ac87b601eee104@mail.gmail.com>
+
+But is it used in any levels? Good idea, I had no clue the flower was
+unimplemented until now!
+
+On 8/15/06, gnomino <gnomino at hotmail.com> wrote:
+>
+> Hello,
+> This is a patch against rev. 4186 that implements iceflower. Icebullets
+> can freeze some badguys (only the ones I could find sprite images for).
+> Mr. Bombs can be carried around while frozen, as said on the wiki. When
+> an icebullet hits an already frozen badguy, it bounces off him.
+> Firebullets will unfreeze frozen badguys. All non-freezable badguys are
+> killed by any type of bullet.
+> (Is this the right behavior?)
+>
+>
+> Index: src/badguy/spiky.hpp
+> ===================================================================
+> --- src/badguy/spiky.hpp        (revision 4186)
+> +++ src/badguy/spiky.hpp        (working copy)
+> @@ -30,6 +30,9 @@
+>    void write(lisp::Writer& writer);
+>    virtual Spiky* clone() const { return new Spiky(*this); }
+>
+> +  void freeze();
+> +  bool is_freezable() const;
+> +
+> private:
+> };
+>
+> Index: src/badguy/jumpy.hpp
+> ===================================================================
+> --- src/badguy/jumpy.hpp        (revision 4186)
+> +++ src/badguy/jumpy.hpp        (working copy)
+> @@ -33,6 +33,9 @@
+>    void write(lisp::Writer& writer);
+>    void active_update(float);
+>
+> +  void freeze();
+> +  bool is_freezable() const;
+> +
+>    virtual Jumpy* clone() const { return new Jumpy(*this); }
+>
+> private:
+> Index: src/badguy/badguy.cpp
+> ===================================================================
+> --- src/badguy/badguy.cpp       (revision 4186)
+> +++ src/badguy/badguy.cpp       (working copy)
+> @@ -34,7 +34,7 @@
+> static const float Y_OFFSCREEN_DISTANCE = 1200;
+>
+> BadGuy::BadGuy(const Vector& pos, const std::string& sprite_name, int
+> layer)
+> -  : MovingSprite(pos, sprite_name, layer, COLGROUP_DISABLED),
+> countMe(true), dir(LEFT), start_dir(AUTO), state(STATE_INIT),
+> on_ground_flag(false)
+> +  : MovingSprite(pos, sprite_name, layer, COLGROUP_DISABLED),
+> countMe(true), dir(LEFT), start_dir(AUTO), frozen(false), state(STATE_INIT),
+> on_ground_flag(false)
+> {
+>    start_position = bbox.p1;
+>
+> @@ -43,7 +43,7 @@
+> }
+>
+> BadGuy::BadGuy(const Vector& pos, Direction direction, const std::string&
+> sprite_name, int layer)
+> -  : MovingSprite(pos, sprite_name, layer, COLGROUP_DISABLED),
+> countMe(true), dir(direction), start_dir(direction), state(STATE_INIT),
+> on_ground_flag(false)
+> +  : MovingSprite(pos, sprite_name, layer, COLGROUP_DISABLED),
+> countMe(true), dir(direction), start_dir(direction), frozen(false),
+> state(STATE_INIT), on_ground_flag(false)
+> {
+>    start_position = bbox.p1;
+>
+> @@ -52,7 +52,7 @@
+> }
+>
+> BadGuy::BadGuy(const lisp::Lisp& reader, const std::string& sprite_name,
+> int layer)
+> -  : MovingSprite(reader, sprite_name, layer, COLGROUP_DISABLED),
+> countMe(true), dir(LEFT), start_dir(AUTO), state(STATE_INIT),
+> on_ground_flag(false)
+> +  : MovingSprite(reader, sprite_name, layer, COLGROUP_DISABLED),
+> countMe(true), dir(LEFT), start_dir(AUTO), frozen(false), state(STATE_INIT),
+> on_ground_flag(false)
+> {
+>    start_position = bbox.p1;
+>
+> @@ -222,6 +222,8 @@
+>      return ABORT_MOVE;
+>    }
+>
+> +  if(frozen)
+> +    unfreeze();
+>    player.kill(false);
+>    return FORCE_MOVE;
+> }
+> @@ -241,8 +243,16 @@
+> HitResponse
+> BadGuy::collision_bullet(Bullet& bullet, const CollisionHit& )
+> {
+> +  if(frozen) {
+> +    if(bullet.get_type() == FIRE_BONUS)
+> +      unfreeze();
+> +    else
+> +      return FORCE_MOVE;
+> +  } else if(bullet.get_type() == ICE_BONUS && is_freezable()) {
+> +    freeze();
+> +  } else
+> +    kill_fall();
+>    bullet.remove_me();
+> -  kill_fall();
+>    return ABORT_MOVE;
+> }
+>
+> @@ -425,3 +435,29 @@
+> {
+>    return on_ground_flag;
+> }
+> +
+> +void
+> +BadGuy::freeze()
+> +{
+> +  set_group(COLGROUP_MOVING_STATIC);
+> +  frozen = true;
+> +}
+> +
+> +void
+> +BadGuy::unfreeze()
+> +{
+> +  set_group(COLGROUP_MOVING);
+> +  frozen = false;
+> +}
+> +
+> +bool
+> +BadGuy::is_freezable() const
+> +{
+> +  return false;
+> +}
+> +
+> +bool
+> +BadGuy::is_frozen() const
+> +{
+> +  return frozen;
+> +}
+> Index: src/badguy/sspiky.cpp
+> ===================================================================
+> --- src/badguy/sspiky.cpp       (revision 4186)
+> +++ src/badguy/sspiky.cpp       (working copy)
+> @@ -106,4 +106,18 @@
+>    }
+> }
+>
+> +void
+> +SSpiky::freeze()
+> +{
+> +  WalkingBadguy::freeze();
+> +  sprite->set_action(dir == LEFT ? "iced-left" : "iced-right");
+> +  state = SSPIKY_WALKING; // if we get hit while sleeping, wake up :)
+> +}
+> +
+> +bool
+> +SSpiky::is_freezable() const
+> +{
+> +  return true;
+> +}
+> +
+> IMPLEMENT_FACTORY(SSpiky, "sspiky")
+> Index: src/badguy/mrbomb.cpp
+> ===================================================================
+> --- src/badguy/mrbomb.cpp       (revision 4186)
+> +++ src/badguy/mrbomb.cpp       (working copy)
+> @@ -28,6 +28,7 @@
+> {
+>    walk_speed = 80;
+>    max_drop_height = 0;
+> +  grabbed = false;
+>
+>    //Check if we need another sprite
+>    if( !reader.get( "sprite", sprite_name ) ){
+> @@ -47,6 +48,7 @@
+> {
+>    walk_speed = 80;
+>    max_drop_height = 0;
+> +  grabbed = false;
+> }
+>
+> void
+> @@ -57,6 +59,22 @@
+>    writer.end_list("mrbomb");
+> }
+>
+> +HitResponse
+> +MrBomb::collision(GameObject& object, const CollisionHit& hit)
+> +{
+> +  if(grabbed)
+> +    return FORCE_MOVE;
+> +  return WalkingBadguy::collision(object, hit);
+> +}
+> +
+> +HitResponse
+> +MrBomb::collision_player(Player& player, const CollisionHit& hit)
+> +{
+> +  if(grabbed)
+> +    return FORCE_MOVE;
+> +  return WalkingBadguy::collision_player(player, hit);
+> +}
+> +
+> bool
+> MrBomb::collision_squished(Player& player)
+> {
+> @@ -67,6 +85,14 @@
+> }
+>
+> void
+> +MrBomb::active_update(float elapsed_time)
+> +{
+> +  if(grabbed)
+> +    return;
+> +  WalkingBadguy::active_update(elapsed_time);
+> +}
+> +
+> +void
+> MrBomb::kill_fall()
+> {
+>    remove_me();
+> @@ -75,4 +101,42 @@
+>    bomb->explode();
+> }
+>
+> +void
+> +MrBomb::grab(MovingObject&, const Vector& pos, Direction dir)
+> +{
+> +  assert(frozen);
+> +  movement = pos - get_pos();
+> +  this->dir = dir;
+> +  sprite->set_action(dir == LEFT ? "iced-left" : "iced-right");
+> +  set_group(COLGROUP_DISABLED);
+> +  grabbed = true;
+> +}
+> +
+> +void
+> +MrBomb::ungrab(MovingObject& , Direction dir)
+> +{
+> +  this->dir = dir;
+> +  set_group(COLGROUP_MOVING);
+> +  grabbed = false;
+> +}
+> +
+> +void
+> +MrBomb::freeze()
+> +{
+> +  WalkingBadguy::freeze();
+> +  sprite->set_action(dir == LEFT ? "iced-left" : "iced-right");
+> +}
+> +
+> +bool
+> +MrBomb::is_freezable() const
+> +{
+> +  return true;
+> +}
+> +
+> +bool
+> +MrBomb::is_portable() const
+> +{
+> +  return frozen;
+> +}
+> +
+> IMPLEMENT_FACTORY(MrBomb, "mrbomb")
+> Index: src/badguy/walking_badguy.hpp
+> ===================================================================
+> --- src/badguy/walking_badguy.hpp       (revision 4186)
+> +++ src/badguy/walking_badguy.hpp       (working copy)
+> @@ -37,6 +37,8 @@
+>    void active_update(float elapsed_time);
+>    void collision_solid(const CollisionHit& hit);
+>    HitResponse collision_badguy(BadGuy& badguy, const CollisionHit& hit);
+> +  void freeze();
+> +  void unfreeze();
+>
+> protected:
+>    void turn_around();
+> Index: src/badguy/fish.hpp
+> ===================================================================
+> --- src/badguy/fish.hpp (revision 4186)
+> +++ src/badguy/fish.hpp (working copy)
+> @@ -37,6 +37,10 @@
+>    void write(lisp::Writer& );
+>    void active_update(float);
+>
+> +  void freeze();
+> +  void unfreeze();
+> +  bool is_freezable() const;
+> +
+>    virtual Fish* clone() const { return new Fish(*this); }
+>
+> private:
+> Index: src/badguy/spiky.cpp
+> ===================================================================
+> --- src/badguy/spiky.cpp        (revision 4186)
+> +++ src/badguy/spiky.cpp        (working copy)
+> @@ -36,4 +36,17 @@
+>    writer.end_list("spiky");
+> }
+>
+> +void
+> +Spiky::freeze()
+> +{
+> +  WalkingBadguy::freeze();
+> +  sprite->set_action(dir == LEFT ? "iced-left" : "iced-right");
+> +}
+> +
+> +bool
+> +Spiky::is_freezable() const
+> +{
+> +  return true;
+> +}
+> +
+> IMPLEMENT_FACTORY(Spiky, "spiky")
+> Index: src/badguy/dispenser.hpp
+> ===================================================================
+> --- src/badguy/dispenser.hpp    (revision 4186)
+> +++ src/badguy/dispenser.hpp    (working copy)
+> @@ -32,6 +32,10 @@
+>    void write(lisp::Writer& writer);
+>    void active_update(float elapsed_time);
+>
+> +  void freeze();
+> +  void unfreeze();
+> +  bool is_freezable() const;
+> +
+>    virtual Dispenser* clone() const { return new Dispenser(*this); }
+>
+> protected:
+> Index: src/badguy/jumpy.cpp
+> ===================================================================
+> --- src/badguy/jumpy.cpp        (revision 4186)
+> +++ src/badguy/jumpy.cpp        (working copy)
+> @@ -63,7 +63,7 @@
+>        groundhit_pos_set = true;
+>      }
+>
+> -    physic.set_velocity_y(JUMPSPEED);
+> +    physic.set_velocity_y(frozen ? 0 : JUMPSPEED);
+>      // TODO create a nice sound for this...
+>      //sound_manager->play("sounds/skid.wav");
+>    } else if(chit.top) {
+> @@ -78,6 +78,9 @@
+> {
+>    BadGuy::active_update(elapsed_time);
+>
+> +  if(frozen)
+> +    return;
+> +
+>    Player* player = this->get_nearest_player();
+>    if (player)
+>    {
+> @@ -99,4 +102,18 @@
+>      sprite->set_action(dir == LEFT ? "left-down" : "right-down");
+> }
+>
+> +void
+> +Jumpy::freeze()
+> +{
+> +  BadGuy::freeze();
+> +  physic.set_velocity_y(std::max(0.0f, physic.get_velocity_y()));
+> +  sprite->set_action(dir == LEFT ? "left-iced" : "right-iced");
+> +}
+> +
+> +bool
+> +Jumpy::is_freezable() const
+> +{
+> +  return true;
+> +}
+> +
+> IMPLEMENT_FACTORY(Jumpy, "jumpy")
+> Index: src/badguy/badguy.hpp
+> ===================================================================
+> --- src/badguy/badguy.hpp       (revision 4186)
+> +++ src/badguy/badguy.hpp       (working copy)
+> @@ -93,6 +93,20 @@
+>     * during runtime. */
+>    bool countMe;
+>
+> +  /**
+> +   * Called when hit by an ice bullet, and is_freezable() returns true.
+> +   */
+> +  virtual void freeze();
+> +
+> +  /**
+> +   * Called to unfreeze the badguy.
+> +   */
+> +  virtual void unfreeze();
+> +
+> +  virtual bool is_freezable() const;
+> +
+> +  bool is_frozen() const;
+> +
+> protected:
+>    enum State {
+>      STATE_INIT,
+> @@ -185,6 +199,8 @@
+>     */
+>    bool on_ground();
+>
+> +  bool frozen;
+> +
+> private:
+>    void try_activate();
+>
+> Index: src/badguy/sspiky.hpp
+> ===================================================================
+> --- src/badguy/sspiky.hpp       (revision 4186)
+> +++ src/badguy/sspiky.hpp       (working copy)
+> @@ -33,6 +33,9 @@
+>    HitResponse collision_badguy(BadGuy& badguy, const CollisionHit& hit);
+>    void active_update(float elapsed_time);
+>
+> +  void freeze();
+> +  bool is_freezable() const;
+> +
+>    virtual SSpiky* clone() const { return new SSpiky(*this); }
+>
+> protected:
+> Index: src/badguy/mrbomb.hpp
+> ===================================================================
+> --- src/badguy/mrbomb.hpp       (revision 4186)
+> +++ src/badguy/mrbomb.hpp       (working copy)
+> @@ -21,8 +21,9 @@
+> #define __MRBOMB_H__
+>
+> #include "walking_badguy.hpp"
+> +#include "object/portable.hpp"
+>
+> -class MrBomb : public WalkingBadguy
+> +class MrBomb : public WalkingBadguy, public Portable
+> {
+> public:
+>    MrBomb(const lisp::Lisp& reader);
+> @@ -30,11 +31,25 @@
+>
+>    void write(lisp::Writer& writer);
+>    void kill_fall();
+> +  HitResponse collision(GameObject& object, const CollisionHit& hit);
+> +  HitResponse collision_player(Player& player, const CollisionHit& hit);
+>
+> +  void active_update(float elapsed_time);
+> +
+> +  void grab(MovingObject& object, const Vector& pos, Direction dir);
+> +  void ungrab(MovingObject& object, Direction dir);
+> +  bool is_portable() const;
+> +
+> +  void freeze();
+> +  bool is_freezable() const;
+> +
+>    virtual MrBomb* clone() const { return new MrBomb(*this); }
+>
+> protected:
+>    bool collision_squished(Player& player);
+> +
+> +private:
+> +  bool grabbed;
+> };
+>
+> #endif
+> Index: src/badguy/walking_badguy.cpp
+> ===================================================================
+> --- src/badguy/walking_badguy.cpp       (revision 4186)
+> +++ src/badguy/walking_badguy.cpp       (working copy)
+> @@ -48,6 +48,8 @@
+> void
+> WalkingBadguy::activate()
+> {
+> +  if(frozen)
+> +    return;
+>    sprite->set_action(dir == LEFT ? walk_left_action : walk_right_action);
+>    bbox.set_size(sprite->get_current_hitbox_width(),
+> sprite->get_current_hitbox_height());
+>    physic.set_velocity_x(dir == LEFT ? -walk_speed : walk_speed);
+> @@ -97,7 +99,23 @@
+> void
+> WalkingBadguy::turn_around()
+> {
+> +  if(frozen)
+> +    return;
+>    dir = dir == LEFT ? RIGHT : LEFT;
+>    sprite->set_action(dir == LEFT ? walk_left_action : walk_right_action);
+> -  physic.set_velocity_x(dir == LEFT ? -walk_speed : walk_speed);
+> +  physic.set_velocity_x(-physic.get_velocity_x());
+> }
+> +
+> +void
+> +WalkingBadguy::freeze()
+> +{
+> +  BadGuy::freeze();
+> +  physic.set_velocity_x(0);
+> +}
+> +
+> +void
+> +WalkingBadguy::unfreeze()
+> +{
+> +  BadGuy::unfreeze();
+> +  WalkingBadguy::activate();
+> +}
+> Index: src/badguy/fish.cpp
+> ===================================================================
+> --- src/badguy/fish.cpp (revision 4186)
+> +++ src/badguy/fish.cpp (working copy)
+> @@ -91,7 +91,8 @@
+>
+>      // stop when we have reached the stop position
+>      if (get_pos().y >= stop_y) {
+> -      start_waiting();
+> +      if(!frozen)
+> +        start_waiting();
+>        movement = Vector(0, 0);
+>      }
+>
+> @@ -109,7 +110,8 @@
+>    }
+>
+>    // set sprite
+> -  sprite->set_action(physic.get_velocity_y() < 0 ? "normal" : "down");
+> +  if(!frozen)
+> +    sprite->set_action(physic.get_velocity_y() < 0 ? "normal" : "down");
+>
+>    // we can't afford flying out of the tilemap, 'cause the engine would
+> remove us.
+>    if ((get_pos().y - 31.8) < 0) // too high, let us fall
+> @@ -136,4 +138,25 @@
+>    set_group(COLGROUP_MOVING);
+> }
+>
+> +void
+> +Fish::freeze()
+> +{
+> +  BadGuy::freeze();
+> +  sprite->set_action(physic.get_velocity_y() < 0 ? "iced" : "iced-down");
+> +  waiting.stop();
+> +}
+> +
+> +void
+> +Fish::unfreeze()
+> +{ // does this happen at all? (or do fishes die when they fall frozen?)
+> +  BadGuy::unfreeze();
+> +  start_waiting();
+> +}
+> +
+> +bool
+> +Fish::is_freezable() const
+> +{
+> +  return true;
+> +}
+> +
+> IMPLEMENT_FACTORY(Fish, "fish")
+> Index: src/badguy/dispenser.cpp
+> ===================================================================
+> --- src/badguy/dispenser.cpp    (revision 4186)
+> +++ src/badguy/dispenser.cpp    (working copy)
+> @@ -60,6 +60,8 @@
+> void
+> Dispenser::activate()
+> {
+> +   if(frozen)
+> +     return;
+>     dispense_timer.start(cycle, true);
+>     launch_badguy();
+> }
+> @@ -122,4 +124,23 @@
+>    }
+> }
+>
+> +void
+> +Dispenser::freeze()
+> +{
+> +  BadGuy::freeze();
+> +  dispense_timer.stop();
+> +}
+> +
+> +void
+> +Dispenser::unfreeze()
+> +{
+> +  BadGuy::unfreeze();
+> +  activate();
+> +}
+> +
+> +bool
+> +Dispenser::is_freezable() const
+> +{
+> +  return true;
+> +}
+> IMPLEMENT_FACTORY(Dispenser, "dispenser")
+> Index: src/object/bullet.hpp
+> ===================================================================
+> --- src/object/bullet.hpp       (revision 4186)
+> +++ src/object/bullet.hpp       (working copy)
+> @@ -23,22 +23,29 @@
+> #include "moving_object.hpp"
+> #include "physic.hpp"
+> #include "sprite/sprite.hpp"
+> +#include "player_status.hpp"
+>
+> class Bullet : public MovingObject
+> {
+> public:
+> -  Bullet(const Vector& pos, float xm, int dir);
+> +  Bullet(const Vector& pos, float xm, int dir, BonusType type);
+>    ~Bullet();
+>
+>    void update(float elapsed_time);
+>    void draw(DrawingContext& context);
+>    void collision_solid(const CollisionHit& hit);
+>    HitResponse collision(GameObject& other, const CollisionHit& hit);
+> +
+> +  BonusType get_type()
+> +  {
+> +    return type;
+> +  }
+>
+> private:
+>    int life_count;
+>    Physic physic;
+>    std::auto_ptr<Sprite> sprite;
+> +  BonusType type;
+> };
+>
+> #endif
+> Index: src/object/player.cpp
+> ===================================================================
+> --- src/object/player.cpp       (revision 4186)
+> +++ src/object/player.cpp       (working copy)
+> @@ -591,7 +591,7 @@
+>    handle_vertical_input();
+>
+>    /* Shoot! */
+> -  if (controller->pressed(Controller::ACTION) && player_status->bonus ==
+> FIRE_BONUS) {
+> +  if (controller->pressed(Controller::ACTION) && (player_status->bonus ==
+> FIRE_BONUS || player_status->bonus == ICE_BONUS)) {
+>      if(Sector::current()->add_bullet(
+>           get_pos() + ((dir == LEFT)? Vector(0, bbox.get_height()/2)
+>                        : Vector(32, bbox.get_height()/2)),
+> Index: src/object/bullet.cpp
+> ===================================================================
+> --- src/object/bullet.cpp       (revision 4186)
+> +++ src/object/bullet.cpp       (working copy)
+> @@ -33,17 +33,21 @@
+>    const float BULLET_STARTING_YM = 0;
+> }
+>
+> -Bullet::Bullet(const Vector& pos, float xm, int dir)
+> -  : life_count(3)
+> +Bullet::Bullet(const Vector& pos, float xm, int dir, BonusType type)
+> +  : life_count(3), type(type)
+> {
+> -  sprite.reset
+> (sprite_manager->create("images/objects/bullets/firebullet.sprite"));
+> +  float speed = dir == RIGHT ? BULLET_XM : -BULLET_XM;
+> +  physic.set_velocity_x(speed + xm);
+>
+> +  if(type == FIRE_BONUS) {
+> +    sprite.reset
+> (sprite_manager->create("images/objects/bullets/firebullet.sprite"));
+> +  } else if(type == ICE_BONUS) {
+> +    life_count = 10;
+> +    sprite.reset
+> (sprite_manager->create("images/objects/bullets/icebullet.sprite"));
+> +  }
+> +
+>    bbox.set_pos(pos);
+>    bbox.set_size(sprite->get_current_hitbox_width(),
+> sprite->get_current_hitbox_height());
+> -
+> -  float speed = dir == RIGHT ? BULLET_XM : -BULLET_XM;
+> -  physic.set_velocity_x(speed + xm);
+> -  physic.set_velocity_y(BULLET_STARTING_YM);
+> }
+>
+> Bullet::~Bullet()
+> @@ -83,7 +87,11 @@
+>      physic.set_velocity_y(-physic.get_velocity_y());
+>      life_count--;
+>    } else if(hit.left || hit.right) {
+> -    remove_me();
+> +    if(type == ICE_BONUS) {
+> +      physic.set_velocity_x(-physic.get_velocity_x());
+> +      life_count--;
+> +    } else
+> +      remove_me();
+>    }
+> }
+>
+> Index: src/sector.cpp
+> ===================================================================
+> --- src/sector.cpp      (revision 4186)
+> +++ src/sector.cpp      (working copy)
+> @@ -1283,9 +1283,12 @@
+>    // TODO remove this function and move these checks elsewhere...
+>
+>    Bullet* new_bullet = 0;
+> -  if((int)bullets.size() >= player_status->max_fire_bullets)
+> +  if((player_status->bonus == FIRE_BONUS &&
+> +      (int)bullets.size() >= player_status->max_fire_bullets) ||
+> +     (player_status->bonus == ICE_BONUS &&
+> +      (int)bullets.size() >= player_status->max_ice_bullets))
+>      return false;
+> -  new_bullet = new Bullet(pos, xm, dir);
+> +  new_bullet = new Bullet(pos, xm, dir, player_status->bonus);
+>    add_object(new_bullet);
+>
+>    sound_manager->play("sounds/shoot.wav");
+> Index: data/images/objects/bullets/icebullet.sprite
+> ===================================================================
+> --- data/images/objects/bullets/icebullet.sprite        (revision 4186)
+> +++ data/images/objects/bullets/icebullet.sprite        (working copy)
+> @@ -1,6 +1,6 @@
+> (supertux-sprite
+>   (action
+> -  (hitbox 12 12 0 0)
+> +  (hitbox 2 2 12 10)
+>    (fps 20)
+>    (images "ice_bullet.png")
+>   )
+> Index: data/scripts/console.nut
+> ===================================================================
+> --- data/scripts/console.nut    (revision 4186)
+> +++ data/scripts/console.nut    (working copy)
+> @@ -24,6 +24,11 @@
+>         sector.Tux.add_bonus("fireflower");
+> }
+>
+> +function ice()
+> +{
+> +       sector.Tux.add_bonus("iceflower");
+> +}
+> +
+> function shrink()
+> {
+>         sector.Tux.add_bonus("none");
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060815/00d6bd84/attachment.html>
+
+From uafr at gmx.de  Wed Aug 16 03:55:05 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Wed, 16 Aug 2006 03:55:05 +0200
+Subject: [Supertux-devel] Iceflower implementation
+In-Reply-To: <44E24627.9050805@hotmail.com>
+References: <44E24627.9050805@hotmail.com>
+Message-ID: <20060816015504.GA19531@greg.local>
+
+On 20060816 gnomino <gnomino at hotmail.com> wrote:
+> Mr. Bombs can be carried around while frozen, as said on the wiki. When 
+> an icebullet hits an already frozen badguy, it bounces off him. 
+> Firebullets will unfreeze frozen badguys. All non-freezable badguys are 
+> killed by any type of bullet.
+> (Is this the right behavior?)
+
+Thats undefined until now. One of the reasons the iceflower was not
+implemented is the lack of a fun conecpt for it. Whats the point of
+freezing badguys with ice (so they still block tux's path) when you
+can kill them with fire? If you already have firetux the iceflower
+is a downgrad. One advantage could be the idea from the wiki "Ice
+bullets will not bounce like fire bullets, but will shoot out in
+a straight path towards the enemy." so it will be simpler to hit
+opponents.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From afief.h at gmail.com  Wed Aug 16 23:32:41 2006
+From: afief.h at gmail.com (Afief Halumi)
+Date: Wed, 16 Aug 2006 23:32:41 +0200
+Subject: [Supertux-devel] Iceflower implementation
+In-Reply-To: <20060816015504.GA19531@greg.local>
+References: <44E24627.9050805@hotmail.com> <20060816015504.GA19531@greg.local>
+Message-ID: <83a40700608161432q6e198b9fh1dafd90ce32bc2f3@mail.gmail.com>
+
+An advantage could be carriable and throwable badguys(if we allow badguys
+other than mr.bomb to be carried too), in SMW there was a boss at whom you
+had to throw items(i think it was bowser)
+
+A more advanced implementation could be similar to Yoshy's Island, yoshy can
+eat certain madguys and make eggs out of them to be thrown later. if tux was
+able to carry a few frozen badguys behind him for a while easily(reads, not
+pressing the action key and being limited to one badguy) this would be quite
+fun. Imagine tux haolding a rope to which the badguys are connected... i
+think this would be quite fun.
+
+When badguys are thrown vertically(like in the SMW) some of them could break
+the ice and walk freely again(giving birth to puzzle levels: throw this guy
+here and that guy there to press that button... oh well, let's not get
+carried away, but it would be cool)
+
+Afief
+
+
+On 8/16/06, Wolfgang Becker <uafr at gmx.de> wrote:
+>
+> On 20060816 gnomino <gnomino at hotmail.com> wrote:
+> > Mr. Bombs can be carried around while frozen, as said on the wiki. When
+> > an icebullet hits an already frozen badguy, it bounces off him.
+> > Firebullets will unfreeze frozen badguys. All non-freezable badguys are
+> > killed by any type of bullet.
+> > (Is this the right behavior?)
+>
+> Thats undefined until now. One of the reasons the iceflower was not
+> implemented is the lack of a fun conecpt for it. Whats the point of
+> freezing badguys with ice (so they still block tux's path) when you
+> can kill them with fire? If you already have firetux the iceflower
+> is a downgrad. One advantage could be the idea from the wiki "Ice
+> bullets will not bounce like fire bullets, but will shoot out in
+> a straight path towards the enemy." so it will be simpler to hit
+> opponents.
+>
+> Tsch??,
+> Wolfgang
+> --
+> Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060816/f83660c3/attachment.html>
+
+From anmaster at berlios.de  Thu Aug 17 00:13:27 2006
+From: anmaster at berlios.de (Arvid Norlander)
+Date: Thu, 17 Aug 2006 00:13:27 +0200
+Subject: [Supertux-devel] Iceflower implementation
+In-Reply-To: <83a40700608161432q6e198b9fh1dafd90ce32bc2f3@mail.gmail.com>
+References: <44E24627.9050805@hotmail.com> <20060816015504.GA19531@greg.local>
+	<83a40700608161432q6e198b9fh1dafd90ce32bc2f3@mail.gmail.com>
+Message-ID: <44E39887.7060306@berlios.de>
+
+Afief Halumi wrote:
+> When badguys are thrown vertically(like in the SMW) some of them could
+> break
+> the ice and walk freely again(giving birth to puzzle levels: throw this guy
+> here and that guy there to press that button... oh well, let's not get
+> carried away, but it would be cool)
+Lets not make a SuperTux just a Mario clone (as said earlier several times ;)).
+> 
+> Afief
+
+
+From uafr at gmx.de  Thu Aug 17 14:51:23 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Thu, 17 Aug 2006 14:51:23 +0200
+Subject: [Supertux-devel] Iceflower implementation
+In-Reply-To: <83a40700608161432q6e198b9fh1dafd90ce32bc2f3@mail.gmail.com>
+References: <44E24627.9050805@hotmail.com> <20060816015504.GA19531@greg.local>
+	<83a40700608161432q6e198b9fh1dafd90ce32bc2f3@mail.gmail.com>
+Message-ID: <20060817125122.GA6181@greg.local>
+
+On 20060817 Afief Halumi <afief.h at gmail.com> wrote:
+> An advantage could be carriable and throwable badguys(if we allow badguys
+> other than mr.bomb to be carried too), in SMW there was a boss at whom you
+
+Right now, there is now way of telling if the frozen badguy is portable
+or will hurt tux if he tries to grab it. Btw, if you release Mr Bomb,
+tux gets hurt, too. If we want tux to throw badguys we need a lot of new
+images. I can't draw them. 
+
+First of all we need a concept, what the iceflower is supposed to do.
+Lets see: freeze baddguys, fine with me but wee need a "frozen" image
+for all of them. Making some portable and some hurt tux is bad, all
+frozen badguys should behave similar. Next problem is losing fire
+if taking ice. What about making ice a temporary effect like invincibleness?
+
+Do we need ice for MS2?
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From gnomino at hotmail.com  Thu Aug 17 21:30:00 2006
+From: gnomino at hotmail.com (gnomino at hotmail.com)
+Date: 17 Aug 2006 11:30 -0800
+Subject: [Supertux-devel] Iceflower implementation
+In-Reply-To: <20060817125122.GA6181@greg.local>
+References: <44E24627.9050805@hotmail.com> <20060816015504.GA19531@greg.local>
+	<83a40700608161432q6e198b9fh1dafd90ce32bc2f3@mail.gmail.com>
+	<20060817125122.GA6181@greg.local>
+Message-ID: <200608171130.1@knomino>
+
+An embedded and charset-unspecified text was scrubbed...
+Name: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060817/aca6edc4/attachment.ksh>
+
+From afief.h at gmail.com  Fri Aug 18 01:14:20 2006
+From: afief.h at gmail.com (Afief Halumi)
+Date: Fri, 18 Aug 2006 02:14:20 +0300
+Subject: [Supertux-devel] Iceflower implementation
+In-Reply-To: <20060817125122.GA6181@greg.local>
+References: <44E24627.9050805@hotmail.com> <20060816015504.GA19531@greg.local>
+	<83a40700608161432q6e198b9fh1dafd90ce32bc2f3@mail.gmail.com>
+	<20060817125122.GA6181@greg.local>
+Message-ID: <83a40700608171614s3bbb43fcjda30d3db3e7ab3b4@mail.gmail.com>
+
+>Right now, there is now way of telling if the frozen badguy is portable
+>or will hurt tux if he tries to grab it. Btw, if you release Mr Bomb,
+>tux gets hurt, too. If we want tux to throw badguys we need a lot of new
+>images. I can't draw them.
+
+Throwing a badguy would simply mean moving him along some airy path, would
+be fancy if he rotated, but that's not MS2 i guess. I can help with some of
+the needed pictures as the "frozen" part seems to be only a semi transparent
+layer.
+
+>Making some portable and some hurt tux is bad, all
+>frozen badguys should behave similar.
+
+couldn't agree more.
+
+>Next problem is losing fire
+>if taking ice. What about making ice a temporary effect like
+invincibleness?
+
+i think ice could just be as useful as fire, there could be some badguys who
+simply shatter when tux collides with them while frozen(similar to legend of
+zelda when throwing a frozen badguy) others could be carried and/or thrown.
+
+IMHO playing with ice flower is more fun than fire flower, how else would
+tux cross the extra hard ocean levels? of course he has to freez the water
+with ice flower abilities :-P
+
+>Lets not make a SuperTux just a Mario clone
+
+I agree, but taking some of the good mario/joshy ideas can't hurt(if it's
+planned well and discussed here)
+
+Afief
+
+On 8/17/06, Wolfgang Becker <uafr at gmx.de> wrote:
+>
+> On 20060817 Afief Halumi <afief.h at gmail.com> wrote:
+> > An advantage could be carriable and throwable badguys(if we allow
+> badguys
+> > other than mr.bomb to be carried too), in SMW there was a boss at whom
+> you
+>
+> Right now, there is now way of telling if the frozen badguy is portable
+> or will hurt tux if he tries to grab it. Btw, if you release Mr Bomb,
+> tux gets hurt, too. If we want tux to throw badguys we need a lot of new
+> images. I can't draw them.
+>
+> First of all we need a concept, what the iceflower is supposed to do.
+> Lets see: freeze baddguys, fine with me but wee need a "frozen" image
+> for all of them. Making some portable and some hurt tux is bad, all
+> frozen badguys should behave similar. Next problem is losing fire
+> if taking ice. What about making ice a temporary effect like
+> invincibleness?
+>
+> Do we need ice for MS2?
+>
+> Tsch??,
+> Wolfgang
+> --
+> Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060818/16098938/attachment.html>
+
+From bpjung at terreon.de  Fri Aug 18 22:58:13 2006
+From: bpjung at terreon.de (Benjamin P. Jung)
+Date: Fri, 18 Aug 2006 22:58:13 +0200
+Subject: [Supertux-devel] Iceflower implementation
+In-Reply-To: <83a40700608171614s3bbb43fcjda30d3db3e7ab3b4@mail.gmail.com>
+References: <44E24627.9050805@hotmail.com> <20060816015504.GA19531@greg.local>
+	<83a40700608161432q6e198b9fh1dafd90ce32bc2f3@mail.gmail.com>
+	<20060817125122.GA6181@greg.local>
+	<83a40700608171614s3bbb43fcjda30d3db3e7ab3b4@mail.gmail.com>
+Message-ID: <1155934693.31717.19.camel@localhost.localdomain>
+
+
+> Throwing a badguy would simply mean moving him along some airy path,
+> would be fancy if he rotated, but that's not MS2 i guess. I can help
+> with some of the needed pictures as the "frozen" part seems to be only
+> a semi transparent layer.
+It would be a good idea to make it a semi-transparent layer.
+Quite a while ago when I painted the frozen guys (mr. bomb, flying
+snowball, fish and spikey as far as I can remember...) I just colorized
+a single frame of each enemy's animation and added some
+"extra-ice-effects" -- a transparent layer would be a much better
+solution of course imho. :-)
+
+
+> 
+> >Making some portable and some hurt tux is bad, all
+> >frozen badguys should behave similar.
+> 
+> couldn't agree more.
+Yepp. I agree.... would be confusing otherwise.
+
+
+Cheers
+-litespeed-
+
+
+
+From jonas.baehr at web.de  Fri Aug 18 23:21:11 2006
+From: jonas.baehr at web.de (Jonas =?iso-8859-15?q?B=E4hr?=)
+Date: Fri, 18 Aug 2006 23:21:11 +0200
+Subject: [Supertux-devel] Iceflower implementation
+In-Reply-To: <83a40700608171614s3bbb43fcjda30d3db3e7ab3b4@mail.gmail.com>
+References: <44E24627.9050805@hotmail.com> <20060817125122.GA6181@greg.local>
+	<83a40700608171614s3bbb43fcjda30d3db3e7ab3b4@mail.gmail.com>
+Message-ID: <200608182321.11896.jonas.baehr@web.de>
+
+Am Freitag, 18. August 2006 01:14 schrieb Afief Halumi:
+> IMHO playing with ice flower is more fun than fire flower, how else would
+> tux cross the extra hard ocean levels? of course he has to freez the water
+> with ice flower abilities :-P
+
+The ability to freeze wather would be quite interesting if it's not 
+permanently:
+Imagine if the a frozen block stays frozen when there is no more wather around 
+it. If there is still whater from one side (right, left or underneath) the 
+block melts ater three seconds, wather from two sides: melt after two seconds 
+and if there is whater from all three sides, the block melts after one 
+second...
+
+bye,
+Jonas
+
+-- 
+Try Krusader...
+http://krusader.org - twinpanel filemanager for KDE
+
+
+From djwings at gmail.com  Mon Aug 21 14:09:21 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Mon, 21 Aug 2006 08:09:21 -0400
+Subject: [Supertux-devel] Bug report
+Message-ID: <826ffc730608210509y20b26560kf3621749ea8b29ed@mail.gmail.com>
+
+Whenever I compile the latest version of SuperTux (rev. 4102 on Xubuntu 6.06),
+I get the following error message:
+
+C++ ./build/i686-pc-linux-gnu/optimize/src/main.o
+src/main.cpp: In function 'bool parse_commandline(int, char**)':
+src/main.cpp:217: internal compiler error: in comptypes, at cp/typeck.c:948
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <URL:http://gcc.gnu.org/bugs.html> for instructions.
+For Debian GNU/Linux specific bug reporting instructions,
+see <URL:file:///usr/share/doc/gcc-4.0/README.Bugs>.
+
+    g++ -c -o ./build/i686-pc-linux-gnu/optimize/src/main.o  -I. -I./src
+-I/usr/include/SDL -D_REENTRANT  -pthread     -Isrc/squirrel/include
+-Isrc/squirrel   -ffast-math -Wall -O3 -g
+-DAPPDATADIR='"/usr/local/share/supertux"' src/main.cpp
+
+...failed C++ ./build/i686-pc-linux-gnu/optimize/src/main.o ...
+...removing ./build/i686-pc-linux-gnu/optimize/src/main.o
+
+If it's not a bug in g++, could someone make a patch for this? This is
+preventing me from upgrading revisions, which is becoming a real pain.
+Thanks in advance,
+DJ Wings
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060821/bf5923f0/attachment.html>
+
+From djwings at gmail.com  Mon Aug 21 14:11:12 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Mon, 21 Aug 2006 08:11:12 -0400
+Subject: [Supertux-devel] Bug report
+In-Reply-To: <826ffc730608210509y20b26560kf3621749ea8b29ed@mail.gmail.com>
+References: <826ffc730608210509y20b26560kf3621749ea8b29ed@mail.gmail.com>
+Message-ID: <826ffc730608210511g3cbd30e7n640ce7a82512caad@mail.gmail.com>
+
+Never mind, I upgraded it with Apt and it worked fine. It was a problem with
+g++.
+
+On 8/21/06, djwings at gmail.com <djwings at gmail.com> wrote:
+>
+> Whenever I compile the latest version of SuperTux (rev. 4102 on Xubuntu
+> 6.06), I get the following error message:
+>
+> C++ ./build/i686-pc-linux-gnu/optimize/src/main.o
+> src/main.cpp: In function 'bool parse_commandline(int, char**)':
+> src/main.cpp:217: internal compiler error: in comptypes, at
+> cp/typeck.c:948
+> Please submit a full bug report,
+> with preprocessed source if appropriate.
+> See <URL:http://gcc.gnu.org/bugs.html > for instructions.
+> For Debian GNU/Linux specific bug reporting instructions,
+> see <URL:file:///usr/share/doc/gcc-4.0/README.Bugs>.
+>
+>     g++ -c -o ./build/i686-pc-linux-gnu/optimize/src/main.o  -I. -I./src
+> -I/usr/include/SDL -D_REENTRANT  -pthread     -Isrc/squirrel/include
+> -Isrc/squirrel   -ffast-math -Wall -O3 -g
+> -DAPPDATADIR='"/usr/local/share/supertux"' src/main.cpp
+>
+> ...failed C++ ./build/i686-pc-linux-gnu/optimize/src/main.o ...
+> ...removing ./build/i686-pc-linux-gnu/optimize/src/main.o
+>
+> If it's not a bug in g++, could someone make a patch for this? This is
+> preventing me from upgrading revisions, which is becoming a real pain.
+> Thanks in advance,
+> DJ Wings
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060821/1d126e1c/attachment.html>
+
+From djwings at gmail.com  Tue Aug 29 14:33:18 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Tue, 29 Aug 2006 08:33:18 -0400
+Subject: [Supertux-devel] Frozen?
+Message-ID: <826ffc730608290533j305fd8a4w65cc41105ab19a86@mail.gmail.com>
+
+Is the development branch completely frozen? Have we stopped working on
+Milestone 2?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060829/716b0f01/attachment.html>
+
+From wansti at gmx.de  Tue Aug 29 15:15:56 2006
+From: wansti at gmx.de (Marek M.)
+Date: Tue, 29 Aug 2006 15:15:56 +0200
+Subject: [Supertux-devel] Frozen?
+In-Reply-To: <826ffc730608290533j305fd8a4w65cc41105ab19a86@mail.gmail.com>
+References: <826ffc730608290533j305fd8a4w65cc41105ab19a86@mail.gmail.com>
+Message-ID: <44F43E0C.3080900@gmx.de>
+
+djwings at gmail.com wrote:
+> Is the development branch completely frozen? Have we stopped working
+> on Milestone 2?
+I guess we're just all on vacation these days. At least that's the case
+with me. :-)
+
+    Marek
+
+
+From djwings at gmail.com  Tue Aug 29 15:19:00 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Tue, 29 Aug 2006 09:19:00 -0400
+Subject: [Supertux-devel] Frozen?
+In-Reply-To: <44F43E0C.3080900@gmx.de>
+References: <826ffc730608290533j305fd8a4w65cc41105ab19a86@mail.gmail.com>
+	<44F43E0C.3080900@gmx.de>
+Message-ID: <826ffc730608290619k6f99234exedf610aed6c6bc22@mail.gmail.com>
+
+Ah. So Nolok's Party Pit hasn't frozen over yet? I'm planning on making some
+remixes of ST music themes, but I'm not suggesting they should go into the
+next milestone, the versions you made are fine (<3ing the new Fortress
+theme), so much as an extra for the fan site.
+
+On 8/29/06, Marek M. <wansti at gmx.de> wrote:
+>
+> djwings at gmail.com wrote:
+> > Is the development branch completely frozen? Have we stopped working
+> > on Milestone 2?
+> I guess we're just all on vacation these days. At least that's the case
+> with me. :-)
+>
+>     Marek
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060829/2565e87e/attachment.html>
+
+From wansti at gmx.de  Tue Aug 29 15:29:01 2006
+From: wansti at gmx.de (Marek M.)
+Date: Tue, 29 Aug 2006 15:29:01 +0200
+Subject: [Supertux-devel] Frozen?
+In-Reply-To: <826ffc730608290619k6f99234exedf610aed6c6bc22@mail.gmail.com>
+References: <826ffc730608290533j305fd8a4w65cc41105ab19a86@mail.gmail.com>	<44F43E0C.3080900@gmx.de>
+	<826ffc730608290619k6f99234exedf610aed6c6bc22@mail.gmail.com>
+Message-ID: <44F4411D.9050908@gmx.de>
+
+Cool! Keep me updated about your progress. And about what's going to be
+in the next milestone, that'll simply be the one that sounds better. I'm
+also planning on releasing a sound track album with milestone 2, and
+it'd be cool to put some remixes on that.
+
+    MWM
+
+djwings at gmail.com wrote:
+> Ah. So Nolok's Party Pit hasn't frozen over yet? I'm planning on
+> making some remixes of ST music themes, but I'm not suggesting they
+> should go into the next milestone, the versions you made are fine
+> (<3ing the new Fortress theme), so much as an extra for the fan site.
+>
+> On 8/29/06, *Marek M.* <wansti at gmx.de <mailto:wansti at gmx.de>> wrote:
+>
+>     djwings at gmail.com <mailto:djwings at gmail.com> wrote:
+>     > Is the development branch completely frozen? Have we stopped working
+>     > on Milestone 2?
+>     I guess we're just all on vacation these days. At least that's the
+>     case
+>     with me. :-)
+>
+>         Marek
+>     _______________________________________________
+>     Supertux-devel mailing list
+>     Supertux-devel at lists.berlios.de
+>     <mailto:Supertux-devel at lists.berlios.de>
+>     https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>   
+
+
+

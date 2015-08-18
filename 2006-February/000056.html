@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Jumping off slopes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Jumping%20off%20slopes&In-Reply-To=%3C1139749452.4457.1.camel%40taylor.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000049.html">
+   <LINK REL="Next"  HREF="000058.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Jumping off slopes</H1>
+    <B>Matze Braun</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Jumping%20off%20slopes&In-Reply-To=%3C1139749452.4457.1.camel%40taylor.local%3E"
+       TITLE="[Supertux-devel] Jumping off slopes">matze at braunis.de
+       </A><BR>
+    <I>Sun Feb 12 14:04:12 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000049.html">[Supertux-devel] Jumping off slopes
+</A></li>
+        <LI>Next message: <A HREF="000058.html">[Supertux-devel] Christoph's patch &lt;- Jumping off slopes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks alot for this patch, I just commited it to svn. It fixes an
+important showstopper for the milestone2 engine. And to be honest, I
+wasn't sure yet how I could fix it cleanly, your patch does it in a nice
+way.
+
+Greetings,
+	Matze
+
+Am Donnerstag, den 09.02.2006, 18:48 +0100 schrieb Christoph Sommer:
+&gt;<i> Hi all,
+</I>&gt;<i> 
+</I>&gt;<i> I found it hard to jump while running down a hill, so I made this little 
+</I>&gt;<i> patch. Currently, it does not work with the level inverted, because I 
+</I>&gt;<i> don't know if the tile collision normal vector being wrong in inverted 
+</I>&gt;<i> levels is because of a bug or a feature.
+</I>&gt;<i> 
+</I>&gt;<i> What do you think?
+</I>&gt;<i> 
+</I>&gt;<i> Regards,
+</I>&gt;<i> 
+</I>&gt;<i>    Christoph
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> einfaches Textdokument-Anlage (supertux-3047-slopewalker-0.1.diff)
+</I>&gt;<i> diff -Naur supertux-nogl/src/object/player.cpp supertux-slopewalker/src/object/player.cpp
+</I>&gt;<i> --- supertux-nogl/src/object/player.cpp	2006-02-06 18:15:04.000000000 +0100
+</I>&gt;<i> +++ supertux-slopewalker/src/object/player.cpp	2006-02-09 18:26:27.000000000 +0100
+</I>&gt;<i> @@ -141,6 +141,8 @@
+</I>&gt;<i>    on_ground_flag = false;
+</I>&gt;<i>    grabbed_object = 0;
+</I>&gt;<i>  
+</I>&gt;<i> +  floor_normal = Vector(0,-1);
+</I>&gt;<i> +
+</I>&gt;<i>    physic.reset();
+</I>&gt;<i>  }
+</I>&gt;<i>  
+</I>&gt;<i> @@ -329,6 +331,16 @@
+</I>&gt;<i>      bbox.set_width(31.8);
+</I>&gt;<i>    }
+</I>&gt;<i>  
+</I>&gt;<i> +  // on downward slopes, adjust vertical velocity to match slope angle
+</I>&gt;<i> +  if (on_ground()) {
+</I>&gt;<i> +    if (floor_normal.y != 0) {
+</I>&gt;<i> +      if ((floor_normal.x * vx) &gt; 0) {
+</I>&gt;<i> +        // we overdo it a little, just to be on the safe side
+</I>&gt;<i> +        vy = vx * (floor_normal.x / floor_normal.y) * 2;
+</I>&gt;<i> +      }
+</I>&gt;<i> +    }
+</I>&gt;<i> +  }
+</I>&gt;<i> +
+</I>&gt;<i>    physic.set_velocity(vx, vy);
+</I>&gt;<i>    physic.set_acceleration(ax, ay);
+</I>&gt;<i>  }
+</I>&gt;<i> @@ -720,6 +732,18 @@
+</I>&gt;<i>        if(physic.get_velocity_y() &lt; 0)
+</I>&gt;<i>          physic.set_velocity_y(0);
+</I>&gt;<i>        on_ground_flag = true;
+</I>&gt;<i> +
+</I>&gt;<i> +      // remember normal of this tile
+</I>&gt;<i> +      if (hit.normal.y &gt; -0.9) {
+</I>&gt;<i> +        floor_normal.x = hit.normal.x;
+</I>&gt;<i> +        floor_normal.y = hit.normal.y;
+</I>&gt;<i> +      } else {
+</I>&gt;<i> +        // slowly adjust to unisolid tiles. 
+</I>&gt;<i> +        // Necessary because our bounding box sometimes reaches through slopes and thus hits unisolid tiles
+</I>&gt;<i> +        floor_normal.x = (floor_normal.x * 0.9) + (hit.normal.x * 0.1);
+</I>&gt;<i> +        floor_normal.y = (floor_normal.y * 0.9) + (hit.normal.y * 0.1);
+</I>&gt;<i> +      }
+</I>&gt;<i> +
+</I>&gt;<i>      } else if(hit.normal.y &gt; 0) { // bumped against the roof
+</I>&gt;<i>        physic.set_velocity_y(.1);
+</I>&gt;<i>      }
+</I>&gt;<i> diff -Naur supertux-nogl/src/object/player.hpp supertux-slopewalker/src/object/player.hpp
+</I>&gt;<i> --- supertux-nogl/src/object/player.hpp	2006-02-06 18:15:03.000000000 +0100
+</I>&gt;<i> +++ supertux-slopewalker/src/object/player.hpp	2006-02-09 01:13:12.000000000 +0100
+</I>&gt;<i> @@ -178,6 +178,7 @@
+</I>&gt;<i>    Sprite* smalltux_gameover;
+</I>&gt;<i>    Sprite* smalltux_star;
+</I>&gt;<i>    Sprite* bigtux_star;
+</I>&gt;<i> +  Vector floor_normal;
+</I>&gt;<i>  };
+</I>&gt;<i>  
+</I>&gt;<i>  #endif /*SUPERTUX_PLAYER_H*/
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000049.html">[Supertux-devel] Jumping off slopes
+</A></li>
+	<LI>Next message: <A HREF="000058.html">[Supertux-devel] Christoph's patch &lt;- Jumping off slopes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

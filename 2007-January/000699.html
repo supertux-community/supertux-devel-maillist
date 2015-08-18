@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Patches for lightmap and widescreen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Patches%20for%20lightmap%20and%20widescreen&In-Reply-To=%3C200701110122.36929.supertux-devel%40denkersoft.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000697.html">
+   <LINK REL="Next"  HREF="000700.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Patches for lightmap and widescreen</H1>
+    <B>Klaus Denker</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Patches%20for%20lightmap%20and%20widescreen&In-Reply-To=%3C200701110122.36929.supertux-devel%40denkersoft.de%3E"
+       TITLE="[Supertux-devel] Patches for lightmap and widescreen">supertux-devel at denkersoft.de
+       </A><BR>
+    <I>Thu Jan 11 01:22:36 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000697.html">[Supertux-devel] Patches for lightmap and widescreen
+</A></li>
+        <LI>Next message: <A HREF="000700.html">[Supertux-devel] Patches for lightmap and widescreen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#699">[ date ]</a>
+              <a href="thread.html#699">[ thread ]</a>
+              <a href="subject.html#699">[ subject ]</a>
+              <a href="author.html#699">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Am Mittwoch 10 Januar 2007 19:42 schrieb Wolfgang Becker:
+&gt;<i> I'm not so sure if that is a good idea. Does that mean that other
+</I>&gt;<i> hardcoded values like max_drop_height for some badguys or the
+</I>&gt;<i> X_OFFSCREEN_DISTANCE have to be adjusted? No time to test it
+</I>&gt;<i> now, so I did not commit this patch yet.
+</I>
+Theoretically it should work. There is a guaranteed 600x600 square in logical 
+coordinates.
+The level distances are in logical coordinates, so they are not affected.
+The OFFSCREEN_DISTANCE has some bugs at very extreme aspects (like 16:5  -  
+SCREEN_WIDTH &gt; X_OFFSCREEN_DISTANCE)
+
+I have another patch to correct some calculations and fix that problem:
+<A HREF="http://www.unix-ag.uni-kl.de/~kldenker/supertux/offscreen.patch">http://www.unix-ag.uni-kl.de/~kldenker/supertux/offscreen.patch</A>
+
+The OFFSCREEN_DISTANCE-constants are not changed.
+
+This patch is also useful without the widescreen-patch.
+
+Klaus Denker
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000697.html">[Supertux-devel] Patches for lightmap and widescreen
+</A></li>
+	<LI>Next message: <A HREF="000700.html">[Supertux-devel] Patches for lightmap and widescreen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#699">[ date ]</a>
+              <a href="thread.html#699">[ thread ]</a>
+              <a href="subject.html#699">[ subject ]</a>
+              <a href="author.html#699">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

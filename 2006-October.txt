@@ -1,0 +1,1826 @@
+From penma at penma.de  Tue Oct  3 20:52:42 2006
+From: penma at penma.de (Penguinmaster)
+Date: Tue, 03 Oct 2006 20:52:42 +0200
+Subject: [Supertux-devel] Supertux Sharp (Editor) Patch for extended sector
+	resizing
+Message-ID: <4522B17A.50203@penma.de>
+
+Sometimes you don't just want to add empty tiles to the end of a sector, 
+but you have already built the end of the sector and the beginning of 
+the sector and want to build the middle when you experience that the 
+room is not enough. You have to manually move all badguys and tiles 
+after resizing the sector. My patch helps people doing this by 
+specifying  a number of tiles before that another number of empty files 
+should be inserted. Example: if you say if should insert at position 0, 
+it will move the whole level to the right (after resizing, of course). 
+Objects are also moved. You can reach that by right-clicking sector tab 
+and clicking "Insert".
+
+Hope that helps some people, at least it helped me :)
+
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: InsertTiles.patch
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061003/194e57df/attachment.ksh>
+
+From anmaster at berlios.de  Tue Oct  3 21:26:44 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Tue, 03 Oct 2006 21:26:44 +0200
+Subject: [Supertux-devel] Supertux Sharp (Editor) Patch for extended
+ sector resizing
+In-Reply-To: <4522B17A.50203@penma.de>
+References: <4522B17A.50203@penma.de>
+Message-ID: <4522B974.3020708@berlios.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+The code for moving objects is broken, they move to outside sector
+sometimes and never where they should go. Please fix this and send an
+updated patch.
+
+/AnMaster
+
+Penguinmaster skrev:
+> Sometimes you don't just want to add empty tiles to the end of a sector,
+> but you have already built the end of the sector and the beginning of
+> the sector and want to build the middle when you experience that the
+> room is not enough. You have to manually move all badguys and tiles
+> after resizing the sector. My patch helps people doing this by
+> specifying  a number of tiles before that another number of empty files
+> should be inserted. Example: if you say if should insert at position 0,
+> it will move the whole level to the right (after resizing, of course).
+> Objects are also moved. You can reach that by right-clicking sector tab
+> and clicking "Insert".
+> 
+> Hope that helps some people, at least it helped me :)
+> 
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+
+iD8DBQFFIrl0WmK6ng/aMNkRA/nPAJwPa7JfOJk/K+XTbj7R42DeNpSpQgCfU+3c
+jxx3Nr9SeV0FJbTtck4vr/Q=
+=+fkU
+-----END PGP SIGNATURE-----
+
+
+From mad_monk4000 at yahoo.com  Wed Oct  4 03:11:38 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Tue, 3 Oct 2006 18:11:38 -0700 (PDT)
+Subject: [Supertux-devel] ?
+Message-ID: <20061004011138.83571.qmail@web37002.mail.mud.yahoo.com>
+
+It seems to me that there's only about 1 digest a week nowadays. Why is this?
+
+ 		
+---------------------------------
+How low will we go? Check out Yahoo! Messenger?s low  PC-to-Phone call rates.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061003/615ab786/attachment.html>
+
+From rflegel at gmail.com  Wed Oct  4 03:33:38 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Tue, 3 Oct 2006 19:33:38 -0600
+Subject: [Supertux-devel] ?
+In-Reply-To: <20061004011138.83571.qmail@web37002.mail.mud.yahoo.com>
+References: <20061004011138.83571.qmail@web37002.mail.mud.yahoo.com>
+Message-ID: <5a5496320610031833h515881f3o960b9312e4763482@mail.gmail.com>
+
+Very low traffic.
+
+-- 
+Ryan
+
+On 10/3/06, Julian Marchant <mad_monk4000 at yahoo.com> wrote:
+> It seems to me that there's only about 1 digest a week nowadays. Why is
+> this?
+>
+>  ________________________________
+> How low will we go? Check out Yahoo! Messenger's low PC-to-Phone call rates.
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+
+
+From penma at penma.de  Wed Oct  4 11:00:00 2006
+From: penma at penma.de (Penguinmaster)
+Date: Wed, 04 Oct 2006 11:00:00 +0200
+Subject: [Supertux-devel] Supertux Sharp (Editor): Updated Patch for
+	inserting tiles
+Message-ID: <45237810.70905@penma.de>
+
+Just two missing characters made the program run amok. Now it works. I 
+can't reply to my old mail because stupid Berlios Mailman didn't send me 
+an e-mail yet. (?&""!!!111oneoneone
+
+Complete patch is attached.
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: InsertTiles_.patch
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061004/ed25dab8/attachment.ksh>
+
+From penma at penma.de  Wed Oct  4 13:59:52 2006
+From: penma at penma.de (Penguinmaster)
+Date: Wed, 04 Oct 2006 13:59:52 +0200
+Subject: [Supertux-devel] Editor Patch: Scrolling layer list
+Message-ID: <4523A238.7070104@penma.de>
+
+Attached is an untested patch that gives the layer list in the editor 
+scrollbars. Untested means that I had to manually edit it, because I 
+made some other changes to that file that aren't committed yet, but it 
+should work as all those changes are below this line and don't affect 
+line numbers.So should work xD
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: LayerListScroll.patch
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061004/e37667c6/attachment.ksh>
+
+From penma at penma.de  Thu Oct  5 10:44:09 2006
+From: penma at penma.de (Penguinmaster)
+Date: Thu, 05 Oct 2006 10:44:09 +0200
+Subject: [Supertux-devel] ? [Supertux-devel Digest, Vol 4, Issue 1]
+In-Reply-To: <mailman.9382.1159952444.5318.supertux-devel@lists.berlios.de>
+References: <mailman.9382.1159952444.5318.supertux-devel@lists.berlios.de>
+Message-ID: <4524C5D9.3040406@penma.de>
+
+Hopefully this message doesn't come in the wrong place. Should be answer 
+on Message "?" by Julian Marchant...
+
+Turned digest mode off. YOu can do this at 
+https://lists.berlios.de/mailman/options/supertux-devel log in with your 
+subscribed e-mail-address, then you can turn digest mode OFF: It takes 
+one day or so for this setting. After that, you should get one mail per 
+new message.
+
+
+From anmaster at berlios.de  Thu Oct  5 11:50:30 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Thu, 05 Oct 2006 11:50:30 +0200
+Subject: [Supertux-devel] Editor Patch: Scrolling layer list
+In-Reply-To: <4523A238.7070104@penma.de>
+References: <4523A238.7070104@penma.de>
+Message-ID: <4524D566.3060602@berlios.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+This patch cause the layer list to become hard to use due to the
+horizontal scrollbar in it. But the idea is good. Why not only show
+scrollbar when the layers doesn't fit inside the list?
+
+Penguinmaster skrev:
+> Attached is an untested patch that gives the layer list in the editor
+> scrollbars. Untested means that I had to manually edit it, because I
+> made some other changes to that file that aren't committed yet, but it
+> should work as all those changes are below this line and don't affect
+> line numbers.So should work xD
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+
+iD8DBQFFJNVmWmK6ng/aMNkRAxFXAJ0czX7VpVZ2Yla30mw54YPhQAMvNACgkE7e
+ZYESIHb47c/aR5bkXVqEh6c=
+=89xc
+-----END PGP SIGNATURE-----
+
+
+From penma at penma.de  Thu Oct  5 12:00:34 2006
+From: penma at penma.de (Penguinmaster)
+Date: Thu, 05 Oct 2006 12:00:34 +0200
+Subject: [Supertux-devel] Editor Patch: Scrolling layer list
+In-Reply-To: <4524D566.3060602@berlios.de>
+References: <4523A238.7070104@penma.de> <4524D566.3060602@berlios.de>
+Message-ID: <4524D7C2.2010903@penma.de>
+
+Done. new complete patch attached :)
+
+AnMaster schrieb:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: RIPEMD160
+>
+> This patch cause the layer list to become hard to use due to the
+> horizontal scrollbar in it. But the idea is good. Why not only show
+> scrollbar when the layers doesn't fit inside the list?
+>
+> Penguinmaster skrev:
+>   
+>> Attached is an untested patch that gives the layer list in the editor
+>> scrollbars. Untested means that I had to manually edit it, because I
+>> made some other changes to that file that aren't committed yet, but it
+>> should work as all those changes are below this line and don't affect
+>> line numbers.So should work xD
+>>
+>>
+>> ------------------------------------------------------------------------
+>>
+>> _______________________________________________
+>> Supertux-devel mailing list
+>> Supertux-devel at lists.berlios.de
+>> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>>     
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.2.1 (MingW32)
+>
+> iD8DBQFFJNVmWmK6ng/aMNkRAxFXAJ0czX7VpVZ2Yla30mw54YPhQAMvNACgkE7e
+> ZYESIHb47c/aR5bkXVqEh6c=
+> =89xc
+> -----END PGP SIGNATURE-----
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>   
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: LayerListScroll_.patch
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061005/c0ee3a03/attachment.ksh>
+
+From mad_monk4000 at yahoo.com  Sat Oct  7 00:10:22 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Fri, 6 Oct 2006 15:10:22 -0700 (PDT)
+Subject: [Supertux-devel] ?
+In-Reply-To: <mailman.1.1160042404.28009.supertux-devel@lists.berlios.de>
+Message-ID: <20061006221023.30648.qmail@web37011.mail.mud.yahoo.com>
+
+Thanks!
+
+  Hopefully this message doesn't come in the wrong place. Should be answer 
+on Message "?" by Julian Marchant...
+
+Turned digest mode off. YOu can do this at 
+https://lists.berlios.de/mailman/options/supertux-devel log in with your 
+subscribed e-mail-address, then you can turn digest mode OFF: It takes 
+one day or so for this setting. After that, you should get one mail per 
+new message.
+
+
+ 		
+---------------------------------
+Stay in the know. Pulse on the new Yahoo.com.  Check it out. 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061006/2b0ac76a/attachment.html>
+
+From mad_monk4000 at yahoo.com  Wed Oct 11 15:05:27 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Wed, 11 Oct 2006 06:05:27 -0700 (PDT)
+Subject: [Supertux-devel] Sprites, Sounds, and Music (NOT SUPERTUX!)
+Message-ID: <20061011130527.28862.qmail@web37002.mail.mud.yahoo.com>
+
+I,m creating a game with the program Game Maker, and I need a few things:
+  Sprites:
+  1.A space ship that the player controls (needs to point to the right, and needs to be moving (with a rocket or somthing))
+  2.A mine
+  3.An enemy ship (needs to point left)
+  4.At least 3 enemy bosses
+  5.A plasma bullet
+  Sound and Music:
+  1.An explosion
+  2.Shooting a plasma cannon
+  3.Explosion
+  4.A background music
+  Misc:
+  A title for my game. The game is a scrolling shooter that takes place in space. You are trying to get past the human defences and invade Earth.
+   
+  If anyone can make one of these, will you make them in your spare time?
+  P.S. sorry to use this mailing list, and sorry that this has nothing to do with Supertux.
+
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+Talk is cheap. Use Yahoo! Messenger to make PC-to-Phone calls.  Great rates starting at 1?/min.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061011/b2682138/attachment.html>
+
+From anmaster at berlios.de  Wed Oct 11 15:10:18 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Wed, 11 Oct 2006 15:10:18 +0200
+Subject: [Supertux-devel] Sprites, Sounds, and Music (NOT SUPERTUX!)
+In-Reply-To: <20061011130527.28862.qmail@web37002.mail.mud.yahoo.com>
+References: <20061011130527.28862.qmail@web37002.mail.mud.yahoo.com>
+Message-ID: <452CED3A.1010509@berlios.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+Julian Marchant wrote:
+>   P.S. sorry to use this mailing list, and sorry that this has nothing to do with Supertux.
+
+Then why not post it to a more appropriate mailing list?
+
+AnMaster
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+
+iD8DBQFFLO06WmK6ng/aMNkRA6VRAKCulNJMLen17EQ+FRK0eerpX4aj4gCfbAWQ
+BVwzUUy1z9Wr6AQ7VbON8Bg=
+=AIFV
+-----END PGP SIGNATURE-----
+
+
+From mad_monk4000 at yahoo.com  Wed Oct 11 16:15:49 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Wed, 11 Oct 2006 07:15:49 -0700 (PDT)
+Subject: [Supertux-devel] Sprites, Sounds, and Music (NOT SUPERTUX!)
+In-Reply-To: <452CED3A.1010509@berlios.de>
+Message-ID: <20061011141549.6988.qmail@web37011.mail.mud.yahoo.com>
+
+I would DEFINITELY do that, but I don't know of any other mailing lists. Any suggestions?
+
+AnMaster <anmaster at berlios.de> wrote:  -----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+Julian Marchant wrote:
+> P.S. sorry to use this mailing list, and sorry that this has nothing to do with Supertux.
+
+Then why not post it to a more appropriate mailing list?
+
+AnMaster
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+
+iD8DBQFFLO06WmK6ng/aMNkRA6VRAKCulNJMLen17EQ+FRK0eerpX4aj4gCfbAWQ
+BVwzUUy1z9Wr6AQ7VbON8Bg=
+=AIFV
+-----END PGP SIGNATURE-----
+_______________________________________________
+Supertux-devel mailing list
+Supertux-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+Yahoo! Messenger with Voice. Make PC-to-Phone Calls to the US (and 30+ countries) for 2?/min or less.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061011/dc562d44/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Wed Oct 11 17:08:10 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Wed, 11 Oct 2006 17:08:10 +0200
+Subject: [Supertux-devel] Sprites, Sounds, and Music (NOT SUPERTUX!)
+In-Reply-To: <20061011130527.28862.qmail@web37002.mail.mud.yahoo.com>
+References: <20061011130527.28862.qmail@web37002.mail.mud.yahoo.com>
+Message-ID: <452D08DA.3030700@2006.expires.deltadevelopment.de>
+
+Julian Marchant wrote:
+> I,m creating a game with the program Game Maker, and I need [...] Sound and Music [...]
+
+Why not use stuff that was released under a CC license?
+
+Rifle:
+http://freesound.iua.upf.edu/samplesViewSingle.php?id=18379
+
+Bang:
+http://freesound.iua.upf.edu/samplesViewSingle.php?id=21410
+
+Boom:
+http://freesound.iua.upf.edu/samplesViewSingle.php?id=22268
+
+Game-Over / Menu:
+http://freesound.iua.upf.edu/samplesViewSingle.php?id=12691
+
+Background loop:
+http://freesound.iua.upf.edu/samplesViewSingle.php?id=18973
+
+
+
+Regards,
+
+   Christoph
+
+
+
+From mad_monk4000 at yahoo.com  Wed Oct 11 18:54:19 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Wed, 11 Oct 2006 09:54:19 -0700 (PDT)
+Subject: [Supertux-devel] Sprites, Sounds, and Music (NOT SUPERTUX!)
+In-Reply-To: <452D08DA.3030700@2006.expires.deltadevelopment.de>
+Message-ID: <20061011165419.11805.qmail@web37001.mail.mud.yahoo.com>
+
+Okay, I like the sound you called "rifle", but how can I possibly use it?
+
+Christoph Sommer <supertux at 2006.expires.deltadevelopment.de> wrote:  Julian Marchant wrote:
+> I,m creating a game with the program Game Maker, and I need [...] Sound and Music [...]
+
+Why not use stuff that was released under a CC license?
+
+Rifle:
+http://freesound.iua.upf.edu/samplesViewSingle.php?id=18379
+
+Bang:
+http://freesound.iua.upf.edu/samplesViewSingle.php?id=21410
+
+Boom:
+http://freesound.iua.upf.edu/samplesViewSingle.php?id=22268
+
+Game-Over / Menu:
+http://freesound.iua.upf.edu/samplesViewSingle.php?id=12691
+
+Background loop:
+http://freesound.iua.upf.edu/samplesViewSingle.php?id=18973
+
+
+
+Regards,
+
+Christoph
+
+_______________________________________________
+Supertux-devel mailing list
+Supertux-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+Do you Yahoo!?
+ Get on board. You're invited to try the new Yahoo! Mail.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061011/bcd96d07/attachment.html>
+
+From mad_monk4000 at yahoo.com  Thu Oct 12 13:11:07 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Thu, 12 Oct 2006 04:11:07 -0700 (PDT)
+Subject: [Supertux-devel] BUG ALERT!
+Message-ID: <20061012111107.16033.qmail@web37012.mail.mud.yahoo.com>
+
+I've found a bug in Supertux, version 0.1.3. I'm afraid, though, that since Firefox can't communicate with Yahoo!, I can't send an example. Here is a basic description.
+  If the player ducks to get under a low floor, if there is a space where Tux can stand but then right after that a wall, Tux goes through the wall rather than stopping at the space. This can only happen once.
+  I would love to send an example, but I can't. However, I think the bug exists because Tux is so big.
+
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+ All-new Yahoo! Mail - Fire up a more powerful email and get things done faster.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061012/d1e20bb9/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Thu Oct 12 13:17:05 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Thu, 12 Oct 2006 13:17:05 +0200
+Subject: [Supertux-devel] BUG ALERT!
+In-Reply-To: <20061012111107.16033.qmail@web37012.mail.mud.yahoo.com>
+References: <20061012111107.16033.qmail@web37012.mail.mud.yahoo.com>
+Message-ID: <452E2431.3010002@2006.expires.deltadevelopment.de>
+
+Hello Julian,
+
+Julian Marchant wrote:
+> If the player ducks to get under a low floor, [...] Tux can stand but [...] Tux goes through the wall
+
+If I understood you right, this is already known, but hard to remedy. 
+Because Tux cannot walk while ducked and cannot stand up when ducked 
+under a low ceiling, the most correct approach would be to have him get 
+stuck.
+
+In the current developer version, we chose to have Tux bang his head, 
+shrink back to small-Tux and thus be able to walk out of this situation 
+again.
+
+
+Regards,
+
+   Christoph
+
+
+From mad_monk4000 at yahoo.com  Thu Oct 12 16:06:49 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Thu, 12 Oct 2006 07:06:49 -0700 (PDT)
+Subject: [Supertux-devel] Developer Version
+Message-ID: <20061012140649.61513.qmail@web37004.mail.mud.yahoo.com>
+
+If I want the dewveloper version of Supertux, to I have to do anything to it to make it work?
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+Talk is cheap. Use Yahoo! Messenger to make PC-to-Phone calls.  Great rates starting at 1?/min.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061012/fa8c691a/attachment.html>
+
+From mad_monk4000 at yahoo.com  Thu Oct 12 16:26:05 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Thu, 12 Oct 2006 07:26:05 -0700 (PDT)
+Subject: [Supertux-devel] BUG ALERT!
+In-Reply-To: <452E2431.3010002@2006.expires.deltadevelopment.de>
+Message-ID: <20061012142605.63124.qmail@web37005.mail.mud.yahoo.com>
+
+OK, when Tux slides because he stands up under a low platform, that's a BUG? I thought it was a feature. It's a feature in SMB, SMB3, and New SMB (at least). In the three games I just mentioned, the feature is to get Mario into an open space. Also, the parts you took out from my original message were not the important parts. In version 0.1.3, when Supertux or Firetux stands up below a low platform, Tux starts sliding in the direction he is pointing until he gets to an open space. The problem is if the first open space is only one block long and after that there is another platform, tux goes through that platform. I would send you an example, but unfortinately the Windows computer's moniter doesn't support the resolution Supertux uses for fullscreen, and I can't switch it to windowed mode because I can't see what's on the screen.
+
+Christoph Sommer <supertux at 2006.expires.deltadevelopment.de> wrote:  Hello Julian,
+
+Julian Marchant wrote:
+> If the player ducks to get under a low floor, [...] Tux can stand but [...] Tux goes through the wall
+
+If I understood you right, this is already known, but hard to remedy. 
+Because Tux cannot walk while ducked and cannot stand up when ducked 
+under a low ceiling, the most correct approach would be to have him get 
+stuck.
+
+In the current developer version, we chose to have Tux bang his head, 
+shrink back to small-Tux and thus be able to walk out of this situation 
+again.
+
+
+Regards,
+
+Christoph
+_______________________________________________
+Supertux-devel mailing list
+Supertux-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+How low will we go? Check out Yahoo! Messenger?s low  PC-to-Phone call rates.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061012/d2aa8fff/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Thu Oct 12 16:55:40 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Thu, 12 Oct 2006 16:55:40 +0200
+Subject: [Supertux-devel] Developer Version
+In-Reply-To: <20061012140649.61513.qmail@web37004.mail.mud.yahoo.com>
+References: <20061012140649.61513.qmail@web37004.mail.mud.yahoo.com>
+Message-ID: <452E576C.1080803@2006.expires.deltadevelopment.de>
+
+Julian Marchant wrote:
+> If I want the dewveloper version of Supertux, to I have to do anything to it to make it work?
+
+Depends on your system.
+
+The autopackages linked from
+
+http://supertux.berlios.de/wiki/index.php/Milestone_1.9
+
+should work out-of-the box on any recent Linux system.
+
+The Windows installer does not include OpenAL, so you will have to 
+install that before running SuperTux. You can find an OpenAL installer at
+
+http://developer.creative.com/articles/article.asp?cat=1&sbcat=31&top=38&aid=46&file=OpenALwEAX.exe
+
+
+
+Regards,
+
+   Christoph
+
+
+From supertux at 2006.expires.deltadevelopment.de  Thu Oct 12 16:59:34 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Thu, 12 Oct 2006 16:59:34 +0200
+Subject: [Supertux-devel] BUG ALERT!
+In-Reply-To: <20061012142605.63124.qmail@web37005.mail.mud.yahoo.com>
+References: <20061012142605.63124.qmail@web37005.mail.mud.yahoo.com>
+Message-ID: <452E5856.4020904@2006.expires.deltadevelopment.de>
+
+Julian Marchant wrote:
+> OK, when Tux slides because he stands up under a low platform, that's a BUG? 
+
+Well, it's not a bug, but it can lead to trouble: If a level has a long 
+1-tile-high shaft that ends in a wall, Tux would slide all the way 
+through the shaft, then get stuck in front of the wall.
+
+> I thought it was a feature. It's a feature in SMB, SMB3, and New SMB (at least). 
+
+The SMB series can rely on the levels having passed a quality check 
+before they get played. SuperTux cannot, so it has to deal with such 
+situations.
+
+Anyway, thanks for reporting the bug. It won't make it to MS2.
+
+
+Regards,
+
+   Christoph
+
+
+From mad_monk4000 at yahoo.com  Fri Oct 13 17:33:04 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Fri, 13 Oct 2006 08:33:04 -0700 (PDT)
+Subject: [Supertux-devel] BUG ALERT!
+In-Reply-To: <452E5856.4020904@2006.expires.deltadevelopment.de>
+Message-ID: <20061013153304.58960.qmail@web37006.mail.mud.yahoo.com>
+
+Actually, Tux goes through the wall, rather than getting stuck. That is the bug I was talking about in the first place.
+
+Christoph Sommer <supertux at 2006.expires.deltadevelopment.de> wrote:    If a level has a long 
+1-tile-high shaft that ends in a wall, Tux would slide all the way 
+through the shaft, then get stuck in front of the wall.
+
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+Yahoo! Messenger with Voice. Make PC-to-Phone Calls to the US (and 30+ countries) for 2?/min or less.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061013/1d2aa057/attachment.html>
+
+From krishnalelis at gmail.com  Fri Oct 13 23:02:18 2006
+From: krishnalelis at gmail.com (Krishnamurti L. L. V. Nunes)
+Date: Fri, 13 Oct 2006 18:02:18 -0300
+Subject: [Supertux-devel] Problem on building supertux from SVN
+Message-ID: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>
+
+Hello guys,
+
+I have met SuperTux few time ago, and I thought to myself "hey, that's
+something I'd like to help developing!"
+
+But when I tried to build the game from the source, I got some errors,
+as you can see below:
+
+-------------------------------------------
+Bison tools/miniswig/parser.cpp tools/miniswig/parser.hpp
+tools/miniswig/parser.yy:23 parser name defined to default :"parse"
+"tools/miniswig/parser.yy", line 88: invalid text in %token or %nterm
+declaration
+"tools/miniswig/parser.yy", line 88: invalid text in %token or %nterm
+declaration
+*** glibc detected *** double free or corruption (!prev): 0x0000000000514760 ***
+Aborted
+
+    bison -d --no-lines -o tools/miniswig/parser.cpp tools/miniswig/parser.yy
+
+...failed Bison tools/miniswig/parser.cpp tools/miniswig/parser.hpp ...
+...skipped <T!tools!miniswig!>parser.o for lack of
+<T!tools!miniswig!>parser.cpp...
+-------------------------------------------
+
+
+From tuxdev103 at gmail.com  Fri Oct 13 23:11:24 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Fri, 13 Oct 2006 14:11:24 -0700
+Subject: [Supertux-devel] Problem on building supertux from SVN
+In-Reply-To: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>
+References: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>
+Message-ID: <ff70c5070610131411y1711ca21w846729a188a44bb2@mail.gmail.com>
+
+What version of bison do you have?
+
+As for not the connection error, that sometimes happens when the SVN
+server is overloaded or otherwise not feeling well.  The only thing to
+do really is try again later (and tell us in IRC about it, if you are
+willing to).
+
+
+From krishnalelis at gmail.com  Fri Oct 13 23:17:14 2006
+From: krishnalelis at gmail.com (Krishnamurti L. L. V. Nunes)
+Date: Fri, 13 Oct 2006 18:17:14 -0300
+Subject: [Supertux-devel] Problem on building supertux from SVN
+In-Reply-To: <ff70c5070610131411y1711ca21w846729a188a44bb2@mail.gmail.com>
+References: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>
+	<ff70c5070610131411y1711ca21w846729a188a44bb2@mail.gmail.com>
+Message-ID: <9f9b69440610131417y3cef220er6841765269beb58e@mail.gmail.com>
+
+2006/10/13, tuxdev <tuxdev103 at gmail.com>:
+> What version of bison do you have?
+
+I have bison++ version  1.21.11-3 isntalled on Debian Unstable through apt.
+
+>
+> As for not the connection error, that sometimes happens when the SVN
+> server is overloaded or otherwise not feeling well.  The only thing to
+> do really is try again later (and tell us in IRC about it, if you are
+> willing to).
+
+Ok, I'll be patient :-)
+
+-- 
+Krishnamurti Lelis Lima Vieira Nunes
+
+
+From supertux at 2006.expires.deltadevelopment.de  Sat Oct 14 01:41:11 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Sat, 14 Oct 2006 01:41:11 +0200
+Subject: [Supertux-devel] Problem on building supertux from SVN
+In-Reply-To: <9f9b69440610131417y3cef220er6841765269beb58e@mail.gmail.com>
+References: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>	<ff70c5070610131411y1711ca21w846729a188a44bb2@mail.gmail.com>
+	<9f9b69440610131417y3cef220er6841765269beb58e@mail.gmail.com>
+Message-ID: <45302417.2080503@2006.expires.deltadevelopment.de>
+
+Krishnamurti L. L. V. Nunes wrote:
+> 2006/10/13, tuxdev <tuxdev103 at gmail.com>:
+>> What version of bison do you have?
+> 
+> I have bison++ version  1.21.11-3 isntalled on Debian Unstable through apt.
+
+For me, "bison --version" yields:
+> bison (GNU Bison) 2.1
+> Written by Robert Corbett and Richard Stallman
+
+I do not have bison++ installed and can build SuperTux SVN on this box.
+
+Maybe you can force configure to use bison instead of bison++ to get 
+things working.
+
+
+Regards,
+
+   Christoph
+
+
+From mad_monk4000 at yahoo.com  Wed Oct 18 12:46:24 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Wed, 18 Oct 2006 03:46:24 -0700 (PDT)
+Subject: [Supertux-devel] SVN&Tux
+Message-ID: <20061018104624.88458.qmail@web37003.mail.mud.yahoo.com>
+
+Is Tux smaller in the SVN version? Probably everyone knows that Tux can just walk over 1-tile gaps. If not, was something else done to solve the problem?
+ 
+Thanks!
+Julian Marchant
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061018/761859e5/attachment.html>
+
+From anmaster at berlios.de  Wed Oct 18 12:53:33 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Wed, 18 Oct 2006 12:53:33 +0200
+Subject: [Supertux-devel] SVN&Tux
+In-Reply-To: <20061018104624.88458.qmail@web37003.mail.mud.yahoo.com>
+References: <20061018104624.88458.qmail@web37003.mail.mud.yahoo.com>
+Message-ID: <453607AD.20807@berlios.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+
+Julian Marchant skrev:
+> Is Tux smaller in the SVN version? Probably everyone knows that Tux can just walk over 1-tile gaps. If not, was something else done to solve the problem?
+
+Tux can fall down through 1 tiles hole in SVN. That is not a bug. Was
+that what you meant?
+
+/AnMaster
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+
+iD8DBQFFNgetWmK6ng/aMNkRA5ZwAJ9uFAgVc4lond9Rry8ZaUt3ibTipwCfWY2h
+XyG6WXvPmKX5DVV4mfyiju8=
+=MmOj
+-----END PGP SIGNATURE-----
+
+
+From krishnalelis at gmail.com  Wed Oct 18 19:40:38 2006
+From: krishnalelis at gmail.com (Krishnamurti L. L. V. Nunes)
+Date: Wed, 18 Oct 2006 14:40:38 -0300
+Subject: [Supertux-devel] Problem on building supertux from SVN
+In-Reply-To: <45302417.2080503@2006.expires.deltadevelopment.de>
+References: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>
+	<ff70c5070610131411y1711ca21w846729a188a44bb2@mail.gmail.com>
+	<9f9b69440610131417y3cef220er6841765269beb58e@mail.gmail.com>
+	<45302417.2080503@2006.expires.deltadevelopment.de>
+Message-ID: <9f9b69440610181040l5c67ab0w427eb350cac7a0da@mail.gmail.com>
+
+2006/10/13, Christoph Sommer <supertux at 2006.expires.deltadevelopment.de>:
+> > 2006/10/13, tuxdev <tuxdev103 at gmail.com>:
+> >> What version of bison do you have?
+> > (...)
+
+I could compile SuperTux from source using bison instead of bison++,
+but now I have another problem.
+
+I cannot run supertux:
+
+./supertux: error while loading shared libraries: libopenal.so.0:
+cannot open shared object file: No such file or directory
+
+OpenAL was compiled correctly, and Supertux' config script detects it.
+libopenal.so.0 exists at /usr/local/lib/, and is a symlink to libopenal.so.0.0.0
+This directory is in my PATH variable, as well as
+~/openal-0.0.8/src/.lib, where the libs have been compiled.
+
+I have read OpenAL INSTALL to figure out whether I should make any
+links by myself, but did not find anything.
+
+All other dependencies are installed, and direct opengl rendering is enebled.
+
+Have I done something wrong?
+
+Thanx,
+
+
+-- 
+Krishnamurti Lelis Lima Vieira Nunes
+
+
+From tuxdev103 at gmail.com  Wed Oct 18 20:23:45 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Wed, 18 Oct 2006 11:23:45 -0700
+Subject: [Supertux-devel] Problem on building supertux from SVN
+In-Reply-To: <9f9b69440610181040l5c67ab0w427eb350cac7a0da@mail.gmail.com>
+References: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>
+	<ff70c5070610131411y1711ca21w846729a188a44bb2@mail.gmail.com>
+	<9f9b69440610131417y3cef220er6841765269beb58e@mail.gmail.com>
+	<45302417.2080503@2006.expires.deltadevelopment.de>
+	<9f9b69440610181040l5c67ab0w427eb350cac7a0da@mail.gmail.com>
+Message-ID: <ff70c5070610181123x3198600ev9a6bec42a6f3a118@mail.gmail.com>
+
+Does /etc/ld.so.conf have /usr/local/lib in it?  What is
+$LD_CONFIG_PATH (I think that is what it is called, not sure)?  PATH
+is for binaries, not libraries.
+
+On 10/18/06, Krishnamurti L. L. V. Nunes <krishnalelis at gmail.com> wrote:
+> 2006/10/13, Christoph Sommer <supertux at 2006.expires.deltadevelopment.de>:
+> > > 2006/10/13, tuxdev <tuxdev103 at gmail.com>:
+> > >> What version of bison do you have?
+> > > (...)
+>
+> I could compile SuperTux from source using bison instead of bison++,
+> but now I have another problem.
+>
+> I cannot run supertux:
+>
+> ./supertux: error while loading shared libraries: libopenal.so.0:
+> cannot open shared object file: No such file or directory
+>
+> OpenAL was compiled correctly, and Supertux' config script detects it.
+> libopenal.so.0 exists at /usr/local/lib/, and is a symlink to
+> libopenal.so.0.0.0
+> This directory is in my PATH variable, as well as
+> ~/openal-0.0.8/src/.lib, where the libs have been compiled.
+>
+> I have read OpenAL INSTALL to figure out whether I should make any
+> links by myself, but did not find anything.
+>
+> All other dependencies are installed, and direct opengl rendering is
+> enebled.
+>
+> Have I done something wrong?
+>
+> Thanx,
+>
+>
+> --
+> Krishnamurti Lelis Lima Vieira Nunes
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+
+
+From krishnalelis at gmail.com  Wed Oct 18 21:53:00 2006
+From: krishnalelis at gmail.com (Krishnamurti L. L. V. Nunes)
+Date: Wed, 18 Oct 2006 16:53:00 -0300
+Subject: [Supertux-devel] Problem on building supertux from SVN
+In-Reply-To: <ff70c5070610181123x3198600ev9a6bec42a6f3a118@mail.gmail.com>
+References: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>
+	<ff70c5070610131411y1711ca21w846729a188a44bb2@mail.gmail.com>
+	<9f9b69440610131417y3cef220er6841765269beb58e@mail.gmail.com>
+	<45302417.2080503@2006.expires.deltadevelopment.de>
+	<9f9b69440610181040l5c67ab0w427eb350cac7a0da@mail.gmail.com>
+	<ff70c5070610181123x3198600ev9a6bec42a6f3a118@mail.gmail.com>
+Message-ID: <9f9b69440610181253u61fc9b99jbb43dbc207149c7b@mail.gmail.com>
+
+2006/10/18, tuxdev <tuxdev103 at gmail.com>:
+> Does /etc/ld.so.conf have /usr/local/lib in it?  What is
+> $LD_CONFIG_PATH (I think that is what it is called, not sure)?  PATH
+> is for binaries, not libraries.
+>
+
+OpenAL `make install' gives me the following:
+
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /usr/local/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the `-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the `LD_RUN_PATH' environment variable
+     during linking
+   - use the `-Wl,--rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to `/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+
+So I have run ldconfig -n /usr/local/lib (as root).
+Yet /etc/ld.so.conf had no /usr/local/lib in it.
+Then I included /usr/local/lib in ld.so.conf, but LD_LIBRARY_PATH is still empty
+
+What am I supposed to do? What shall I have forgotten?
+
+I had no libtool program, does openall compiling process try to use
+it? I've just installed.
+
+
+
+
+> On 10/18/06, Krishnamurti L. L. V. Nunes <krishnalelis at gmail.com> wrote:
+> > 2006/10/13, Christoph Sommer <supertux at 2006.expires.deltadevelopment.de>:
+> > > > 2006/10/13, tuxdev <tuxdev103 at gmail.com>:
+> > > >> What version of bison do you have?
+> > > > (...)
+> >
+> > I could compile SuperTux from source using bison instead of bison++,
+> > but now I have another problem.
+> >
+> > I cannot run supertux:
+> >
+> > ./supertux: error while loading shared libraries: libopenal.so.0:
+> > cannot open shared object file: No such file or directory
+> >
+> > OpenAL was compiled correctly, and Supertux' config script detects it.
+> > libopenal.so.0 exists at /usr/local/lib/, and is a symlink to
+> > libopenal.so.0.0.0
+> > This directory is in my PATH variable, as well as
+> > ~/openal-0.0.8/src/.lib, where the libs have been compiled.
+> >
+> > I have read OpenAL INSTALL to figure out whether I should make any
+> > links by myself, but did not find anything.
+> >
+> > All other dependencies are installed, and direct opengl rendering is
+> > enebled.
+> >
+> > Have I done something wrong?
+> >
+> > Thanx,
+> >
+> >
+
+
+
+-- 
+Krishnamurti Lelis Lima Vieira Nunes
+
+
+From supertux at 2006.expires.deltadevelopment.de  Wed Oct 18 22:09:24 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Wed, 18 Oct 2006 22:09:24 +0200
+Subject: [Supertux-devel] Problem on building supertux from SVN
+In-Reply-To: <9f9b69440610181253u61fc9b99jbb43dbc207149c7b@mail.gmail.com>
+References: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>	<ff70c5070610131411y1711ca21w846729a188a44bb2@mail.gmail.com>	<9f9b69440610131417y3cef220er6841765269beb58e@mail.gmail.com>	<45302417.2080503@2006.expires.deltadevelopment.de>	<9f9b69440610181040l5c67ab0w427eb350cac7a0da@mail.gmail.com>	<ff70c5070610181123x3198600ev9a6bec42a6f3a118@mail.gmail.com>
+	<9f9b69440610181253u61fc9b99jbb43dbc207149c7b@mail.gmail.com>
+Message-ID: <453689F4.2040400@2006.expires.deltadevelopment.de>
+
+Krishnamurti L. L. V. Nunes wrote:
+> OpenAL `make install' gives me the following:
+> 
+> ----------------------------------------------------------------------
+> Libraries have been installed in:
+>    /usr/local/lib
+> [...] 
+>    - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+>      during execution
+
+This sounds like a plan. Try running the following commands in bash:
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+./supertux
+
+
+If ./configure took care of adding the correct -L switches this should 
+work. If it does you can still try to make this more permanent (e.g. by 
+adding to your .bashrc, moving the libraries or re-configuring the 
+run-time linker)
+
+
+Regards,
+
+   Christoph
+
+
+From rflegel at gmail.com  Wed Oct 18 22:08:26 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Wed, 18 Oct 2006 14:08:26 -0600
+Subject: [Supertux-devel] Problem on building supertux from SVN
+In-Reply-To: <9f9b69440610181253u61fc9b99jbb43dbc207149c7b@mail.gmail.com>
+References: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>
+	<ff70c5070610131411y1711ca21w846729a188a44bb2@mail.gmail.com>
+	<9f9b69440610131417y3cef220er6841765269beb58e@mail.gmail.com>
+	<45302417.2080503@2006.expires.deltadevelopment.de>
+	<9f9b69440610181040l5c67ab0w427eb350cac7a0da@mail.gmail.com>
+	<ff70c5070610181123x3198600ev9a6bec42a6f3a118@mail.gmail.com>
+	<9f9b69440610181253u61fc9b99jbb43dbc207149c7b@mail.gmail.com>
+Message-ID: <5a5496320610181308n7b45f81am2e7ea31d38bbdbf4@mail.gmail.com>
+
+On 10/18/06, Krishnamurti L. L. V. Nunes <krishnalelis at gmail.com> wrote:
+> So I have run ldconfig -n /usr/local/lib (as root).
+> Yet /etc/ld.so.conf had no /usr/local/lib in it.
+> Then I included /usr/local/lib in ld.so.conf, but LD_LIBRARY_PATH is still empty
+>
+> What am I supposed to do? What shall I have forgotten?
+
+What you want to do is put /usr/local/lib in ld.so.conf (which you
+have already done).
+
+Now run "ldconfig" with no parameters as root. This will update the cache.
+
+LD_LIBRARY_PATH can stay empty, since /usr/local/lib is in ld.so.conf.
+
+Now try running Supertux.
+
+-- 
+Ryan
+
+
+From rflegel at gmail.com  Wed Oct 18 22:09:57 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Wed, 18 Oct 2006 14:09:57 -0600
+Subject: [Supertux-devel] Problem on building supertux from SVN
+In-Reply-To: <453689F4.2040400@2006.expires.deltadevelopment.de>
+References: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>
+	<ff70c5070610131411y1711ca21w846729a188a44bb2@mail.gmail.com>
+	<9f9b69440610131417y3cef220er6841765269beb58e@mail.gmail.com>
+	<45302417.2080503@2006.expires.deltadevelopment.de>
+	<9f9b69440610181040l5c67ab0w427eb350cac7a0da@mail.gmail.com>
+	<ff70c5070610181123x3198600ev9a6bec42a6f3a118@mail.gmail.com>
+	<9f9b69440610181253u61fc9b99jbb43dbc207149c7b@mail.gmail.com>
+	<453689F4.2040400@2006.expires.deltadevelopment.de>
+Message-ID: <5a5496320610181309xad6ff7fhe161232d8066d23@mail.gmail.com>
+
+On 10/18/06, Christoph Sommer <supertux at 2006.expires.deltadevelopment.de> wrote:
+> Krishnamurti L. L. V. Nunes wrote:
+> > OpenAL `make install' gives me the following:
+> >
+> > ----------------------------------------------------------------------
+> > Libraries have been installed in:
+> >    /usr/local/lib
+> > [...]
+> >    - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+> >      during execution
+>
+> This sounds like a plan. Try running the following commands in bash:
+>
+> export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+> ./supertux
+>
+>
+> If ./configure took care of adding the correct -L switches this should
+> work. If it does you can still try to make this more permanent (e.g. by
+> adding to your .bashrc, moving the libraries or re-configuring the
+> run-time linker)
+
+I recommend my solution over this, otherwise you'll need to update
+LD_LIBRARY_PATH every time you run supertux in a different console.
+
+-- 
+Ryan
+
+
+From krishnalelis at gmail.com  Wed Oct 18 22:28:00 2006
+From: krishnalelis at gmail.com (Krishnamurti L. L. V. Nunes)
+Date: Wed, 18 Oct 2006 17:28:00 -0300
+Subject: [Supertux-devel] Problem on building supertux from SVN
+In-Reply-To: <5a5496320610181309xad6ff7fhe161232d8066d23@mail.gmail.com>
+References: <9f9b69440610131402y32efa0d1g404af0c1f69cfaf0@mail.gmail.com>
+	<ff70c5070610131411y1711ca21w846729a188a44bb2@mail.gmail.com>
+	<9f9b69440610131417y3cef220er6841765269beb58e@mail.gmail.com>
+	<45302417.2080503@2006.expires.deltadevelopment.de>
+	<9f9b69440610181040l5c67ab0w427eb350cac7a0da@mail.gmail.com>
+	<ff70c5070610181123x3198600ev9a6bec42a6f3a118@mail.gmail.com>
+	<9f9b69440610181253u61fc9b99jbb43dbc207149c7b@mail.gmail.com>
+	<453689F4.2040400@2006.expires.deltadevelopment.de>
+	<5a5496320610181309xad6ff7fhe161232d8066d23@mail.gmail.com>
+Message-ID: <9f9b69440610181328t27f6f0b6q6f1475b4a7b7fa0d@mail.gmail.com>
+
+Great!
+Thank you all for the help!
+
+2006/10/18, Ryan Flegel <rflegel at gmail.com>:
+> On 10/18/06, Christoph Sommer <supertux at 2006.expires.deltadevelopment.de> wrote:
+> > Krishnamurti L. L. V. Nunes wrote:
+> > > OpenAL `make install' gives me the following:
+> > >
+> > > ----------------------------------------------------------------------
+> > > Libraries have been installed in:
+> > >    /usr/local/lib
+> > > [...]
+> > >    - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+> > >      during execution
+> >
+> > This sounds like a plan. Try running the following commands in bash:
+> >
+> > export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+> > ./supertux
+> >
+> >
+> > If ./configure took care of adding the correct -L switches this should
+> > work. If it does you can still try to make this more permanent (e.g. by
+> > adding to your .bashrc, moving the libraries or re-configuring the
+> > run-time linker)
+>
+> I recommend my solution over this, otherwise you'll need to update
+> LD_LIBRARY_PATH every time you run supertux in a different console.
+>
+> --
+> Ryan
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+
+
+-- 
+Krishnamurti Lelis Lima Vieira Nunes
+
+
+From mad_monk4000 at yahoo.com  Fri Oct 20 04:42:09 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Thu, 19 Oct 2006 19:42:09 -0700 (PDT)
+Subject: [Supertux-devel] SVN&Tux
+In-Reply-To: <453607AD.20807@berlios.de>
+Message-ID: <20061020024209.32469.qmail@web37010.mail.mud.yahoo.com>
+
+Actually, if it is SOPPOSED to be hard to fall through 1-tile gaps, that's crazy. But thanks. I just wish I knew where the hell the SVN version gets installed. I can't find it if I try to install it. It seems to me that Linux scatters the files.
+
+AnMaster <anmaster at berlios.de> wrote:  -----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+
+Julian Marchant skrev:
+> Is Tux smaller in the SVN version? Probably everyone knows that Tux can just walk over 1-tile gaps. If not, was something else done to solve the problem?
+
+Tux can fall down through 1 tiles hole in SVN. That is not a bug. Was
+that what you meant?
+
+/AnMaster
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+
+iD8DBQFFNgetWmK6ng/aMNkRA5ZwAJ9uFAgVc4lond9Rry8ZaUt3ibTipwCfWY2h
+XyG6WXvPmKX5DVV4mfyiju8=
+=MmOj
+-----END PGP SIGNATURE-----
+_______________________________________________
+Supertux-devel mailing list
+Supertux-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+Get your email and more, right on the  new Yahoo.com 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061019/f36749f7/attachment.html>
+
+From rflegel at gmail.com  Fri Oct 20 04:45:48 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Thu, 19 Oct 2006 20:45:48 -0600
+Subject: [Supertux-devel] SVN&Tu
+In-Reply-To: <20061020024209.32469.qmail@web37010.mail.mud.yahoo.com>
+References: <453607AD.20807@berlios.de>
+	<20061020024209.32469.qmail@web37010.mail.mud.yahoo.com>
+Message-ID: <5a5496320610191945x3c916d60r18cfee9eb009945a@mail.gmail.com>
+
+You can run supertux svn from the directory you compile it in. Just
+type "./supertux"
+
+-- 
+Ryan
+
+On 10/19/06, Julian Marchant <mad_monk4000 at yahoo.com> wrote:
+> Actually, if it is SOPPOSED to be hard to fall through 1-tile gaps, that's
+> crazy. But thanks. I just wish I knew where the hell the SVN version gets
+> installed. I can't find it if I try to install it. It seems to me that Linux
+> scatters the files.
+>
+> AnMaster <anmaster at berlios.de> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: RIPEMD160
+>
+>
+> Julian Marchant skrev:
+> > Is Tux smaller in the SVN version? Probably everyone knows that Tux can
+> just walk over 1-tile gaps. If not, was something else done to solve the
+> problem?
+>
+> Tux can fall down through 1 tiles hole in SVN. That is not a bug. Was
+> that what you meant?
+>
+> /AnMaster
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.2.1 (MingW32)
+>
+> iD8DBQFFNgetWmK6ng/aMNkRA5ZwAJ9uFAgVc4lond9Rry8ZaUt3ibTipwCfWY2h
+> XyG6WXvPmKX5DVV4mfyiju8=
+> =MmOj
+> -----END PGP SIGNATURE-----
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+> Thanks!
+> Julian Marchant
+>
+>  ________________________________
+> Get your email and more, right on the new Yahoo.com
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+
+
+From mad_monk4000 at yahoo.com  Fri Oct 20 04:52:28 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Thu, 19 Oct 2006 19:52:28 -0700 (PDT)
+Subject: [Supertux-devel] SVN&Tu
+In-Reply-To: <5a5496320610191945x3c916d60r18cfee9eb009945a@mail.gmail.com>
+Message-ID: <20061020025228.96901.qmail@web37015.mail.mud.yahoo.com>
+
+For your information, I am only 13 and don't understand what that means.
+
+Ryan Flegel <rflegel at gmail.com> wrote:  You can run supertux svn from the directory you compile it in. Just
+type "./supertux"
+
+-- 
+Ryan
+
+On 10/19/06, Julian Marchant wrote:
+> Actually, if it is SOPPOSED to be hard to fall through 1-tile gaps, that's
+> crazy. But thanks. I just wish I knew where the hell the SVN version gets
+> installed. I can't find it if I try to install it. It seems to me that Linux
+> scatters the files.
+>
+> AnMaster wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: RIPEMD160
+>
+>
+> Julian Marchant skrev:
+> > Is Tux smaller in the SVN version? Probably everyone knows that Tux can
+> just walk over 1-tile gaps. If not, was something else done to solve the
+> problem?
+>
+> Tux can fall down through 1 tiles hole in SVN. That is not a bug. Was
+> that what you meant?
+>
+> /AnMaster
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.2.1 (MingW32)
+>
+> iD8DBQFFNgetWmK6ng/aMNkRA5ZwAJ9uFAgVc4lond9Rry8ZaUt3ibTipwCfWY2h
+> XyG6WXvPmKX5DVV4mfyiju8=
+> =MmOj
+> -----END PGP SIGNATURE-----
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+> Thanks!
+> Julian Marchant
+>
+> ________________________________
+> Get your email and more, right on the new Yahoo.com
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+_______________________________________________
+Supertux-devel mailing list
+Supertux-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+Thanks!
+  Julian Marchant
+
+ 			
+---------------------------------
+Get your own web address for just $1.99/1st yr. We'll help. Yahoo! Small Business.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061019/aa105d7c/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Fri Oct 20 13:58:09 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Fri, 20 Oct 2006 13:58:09 +0200
+Subject: [Supertux-devel] SVN&Tux
+In-Reply-To: <20061020024209.32469.qmail@web37010.mail.mud.yahoo.com>
+References: <20061020024209.32469.qmail@web37010.mail.mud.yahoo.com>
+Message-ID: <4538B9D1.5010901@2006.expires.deltadevelopment.de>
+
+Hey Julian,
+
+Julian Marchant wrote:
+> Actually, if it is SOPPOSED to be hard to fall through 1-tile gaps, that's crazy. 
+
+Tux can still walk over 1-tile gaps, special care was taken to assure 
+that. Only if you deliberately stand or jump exactly between two tiles 
+you are now able to get through.
+
+I'd call that a plus :)
+
+
+> I just wish I knew where the hell the SVN version gets installed. I can't find it if I try to install it. It seems to me that Linux scatters the files.
+
+The SVN version cannot be installed.
+
+I suggest you try out one of the early builds of installer packages for 
+the upcoming release. The packages (Linux and Windows) are linked from 
+<http://supertux.berlios.de/wiki/index.php/Milestone_1.9>
+
+
+Regards,
+
+   Christoph
+
+
+From mad_monk4000 at yahoo.com  Fri Oct 20 21:12:22 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Fri, 20 Oct 2006 12:12:22 -0700 (PDT)
+Subject: [Supertux-devel] SVN&Tux
+In-Reply-To: <4538B9D1.5010901@2006.expires.deltadevelopment.de>
+Message-ID: <20061020191222.25746.qmail@web37014.mail.mud.yahoo.com>
+
+Good. Now that I think of it, in SMB3, you can walk over 1-tile gaps.
+   
+  On the other hand, why can't the SVN be installed?
+
+Christoph Sommer <supertux at 2006.expires.deltadevelopment.de> wrote:
+    Tux can still walk over 1-tile gaps, special care was taken to assure 
+that. Only if you deliberately stand or jump exactly between two tiles 
+you are now able to get through.
+
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+Do you Yahoo!?
+ Everyone is raving about the  all-new Yahoo! Mail.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061020/a3c0a66d/attachment.html>
+
+From mad_monk4000 at yahoo.com  Fri Oct 20 04:51:12 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Thu, 19 Oct 2006 19:51:12 -0700 (PDT)
+Subject: [Supertux-devel] A game I created
+Message-ID: <20061020025112.98497.qmail@web37012.mail.mud.yahoo.com>
+
+Believe it or not, a game I created, called "Battle for Sol", actually has something to do with SuperTux! The reason is I would like to create a version of this game in Supertux form, in which the player controls Tux, who shoots down enemies with the Fire Flower (or Ice Flower) while running. The attached game is rather boring, but I intend to make it much better. I need two things: First, I'd like feedback on the game, to see how many people like the idea. second, I need a background for Tux to run on and some kind of ally for Tux. Can anybody help me out here?
+
+
+Thanks!
+  Julian Marchant
+
+ 			
+---------------------------------
+Get your own web address for just $1.99/1st yr. We'll help. Yahoo! Small Business.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061019/2f455039/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Battle for Sol.zip
+Type: application/x-zip-compressed
+Size: 1005315 bytes
+Desc: 542575674-Battle for Sol.zip
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061019/2f455039/attachment.bin>
+
+From mad_monk4000 at yahoo.com  Mon Oct 23 05:12:28 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Sun, 22 Oct 2006 20:12:28 -0700 (PDT)
+Subject: [Supertux-devel] Swimming
+Message-ID: <20061023031228.99453.qmail@web37007.mail.mud.yahoo.com>
+
+I think Tux should swim similar to the way Frog Mario swims in SMB3, rather than the way Mario swims, because I am pretty sure Penguins are good swimmers.
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+Do you Yahoo!?
+ Get on board. You're invited to try the new Yahoo! Mail.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061022/0729ca39/attachment.html>
+
+From mad_monk4000 at yahoo.com  Tue Oct 24 05:54:43 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Mon, 23 Oct 2006 20:54:43 -0700 (PDT)
+Subject: [Supertux-devel] images
+Message-ID: <20061024035443.95992.qmail@web37012.mail.mud.yahoo.com>
+
+I am making a game involving Tux and a huge army of penguins and I need a few sprites:
+  *Nolok
+  *Whatever Nolok shoots (does Nolok shoot ice or something?)
+   
+  Okay, I'll give a description. It's called "War in Antarcica", and in it you control Tux and fight with an army of penguins to take down Nolok.
+  I'm having a slight problem, though. I am forced to use a program that helps desighn games called "Game Maker", which only works on Windows. I can't find a game editing software for Linux anywhere. And the thing is, I'd like to use the SuperTux music for background music because the game is based on Supertux. However, Game Maker cannot understand .mod files, so I can't use them. Any suggestions?
+   
+  Please be simple, I am only a 13-year-old testing my limits. (There's a reason I need to use Game Maker!)
+
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+Get your email and more, right on the  new Yahoo.com 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061023/0a1d4e5a/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Tue Oct 24 07:00:46 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Tue, 24 Oct 2006 07:00:46 +0200
+Subject: [Supertux-devel] images
+In-Reply-To: <20061024035443.95992.qmail@web37012.mail.mud.yahoo.com>
+References: <20061024035443.95992.qmail@web37012.mail.mud.yahoo.com>
+Message-ID: <453D9DFE.5050006@2006.expires.deltadevelopment.de>
+
+Hello Julian,
+
+Julian Marchant wrote:
+> I need a few sprites:
+>   *Nolok
+>   *Whatever Nolok shoots (does Nolok shoot ice or something?)
+
+There are some drafts on what Nolok might look like on the SuperTux Wiki 
+<http://supertux.berlios.de/wiki/>, for example 
+<http://supertux.berlios.de/wiki/images/1/13/Noloksketches3.jpg>.
+
+> I'd like to use the SuperTux music for background music because the game is based on Supertux. However, Game Maker cannot understand .mod files, so I can't use them. Any suggestions?
+
+SuperTux Milestone 2 will have Vorbis music. You can find drafts of the 
+music in the SVN repository 
+<svn://svn.berlios.de/supertux/trunk/supertux>, for example 
+<http://svn.berlios.de/viewcvs/*checkout*/supertux/trunk/supertux/data/music/chipdisko.ogg?rev=3335>.
+
+
+Note, however, that most data files of SuperTux are *not* in the public 
+domain, but released under a strict license, which you will have to 
+adhere to if you use them.
+
+
+Regards,
+
+   Christoph
+
+
+From mad_monk4000 at yahoo.com  Tue Oct 24 12:51:46 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Tue, 24 Oct 2006 03:51:46 -0700 (PDT)
+Subject: [Supertux-devel] images
+In-Reply-To: <453D9DFE.5050006@2006.expires.deltadevelopment.de>
+Message-ID: <20061024105146.63436.qmail@web37009.mail.mud.yahoo.com>
+
+I'm afraid that Game Maker only understands Wave files, MP3 files, and Midi files. Actually, a program called Netscape Winamp, which understands many music and sound files, doesn't understand this "Vorbis music" (which seems to have the extension .ogg, which I recognize), although it DOES understand .mod files.
+
+Christoph Sommer <supertux at 2006.expires.deltadevelopment.de> wrote:  SuperTux Milestone 2 will have Vorbis music. You can find drafts of the 
+music in the SVN repository 
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+Get your email and more, right on the  new Yahoo.com 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061024/fd4a8886/attachment.html>
+
+From supertux at 2006.expires.deltadevelopment.de  Tue Oct 24 12:58:53 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Tue, 24 Oct 2006 12:58:53 +0200
+Subject: [Supertux-devel] images
+In-Reply-To: <20061024105146.63436.qmail@web37009.mail.mud.yahoo.com>
+References: <20061024105146.63436.qmail@web37009.mail.mud.yahoo.com>
+Message-ID: <9d8eb3955b0bcf8a95d7481d9469a4b5@localhost>
+
+Hello Julian,
+
+Julian Marchant <mad_monk4000 at yahoo.com> wrote:
+> I'm afraid that Game Maker only understands Wave files, MP3 files, and Midi
+> files. Actually, a program called Netscape Winamp, which understands many
+> music and sound files, doesn't understand this "Vorbis music" 
+
+There seems to be a plugin for Winamp that allows you to play .ogg files. <http://www.angrycoffee.com/tutorials/vorbis/oggwin.html> seems to detail the steps to install it.
+
+I don't know if Winamp can convert files to .ogg, but IIRC it can at least create .wav files from anything you play. Use Winamp's "Diskwriter" plugin to do this. From there you can probably take it with an MP3 encoder ("Lame"?)
+
+
+Regards,
+
+  Christoph
+
+
+
+From mad_monk4000 at yahoo.com  Tue Oct 24 21:09:35 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Tue, 24 Oct 2006 12:09:35 -0700 (PDT)
+Subject: [Supertux-devel] images
+In-Reply-To: <9d8eb3955b0bcf8a95d7481d9469a4b5@localhost>
+Message-ID: <20061024190935.75138.qmail@web37006.mail.mud.yahoo.com>
+
+Hey, in the original message I clearly stated that I am merely a 13-year-old testing my game making limits. Can you put this in simpler terms? I don't understand a word you typed.
+Also, it truely is best if I don't use MP3 files with Game Maker (or at least, that's what the instructions said), so I don't see the point in making something an MP3 file.
+Christoph Sommer <supertux at 2006.expires.deltadevelopment.de> wrote:  Hello Julian,
+
+Julian Marchant wrote:
+> I'm afraid that Game Maker only understands Wave files, MP3 files, and Midi
+> files. Actually, a program called Netscape Winamp, which understands many
+> music and sound files, doesn't understand this "Vorbis music" 
+
+There seems to be a plugin for Winamp that allows you to play .ogg files. seems to detail the steps to install it.
+
+I don't know if Winamp can convert files to .ogg, but IIRC it can at least create .wav files from anything you play. Use Winamp's "Diskwriter" plugin to do this. From there you can probably take it with an MP3 encoder ("Lame"?)
+
+
+Regards,
+
+Christoph
+
+_______________________________________________
+Supertux-devel mailing list
+Supertux-devel at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/supertux-devel
+
+
+
+Thanks!
+  Julian Marchant
+
+ __________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061024/fe31232b/attachment.html>
+
+From mad_monk4000 at yahoo.com  Fri Oct 27 03:53:34 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Thu, 26 Oct 2006 18:53:34 -0700 (PDT)
+Subject: [Supertux-devel] Feedback, please.
+Message-ID: <20061027015334.60433.qmail@web37015.mail.mud.yahoo.com>
+
+I'm making a game, and it is described in this Text Document. Can ya send feedback?
+   
+  P.S. I know this has nothing to do with Supertux, but if I was to search for a mailing list that makes sense, I'd be done with the game before I could find one, and I want some feedback.
+  P.S.S. Ya know, it would be great if there was a scrolling shooter featuring Tux.
+
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+ All-new Yahoo! Mail - Fire up a more powerful email and get things done faster.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061026/8f8cb557/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Battle for Sol.zip
+Type: application/x-zip-compressed
+Size: 1763 bytes
+Desc: 2094548424-Battle for Sol.zip
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061026/8f8cb557/attachment.bin>
+
+From mad_monk4000 at yahoo.com  Fri Oct 27 04:13:52 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Thu, 26 Oct 2006 19:13:52 -0700 (PDT)
+Subject: [Supertux-devel] Milestone 2
+Message-ID: <20061027021352.43576.qmail@web37009.mail.mud.yahoo.com>
+
+Do ya think it'll take long for Milestone 2 to be finished? I'm making a level in Milestone1 that is very long (a length of 1000) and will be very hard. It's called "The Last Castle". I also think it would be a hard addition to Bonus Island 1. Actually, it could possibly be a bonus island 3 all by itself!
+
+Thanks!
+  Julian Marchant
+
+ 		
+---------------------------------
+How low will we go? Check out Yahoo! Messenger?s low  PC-to-Phone call rates.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20061026/71c99f97/attachment.html>
+
+From anmaster at berlios.de  Sat Oct 28 16:41:46 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Sat, 28 Oct 2006 16:41:46 +0200
+Subject: [Supertux-devel] [Supertux-commit] r4422 - in
+	trunk/supertux/src: object scripting
+In-Reply-To: <20061028143352.GA5170@greg.local>
+References: <mailman.41.1162029636.29195.supertux-commit@lists.berlios.de>
+	<20061028143352.GA5170@greg.local>
+Message-ID: <45436C2A.6000605@berlios.de>
+
+Hm I think you sent this to the wrong list...
+Anyway your mail client must be broken as all mails in the commit list
+have this header:
+Reply-To: supertux-devel at lists.berlios.de
+
+Please make sure to send to the devel list next time please.
+
+Regards,
+Arvid
+
+Wolfgang Becker skrev:
+>> Log:
+>> Made LevelTime object scriptable (start, stop, get_time, set_time)
+> 
+> Does that mean time limits are no longer deprecated?
+> 
+> Tsch??,
+> Wolfgang
+
+
+From supertux at 2006.expires.deltadevelopment.de  Sat Oct 28 16:42:04 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Sat, 28 Oct 2006 16:42:04 +0200
+Subject: [Supertux-devel] [Supertux-commit] r4422 - in
+	trunk/supertux/src: object scripting
+In-Reply-To: <20061028143352.GA5170@greg.local>
+References: <mailman.41.1162029636.29195.supertux-commit@lists.berlios.de>
+	<20061028143352.GA5170@greg.local>
+Message-ID: <45436C3C.6050808@2006.expires.deltadevelopment.de>
+
+Hey Wolfgang,
+
+Wolfgang Becker wrote:
+>> Log:
+>> Made LevelTime object scriptable (start, stop, get_time, set_time)
+> 
+> Does that mean time limits are no longer deprecated?
+
+IMHO we still shouldn't use them in the storyline. They're annoying.
+
+But if users want a (scriptable) timelimit for a level they draw - why
+not let them?
+
+
+Regards,
+
+  Christoph
+
+
+From uafr at gmx.de  Sat Oct 28 17:26:29 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Sat, 28 Oct 2006 17:26:29 +0200
+Subject: [Supertux-devel] [Supertux-commit] r4422 - in
+	trunk/supertux/src: object scripting
+In-Reply-To: <45436C2A.6000605@berlios.de>
+References: <mailman.41.1162029636.29195.supertux-commit@lists.berlios.de>
+	<20061028143352.GA5170@greg.local> <45436C2A.6000605@berlios.de>
+Message-ID: <20061028152629.GA5318@greg.local>
+
+On 20061028 AnMaster <anmaster at berlios.de> wrote:
+> Anyway your mail client must be broken as all mails in the commit list
+> have this header:
+> Reply-To: supertux-devel at lists.berlios.de
+
+The headers of the mail I replied to look like this:
+| From: supertux-commit-request at lists.berlios.de
+| Subject: Supertux-commit Digest, Vol 4, Issue 28
+| To: supertux-commit at lists.berlios.de
+| Reply-To: supertux-commit at lists.berlios.de
+| Date: Sat, 28 Oct 2006 12:00:36 +0200
+
+As recommended in the digest, I adjusted the subject.
+ 
+> Please make sure to send to the devel list next time please.
+
+Can do. 
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From anmaster at berlios.de  Sat Oct 28 18:22:01 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Sat, 28 Oct 2006 18:22:01 +0200
+Subject: [Supertux-devel] [Supertux-commit] r4422 -
+ in	trunk/supertux/src: object scripting
+In-Reply-To: <20061028152629.GA5318@greg.local>
+References: <mailman.41.1162029636.29195.supertux-commit@lists.berlios.de>	<20061028143352.GA5170@greg.local>
+	<45436C2A.6000605@berlios.de> <20061028152629.GA5318@greg.local>
+Message-ID: <454383A9.2070404@berlios.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: RIPEMD160
+
+Ah, I don't use digest mode, for me it looks like
+Reply-To: supertux-devel at lists.berlios.de
+in the commit list.
+
+Seems like digest may be broken.
+
+Regards,
+Arvid
+
+Wolfgang Becker skrev:
+> On 20061028 AnMaster <anmaster at berlios.de> wrote:
+>> Anyway your mail client must be broken as all mails in the commit list
+>> have this header:
+>> Reply-To: supertux-devel at lists.berlios.de
+> 
+> The headers of the mail I replied to look like this:
+> | From: supertux-commit-request at lists.berlios.de
+> | Subject: Supertux-commit Digest, Vol 4, Issue 28
+> | To: supertux-commit at lists.berlios.de
+> | Reply-To: supertux-commit at lists.berlios.de
+> | Date: Sat, 28 Oct 2006 12:00:36 +0200
+> 
+> As recommended in the digest, I adjusted the subject.
+>  
+>> Please make sure to send to the devel list next time please.
+> 
+> Can do. 
+> 
+> Tsch??,
+> Wolfgang
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.1 (MingW32)
+
+iD8DBQFFQ4OpWmK6ng/aMNkRAySPAJ0fvVNkrV3aPEnEPx+GvTsYbd++gwCfabnq
+NSKvqpFVMtALm0tgZX47jmg=
+=Mxx4
+-----END PGP SIGNATURE-----
+
+

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3435%20-%20in%20trunk/supertux%3A%20data/levels/world1%20src%20src/badguy%20src/object%20src/scripting&In-Reply-To=%3C5a5496320604261500l4330e38djfbd24713dd044324%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000163.html">
+   <LINK REL="Next"  HREF="000185.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting</H1>
+    <B>Ryan Flegel</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3435%20-%20in%20trunk/supertux%3A%20data/levels/world1%20src%20src/badguy%20src/object%20src/scripting&In-Reply-To=%3C5a5496320604261500l4330e38djfbd24713dd044324%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting">rflegel at gmail.com
+       </A><BR>
+    <I>Thu Apr 27 00:00:03 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000163.html">[Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting
+</A></li>
+        <LI>Next message: <A HREF="000185.html">[Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#166">[ date ]</a>
+              <a href="thread.html#166">[ thread ]</a>
+              <a href="subject.html#166">[ subject ]</a>
+              <a href="author.html#166">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 4/26/06, Matze Braun &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">matze at braunis.de</A>&gt; wrote:
+&gt;<i> Am Mittwoch, den 26.04.2006, 04:15 +0200 schrieb <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">sik0fewl at berlios.de</A>:
+</I>&gt;<i> &gt; Author: sik0fewl
+</I>&gt;<i> &gt; Date: 2006-04-26 04:13:42 +0200 (Wed, 26 Apr 2006)
+</I>&gt;<i> &gt; New Revision: 3435
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Added:
+</I>&gt;<i> &gt;    trunk/supertux/src/random_generator.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/random_generator.hpp
+</I>&gt;<i> &gt;    trunk/supertux/src/scripting/random_generator.hpp
+</I>&gt;<i> &gt; Modified:
+</I>&gt;<i> &gt;    trunk/supertux/data/levels/world1/intro.nut
+</I>&gt;<i> &gt;    trunk/supertux/src/badguy/dispenser.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/badguy/kugelblitz.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/badguy/skullyhop.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/badguy/stalactite.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/badguy/zeekling.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/game_session.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/gameconfig.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/gameconfig.hpp
+</I>&gt;<i> &gt;    trunk/supertux/src/main.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/mainloop.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/object/fireworks.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/object/gameobjs.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/object/particles.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/object/particlesystem.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/object/particlesystem_interactive.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/object/player.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/object/skull_tile.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/object/unstable_tile.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/scripting/player.hpp
+</I>&gt;<i> &gt;    trunk/supertux/src/scripting/squirrel_util.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/scripting/wrapper.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/scripting/wrapper.hpp
+</I>&gt;<i> &gt;    trunk/supertux/src/scripting/wrapper.interface.hpp
+</I>&gt;<i> &gt;    trunk/supertux/src/title.cpp
+</I>&gt;<i> &gt; Log:
+</I>&gt;<i> &gt; Committing RandomGenerator patch from Allen King, with a few small changes
+</I>&gt;<i> &gt; Created scripting wrapper for the random number generator
+</I>&gt;<i> &gt;  - could someone check this over to make sure I did it properly? :)
+</I>&gt;<i> &gt; ...
+</I>&gt;<i>
+</I>&gt;<i> Some comments:
+</I>&gt;<i>
+</I>&gt;<i> I don't feel too well about the copyright:
+</I>&gt;<i>
+</I>&gt;<i> &quot;2. Redistributions in binary form must reproduce the above copyright
+</I>&gt;<i> notice, this list of conditions and the following disclaimer in the
+</I>&gt;<i> documentation and/or other materials provided with the distribution.&quot;
+</I>
+This is the BSD licence.. it should be no problem for us, the Linux
+kernel itself uses BSD code (in fact, I don't think there are any OSs
+that dont :). All that it requires is that we include the same text
+that is at the beginning of the source files in a text file in the
+binary distribution. It would just be another file to go along with
+LICENCE or we could even tag it at the end of LICENCE.
+
+&gt;<i> I don't like the squirrel interface like that. I'll change that to a
+</I>&gt;<i> single rand() function and override the one built into the squirrel
+</I>&gt;<i> standard library, otherwise we still can't be sure that the user is
+</I>&gt;<i> using our random numbers.
+</I>
+Okay, sounds good.
+
+--
+Ryan
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000163.html">[Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting
+</A></li>
+	<LI>Next message: <A HREF="000185.html">[Supertux-devel] Re: [Supertux-commit] r3435 - in trunk/supertux: data/levels/world1 src src/badguy src/object src/scripting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#166">[ date ]</a>
+              <a href="thread.html#166">[ thread ]</a>
+              <a href="subject.html#166">[ subject ]</a>
+              <a href="author.html#166">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

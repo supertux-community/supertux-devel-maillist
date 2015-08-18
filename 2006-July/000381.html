@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src src/gui
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3909%20-%20in%20trunk/supertux%3A%20data/locale%20src%20src/gui&In-Reply-To=%3C5a5496320607061121o6e534087gc578e7d2ddcf106%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000380.html">
+   <LINK REL="Next"  HREF="000388.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src src/gui</H1>
+    <B>Ryan Flegel</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3909%20-%20in%20trunk/supertux%3A%20data/locale%20src%20src/gui&In-Reply-To=%3C5a5496320607061121o6e534087gc578e7d2ddcf106%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src src/gui">rflegel at gmail.com
+       </A><BR>
+    <I>Thu Jul  6 20:21:50 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000380.html">[Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src src/gui
+</A></li>
+        <LI>Next message: <A HREF="000388.html">[Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#381">[ date ]</a>
+              <a href="thread.html#381">[ thread ]</a>
+              <a href="subject.html#381">[ subject ]</a>
+              <a href="author.html#381">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 7/6/06, Matze Braun &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">matze at braunis.de</A>&gt; wrote:
+&gt;<i> sommer at BerliOS wrote:
+</I>&gt;<i> &gt; Author: sommer
+</I>&gt;<i> &gt; Date: 2006-07-06 00:42:39 +0200 (Thu, 06 Jul 2006)
+</I>&gt;<i> &gt; New Revision: 3909
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Modified:
+</I>&gt;<i> &gt;    trunk/supertux/data/locale/de.po
+</I>&gt;<i> &gt;    trunk/supertux/src/game_session.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/gui/menu.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/player_status.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/resources.cpp
+</I>&gt;<i> &gt;    trunk/supertux/src/statistics.cpp
+</I>&gt;<i> &gt; Log:
+</I>&gt;<i> &gt; Changed sprintfs to snprintfs, updated translation
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> ...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; +namespace {
+</I>&gt;<i> &gt; +  inline const char* chain(const char* c1, const char* c2) {
+</I>&gt;<i> &gt; +    return (std::string(c1) + std::string(c2)).c_str();
+</I>&gt;<i> &gt; +  }
+</I>&gt;<i> &gt; +  inline const char* chain(const char* c1, const char* c2, const char* c3) {
+</I>&gt;<i> &gt; +    return (std::string(c1) + std::string(c2) + std::string(c3)).c_str();
+</I>&gt;<i> &gt; +  }
+</I>&gt;<i> &gt; +}
+</I>&gt;<i> &gt; +
+</I>&gt;<i> &gt;
+</I>&gt;<i> That looks like a memory error. The strings will get destructed before
+</I>&gt;<i> the function returns, and then the value of c_str() will be invalid (it
+</I>&gt;<i> probably works because there's no time that something else fills the
+</I>&gt;<i> memory until the stuff is used. But this is definately very wrong.
+</I>
+Yep, that's definitely not very safe. Perhaps stringstream would be a
+better solution than snprintf(), anyway?
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000380.html">[Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src src/gui
+</A></li>
+	<LI>Next message: <A HREF="000388.html">[Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#381">[ date ]</a>
+              <a href="thread.html#381">[ thread ]</a>
+              <a href="subject.html#381">[ subject ]</a>
+              <a href="author.html#381">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

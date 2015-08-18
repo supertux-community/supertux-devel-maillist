@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] OpenAL configuration nuisance when it requires pthreads
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20OpenAL%20configuration%20nuisance%20when%20it%20requires%20pthreads&In-Reply-To=%3C445F8E93.4040809%40a-king.us%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000216.html">
+   <LINK REL="Next"  HREF="000219.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] OpenAL configuration nuisance when it requires pthreads</H1>
+    <B>Allen King</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20OpenAL%20configuration%20nuisance%20when%20it%20requires%20pthreads&In-Reply-To=%3C445F8E93.4040809%40a-king.us%3E"
+       TITLE="[Supertux-devel] OpenAL configuration nuisance when it requires pthreads">allen at a-king.us
+       </A><BR>
+    <I>Mon May  8 20:31:47 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000216.html">[Supertux-devel] Building Supertux on OS/2
+</A></li>
+        <LI>Next message: <A HREF="000219.html">[Supertux-devel] 1 single idea
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#215">[ date ]</a>
+              <a href="thread.html#215">[ thread ]</a>
+              <a href="subject.html#215">[ subject ]</a>
+              <a href="author.html#215">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Linux FC4, my implementation of OpenAL requires libpthread!  However 
+./configure does not include libpthread when it tests for OpenAL.  (The 
+first OpenAL I used was a binary package: 
+openal-0.0.9-0.4.20060204cvs.fc4.i386.rpm.  It is the recommended OpenAL 
+for FC4. I then installed and built the source package: 
+openal-0.0.9-0.4.20060204cvs.fc4.src.rpm.  Both have the same problem.)
+
+The patch below fixes the problem.  It also changes the warning message, 
+because the failure of this test could be for either OpenAL or pthreads.  
+
+Perhaps a better solution would be to have configure check for pthread 
+first (before OpenAL), and always include -lpthread in the OpenAL test 
+if it exists.  However I am not experienced enough in things configure 
+to ferret that one out.
+
+I am also not sure that this patch works on all platforms, especially on 
+those without pthreads.
+
+I hope this isn't a cross-platform monkey!
+
+
+Index: configure.ac
+===================================================================
+--- configure.ac        (revision 3502)
++++ configure.ac        (working copy)
+@@ -134,10 +134,10 @@
+ NP_FINDLIB([OPENAL], [OpenAL], [OpenAL],
+          NP_LANG_PROGRAM([#include &lt;AL/al.h&gt;],
+            [alcOpenDevice(0);]),
+-         [], [-lopenal],
++         [], [-lopenal -lpthread],
+          [],
+-         [AC_MSG_ERROR([Please intall OpenAL])],
+-         [], [])
++         [AC_MSG_ERROR([Please intall OpenAL (or perhaps pthread)])],
++        [], [])
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060508/36ba1867/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060508/36ba1867/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000216.html">[Supertux-devel] Building Supertux on OS/2
+</A></li>
+	<LI>Next message: <A HREF="000219.html">[Supertux-devel] 1 single idea
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#215">[ date ]</a>
+              <a href="thread.html#215">[ thread ]</a>
+              <a href="subject.html#215">[ subject ]</a>
+              <a href="author.html#215">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] trying to install in xandros
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20trying%20to%20install%20in%20xandros&In-Reply-To=%3C4506BAF5.1090204%402006.expires.deltadevelopment.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000495.html">
+   <LINK REL="Next"  HREF="000497.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] trying to install in xandros</H1>
+    <B>Christoph Sommer</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20trying%20to%20install%20in%20xandros&In-Reply-To=%3C4506BAF5.1090204%402006.expires.deltadevelopment.de%3E"
+       TITLE="[Supertux-devel] trying to install in xandros">supertux at 2006.expires.deltadevelopment.de
+       </A><BR>
+    <I>Tue Sep 12 15:49:41 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000495.html">[Supertux-devel] trying to install in xandros
+</A></li>
+        <LI>Next message: <A HREF="000497.html">[Supertux-devel] trying to install in xandros
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#496">[ date ]</a>
+              <a href="thread.html#496">[ thread ]</a>
+              <a href="subject.html#496">[ subject ]</a>
+              <a href="author.html#496">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Daniel Sheets wrote:
+&gt;<i> I tried the generic autopackage 1.0.10
+</I>
+Perfect. This should work on almost any system.
+
+&gt;<i> I couldnt fine and downloads for xandros. I believe
+</I>&gt;<i> xandros is based on debian, but the apt-get did nothing.
+</I>
+If it really did nothing at all, i.e. report neither success nor error
+you might have done something wrong.
+
+Did you try looking for a SuperTux package in your graphical package
+manager (&quot;Xandros Networks&quot; if I read the Wikipedia article right)?
+
+If it doesn't, I can think of two possible ways, both of which require
+typing commands in a console: Open a console window by clicking &quot;Launch
+&gt;<i> Run Command...&quot;, then typing &quot;konsole&quot; and pressing the Enter key.
+</I>
+
+== 1: Get and install the debian package manually =====
+
+Download the package from
+
+<A HREF="http://ftp.us.debian.org/debian/pool/main/s/supertux/supertux_0.1.3-1.1_i386.deb">http://ftp.us.debian.org/debian/pool/main/s/supertux/supertux_0.1.3-1.1_i386.deb</A>
+
+Try double-clicking the file. If this doesn't open your package manager,
+move the file somewhere convenient, e.g. to &quot;/tmp&quot;, open a console
+window then type the following commands:
+
+su
+dpkg --install /tmp/supertux_0.1.3-1.1_i386.deb
+
+
+== 2: Run the autopackage file manually =====
+
+If your desktop does not know how to start shell scripts (which seems to
+be the case with Xandros') you can launch the autopackage installer
+manually. Just do the following:
+
+1.) Move the &quot;supertux-0.1.3.x86.package&quot; file to somewhere convenient,
+e.g. the &quot;/tmp&quot; directory.
+
+2.) In a console window, enter the following lines:
+cd /tmp &amp;&amp; bash supertux-0.1.3.x86.package
+
+Just follow the installer's prompts and you should be done.
+
+
+
+Please let us know if either (1) or (2) worked for you.
+
+
+Regards,
+
+   Christoph
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000495.html">[Supertux-devel] trying to install in xandros
+</A></li>
+	<LI>Next message: <A HREF="000497.html">[Supertux-devel] trying to install in xandros
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#496">[ date ]</a>
+              <a href="thread.html#496">[ thread ]</a>
+              <a href="subject.html#496">[ subject ]</a>
+              <a href="author.html#496">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

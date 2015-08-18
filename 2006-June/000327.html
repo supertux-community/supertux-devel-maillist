@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] SuperTux Configuration Files Contd. (patch)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20SuperTux%20Configuration%20Files%20Contd.%20%28patch%29&In-Reply-To=%3C44A124F8.4080909%40digitree.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000323.html">
+   <LINK REL="Next"  HREF="000342.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] SuperTux Configuration Files Contd. (patch)</H1>
+    <B>Daniel Hedlund</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20SuperTux%20Configuration%20Files%20Contd.%20%28patch%29&In-Reply-To=%3C44A124F8.4080909%40digitree.org%3E"
+       TITLE="[Supertux-devel] SuperTux Configuration Files Contd. (patch)">daniel at digitree.org
+       </A><BR>
+    <I>Tue Jun 27 14:30:48 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000323.html">[Supertux-devel] SuperTux Configuration Files (patch)
+</A></li>
+        <LI>Next message: <A HREF="000342.html">[Supertux-devel] [Bug #7496] error during the compilation of svn version
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#327">[ date ]</a>
+              <a href="thread.html#327">[ thread ]</a>
+              <a href="subject.html#327">[ subject ]</a>
+              <a href="author.html#327">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have taken my previous patch a bit further and changed when the 
+configuration file was saved from when the program exits to when a user 
+quits from the options menu.
+
+Several advantages to this method include:
+1.  changes to keyboard options get saved even if the game crashes while 
+playing a level
+2.  changes don't get saved if the program crashes while switching to or 
+from fullscreen mode because they haven't explicitly exited the options 
+menu.
+
+Some things I had to change to make this possible:
+1.  added an optional parameter to the Menu::update() function.  The 
+definition now looks like:
+const MenuAction &amp;override_action = MENU_ACTION_NONE);
+This allows us to now explicitly call a menu action from within the 
+code, and not limit us to only user-supplied actions (ie. you can call 
+&quot;MENU_ACTION_BACK&quot; after a couple minute timeout to return to the main 
+menu).  I also had to make the MenuAction enumeration public for this to 
+work.
+2.  made the options menu back button an entry which executes it's 
+menu_action() method , saves the configuration file and then tell the 
+menu to go back to the title screen.
+
+I have attached two patches, one patch, 
+fix_config_options_save-2006-06-27, includes previous changes from my 
+last email &quot;SuperTux Configuration Files (patch)&quot; using `svn diff`.  The 
+other patch (options_save-2006-06-27) only includes changes since my 
+last email using `diff -rU 3 src dst`.
+
+Cheers,
+
+Daniel Hedlund
+<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">daniel at digitree.org</A>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: fix_config_options_save-2006-06-27.patch
+Type: text/x-patch
+Size: 5798 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060627/66cdebcf/attachment.bin">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060627/66cdebcf/attachment.bin</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: options_save-2006-06-27.patch
+Type: text/x-patch
+Size: 2729 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060627/66cdebcf/attachment-0001.bin">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060627/66cdebcf/attachment-0001.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000323.html">[Supertux-devel] SuperTux Configuration Files (patch)
+</A></li>
+	<LI>Next message: <A HREF="000342.html">[Supertux-devel] [Bug #7496] error during the compilation of svn version
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#327">[ date ]</a>
+              <a href="thread.html#327">[ thread ]</a>
+              <a href="subject.html#327">[ subject ]</a>
+              <a href="author.html#327">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

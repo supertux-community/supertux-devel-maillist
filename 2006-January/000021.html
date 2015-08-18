@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] compilation on amd64
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20compilation%20on%20amd64&In-Reply-To=%3C20060128192424.GA28511%40garfield%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000020.html">
+   <LINK REL="Next"  HREF="000022.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] compilation on amd64</H1>
+    <B>Enrico Tassi</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20compilation%20on%20amd64&In-Reply-To=%3C20060128192424.GA28511%40garfield%3E"
+       TITLE="[Supertux-devel] compilation on amd64">gareuselesinge at debian.org
+       </A><BR>
+    <I>Sat Jan 28 20:24:24 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000020.html">[Supertux-devel] compilation on amd64
+</A></li>
+        <LI>Next message: <A HREF="000022.html">[Supertux-devel] Interested in playing around with the Supertux code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Jan 28, 2006 at 08:20:19PM +0100, Enrico Tassi wrote:
+&gt;<i> compiling the svn code on amd64 I get:
+</I>&gt;<i> 
+</I>&gt;<i> src/squirrel/squirrel/sqclass.h:32: error: cast from &#8216;void*&#8217; to &#8216;int&#8217;
+</I>&gt;<i> loses precision
+</I>&gt;<i> 
+</I>&gt;<i> repeated many times. on amd64 int are 32bits while pointers 64bits.
+</I>
+I forgot the patch.
+
+-- 
+Enrico Tassi
+-------------- next part --------------
+Index: src/squirrel/squirrel/sqclass.cpp
+===================================================================
+--- src/squirrel/squirrel/sqclass.cpp	(revision 3039)
++++ src/squirrel/squirrel/sqclass.cpp	(working copy)
+@@ -66,7 +66,7 @@
+ 				_methods.push_back(m);
+ 			}
+ 			else {
+-				_methods[(int)_userpointer(temp)].val = val;
++				_methods[(long int)_userpointer(temp)].val = val;
+ 			}
+ 		}
+ 		return true;
+@@ -90,7 +90,7 @@
+ 	int idx = _members-&gt;Next(refpos,outkey,oval);
+ 	if(idx != -1) {
+ 		if(type(oval) != OT_INTEGER) {
+-			outval = _methods[(int)_userpointer(oval)].val;
++			outval = _methods[(long int)_userpointer(oval)].val;
+ 		}
+ 		else {
+ 			outval = _defaultvalues[_integer(oval)].val;
+@@ -106,7 +106,7 @@
+ 		if(type(idx) == OT_INTEGER)
+ 			_defaultvalues[_integer(idx)].attrs = val;
+ 		else
+-			_methods[(int)_userpointer(idx)].attrs = val;
++			_methods[(long int)_userpointer(idx)].attrs = val;
+ 		return true;
+ 	}
+ 	return false;
+@@ -116,7 +116,7 @@
+ {
+ 	SQObjectPtr idx;
+ 	if(_members-&gt;Get(key,idx)) {
+-		outval = (type(idx) == OT_INTEGER?_defaultvalues[_integer(idx)].attrs:_methods[(int)_userpointer(idx)].attrs);
++		outval = (type(idx) == OT_INTEGER?_defaultvalues[_integer(idx)].attrs:_methods[(long int)_userpointer(idx)].attrs);
+ 		return true;
+ 	}
+ 	return false;
+Index: src/squirrel/squirrel/sqclass.h
+===================================================================
+--- src/squirrel/squirrel/sqclass.h	(revision 3039)
++++ src/squirrel/squirrel/sqclass.h	(working copy)
+@@ -29,7 +29,7 @@
+ 	bool NewSlot(const SQObjectPtr &amp;key,const SQObjectPtr &amp;val);
+ 	bool Get(const SQObjectPtr &amp;key,SQObjectPtr &amp;val) {
+ 		if(_members-&gt;Get(key,val)) {
+-			val = (type(val) == OT_INTEGER?_defaultvalues[_integer(val)].val:_methods[(int)_userpointer(val)].val);
++			val = (type(val) == OT_INTEGER?_defaultvalues[_integer(val)].val:_methods[(long int)_userpointer(val)].val);
+ 			return true;
+ 		}
+ 		return false;
+@@ -73,7 +73,7 @@
+ 	~SQInstance();
+ 	bool Get(const SQObjectPtr &amp;key,SQObjectPtr &amp;val)  {
+ 		if(_class-&gt;_members-&gt;Get(key,val)) {
+-			val = (type(val) == OT_INTEGER?_values[_integer(val)]:_class-&gt;_methods[(int)_userpointer(val)].val);
++			val = (type(val) == OT_INTEGER?_values[_integer(val)]:_class-&gt;_methods[(long int)_userpointer(val)].val);
+ 			return true;
+ 		}
+ 		return false;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000020.html">[Supertux-devel] compilation on amd64
+</A></li>
+	<LI>Next message: <A HREF="000022.html">[Supertux-devel] Interested in playing around with the Supertux code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

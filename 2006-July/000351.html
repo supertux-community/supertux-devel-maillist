@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Jam Fix for 10240-related Errors (patch)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Jam%20Fix%20for%2010240-related%20Errors%20%28patch%29&In-Reply-To=%3C44A65B92.6090501%40berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000352.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Jam Fix for 10240-related Errors (patch)</H1>
+    <B>Ravu al Hemio</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Jam%20Fix%20for%2010240-related%20Errors%20%28patch%29&In-Reply-To=%3C44A65B92.6090501%40berlios.de%3E"
+       TITLE="[Supertux-devel] Jam Fix for 10240-related Errors (patch)">ravu_al_hemio at berlios.de
+       </A><BR>
+    <I>Sat Jul  1 13:25:06 CEST 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000352.html">[Supertux-devel] Jam Fix for 10240-related Errors (patch)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#351">[ date ]</a>
+              <a href="thread.html#351">[ thread ]</a>
+              <a href="subject.html#351">[ subject ]</a>
+              <a href="author.html#351">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Daniel Hedlund wrote:
+&gt;<i> I have made a patch that fixes the 10240-related errors when compiling 
+</I>&gt;<i> with Jam (jam-fix-2006-06-30.patch).  The patch has only been tested 
+</I>&gt;<i> under Linux at the moment and would be appreciated if anyone under 
+</I>&gt;<i> Windows or OS X can let the list know if they have any problems.  
+</I>&gt;<i> AnMaster also recommends for anyone with a multi-cpu/core system to 
+</I>&gt;<i> see how well it works using multiple threads (ie. jam -j2).
+</I>&gt;<i>
+</I>&gt;<i> This patch fixes the problem by breaking each of the SuperTux 
+</I>&gt;<i> subdirectories into an archive file (.a) and then recombines them at 
+</I>&gt;<i> the end to form the supertux executable.  This patch slows down 
+</I>&gt;<i> overall compile time, but it should be compatible with most systems.
+</I>&gt;<i>
+</I>&gt;<i> I have also attached an older patch (jam-fix-gcc4-2006-06-28.patch) I 
+</I>&gt;<i> made that fixes the 10240 problems, but only appears to be compatible 
+</I>&gt;<i> with GCC 4.x.  The part of the patch that is incompatible is the use 
+</I>&gt;<i> of the '@file' syntax which looks in a file for a list of objects to 
+</I>&gt;<i> link together.  This patch is much cleaner, but should not be 
+</I>&gt;<i> introduced into the official source due to its incompatibilities.
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i>
+</I>&gt;<i> Daniel Hedlund
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">daniel at digitree.org</A>
+</I>Hey Daniel,
+
+I just found out that the OSX linker doesn't know &quot;--whole-archive&quot;.
+
+Wouldn't it be easier just to modify a small value in the jam sources? 
+While I think about it... we might want to drop a line to Perforce that 
+they should use better ways of getting the number of max cmdline 
+commands (and that 10240 is irrationally small).
+
+On OSX and other BSD systems, &quot;sysctl -n kern.argmax&quot; can be used to get 
+the value.
+
+As an interim hack, search &quot;jam.h&quot; in your jam sources for &quot;Jam 
+implementation misc&quot; and change the following definition of MAXLINE to a 
+nicer number. (262144 on my Darwin box.) Run &quot;jam&quot; to compile itself 
+(Baron M&#252;nchhausen's bootstrapping?) and overwrite your old binary with 
+the resulting one.
+
+~~ Ondra
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000352.html">[Supertux-devel] Jam Fix for 10240-related Errors (patch)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#351">[ date ]</a>
+              <a href="thread.html#351">[ thread ]</a>
+              <a href="subject.html#351">[ subject ]</a>
+              <a href="author.html#351">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

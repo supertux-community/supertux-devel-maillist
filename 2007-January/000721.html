@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Installing 0.3.0 Level Editor
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Installing%200.3.0%20Level%20Editor&In-Reply-To=%3C562647.21086.qm%40web32913.mail.mud.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000720.html">
+   <LINK REL="Next"  HREF="000722.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Installing 0.3.0 Level Editor</H1>
+    <B>onlinejb at yahoo.com</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Installing%200.3.0%20Level%20Editor&In-Reply-To=%3C562647.21086.qm%40web32913.mail.mud.yahoo.com%3E"
+       TITLE="[Supertux-devel] Installing 0.3.0 Level Editor">onlinejb at yahoo.com
+       </A><BR>
+    <I>Thu Jan 18 07:44:07 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000720.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+        <LI>Next message: <A HREF="000722.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#721">[ date ]</a>
+              <a href="thread.html#721">[ thread ]</a>
+              <a href="subject.html#721">[ subject ]</a>
+              <a href="author.html#721">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+The editor finally installed but not working.  While
+installing pango-1.11.5-2:
+
+ [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">root at localhost</A> pango]# rpm -v -U --nodeps   
+pango-1.11.5-2.i386.rpm
+ Preparing packages for installation...
+ pango-1.11.5-2
+ /usr/bin/pango-querymodules-32: symbol lookup error: 
+ /usr/lib/libpango-1.0.so.0: undefined symbol: 
+g_intern_static_string 
+ error: %post(pango-1.11.5-2.i386) scriptlet failed, 
+exit status 127
+
+Hmmm...pango doesn't install.  let's see:
+
+ [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">root at localhost</A> pango]# rpm -v -U --nodeps --test 
+pango-1.11.5-2.i386.rpm
+ Preparing packages for installation...
+         package pango-1.11.5-2 is already installed
+
+Okay...so it is installed, or so they would have me
+believe.  All right, I'll play along...
+
+ [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">root at localhost</A> supertux]# yum install
+gtk-sharp2-2.8.2-1.i386.rpm
+
+...That worked.
+
+ [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">root at localhost</A> supertux-editor-0.3.0]# jam
+
+...Success.  Now we're ready for the big time:
+
+ [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">root at localhost</A> supertux]# mono supertux-editor.exe &amp;
+
+...KA-BOOM!
+
+** (supertux-editor.exe:7199): WARNING **: The
+following assembly referenced from
+/root/in/supertux/supertux-editor.exe could not be
+loaded:
+     Assembly:   libeditor    (assemblyref_index=2)
+     Version:    0.0.0.0
+     Public Key: (none)
+The assembly was not found in the Global Assembly
+Cache, a path listed in the MONO_PATH environment
+variable, or in the location of the executing assembly
+(/root/in/supertux/).
+
+** (supertux-editor.exe:7199): WARNING **: Could not
+load file or assembly 'libe
+ditor, Version=0.0.0.0, Culture=neutral' or one of its
+dependencies.
+Stacktrace:
+
+
+Native stacktrace:
+
+        mono [0x815b8ed]
+        mono [0x81457b7]
+        [0x9a4440]
+        mono(mono_object_new+0x18) [0x80db3b8]
+       
+mono(mono_exception_from_name_two_strings+0x4c)
+[0x809dccc]
+        mono(mono_get_exception_file_not_found2+0x4b)
+[0x809e44b]
+        mono [0x80bcfbc]
+        mono [0x808bba5]
+        mono [0x80d857a]
+        mono(mono_object_new+0x18) [0x80db3b8]
+       
+mono(mono_exception_from_name_two_strings+0x4c)
+[0x809dccc]
+        mono(mono_get_exception_file_not_found2+0x4b)
+[0x809e44b]
+        mono [0x80bcfbc]
+        mono [0x808bba5]
+        mono [0x80d857a]
+        mono(mono_object_new+0x18) [0x80db3b8]
+       
+mono(mono_exception_from_name_two_strings+0x4c)
+[0x809dccc]
+        mono(mono_get_exception_type_load+0x4b)
+[0x809e0ab]
+        mono [0x808bbf5]
+        mono [0x80d857a]
+        mono [0x8145639]
+        mono(mono_runtime_invoke+0x27) [0x80d9cb7]
+        mono(mono_runtime_exec_main+0x5c) [0x80dae6c]
+        mono(mono_runtime_run_main+0x182) [0x80daa52]
+        mono(strftime+0x1c46) [0x8058572]
+        mono(mono_main+0x867) [0x8058f77]
+        mono(__fxstat64+0x12f) [0x80578db]
+        /lib/libc.so.6(__libc_start_main+0xdc)
+[0x150e5c]
+        mono(sinh+0x45) [0x8057831]
+
+Debug info from gdb:
+
+(no debugging symbols found)
+Using host libthread_db library
+&quot;/lib/libthread_db.so.1&quot;.
+(no debugging symbols found)
+(no debugging symbols found)
+(no debugging symbols found)
+(no debugging symbols found)
+(no debugging symbols found)
+[Thread debugging using libthread_db enabled]
+[New Thread 2664128 (LWP 7199)]
+[New Thread 8240016 (LWP 7201)]
+[New Thread 2747280 (LWP 7200)]
+(no debugging symbols found)
+(no debugging symbols found)
+(no debugging symbols found)
+(no debugging symbols found)
+(no debugging symbols found)
+(no debugging symbols found)
+0x009a4402 in __kernel_vsyscall ()
+  3 Thread 2747280 (LWP 7200)  0x009a4402 in
+__kernel_vsyscall ()
+  2 Thread 8240016 (LWP 7201)  0x009a4402 in
+__kernel_vsyscall ()
+  1 Thread 2664128 (LWP 7199)  0x009a4402 in
+__kernel_vsyscall ()
+Thread 3 (Thread 2747280 (LWP 7200)):
+#0  0x009a4402 in __kernel_vsyscall ()
+#1  0x00b6e436 in nanosleep () from
+/lib/libpthread.so.0
+#2  0x081057e0 in mono_pthread_key_for_tls ()
+#3  0x00b672db in start_thread () from
+/lib/libpthread.so.0
+#4  0x0020824e in clone () from /lib/libc.so.6
+
+Thread 2 (Thread 8240016 (LWP 7201)):
+#0  0x009a4402 in __kernel_vsyscall ()
+#1  0x00b6b076 in pthread_cond_wait@@GLIBC_2.3.2 ()
+from /lib/libpthread.so.0
+#2  0x0810aadf in mono_pthread_key_for_tls ()
+#3  0x0810ad7b in mono_pthread_key_for_tls ()
+#4  0x0810ac0e in mono_pthread_key_for_tls ()
+#5  0x0810e23f in mono_pthread_key_for_tls ()
+#6  0x080d663d in mono_gchandle_free ()
+#7  0x08094612 in mono_signature_explicit_this ()
+#8  0x080fbe97 in mono_environment_exitcode_set ()
+#9  0x0811ab95 in GC_end_blocking ()
+#10 0x00b672db in start_thread () from
+/lib/libpthread.so.0
+#11 0x0020824e in clone () from /lib/libc.so.6
+
+Thread 1 (Thread 2664128 (LWP 7199)):
+#0  0x009a4402 in __kernel_vsyscall ()
+#1  0x001c8d3f in fork () from /lib/libc.so.6
+#2  0x00b70224 in fork () from /lib/libpthread.so.0
+#3  0x008ac79a in g_spawn_close_pid () from
+/usr/lib/libglib-2.0.so.0
+#4  0x008ad224 in g_spawn_sync () from
+/usr/lib/libglib-2.0.so.0
+#5  0x008ad64d in g_spawn_command_line_sync () from
+/usr/lib/libglib-2.0.so.0
+#6  0x0815b996 in mono_debugger_run_finally ()
+#7  0x081457b7 in mono_jit_thread_attach ()
+#8  &lt;signal handler called&gt;
+#9  0x080d8a76 in mono_class_vtable ()
+#10 0x080db3b8 in mono_object_new ()
+#11 0x0809dccc in mono_exception_from_name_two_strings
+()
+#12 0x0809e44b in mono_get_exception_file_not_found2
+()
+#13 0x080bcfbc in mono_marshal_string_to_utf16 ()
+#14 0x0808bba5 in
+mono_class_get_method_from_name_flags ()
+#15 0x080d857a in mono_class_vtable ()
+#16 0x080db3b8 in mono_object_new ()
+#17 0x0809dccc in mono_exception_from_name_two_strings
+()
+#18 0x0809e44b in mono_get_exception_file_not_found2
+()
+#19 0x080bcfbc in mono_marshal_string_to_utf16 ()
+#20 0x0808bba5 in
+mono_class_get_method_from_name_flags ()
+#21 0x080d857a in mono_class_vtable ()
+#22 0x080db3b8 in mono_object_new ()
+#23 0x0809dccc in mono_exception_from_name_two_strings
+()
+#24 0x0809e0ab in mono_get_exception_type_load ()
+#25 0x0808bbf5 in
+mono_class_get_method_from_name_flags ()
+#26 0x080d857a in mono_class_vtable ()
+#27 0x08145639 in mono_jit_thread_attach ()
+#28 0x080d9cb7 in mono_runtime_invoke ()
+#29 0x080dae6c in mono_runtime_exec_main ()
+#30 0x080daa52 in mono_runtime_run_main ()
+#31 0x08058572 in mono_jit_exec ()
+#32 0x08058f77 in mono_main ()
+#33 0x080578db in strcpy ()
+#34 0x00000001 in ?? ()
+#35 0xbfc175a4 in ?? ()
+#36 0xbfc17578 in ?? ()
+#37 0x00150e5c in __libc_start_main () from
+/lib/libc.so.6
+#38 0x00150e5c in __libc_start_main () from
+/lib/libc.so.6
+#39 0x08057831 in strcpy ()
+#0  0x009a4402 in __kernel_vsyscall ()
+
+
+=================================================================
+Got a SIGSEGV while executing native code. This
+usually indicates
+a fatal error in the mono runtime or one of the native
+libraries 
+used by your application.
+=================================================================
+
+Aborted
+[<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">root at localhost</A> supertux]#
+
+
+
+
+
+ 
+____________________________________________________________________________________
+8:00? 8:25? 8:40? Find a flick in no time 
+with the Yahoo! Search movie showtime shortcut.
+<A HREF="http://tools.search.yahoo.com/shortcuts/#news">http://tools.search.yahoo.com/shortcuts/#news</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000720.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+	<LI>Next message: <A HREF="000722.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#721">[ date ]</a>
+              <a href="thread.html#721">[ thread ]</a>
+              <a href="subject.html#721">[ subject ]</a>
+              <a href="author.html#721">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

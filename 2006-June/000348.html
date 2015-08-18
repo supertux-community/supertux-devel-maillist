@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] [Bug #7496] error during the compilation of svn version
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%5BBug%20%237496%5D%20error%20during%20the%20compilation%20of%20svn%20version&In-Reply-To=%3C200606280532.k5S5W4gZ000196%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000343.html">
+   <LINK REL="Next"  HREF="000349.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] [Bug #7496] error during the compilation of svn version</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%5BBug%20%237496%5D%20error%20during%20the%20compilation%20of%20svn%20version&In-Reply-To=%3C200606280532.k5S5W4gZ000196%40unicorn.berlios.de%3E"
+       TITLE="[Supertux-devel] [Bug #7496] error during the compilation of svn version">admin at berlios.de
+       </A><BR>
+    <I>Wed Jun 28 07:32:04 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000343.html">[Supertux-devel] Where's the site?
+</A></li>
+        <LI>Next message: <A HREF="000349.html">[Supertux-devel] load error in flexlay, cannot start supertux editor
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#348">[ date ]</a>
+              <a href="thread.html#348">[ thread ]</a>
+              <a href="subject.html#348">[ subject ]</a>
+              <a href="author.html#348">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #7496, was updated on 2006-May-15 02:24
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: trougnouf
+Assigned to : none
+Summary: error during the compilation of svn version
+
+Details: sorry to try to use the developement version ^.^
+i tryed to compil it (install all the dependeny, autogen and configure works) but during the compilation i got that
+
+[...]
+C++ ./build/x86_64-unknown-linux-gnu/optimize/src/scripting/camera.o
+C++ ./build/x86_64-unknown-linux-gnu/optimize/src/scripting/time_scheduler.o
+C++ ./build/x86_64-unknown-linux-gnu/optimize/src/scripting/wrapper.o
+LinkApplication actions too long (max 10240)!
+<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">trougnouf at ubuntu</A>:~/svn/supertux$ 
+
+thankyou this game is wonderful and it replace counter strike in every student's laptop of my school since i played it :D
+
+Follow-Ups:
+
+Date: 2006-Jun-28 07:32
+By: ravu_al_hemio
+
+Comment:
+A short hack in Jam sources fixes the problem: open jam.h and jump to line 461. Change the definition of MAXLINE to a larger number (try something like 30000), rebuild jam and copy the new binary into /usr/bin or /usr/local/bin or ~/bin (overwriting the one you've had before).
+
+10240 is a pretty low limit, I give you that.
+-------------------------------------------------------
+
+Date: 2006-Jun-27 20:18
+By: farnkerl
+
+Comment:
+This problem is related to AMD64 processors and caused because the command line arguments supplied to jam's linker are too long for jam to handle.  A temporary workaround to this problem is to run the configure script with &quot;--build=x86_64-pc-linux-gnu&quot;:
+./configure --build=x86_64-pc-linux-gnu
+
+This will shorten the list of arguments down by a few hundred characters, bringing you back under the 10240 limit.  Note that you should run &quot;jam clean&quot; before reconfiguring and rebuilding.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=7496&amp;group_id=3467">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=7496&amp;group_id=3467</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000343.html">[Supertux-devel] Where's the site?
+</A></li>
+	<LI>Next message: <A HREF="000349.html">[Supertux-devel] load error in flexlay, cannot start supertux editor
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#348">[ date ]</a>
+              <a href="thread.html#348">[ thread ]</a>
+              <a href="subject.html#348">[ subject ]</a>
+              <a href="author.html#348">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

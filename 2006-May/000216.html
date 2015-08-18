@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Building Supertux on OS/2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Building%20Supertux%20on%20OS/2&In-Reply-To=%3C445F8885.5020701%40a-king.us%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000214.html">
+   <LINK REL="Next"  HREF="000215.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Building Supertux on OS/2</H1>
+    <B>Allen King</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Building%20Supertux%20on%20OS/2&In-Reply-To=%3C445F8885.5020701%40a-king.us%3E"
+       TITLE="[Supertux-devel] Building Supertux on OS/2">allen at a-king.us
+       </A><BR>
+    <I>Mon May  8 20:05:57 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000214.html">[Supertux-devel] Building Supertux on OS/2
+</A></li>
+        <LI>Next message: <A HREF="000215.html">[Supertux-devel] OpenAL configuration nuisance when it requires pthreads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#216">[ date ]</a>
+              <a href="thread.html#216">[ thread ]</a>
+              <a href="subject.html#216">[ subject ]</a>
+              <a href="author.html#216">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I get the same error messages on Linux FC4.  However, it occurs only on 
+the first attempt to jam (make) after a new download (or a jam 
+distclean).  After issuing jam a second it compiles cleanly.  Strangely, 
+that 2'nd jam doesn't resolve all dependencies -- it takes a 3'rd jam 
+which compiles about 20 dependencies, and thereafter it is clean.
+
+I have ignored it up to now, but since others brought it up, rebuilt a 
+clean copy (r3502) and remade.  The two files Ondra asked about were 
+there (./tools/miniswig/parser.cpp, and ./tools/miniswig/parser.hpp).  
+The only other thing I noticed was the line starting with &quot;Bison tools&quot;, 
+which came out after main.o, and may or may not be important.
+
+
+    [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">allen at grub</A> supertuxT1]$ ./autogen.sh
+    [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">allen at grub</A> supertuxT1]$ ./configure --enable-debug
+    [<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">allen at grub</A> supertuxT1]$ jam
+    ...patience...
+    ...found 1069 target(s)...
+            ....
+    C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/create_wrapper.o
+    Lex tools/miniswig/lexer.cpp
+    C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/lexer.o
+    *tools/miniswig/lexer.cpp:514:22: error: parser.hpp: No such file or
+    directory
+    tools/miniswig/lexer.cpp:688: error: 'YYSTYPE' was not declared in
+    this scope
+    tools/miniswig/lexer.cpp:688: error: 'yylval' was not declared in
+    this scope
+    tools/miniswig/lexer.cpp:689: error: expected ',' or ';' before '{'
+    token
+
+        g++ -c -o
+    ./build/i686-pc-linux-gnu/debug/tools/miniswig/lexer.o  -I. -I./src
+    -Itools/miniswig/.   -ffast-math -Wall -W -Werror -O0 -g3 -DDEBUG
+    -Wno-unused tools/miniswig/lexer.cpp
+
+    ...failed C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/lexer.o ...
+    *C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/main.o
+    *Bison tools/miniswig/parser.cpp tools/miniswig/parser.hpp *
+    C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/parser.o
+    C++ ./build/i686-pc-linux-gnu/debug/tools/miniswig/create_docu.o
+        .....
+    ...on 100th target...
+        .....
+    ...on 200th target...
+       .....
+    C++ ./build/i686-pc-linux-gnu/debug/src/scripting/time_scheduler.o
+    ...skipped &lt;T!src!scripting!&gt;wrapper.cpp for lack of miniswig...
+    ...skipped &lt;T!src!scripting!&gt;wrapper.o for lack of
+    &lt;T!src!scripting!&gt;wrapper.cpp...
+    ...skipped supertux for lack of &lt;T!src!scripting!&gt;wrapper.o...
+      .....
+    ...failed updating 1 target(s)...
+    ...skipped 4 target(s)...
+    ...updated 209 target(s)...
+
+
+Ravu al Hemio wrote:
+&gt;<i> Hey Dave,
+</I>&gt;<i>
+</I>&gt;<i> it's entirely possible that bison spat out a pair of files (parser.cpp 
+</I>&gt;<i> and a header) with the header file not being called &quot;parser.hpp&quot;. 
+</I>&gt;<i> Check if you can find a file named parser.cpp.h and rename it to 
+</I>&gt;<i> parser.hpp. Then you should be able to continue the build.
+</I>&gt;<i>
+</I>&gt;<i> (I had to do this hack on Mac OS X too.)
+</I>&gt;<i>
+</I>&gt;<i> Please drop a line if it helped.
+</I>&gt;<i>
+</I>&gt;<i> Have fun,
+</I>&gt;<i> ~~ Ondra Hosek
+</I>&gt;<i>
+</I>&gt;<i> Dave Yeo wrote:
+</I>&gt;&gt;<i> Hi, I'm trying to build Supertux (latest svn version) on OS/2. While 
+</I>&gt;&gt;<i> ver 0.1.3 built out of the box I'm having problems with the svn version.
+</I>&gt;&gt;<i> src/video/font.cpp needs &lt;sys/types.h&gt; for ssize_t
+</I>&gt;&gt;<i> The big problem is in tools/miniswig where the error starts like this
+</I>&gt;&gt;<i> Compiler is GCC-EMX ...found 753 target(s)...
+</I>&gt;&gt;<i> ...updating 8 target(s)...
+</I>&gt;&gt;<i> Bison tools\miniswig\parser.cpp tools\miniswig\parser.hpp C++ 
+</I>&gt;&gt;<i> tools\miniswig\lexer.o tools/miniswig/lexer.cpp:514:22: parser.hpp: 
+</I>&gt;&gt;<i> No such file or directory
+</I>&gt;&gt;<i> tools/miniswig/lexer.cpp:688: error: `YYSTYPE' was not declared in 
+</I>&gt;&gt;<i> this scope
+</I>&gt;&gt;<i> tools/miniswig/lexer.cpp:688: error: `yylval' was not declared in 
+</I>&gt;&gt;<i> this scope
+</I>&gt;&gt;<i> tools/miniswig/lexer.cpp:689: error: syntax error before `{' token
+</I>&gt;&gt;<i> tools/miniswig/lexer.cpp:691: error: register name not specified for `
+</I>&gt;&gt;<i>    char*yy_cp'
+</I>&gt;&gt;<i> ...
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> and I can't decide what the problem is. Bison?, jam (which I had to 
+</I>&gt;&gt;<i> hack a bit to get it working) or what?
+</I>&gt;&gt;<i> Dave, who has a son who loves Supertux
+</I>&gt;&gt;<i>   
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/supertux-devel">http://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060508/561529f5/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060508/561529f5/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000214.html">[Supertux-devel] Building Supertux on OS/2
+</A></li>
+	<LI>Next message: <A HREF="000215.html">[Supertux-devel] OpenAL configuration nuisance when it requires pthreads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#216">[ date ]</a>
+              <a href="thread.html#216">[ thread ]</a>
+              <a href="subject.html#216">[ subject ]</a>
+              <a href="author.html#216">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

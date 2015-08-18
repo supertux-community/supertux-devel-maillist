@@ -1,0 +1,72 @@
+From fulbert05 at gmail.com  Thu Feb 15 15:36:51 2007
+From: fulbert05 at gmail.com (Fulbert)
+Date: Thu, 15 Feb 2007 15:36:51 +0100
+Subject: [Supertux-devel] [Translation] French
+Message-ID: <43a23b780702150636x571e814bg22eaa1c986862b11@mail.gmail.com>
+
+Hi!
+
+I've translated SuperTux 0.3.0 in french. This translation is not exactely
+because my english is very bad. The translation is similar to a french
+game...
+You can find the .po file here :
+http://www.sansinteret.info/fulbert/supertux/traduction/fr.po
+
+Thank for this good game, I'm happy to help you in your conquest of the
+world ! :P
+Bye.
+
+P.S. : Contact me if you need (and sorry if my english is too bad...)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20070215/9f2e5c75/attachment.html>
+
+From djwings at gmail.com  Thu Feb 15 22:49:02 2007
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Thu, 15 Feb 2007 16:49:02 -0500
+Subject: [Supertux-devel] [Translation] French
+In-Reply-To: <43a23b780702150636x571e814bg22eaa1c986862b11@mail.gmail.com>
+References: <43a23b780702150636x571e814bg22eaa1c986862b11@mail.gmail.com>
+Message-ID: <826ffc730702151349v2fe6653m789375ab2dbd55e2@mail.gmail.com>
+
+Thank you anyways, a rough translation is much better than nothing. Someone
+else will probably fix it anyways, and they'll be glad you started it.
+
+On 2/15/07, Fulbert <fulbert05 at gmail.com> wrote:
+>
+> Hi!
+>
+> I've translated SuperTux 0.3.0 in french. This translation is not exactely
+> because my english is very bad. The translation is similar to a french
+> game...
+> You can find the .po file here :
+> http://www.sansinteret.info/fulbert/supertux/traduction/fr.po
+>
+> Thank for this good game, I'm happy to help you in your conquest of the
+> world ! :P
+> Bye.
+>
+> P.S. : Contact me if you need (and sorry if my english is too bad...)
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20070215/a689b23c/attachment.html>
+
+From goldenpiranha at gmail.com  Wed Feb 28 04:01:01 2007
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Tue, 27 Feb 2007 19:01:01 -0800
+Subject: [Supertux-devel] Bomb's
+Message-ID: <bcd1d8470702271901v4071c07bt6100f72507f16480@mail.gmail.com>
+
+I think that if a bomb explodes on a crumbling block, the block should
+crumble.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20070227/c068d587/attachment.html>
+

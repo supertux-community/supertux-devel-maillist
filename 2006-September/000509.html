@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] PROBLEM!!!
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20PROBLEM%21%21%21&In-Reply-To=%3C20060918195908.71385.qmail%40web37010.mail.mud.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000508.html">
+   <LINK REL="Next"  HREF="000510.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] PROBLEM!!!</H1>
+    <B>Julian Marchant</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20PROBLEM%21%21%21&In-Reply-To=%3C20060918195908.71385.qmail%40web37010.mail.mud.yahoo.com%3E"
+       TITLE="[Supertux-devel] PROBLEM!!!">mad_monk4000 at yahoo.com
+       </A><BR>
+    <I>Mon Sep 18 21:59:08 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000508.html">[Supertux-devel] Compiling in Windows
+</A></li>
+        <LI>Next message: <A HREF="000510.html">[Supertux-devel] PROBLEM!!!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#509">[ date ]</a>
+              <a href="thread.html#509">[ thread ]</a>
+              <a href="subject.html#509">[ subject ]</a>
+              <a href="author.html#509">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The only messages I'm getting from the mailing list are ones like the one below. I think my e-mail account might have something to do with it.
+
+  Send Supertux-devel mailing list submissions to
+<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">supertux-devel at lists.berlios.de</A>
+
+To subscribe or unsubscribe via the World Wide Web, visit
+<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+or, via email, send a message with subject or body 'help' to
+<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">supertux-devel-request at lists.berlios.de</A>
+
+You can reach the person managing the list at
+<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">supertux-devel-owner at lists.berlios.de</A>
+
+When replying, please edit your Subject line so it is more specific
+than &quot;Re: Contents of Supertux-devel digest...&quot;
+
+
+Today's Topics:
+
+1. Re: Iceflower implementation (<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">djwings at gmail.com</A>)
+2. Frozen Mr. Tree and Snow Snail sprites (<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">djwings at gmail.com</A>)
+
+
+----------------------------------------------------------------------
+
+Message: 1
+Date: Sat, 16 Sep 2006 16:22:05 -0400
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">djwings at gmail.com</A>
+Subject: Re: [Supertux-devel] Iceflower implementation
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">supertux-devel at lists.berlios.de</A>
+Message-ID:
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">826ffc730609161322n5703da13r2f0c0ab4aeb45558 at mail.gmail.com</A>&gt;
+Content-Type: text/plain; charset=&quot;iso-8859-1&quot;
+
+I have an idea for creating frozen images of bagdguys in Gimp:
+1) Make a new layer as wide as the image, but only 1 pixel high (2 or 3
+works fine).
+2) Render a solid-noise cloud with Filters &gt; Render &gt; Clouds &gt; Solid
+Noise...
+3) Scale the layer to the full image size.
+4) Make the layer between 50 and 70% opaque.
+5) Go to Layer &gt; Colors &gt; Colorize, and crank up the lightness (about 25 to
+50%), and move the hue to between 180 and 200 degrees.
+6) Go to the badguy's layer, hit Z, and select the transparency, then go
+back and trim the frost layer.
+I'm doing this to a series of badguys, and I'll upload the results when I'm
+done.
+
+On 8/18/06, Jonas B?hr wrote:
+&gt;<i>
+</I>&gt;<i> Am Freitag, 18. August 2006 01:14 schrieb Afief Halumi:
+</I>&gt;<i> &gt; IMHO playing with ice flower is more fun than fire flower, how else
+</I>&gt;<i> would
+</I>&gt;<i> &gt; tux cross the extra hard ocean levels? of course he has to freez the
+</I>&gt;<i> water
+</I>&gt;<i> &gt; with ice flower abilities :-P
+</I>&gt;<i>
+</I>&gt;<i> The ability to freeze wather would be quite interesting if it's not
+</I>&gt;<i> permanently:
+</I>&gt;<i> Imagine if the a frozen block stays frozen when there is no more wather
+</I>&gt;<i> around
+</I>&gt;<i> it. If there is still whater from one side (right, left or underneath) the
+</I>&gt;<i> block melts ater three seconds, wather from two sides: melt after two
+</I>&gt;<i> seconds
+</I>&gt;<i> and if there is whater from all three sides, the block melts after one
+</I>&gt;<i> second...
+</I>&gt;<i>
+</I>&gt;<i> bye,
+</I>&gt;<i> Jonas
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Try Krusader...
+</I>&gt;<i> <A HREF="http://krusader.org">http://krusader.org</A> - twinpanel filemanager for KDE
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/1e3ccb3f/attachment-0001.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/1e3ccb3f/attachment-0001.html</A> 
+
+------------------------------
+
+Message: 2
+Date: Sat, 16 Sep 2006 16:49:10 -0400
+From: <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">djwings at gmail.com</A>
+Subject: [Supertux-devel] Frozen Mr. Tree and Snow Snail sprites
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">supertux-devel at lists.berlios.de</A>
+Message-ID:
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">826ffc730609161349h2a1f2539qd4891679e7dda77c at mail.gmail.com</A>&gt;
+Content-Type: text/plain; charset=&quot;iso-8859-1&quot;
+
+All the files are attached, including updated sprite files for each. See my
+post in the Ice Flower topic about making these pics.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.html</A> 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: dizzy_frozen.png
+Type: image/png
+Size: 7479 bytes
+Desc: not available
+Url : <A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.png">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.png</A> 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: mr_tree.sprite
+Type: application/octet-stream
+Size: 507 bytes
+Desc: not available
+Url : <A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.obj">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment.obj</A> 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: small_frozen.png
+Type: image/png
+Size: 7489 bytes
+Desc: not available
+Url : <A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0001.png">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0001.png</A> 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: stumpy.sprite
+Type: application/octet-stream
+Size: 1150 bytes
+Desc: not available
+Url : <A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0001.obj">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0001.obj</A> 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: walk_frozen.png
+Type: image/png
+Size: 12927 bytes
+Desc: not available
+Url : <A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0002.png">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0002.png</A> 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: snail.sprite
+Type: application/octet-stream
+Size: 1268 bytes
+Desc: not available
+Url : <A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0002.obj">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0002.obj</A> 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: snowsnail_flip_frozen.png
+Type: image/png
+Size: 2335 bytes
+Desc: not available
+Url : <A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0003.png">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0003.png</A> 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: snowsnail_frozen.png
+Type: image/png
+Size: 2815 bytes
+Desc: not available
+Url : <A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0004.png">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060916/3040acc8/attachment-0004.png</A> 
+
+------------------------------
+
+_______________________________________________
+Supertux-devel mailing list
+<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+
+
+End of Supertux-devel Digest, Vol 3, Issue 10
+*********************************************
+
+
+ 		
+---------------------------------
+Do you Yahoo!?
+ Get on board. You're invited to try the new Yahoo! Mail.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060918/f43e2f8c/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060918/f43e2f8c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000508.html">[Supertux-devel] Compiling in Windows
+</A></li>
+	<LI>Next message: <A HREF="000510.html">[Supertux-devel] PROBLEM!!!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#509">[ date ]</a>
+              <a href="thread.html#509">[ thread ]</a>
+              <a href="subject.html#509">[ subject ]</a>
+              <a href="author.html#509">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

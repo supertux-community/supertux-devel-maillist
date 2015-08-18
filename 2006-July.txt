@@ -1,0 +1,3536 @@
+From ravu_al_hemio at berlios.de  Sat Jul  1 13:25:06 2006
+From: ravu_al_hemio at berlios.de (Ravu al Hemio)
+Date: Sat, 01 Jul 2006 13:25:06 +0200
+Subject: [Supertux-devel] Jam Fix for 10240-related Errors (patch)
+In-Reply-To: <44A5830D.6050008@digitree.org>
+References: <44A5830D.6050008@digitree.org>
+Message-ID: <44A65B92.6090501@berlios.de>
+
+Daniel Hedlund wrote:
+> I have made a patch that fixes the 10240-related errors when compiling 
+> with Jam (jam-fix-2006-06-30.patch).  The patch has only been tested 
+> under Linux at the moment and would be appreciated if anyone under 
+> Windows or OS X can let the list know if they have any problems.  
+> AnMaster also recommends for anyone with a multi-cpu/core system to 
+> see how well it works using multiple threads (ie. jam -j2).
+>
+> This patch fixes the problem by breaking each of the SuperTux 
+> subdirectories into an archive file (.a) and then recombines them at 
+> the end to form the supertux executable.  This patch slows down 
+> overall compile time, but it should be compatible with most systems.
+>
+> I have also attached an older patch (jam-fix-gcc4-2006-06-28.patch) I 
+> made that fixes the 10240 problems, but only appears to be compatible 
+> with GCC 4.x.  The part of the patch that is incompatible is the use 
+> of the '@file' syntax which looks in a file for a list of objects to 
+> link together.  This patch is much cleaner, but should not be 
+> introduced into the official source due to its incompatibilities.
+>
+> Cheers,
+>
+> Daniel Hedlund
+> daniel at digitree.org
+Hey Daniel,
+
+I just found out that the OSX linker doesn't know "--whole-archive".
+
+Wouldn't it be easier just to modify a small value in the jam sources? 
+While I think about it... we might want to drop a line to Perforce that 
+they should use better ways of getting the number of max cmdline 
+commands (and that 10240 is irrationally small).
+
+On OSX and other BSD systems, "sysctl -n kern.argmax" can be used to get 
+the value.
+
+As an interim hack, search "jam.h" in your jam sources for "Jam 
+implementation misc" and change the following definition of MAXLINE to a 
+nicer number. (262144 on my Darwin box.) Run "jam" to compile itself 
+(Baron M?nchhausen's bootstrapping?) and overwrite your old binary with 
+the resulting one.
+
+~~ Ondra
+
+
+From matze at braunis.de  Sat Jul  1 13:34:44 2006
+From: matze at braunis.de (Matze Braun)
+Date: Sat, 01 Jul 2006 13:34:44 +0200
+Subject: [Supertux-devel] Jam Fix for 10240-related Errors (patch)
+In-Reply-To: <44A65B92.6090501@berlios.de>
+References: <44A5830D.6050008@digitree.org> <44A65B92.6090501@berlios.de>
+Message-ID: <44A65DD4.4060401@braunis.de>
+
+Ravu al Hemio wrote:
+> Daniel Hedlund wrote:
+>> I have made a patch that fixes the 10240-related errors when 
+>> compiling with Jam (jam-fix-2006-06-30.patch).  The patch has only 
+>> been tested under Linux at the moment and would be appreciated if 
+>> anyone under Windows or OS X can let the list know if they have any 
+>> problems.  AnMaster also recommends for anyone with a multi-cpu/core 
+>> system to see how well it works using multiple threads (ie. jam -j2).
+>>
+>> This patch fixes the problem by breaking each of the SuperTux 
+>> subdirectories into an archive file (.a) and then recombines them at 
+>> the end to form the supertux executable.  This patch slows down 
+>> overall compile time, but it should be compatible with most systems.
+>>
+>> I have also attached an older patch (jam-fix-gcc4-2006-06-28.patch) I 
+>> made that fixes the 10240 problems, but only appears to be compatible 
+>> with GCC 4.x.  The part of the patch that is incompatible is the use 
+>> of the '@file' syntax which looks in a file for a list of objects to 
+>> link together.  This patch is much cleaner, but should not be 
+>> introduced into the official source due to its incompatibilities.
+>>
+>> Cheers,
+>>
+>> Daniel Hedlund
+>> daniel at digitree.org
+> Hey Daniel,
+>
+> I just found out that the OSX linker doesn't know "--whole-archive".
+>
+> Wouldn't it be easier just to modify a small value in the jam sources? 
+> While I think about it... we might want to drop a line to Perforce 
+> that they should use better ways of getting the number of max cmdline 
+> commands (and that 10240 is irrationally small).
+
+Unfortunately there are some problems with this:
+* Jam isn't maintained actively, there are countless patches floating 
+around the jam mailing list and in the perforce public repository (speed 
+improvements, countless bugfixes to the builtin rules and even for 
+commandline length if I remember correctly). The chance for a new jam 
+release anytime soon is minimal :-(
+* There are at least 2 forks of jam around at the moment: ftjam and 
+boostjam. These are more actively maintained and we could look whether 
+they already contain a fix for the commandline length issue or would 
+include a patch from our side.
+* Maybe the 10240 limit is there to enforce you to write portable 
+jamfiles, there might be obscure platforms around that can't handle 
+more. Then again these strange architectures are probably so old that we 
+can't compile supertux on them anyway, so this point isn't really valid 
+for us
+>
+> On OSX and other BSD systems, "sysctl -n kern.argmax" can be used to 
+> get the value.
+>
+> As an interim hack, search "jam.h" in your jam sources for "Jam 
+> implementation misc" and change the following definition of MAXLINE to 
+> a nicer number. (262144 on my Darwin box.) Run "jam" to compile itself 
+> (Baron M?nchhausen's bootstrapping?) and overwrite your old binary 
+> with the resulting one.
+Problem is that it's a very bad idea to ask our users to patch and 
+compile their own jam binaries :-/
+
+Greetings,
+    Matze
+
+
+
+From daniel at digitree.org  Sat Jul  1 14:07:09 2006
+From: daniel at digitree.org (Daniel Hedlund)
+Date: Sat, 01 Jul 2006 05:07:09 -0700
+Subject: [Supertux-devel] Jam Fix for 10240-related Errors (patch)
+In-Reply-To: <44A65B92.6090501@berlios.de>
+References: <44A5830D.6050008@digitree.org> <44A65B92.6090501@berlios.de>
+Message-ID: <44A6656D.6030905@digitree.org>
+
+Ravu al Hemio wrote:
+> Hey Daniel,
+>
+> I just found out that the OSX linker doesn't know "--whole-archive".
+>
+Ondra, can you send me a copy of the man pages for g++ and ld so I can 
+see if there is an alternative command argument I can use on that 
+system?  It might be something simple.  Could you also provide me with 
+the version numbers of OS X, g++ and ld?  For OS X users, it may be as 
+simple as rolling back the new jam_fix patch and applying the other one 
+I supplied in a previous email; the man page will help let me know if 
+that's possible.
+
+> Wouldn't it be easier just to modify a small value in the jam sources? 
+> While I think about it... we might want to drop a line to Perforce 
+> that they should use better ways of getting the number of max cmdline 
+> commands (and that 10240 is irrationally small).
+>
+Although there won't be that many different people compiling the 
+SuperTux source code since there are a limited number of developers, you 
+don't want to make it very difficult for an interested individual to 
+dive into the project and start playing around.  There are probably 20 
+people max who normally compile SuperTux and it's not a big thing to ask 
+all the developers to modify the jam source code.  What is a big thing 
+is to try to convince the Linux distributors/vendors to keep a patched 
+version of jam specifically to compile SuperTux every time they want to 
+distribute a binary package with their distribution.
+
+> As an interim hack, search "jam.h" in your jam sources for "Jam 
+> implementation misc" and change the following definition of MAXLINE to 
+> a nicer number. (262144 on my Darwin box.) Run "jam" to compile itself 
+> (Baron M?nchhausen's bootstrapping?) and overwrite your old binary 
+> with the resulting one.
+
+Since we've committed the patch to SVN, this won't fix the problem 
+anymore until we find another solution for your platform.  Can you or 
+someone else with OS X please make yourselves known on the #supertux IRC 
+channel so we can work this out as soon as possible.
+
+Cheers,
+
+Daniel Hedlund
+daniel at digitree.org
+
+
+From sommeraktion at discardmail.com  Sun Jul  2 05:21:31 2006
+From: sommeraktion at discardmail.com (sommeraktion at discardmail.com)
+Date: So, 2 Jul 2006 05:21:31
+Subject: [Supertux-devel] TOP: Schwarze klassische Socken zum Schleuderpreis
+Message-ID: <200607020657.k626vbe25374@bat.berlios.de>
+
+============================================================= 
+         Schwarze klassische Socken in Top-Qualit?t 
+               zu einem unschlagbaren Preis! 
+=============================================================   
+
+Unser Eink?ufer hat gezaubert! Schwarze klassische Herren -  
+Socken in hervorragender Qualit?t mit handgekettelten Spitzen  
+(diese Naht sp?ren Sie nicht!) aus hochwertiger mit Lycra 
+angereicherter Baumwolle sind jetzt zu einem absoluten  
+Schn?ppchen - Preis zu haben! Nutzen Sie diese einmalige   
+Gelegenheit noch heute, und trennen Sie sich von Ihren   
+alten Socken! 
+     
+ 
+Argumente, die z?hlen! Bester Kundenservice f?r Sie: 
+
+* Wir liefern bequem gegen Rechnung! 
+* Unschlagbare Preise und Konditionen! 
+* Ausgesuchte Top - Qualit?t, keine Billigware! 
+* Bezahlung mit 100% WIR m?glich! 
+
+
+=============================================================    
+                     Vergleichen Sie selbst!  
+1 Paar Socken statt Fr. 18.- bereits ab Fr. 2.70! (100 Paar) 
+=============================================================  
+
+Socken, wie von einem anderen Stern! Mit optimierter Passform, 
+verbesserter F?rbeformel f?r l?ngere Farbechtheit auch nach 
+intensivem Waschen, und mit handgekettelten Spitzen. Die  
+Socken ?berzeugen durch erstklassige Qualit?t in Material 
+und Verarbeitung und werden auch h?chsten Anspr?chen gerecht. 
+Keine billigen oder minderwertigen "Freizeit"-Socken, sondern  
+klassische, schwarze Business - Socken aus hochwertiger 
+Baumwolle mit Lycra-Anteil f?r h?chsten Tragkomfort.     
+
+- Neue Produktion mit zahlreichen Verbesserungen 
+- Waden - Socken glatt, in 200Nadel - Top - Qualit?t (!!) 
+- Ergonomischer Schnitt mit handgekettelten Spitzen 
+- Feinste, mit Lycra angereicherte Baumwolle 
+- leicht und anschmiegsam  
+- Verbesserte Webe - Technik gegen "Verfilzen"    
+- Business- Qualit?t im klassischen Stil,  
+  passt hervorragend zu Anz?gen 
+- Kein Aufdruck von "Elef?ntchen" oder "dekorativen" Streifen 
+
+
+
+Unser Angebot f?r Sie: 
+==============================================================  
+
+Schwarze klassische Business - Socken in Top - Qualit?t 
+offizieller Ladenpreis Fr. 18.- / Paar 
+
+20 Paar       statt     360.-     nur     Fr.   69.-  !! 
+40 Paar       statt     720.-     nur     Fr.  118.-  !!  
+60 Paar       statt    1080.-     nur     Fr.  168.-  !! 
+100 Paar      statt    1800.-     nur     Fr.  270.-  !!       
+
+
+Bestellen Sie jetzt bequem und unkompliziert per Telefax! 
+
+* mit dem guten Gef?hl, das Socken - Problem gel?st, 
+* viel Zeit und Nerven beim Einkaufen gespart, 
+* und Ihren Geldbeutel ENORM geschont zu haben! 
+
+
+=============================================================== 
+
+Ja, ich m?chte von diesem Angebot profitieren und bestelle 
+bequem gegen Rechnung 10 Tage netto: 
+
+
+____ 20 Paar  statt  Fr. 360.-   f?r nur Fr.   69.- !! 
+
+____ 40 Paar  statt  Fr. 720.-   f?r nur Fr.  118.- !! 
+
+____ 60 Paar  statt  Fr. 1080.-  f?r nur Fr.  168.- !! 
+
+____ 100 Paar statt  Fr. 1800.-  f?r nur Fr.  270.- !!        
+
+
+Gr?sse: ____ x 35-38   ____ x 39-42   ____ x 43 - 46 
+
+
+zuz?glich Versandkostenanteil Fr. 8.- 
+
+
+=============================================================== 
+!!!!             Minimalbestellmenge 20 Paar!              !!!! 
+===============================================================  
+
+___ Ich bezahle mit 100% WIR 
+
+_______________________________________________________________ 
+
+
+Name/Vorname:__________________________________________________ 
+
+
+Adresse: ______________________________________________________ 
+
+
+PLZ/Ort:_______________________________________________________ 
+
+
+EMail:_________________________________________________________ 
+
+
+
+Datum / Unterschrift: _________________________________________ 
+
+=============================================================== 
+
+Bitte Talon ausdrucken und einsenden oder faxen an:  
+
+Socks and more AG, 
+Postfach, 6062 W'ilen  
+Telefax: 041- 661 17 19  
+
+
+______________________________________________________________  
+Newsletter abbestellen: Senden Sie Ihre EMail-Adresse an  
+ausjuni at uk2.net oder per Telefax.    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+From wansti at gmx.de  Sun Jul  2 15:13:17 2006
+From: wansti at gmx.de (Marek M.)
+Date: Sun, 02 Jul 2006 15:13:17 +0200
+Subject: [Supertux-devel] TOP: Schwarze klassische Socken zum Schleuderpreis
+In-Reply-To: <200607020657.k626vbe25374@bat.berlios.de>
+References: <200607020657.k626vbe25374@bat.berlios.de>
+Message-ID: <44A7C66D.1010007@gmx.de>
+
+Hey everyone,
+sorry for spamming your mailbox, but this was too funny to not approve
+it. :-)
+For those of you who don't speak German, this junk mail advertises
+"Black classic socks at discount prize". I'll translate the funniest
+lines for you:
+
+"Take this opportunity today to part from your old socks!"
+"Best customer service!"
+"Socks like from another planet"
+"No low-quality free-time socks, but black classic business-socks"
+"No little elephants or decorative stripes printed on them"
+
+If that doesn't convince you to buy 100 pairs of socks for only 270
+(Swiss?) Francs... :-)
+
+    Marek
+
+
+sommeraktion at discardmail.com wrote:
+> ============================================================= 
+>          Schwarze klassische Socken in Top-Qualit? 
+>                zu einem unschlagbaren Preis! 
+> =============================================================   
+>
+> Unser Eink?fer hat gezaubert! Schwarze klassische Herren -  
+> Socken in hervorragender Qualit? mit handgekettelten Spitzen  
+> (diese Naht sp?en Sie nicht!) aus hochwertiger mit Lycra 
+> angereicherter Baumwolle sind jetzt zu einem absoluten  
+> Schn?pchen - Preis zu haben! Nutzen Sie diese einmalige   
+> Gelegenheit noch heute, und trennen Sie sich von Ihren   
+> alten Socken! 
+>      
+>  
+> Argumente, die z?len! Bester Kundenservice f? Sie: 
+>
+> * Wir liefern bequem gegen Rechnung! 
+> * Unschlagbare Preise und Konditionen! 
+> * Ausgesuchte Top - Qualit?, keine Billigware! 
+> * Bezahlung mit 100% WIR m?lich! 
+>
+>
+> =============================================================    
+>                      Vergleichen Sie selbst!  
+> 1 Paar Socken statt Fr. 18.- bereits ab Fr. 2.70! (100 Paar) 
+> =============================================================  
+>
+> Socken, wie von einem anderen Stern! Mit optimierter Passform, 
+> verbesserter F?beformel f? l?gere Farbechtheit auch nach 
+> intensivem Waschen, und mit handgekettelten Spitzen. Die  
+> Socken ?erzeugen durch erstklassige Qualit? in Material 
+> und Verarbeitung und werden auch h?hsten Anspr?hen gerecht. 
+> Keine billigen oder minderwertigen "Freizeit"-Socken, sondern  
+> klassische, schwarze Business - Socken aus hochwertiger 
+> Baumwolle mit Lycra-Anteil f? h?hsten Tragkomfort.     
+>
+> - Neue Produktion mit zahlreichen Verbesserungen 
+> - Waden - Socken glatt, in 200Nadel - Top - Qualit? (!!) 
+> - Ergonomischer Schnitt mit handgekettelten Spitzen 
+> - Feinste, mit Lycra angereicherte Baumwolle 
+> - leicht und anschmiegsam  
+> - Verbesserte Webe - Technik gegen "Verfilzen"    
+> - Business- Qualit? im klassischen Stil,  
+>   passt hervorragend zu Anz?en 
+> - Kein Aufdruck von "Elef?tchen" oder "dekorativen" Streifen 
+>
+>
+>
+> Unser Angebot f? Sie: 
+> ==============================================================  
+>
+> Schwarze klassische Business - Socken in Top - Qualit? 
+> offizieller Ladenpreis Fr. 18.- / Paar 
+>
+> 20 Paar       statt     360.-     nur     Fr.   69.-  !! 
+> 40 Paar       statt     720.-     nur     Fr.  118.-  !!  
+> 60 Paar       statt    1080.-     nur     Fr.  168.-  !! 
+> 100 Paar      statt    1800.-     nur     Fr.  270.-  !!       
+>
+>
+> Bestellen Sie jetzt bequem und unkompliziert per Telefax! 
+>
+> * mit dem guten Gef?l, das Socken - Problem gel?t, 
+> * viel Zeit und Nerven beim Einkaufen gespart, 
+> * und Ihren Geldbeutel ENORM geschont zu haben! 
+>
+>
+> =============================================================== 
+>
+> Ja, ich m?hte von diesem Angebot profitieren und bestelle 
+> bequem gegen Rechnung 10 Tage netto: 
+>
+>
+> ____ 20 Paar  statt  Fr. 360.-   f? nur Fr.   69.- !! 
+>
+> ____ 40 Paar  statt  Fr. 720.-   f? nur Fr.  118.- !! 
+>
+> ____ 60 Paar  statt  Fr. 1080.-  f? nur Fr.  168.- !! 
+>
+> ____ 100 Paar statt  Fr. 1800.-  f? nur Fr.  270.- !!        
+>
+>
+> Gr?se: ____ x 35-38   ____ x 39-42   ____ x 43 - 46 
+>
+>
+> zuz?lich Versandkostenanteil Fr. 8.- 
+>
+>
+> =============================================================== 
+> !!!!             Minimalbestellmenge 20 Paar!              !!!! 
+> ===============================================================  
+>
+> ___ Ich bezahle mit 100% WIR 
+>
+> _______________________________________________________________ 
+>
+>
+> Name/Vorname:__________________________________________________ 
+>
+>
+> Adresse: ______________________________________________________ 
+>
+>
+> PLZ/Ort:_______________________________________________________ 
+>
+>
+> EMail:_________________________________________________________ 
+>
+>
+>
+> Datum / Unterschrift: _________________________________________ 
+>
+> =============================================================== 
+>
+> Bitte Talon ausdrucken und einsenden oder faxen an:  
+>
+> Socks and more AG, 
+> Postfach, 6062 W'ilen  
+> Telefax: 041- 661 17 19  
+>
+>
+> ______________________________________________________________  
+> Newsletter abbestellen: Senden Sie Ihre EMail-Adresse an  
+> ausjuni at uk2.net oder per Telefax.    
+>  
+>  
+>  
+>  
+>  
+>  
+>  
+>  
+>  
+>  
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>   
+
+
+
+From wansti at gmx.de  Sun Jul  2 15:34:09 2006
+From: wansti at gmx.de (Marek M.)
+Date: Sun, 02 Jul 2006 15:34:09 +0200
+Subject: [Supertux-devel] authorization request for supertux
+In-Reply-To: <86AAC31695FD224F8D30AEE3548635910140FD9C@ISIS.FUTURE.LOCAL>
+References: <86AAC31695FD224F8D30AEE3548635910140FD9C@ISIS.FUTURE.LOCAL>
+Message-ID: <44A7CB51.5020304@gmx.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+
+Hello Monsieur Despointes,
+since SuperTux is free software licensed under the GPL, you are
+allowed to distribute it without explicit permission. We are always
+happy to find SuperTux on cover CD's of computer magazines and we hope
+that it will increase the popularity of our game.
+Below you'll find the filled-out form.
+Sincerely,
+
+    Marek M?ckel,
+    SuperTux Development Team
+ 
+>
+> I, Marek M?ckel, representing the SuperTux Development Team
+>
+> hereby authorize Future France to include any version of SuperTux in
+> the cover cd distributed with
+>
+> Windows News, Windows XP Magazine, .net, Micro Guide, Micro Actuel,
+> Internet Pratique, Computer Arts, PC Jeux, Jeux Vid?o Magazine, PSM
+> 2, PlayStation 2 Magazine, Joystick, Kid Paddle, XBox Magazine,
+> Nintendo Magazine, Joypad, DS Magazine, Download Magazine, Fiches
+> Pratiques XP as well as future updates and future magazines and
+> declare to be the author of the above software.
+>
+> 
+>
+> 
+>
+> Could you also remind me the exact limitation of this version (fully
+> working, 30 days / 30 days, limited functionalities / time
+> illimited, limited functionalities) as well as the Os(es) it
+> requires:  Fully working, free software - no limitations. May be
+> distributed free under the terms of the GNU General Public License.
+> The game is available for Linux, 32-bit Windows, MacOS X as well as
+> other platforms such as the Sony PlayStation Portable.
+>
+> 
+>
+> Do you sell your software in France via a distributer ? No
+>
+> If so, which ? (Does not apply)
+>
+> 
+>
+> Date   : 2006-07-02
+>
+> Signed : Marek M?ckel (SuperTux Development Team)
+>
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.3 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFEp8tQpVeWyxRwnMcRArSGAJ9zgiRHGlsEXK5OIHE+uIGtG2A+xQCfbXOk
+0krJUv/5PzJtivw9w8XM+iA=
+=gzv8
+-----END PGP SIGNATURE-----
+
+
+
+From allen at a-king.us  Sun Jul  2 23:23:37 2006
+From: allen at a-king.us (Allen King)
+Date: Sun, 02 Jul 2006 17:23:37 -0400
+Subject: [Supertux-devel] repeatable platform-independent random numbers
+Message-ID: <44A83959.3050303@a-king.us>
+
+A while back, I did some work to make Supertux have cross-platform 
+repeatability of random numbers.  Back in the end of April, I released 
+those changes, but the release did not go smoothly.  There were some 
+bugs and others with SVN access made some stopgap fixes.  Since then, 
+I've isolated the problem which probably prevented all of the changes 
+from being incorporated.  Attached is a patch which should complete this 
+task. 
+
+I hope you can get it into SVN quickly, as I have put some time into 
+reconstructing it.  Whoever puts it in, please let me know how it went.  
+I am here to help with any problems which might come up.  However my 
+time will be less available starting next month, and I probably won't be 
+able to go through this exercise again.
+
+          Allen King
+
+
+It is based on a recent version (3821), and effects the following changes.
+
+   1. The variable RAND_MAX is machine-dependent, and shouldn't be used
+      inside the machine-independent RandomGenerator, as it currently
+      is.  This patch fixes that problem, which expressed itself in
+      Wintel platforms (where RAND_MAX=0x7fff and INT_MAX=0x7fffffff) as
+      assertion failures as well as numeric errors in randf.
+   2. In the current version, the random seed is not properly
+      initialized from the demo file.  It says it does, but it doesn't.
+      (Instead a random number is generated from time(0)).
+
+    GOREY DETAILS:  For things to work, the call to init_rand() must be
+    delayed until after the seed is read from the demo file. 
+    Unfortunately just delaying the init_rand() call till after
+    play_demo  caused the "uninitialized random generator" throw bug. To
+    get around that problem, the code that reads the random seed was
+    moved from GameSession :: play_demo method to a new method: 
+    GameSession :: get_demo_random_seed, which could occur earlier. 
+    Unfortunately in the process of doing that, play_demo stopped
+    skipping over the initial seed, got confused, and prevented
+    play_demo from operating at all. All of this should be fixed now.
+
+Other lesser changes that are also in this patch are:
+
+   1. RandomGenerator::rand(int) now has no fence-post biases. 
+      Previously,  there were large biases in cases like when it's
+      argument was, say, =rand_max*0.75.
+   2. A debug mode was added to RandomGenerator, but set to OFF.
+   3. A periodic call of rand had been added every 20 frames to aid in
+      debug.  It was changed to call rand every cycle because the "every
+      20 times" functionality broke due to other's changes.  The call is
+      currently commented out, but I un-comment it for debug.
+   4. The random_seed stored in the demo file is saved as decimal with
+      leading spaces. This removes a trivial debugging cut-and-paste gotcha.
+   5. in random_generator, an assertion check (of sizeof(int) >= 4) was
+      moved into initialization code to reduce processing time.
+   6. An old commented-out erroneous call to srand(0) was removed totally.
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060702/9a0d79b1/attachment.html>
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: 060702-RandomGenerator.patch4
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060702/9a0d79b1/attachment.ksh>
+
+From tuxdev103 at gmail.com  Tue Jul  4 17:12:38 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Tue, 4 Jul 2006 08:12:38 -0700
+Subject: [Supertux-devel] A new level for forest world and patch to make it work
+Message-ID: <ff70c5070607040812l63b37fa4v1c5fc9fb514ec335@mail.gmail.com>
+
+This level is called "Lost Woods" because I took the concept from
+Legend of Zelda.
+Things I need to fix:
+1.  The music should always start at about .5 when the message shows
+2.  The player doesn't notice how small the level really is
+3.  Other cosmetic stuff, like filling in all the earth tiles
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: lostwoods.stl
+Type: application/octet-stream
+Size: 25480 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060704/f0d9a00d/attachment.obj>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: ambientsoundscripting.patch
+Type: application/octet-stream
+Size: 8255 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060704/f0d9a00d/attachment-0001.obj>
+
+From admin at berlios.de  Sun Jul  2 17:33:43 2006
+From: admin at berlios.de (admin at berlios.de)
+Date: Sun, 2 Jul 2006 08:33:43 -0700 (PDT)
+Subject: [Supertux-devel] [Bug #8054] Icons in objects tool and tile tool panes go white sometimes
+Message-ID: <200607021533.k62FXhWU022144@unicorn.berlios.de>
+
+Bug #8054, was updated on 2006-Jul-02 08:33
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: tuxdev
+Assigned to : none
+Summary: Icons in objects tool and tile tool panes go white sometimes
+
+Details: If an object is selected, the objects between the selected one and the first (none) go white.  "Between" meaning if you convert the 2D view to a 1D array by left-right up-down order priority.
+
+If the pane is resized, all the icons go white until you move it back to where it was exactly.
+
+If you scroll in a pane, all the icons go white until you scroll back.
+
+These behaviours sometimes clear up for reasons I have yet to determine.
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=8054&group_id=3467
+
+
+From krissij4 at hotmail.com  Mon Jul  3 02:07:37 2006
+From: krissij4 at hotmail.com (kristján ´Jónsson)
+Date: Mon, 03 Jul 2006 00:07:37 +0000
+Subject: [Supertux-devel] bonus
+Message-ID: <BAY12-F20F3F5A513C67091E0F68088700@phx.gbl>
+
+can u plees put this in some bonus island or story island and send me the 
+new super tux game?
+
+_________________________________________________________________
+Express yourself instantly with MSN Messenger! Download today it's FREE! 
+http://messenger.msn.click-url.com/go/onm00200471ave/direct/01/
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level1.stl
+Type: application/vnd.ms-pki.stl
+Size: 44328 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060703/ad140387/attachment.stl>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level2.stl
+Type: application/vnd.ms-pki.stl
+Size: 47889 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060703/ad140387/attachment-0001.stl>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level3.stl
+Type: application/vnd.ms-pki.stl
+Size: 42717 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060703/ad140387/attachment-0002.stl>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: level4.stl
+Type: application/vnd.ms-pki.stl
+Size: 27926 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060703/ad140387/attachment-0003.stl>
+
+From admin at berlios.de  Tue Jul  4 12:52:02 2006
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 4 Jul 2006 12:52:02 +0200 (CEST)
+Subject: [Supertux-devel] [Bug #7373] Supertux crash when starting game
+Message-ID: <200607041052.k64Aq2vF002702@unicorn.berlios.de>
+
+Bug #7373, was updated on 2006-May-03 13:44
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Closed
+Resolution: Works For Me
+Bug Group: None
+Priority: 5
+Submitted by: bugmenot
+Assigned to : none
+Summary: Supertux crash when starting game
+
+Details: Latest svn, --enable-debug
+[DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.131 seconds
+[INFO] src/main.cpp:429 Component 'resources' finished after 1.503 seconds
+[INFO] src/main.cpp:297 Using random seed 1146655925, from time().
+[DEBUG] src/world.cpp:233 Couldn't load savegame: Couldn't open file 'save/world1_1.stsg': No such file or directory
+Display intro
+
+Program received signal SIGILL, Illegal instruction.
+[Switching to Thread -1225926944 (LWP 9147)]
+0xb7e7cd98 in png_handle_gAMA ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+(gdb) bt
+#0  0xb7e7cd98 in png_handle_gAMA ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#1  0xb7e69061 in png_read_info ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#2  0xb7e53243 in IMG_LoadPNG_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#3  0xb7e4fca4 in IMG_LoadTyped_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#4  0xb7e4fb0c in IMG_Load_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#5  0x08121e91 in TextureManager::create_image_texture (this=0x82b88c0,
+    filename=@0xbfe9d8b8) at src/video/texture_manager.cpp:103
+#6  0x08122d5b in TextureManager::get (this=0x82b88c0, _filename=@0xbfe9d954)
+    at src/video/texture_manager.cpp:66
+#7  0x08121353 in Surface (this=0x8912740, file=@0xbfe9d954)
+    at src/video/surface.cpp:40
+#8  0x080e1da2 in SnowParticleSystem (this=0x8911b38)
+    at src/object/particlesystem.cpp:85
+#9  0x080756f2 in Sector::parse_object (this=0x890e9e0, name=@0xbfe9da28,
+    reader=@0x0) at src/sector.cpp:144
+#10 0x0807a6a3 in Sector::parse (this=0x890e9e0, sector=@0x890e6e0)
+    at src/sector.cpp:194
+#11 0x080500cb in Level::load (this=0x8927e88, filepath=@0x8927918)
+    at src/level.cpp:89
+
+
+Follow-Ups:
+
+Date: 2006-May-05 16:26
+By: bugmenot
+
+Comment:
+Strange, now it is working. Maybe because I updated to Suse 10 or something in SVN changed. But I can no longer reproduce the problem.
+-------------------------------------------------------
+
+Date: 2006-May-04 07:17
+By: ravu_al_hemio
+
+Comment:
+Sounds like an SDL/PNG problem.
+
+Could you go "up 5" and "print *filename"? Thanks.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=7373&group_id=3467
+
+
+From admin at berlios.de  Tue Jul  4 12:53:55 2006
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 4 Jul 2006 12:53:55 +0200 (CEST)
+Subject: [Supertux-devel] [Bug #7496] error during the compilation of svn version
+Message-ID: <200607041053.k64ArtaJ005384@unicorn.berlios.de>
+
+Bug #7496, was updated on 2006-May-15 02:24
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Open
+Resolution: Fixed
+Bug Group: None
+Priority: 5
+Submitted by: trougnouf
+Assigned to : none
+Summary: error during the compilation of svn version
+
+Details: sorry to try to use the developement version ^.^
+i tryed to compil it (install all the dependeny, autogen and configure works) but during the compilation i got that
+
+[...]
+C++ ./build/x86_64-unknown-linux-gnu/optimize/src/scripting/camera.o
+C++ ./build/x86_64-unknown-linux-gnu/optimize/src/scripting/time_scheduler.o
+C++ ./build/x86_64-unknown-linux-gnu/optimize/src/scripting/wrapper.o
+LinkApplication actions too long (max 10240)!
+trougnouf at ubuntu:~/svn/supertux$ 
+
+thankyou this game is wonderful and it replace counter strike in every student's laptop of my school since i played it :D
+
+Follow-Ups:
+
+Date: 2006-Jul-04 12:53
+By: sommer
+
+Comment:
+Should be fixed in current trunk
+-------------------------------------------------------
+
+Date: 2006-Jun-30 22:07
+By: farnkerl
+
+Comment:
+See the following patch for a fix:
+https://developer.berlios.de/patch/index.php?func=detailpatch&patch_id=1178&group_id=3467
+
+or download directly from:
+https://developer.berlios.de/patch/download.php?id=1178
+
+To apply the patch, download it into the supertux directory and run "patch -p0 < ./patch_filename.patch"
+-------------------------------------------------------
+
+Date: 2006-Jun-28 07:32
+By: ravu_al_hemio
+
+Comment:
+A short hack in Jam sources fixes the problem: open jam.h and jump to line 461. Change the definition of MAXLINE to a larger number (try something like 30000), rebuild jam and copy the new binary into /usr/bin or /usr/local/bin or ~/bin (overwriting the one you've had before).
+
+10240 is a pretty low limit, I give you that.
+-------------------------------------------------------
+
+Date: 2006-Jun-27 20:18
+By: farnkerl
+
+Comment:
+This problem is related to AMD64 processors and caused because the command line arguments supplied to jam's linker are too long for jam to handle.  A temporary workaround to this problem is to run the configure script with "--build=x86_64-pc-linux-gnu":
+./configure --build=x86_64-pc-linux-gnu
+
+This will shorten the list of arguments down by a few hundred characters, bringing you back under the 10240 limit.  Note that you should run "jam clean" before reconfiguring and rebuilding.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=7496&group_id=3467
+
+
+From uafr at gmx.de  Tue Jul  4 18:09:25 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Tue, 4 Jul 2006 18:09:25 +0200
+Subject: [Supertux-devel] bonus
+In-Reply-To: <BAY12-F20F3F5A513C67091E0F68088700@phx.gbl>
+References: <BAY12-F20F3F5A513C67091E0F68088700@phx.gbl>
+Message-ID: <20060704160925.GA9777@greg.local>
+
+On 20060704 kristj?n ?J?nsson <krissij4 at hotmail.com> wrote:
+
+Hi Kristjan,
+
+> can u plees put this in some bonus island or story island and send me the 
+> new super tux game?
+
+After careful testing your levels by our test players we we are
+sorry to inform you that your contribution does not quite match our
+players expectations. It might be a good idea to keep in mind
+that a major part of our audience is young children while designing 
+levels. Another hint: get someone else to playtest your works,
+they will notice details that you with your knowledge as the level's
+designer missed.
+
+We can not send you the new release of supertux because
+it is not ready yet. If it is done we will announce it on
+http://supertux.berlios.de/ and through the usual channels. For
+milesone two (the upcoming release of supertux) we would like to
+have levels that also use the new features of this release.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From tuxdev103 at gmail.com  Tue Jul  4 19:31:51 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Tue, 4 Jul 2006 10:31:51 -0700
+Subject: [Supertux-devel] Re: A new level for forest world and patch to make it work
+In-Reply-To: <ff70c5070607040812l63b37fa4v1c5fc9fb514ec335@mail.gmail.com>
+References: <ff70c5070607040812l63b37fa4v1c5fc9fb514ec335@mail.gmail.com>
+Message-ID: <ff70c5070607041031l538b4f31hc4600b14258c831@mail.gmail.com>
+
+Updated patch to include new files for AmbientSound scripting interface
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: ambientsoundscripting.patch
+Type: application/octet-stream
+Size: 11641 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060704/bb2ee409/attachment.obj>
+
+From tuxdev103 at gmail.com  Tue Jul  4 20:47:52 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Tue, 4 Jul 2006 11:47:52 -0700
+Subject: [Supertux-devel] Re: A new level for forest world and patch to make it work
+In-Reply-To: <ff70c5070607041031l538b4f31hc4600b14258c831@mail.gmail.com>
+References: <ff70c5070607040812l63b37fa4v1c5fc9fb514ec335@mail.gmail.com>
+	 <ff70c5070607041031l538b4f31hc4600b14258c831@mail.gmail.com>
+Message-ID: <ff70c5070607041147i48e24b60jad68ff4e4015062a@mail.gmail.com>
+
+Enhanced level from WolfgangB's suggestions
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: lostwoods.stl
+Type: application/octet-stream
+Size: 25707 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060704/e965f346/attachment.obj>
+
+From p637777 at aol.com  Wed Jul  5 14:56:24 2006
+From: p637777 at aol.com (Markus Engel)
+Date: Wed, 5 Jul 2006 14:56:24 +0200
+Subject: [Supertux-devel] Stalactites
+Message-ID: <001501c6a032$6cc90480$2001a8c0@MPC>
+
+Hi there!
+
+I created a little patch for three levels in world1 because there some
+stalactites don't fall down.
+This happens if you place them on another tile.
+
+Markus
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: stalactites.diff
+Type: application/octet-stream
+Size: 1312 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060705/46b9f5cd/attachment.obj>
+
+From tuxdev103 at gmail.com  Wed Jul  5 17:30:58 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Wed, 5 Jul 2006 08:30:58 -0700
+Subject: [Supertux-devel] Re: A new level for forest world and patch to make it work
+In-Reply-To: <ff70c5070607041147i48e24b60jad68ff4e4015062a@mail.gmail.com>
+References: <ff70c5070607040812l63b37fa4v1c5fc9fb514ec335@mail.gmail.com>
+	 <ff70c5070607041031l538b4f31hc4600b14258c831@mail.gmail.com>
+	 <ff70c5070607041147i48e24b60jad68ff4e4015062a@mail.gmail.com>
+Message-ID: <ff70c5070607050830l75b20cf2hf99e2622e73b912e@mail.gmail.com>
+
+Enhanced level from AnMaster's suggestions
+
+Patch has been merged into SVN
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: lostwoods.stl
+Type: application/octet-stream
+Size: 25705 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060705/1da9ee7d/attachment.obj>
+
+From rflegel at gmail.com  Wed Jul  5 18:11:23 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Wed, 5 Jul 2006 10:11:23 -0600
+Subject: [Supertux-devel] repeatable platform-independent random numbers
+In-Reply-To: <44A83959.3050303@a-king.us>
+References: <44A83959.3050303@a-king.us>
+Message-ID: <5a5496320607050911k3f137269wb424fba5f9957651@mail.gmail.com>
+
+Could you send the patch as an attachment?
+
+-- 
+Ryan
+
+On 7/2/06, Allen King <allen at a-king.us> wrote:
+>
+>  A while back, I did some work to make Supertux have cross-platform
+> repeatability of random numbers.  Back in the end of April, I released those
+> changes, but the release did not go smoothly.  There were some bugs and
+> others with SVN access made some stopgap fixes.  Since then, I've isolated
+> the problem which probably prevented all of the changes from being
+> incorporated.  Attached is a patch which should complete this task.
+>
+>  I hope you can get it into SVN quickly, as I have put some time into
+> reconstructing it.  Whoever puts it in, please let me know how it went.  I
+> am here to help with any problems which might come up.  However my time will
+> be less available starting next month, and I probably won't be able to go
+> through this exercise again.
+>
+>            Allen King
+>
+>
+>  It is based on a recent version (3821), and effects the following changes.
+>
+>
+> The variable RAND_MAX is machine-dependent, and shouldn't be used inside the
+> machine-independent RandomGenerator, as it currently is.  This patch fixes
+> that problem, which expressed itself in Wintel platforms (where
+> RAND_MAX=0x7fff and INT_MAX=0x7fffffff) as assertion failures as well as
+> numeric errors in randf.
+> In the current version, the random seed is not properly initialized from the
+> demo file.  It says it does, but it doesn't. (Instead a random number is
+> generated from time(0)).
+>
+> GOREY DETAILS:  For things to work, the call to init_rand() must be delayed
+> until after the seed is read from the demo file.  Unfortunately just
+> delaying the init_rand() call till after play_demo  caused the
+> "uninitialized random generator" throw bug. To get around that problem, the
+> code that reads the random seed was moved from GameSession :: play_demo
+> method to a new method:  GameSession :: get_demo_random_seed, which could
+> occur earlier.  Unfortunately in the process of doing that, play_demo
+> stopped skipping over the initial seed, got confused, and prevented
+> play_demo from operating at all. All of this should be fixed now.
+>
+>  Other lesser changes that are also in this patch are:
+>
+>
+> RandomGenerator::rand(int) now has no fence-post biases.  Previously,  there
+> were large biases in cases like when it's argument was, say, =rand_max*0.75.
+>
+> A debug mode was added to RandomGenerator, but set to OFF.
+> A periodic call of rand had been added every 20 frames to aid in debug.  It
+> was changed to call rand every cycle because the "every 20 times"
+> functionality broke due to other's changes.  The call is currently commented
+> out, but I un-comment it for debug.
+> The random_seed stored in the demo file is saved as decimal with leading
+> spaces. This removes a trivial debugging cut-and-paste gotcha.
+> in random_generator, an assertion check (of sizeof(int) >= 4) was moved into
+> initialization code to reduce processing time.
+>
+> An old commented-out erroneous call to srand(0) was removed totally.
+>
+>
+>
+> Index: src/random_generator.hpp
+> ===================================================================
+> --- src/random_generator.hpp    (revision 3821)
+> +++ src/random_generator.hpp    (working copy)
+> @@ -81,6 +81,8 @@
+>      long rand_deg;
+>      long rand_sep;
+>      long *end_ptr;
+> +    int debug;
+> +    static const int rand_max = 0x7fffffff;         // biggest signed
+> Uint32
+>
+>  public:
+>      RandomGenerator();
+> @@ -95,7 +97,7 @@
+>
+>       // generate random 31-bit numbers
+>      // calls to the following return a value evenly distributed between u
+> (or
+> -    // 0 if not specified) and v (or RAND_MAX if not specified).  Return
+> +    // 0 if not specified) and v (or rand_max if not specified).  Return
+>      // values may include u, but never v.
+>      int rand();
+>      int rand(int v);
+> Index: src/game_session.cpp
+> ===================================================================
+> --- src/game_session.cpp        (revision 3821)
+> +++ src/game_session.cpp        (working copy)
+> @@ -179,11 +179,30 @@
+>    capture_file = filename;
+>
+>    char buf[30];                            // save the seed in the demo
+> file
+> -  sprintf(buf, "random_seed=%010d", config->random_seed);
+> +  sprintf(buf, "random_seed=%10d", config->random_seed);
+>    for (int i=0; i==0 || buf[i-1]; i++)
+>      capture_demo_stream->put(buf[i]);
+>  }
+>
+> +int
+> +GameSession::get_demo_random_seed(const std::string&
+> filename)
+> +{
+> +  std::istream* test_stream = new std::ifstream(filename.c_str());
+> +  if(test_stream->good()) {
+> +    char buf[30];                     // recall the seed from the demo file
+> +    int seed;
+> +    for (int i=0; i<30 && (i==0 || buf[i-1]); i++)
+> +      test_stream->get(buf[i]);
+> +    if (sscanf(buf, "random_seed=%10d", &seed) == 1) {
+> +      log_info << "Random seed " << seed << " from demo file" << std::endl;
+> +         return seed;
+> +    }
+> +    else
+> +      log_info << "Demo file contains no random number" << std::endl;
+> +  }
+> +  return 0;
+> +}
+> +
+>  void
+>  GameSession::play_demo(const std::string& filename)
+>  {
+> @@ -201,18 +220,13 @@
+>    demo_controller = new CodeController();
+>    tux.set_controller(demo_controller);
+>
+> -  char buf[30];                            // recall the seed from the demo
+> file
+> +  // skip over random seed, if it exists in the file
+> +  char buf[30];                            // ascii decimal seed
+>    int seed;
+>    for (int i=0; i<30 && (i==0 || buf[i-1]); i++)
+>      playback_demo_stream->get(buf[i]);
+> -  if (sscanf(buf, "random_seed=%010d", &seed) == 1) {
+> -    config->random_seed = seed;            // save where it will be used
+> -    log_info << "Taking random seed " << seed << " from demo file"
+> <<std::endl;
+> -  }
+> -  else {
+> +  if (sscanf(buf, "random_seed=%010d", &seed) != 1)
+>      playback_demo_stream->seekg(0);     // old style w/o
+> seed, restart at beg
+> -    log_info << "Demo file contains no random number" << std::endl;
+> -  }
+>  }
+>
+>  void
+> Index: src/mainloop.cpp
+> ===================================================================
+> --- src/mainloop.cpp    (revision 3821)
+> +++ src/mainloop.cpp    (working copy)
+> @@ -124,7 +124,6 @@
+>    DrawingContext context;
+>
+>    unsigned int frame_count = 0;
+> -  unsigned int rand_prints = 0;
+>    float fps_fps = 0;
+>    Uint32 fps_ticks = SDL_GetTicks();
+>    Uint32 fps_nextframe_ticks = SDL_GetTicks();
+> @@ -239,11 +238,8 @@
+>      }
+>
+>      sound_manager->update();
+> -
+> -    // insert calls for debug (there are few rand calls otherwise)
+> -    if (0 && rand_prints++ % 20 == 0)
+> -        log_info << "== periodic rand() call " << systemRandom.rand() <<
+> -                " at frame " << rand_prints << "==" <<std::endl;
+> +
+> +    //log_info << "== periodic rand() = " << systemRandom.rand() <<
+> std::endl;
+>    }
+>  }
+>
+> Index: src/main.cpp
+> ===================================================================
+> --- src/main.cpp        (revision 3821)
+> +++ src/main.cpp        (working copy)
+> @@ -445,7 +445,6 @@
+>
+>    try {
+>      Console::instance = new Console();
+> -//  srand(time(0));            // this breaks repeatability in random
+> numbers
+>      init_physfs(argv[0]);
+>      init_sdl();
+>
+> @@ -476,16 +475,18 @@
+>        std::string dir =
+> FileSystem::dirname(config->start_level);
+>        PHYSFS_addToSearchPath(dir.c_str(), true);
+>
+> -      init_rand();        // play_demo sets seed, record_demo uses it
+> -
+>        if(config->start_level.size() > 4 &&
+>
+> config->start_level.compare(config->start_level.size() - 5,
+> 5, ".stwm") == 0) {
+> +          init_rand();
+>            main_loop->push_screen(new WorldMapNS::WorldMap(
+>
+> FileSystem::basename(config->start_level)));
+>        } else {
+>          std::auto_ptr<GameSession> session (
+>                  new
+> GameSession(FileSystem::basename(config->start_level)));
+>
+> +        config->random_seed
+> =session->get_demo_random_seed(config->start_demo);
+> +        init_rand();
+> +
+>          if(config->start_demo != "")
+>            session->play_demo(config->start_demo);
+>
+> @@ -498,6 +499,7 @@
+>        main_loop->push_screen(new TitleScreen());
+>      }
+>
+> +    //init_rand(); PAK: this call might subsume the above 3, but I'm
+> chicken!
+>      main_loop->run();
+>
+>    } catch(std::exception& e) {
+> Index: src/random_generator.cpp
+> ===================================================================
+> --- src/random_generator.cpp    (revision 3821)
+> +++ src/random_generator.cpp    (working copy)
+> @@ -45,6 +45,7 @@
+>  RandomGenerator::RandomGenerator() {
+>      assert(sizeof(int) >= 4);
+>      initialized = 0;
+> +    debug = 0;                              // change this by hand for
+> debug
+>      initialize();
+>  }
+>
+> @@ -52,19 +53,36 @@
+>  }
+>
+>  int RandomGenerator::srand(int x)    {
+> -    while (x == 0)                          // random seed of zero means
+> -        x = (time(0) % RAND_MAX);           // randomize with time
+> -    assert(x < RAND_MAX);                   // only allow posative 31-bit
+> seeds
+> -    assert(sizeof(int) >= 4);
+> -    srandom(x);
+> +    int x0 = x;
+> +    while (x <= 0)                          // random seed of zero means
+> +        x = time(0) % RandomGenerator::rand_max; // randomize with time
+> +
+> +    if (debug > 0)
+> +        printf("==== srand(%10d) (%10d) rand_max=%x =====\n",
+> +               x, x0, RandomGenerator::rand_max);
+> +
+> +    RandomGenerator::srandom(x);
+>      return x;                               // let caller know seed used
+>  }
+>
+> -int RandomGenerator::rand()                 {        return random();    }
+> +int RandomGenerator::rand() {
+> +    int rv;                                  // a posative int
+> +    while ((rv = RandomGenerator::random()) <= 0) // neg or zero causes
+> probs
+> +        ;
+> +    if (debug > 0)
+> +        printf("==== rand(): %10d =====\n", rv);
+> +    return rv;
+> +}
+>
+>  int RandomGenerator::rand(int v) {
+> -    assert(v != 0 && v <= RAND_MAX);        // illegal arg: 0 or too big
+> -    return RandomGenerator::random() % v;
+> +    assert(v >= 0 && v <= RandomGenerator::rand_max); // illegal arg
+> +
+> +     // remove biases, esp. when v is large (e.g. v == (rand_max/4)*3;)
+> +    int rv, maxV =(RandomGenerator::rand_max / v) * v;
+> +    assert(maxV <= RandomGenerator::rand_max);
+> +    while ((rv = RandomGenerator::random()) >= maxV)
+> +        ;
+> +    return rv % v;                          // mod it down to 0..(maxV-1)
+>  }
+>
+>  int RandomGenerator::rand(int u, int v) {
+> @@ -74,8 +92,12 @@
+>
+>  double RandomGenerator::randf(double v) {
+>      float rv;
+> -    while ((rv = (double)RandomGenerator::random() /
+> RAND_MAX * v) >= v)
+> -        ;                                   // never return v!
+> +    do {
+> +               rv =
+> ((double)RandomGenerator::random())/RandomGenerator::rand_max
+> * v;
+> +       } while (rv >= v);                      // rounding might cause
+> rv==v
+> +
+> +    if (debug > 0)
+> +        printf("==== rand(): %f =====\n", rv);
+>      return rv;
+>  }
+>
+> Index: src/game_session.hpp
+> ===================================================================
+> --- src/game_session.hpp        (revision 3821)
+> +++ src/game_session.hpp        (working copy)
+> @@ -46,6 +46,7 @@
+>    ~GameSession();
+>
+>    void record_demo(const std::string& filename);
+> +  int get_demo_random_seed(const std::string& filename);
+>    void play_demo(const std::string& filename);
+>
+>    void draw(DrawingContext& context);
+>
+>
+>
+
+
+From lucas.vila at laposte.net  Tue Jul  4 19:38:35 2006
+From: lucas.vila at laposte.net (lucas.vila)
+Date: Tue,  4 Jul 2006 19:38:35 +0200
+Subject: [Supertux-devel] I've found a bug for never had 'Game Over' in Supertux
+Message-ID: <J1W3OB$993F9D037FBDB08E91FC6FD85406ED65@laposte.net>
+
+Hello! I am french, i'm fourteen and i don't write english
+very well, excuse my language, please.
+
+In supertux, when you have no lives, you can put "escape" and
+click on the 'abort the level' button. This tip is
+interessant: you have no game over, but you see you have -1,
+-2, -3 lives (et caetera) when you return in the level.
+
+Thank you for your work.
+
+Acc?dez au courrier ?lectronique de La Poste : www.laposte.net
+3615 LAPOSTENET (0,34 ?/mn)
+
+
+
+
+From admin at berlios.de  Wed Jul  5 08:35:59 2006
+From: admin at berlios.de (admin at berlios.de)
+Date: Tue, 4 Jul 2006 22:35:59 -0800 (AKDT)
+Subject: [Supertux-devel] [Bug #8076] compile error: ambient_sound.hpp: No such file or directory
+Message-ID: <200607050635.k656ZxeU009578@unicorn.berlios.de>
+
+Bug #8076, was updated on 2006-Jul-04 22:35
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: benau
+Assigned to : none
+Summary: compile error: ambient_sound.hpp: No such file or directory
+
+Details: 
+
+bash-3.00# jam
+...patience...
+...found 1295 target(s)...
+...updating 30 target(s)...
+C++ ./build/i686-pc-linux-gnu/optimize/src/object/ambient_sound.o 
+src/object/ambient_sound.cpp:33:39: scripting/ambient_sound.hpp: No such file or
+ directory
+In file included from src/scripting/wrapper.hpp:10,
+                 from src/scripting/squirrel_util.hpp:26,
+                 from src/object/ambient_sound.cpp:34:
+src/scripting/wrapper.interface.hpp:14:29: ambient_sound.hpp: No such file or di
+rectory
+In file included from src/scripting/squirrel_util.hpp:26,
+                 from src/object/ambient_sound.cpp:34:
+src/scripting/wrapper.hpp:27: error: no type `AmbientSound' in `Scripting'
+src/scripting/wrapper.hpp:27: error: syntax error before `*' token
+src/object/ambient_sound.cpp:119: error: prototype for `void 
+   AmbientSound::hit(Scripting::Player&)' does not match any in class `
+   AmbientSound'
+src/object/ambient_sound.hpp:69: error: candidate is: virtual void 
+   AmbientSound::hit(Player&)
+src/object/ambient_sound.cpp: In member function `virtual void 
+
+   AmbientSound::expose(SQVM*, int)':
+src/object/ambient_sound.cpp:215: error: `AmbientSound' undeclared in namespace 
+   `Scripting'
+src/object/ambient_sound.cpp:215: error: `interface' undeclared (first use this 
+   function)
+src/object/ambient_sound.cpp:215: error: (Each undeclared identifier is 
+   reported only once for each function it appears in.)
+src/object/ambient_sound.cpp:215: error: syntax error before `this'
+
+    g++ -c -o ./build/i686-pc-linux-gnu/optimize/src/object/ambient_sound.o  -I.
+ -I./src -I/usr/include/SDL -D_REENTRANT  -I/usr/X11R6/include -pthread     -Isr
+c/squirrel/include -Isrc/squirrel   -ffast-math -Wall -O3 -g src/object/ambient_
+sound.cpp
+
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=8076&group_id=3467
+
+
+From admin at berlios.de  Wed Jul  5 11:47:57 2006
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 5 Jul 2006 11:47:57 +0200 (CEST)
+Subject: [Supertux-devel] [Bug #8054] Icons in objects tool and tile tool panes go white sometimes
+Message-ID: <200607050947.k659lv68009154@unicorn.berlios.de>
+
+Bug #8054, was updated on 2006-Jul-02 17:33
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: tuxdev
+Assigned to : none
+Summary: Icons in objects tool and tile tool panes go white sometimes
+
+Details: If an object is selected, the objects between the selected one and the first (none) go white.  "Between" meaning if you convert the 2D view to a 1D array by left-right up-down order priority.
+
+If the pane is resized, all the icons go white until you move it back to where it was exactly.
+
+If you scroll in a pane, all the icons go white until you scroll back.
+
+These behaviours sometimes clear up for reasons I have yet to determine.
+
+Follow-Ups:
+
+Date: 2006-Jul-05 11:47
+By: wolfgangb
+
+Comment:
+Works fine here, can't reproduce it. Sounds like a OpenGL problem eg. out of texture memory. Which OS/video card/video driver do you use?
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=8054&group_id=3467
+
+
+From admin at berlios.de  Wed Jul  5 12:42:03 2006
+From: admin at berlios.de (admin at berlios.de)
+Date: Wed, 5 Jul 2006 12:42:03 +0200 (CEST)
+Subject: [Supertux-devel] [Bug #8076] compile error: ambient_sound.hpp: No such file or directory
+Message-ID: <200607051042.k65Ag3tB012649@unicorn.berlios.de>
+
+Bug #8076, was updated on 2006-Jul-05 08:35
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: benau
+Assigned to : none
+Summary: compile error: ambient_sound.hpp: No such file or directory
+
+Details: 
+
+bash-3.00# jam
+...patience...
+...found 1295 target(s)...
+...updating 30 target(s)...
+C++ ./build/i686-pc-linux-gnu/optimize/src/object/ambient_sound.o 
+src/object/ambient_sound.cpp:33:39: scripting/ambient_sound.hpp: No such file or
+ directory
+In file included from src/scripting/wrapper.hpp:10,
+                 from src/scripting/squirrel_util.hpp:26,
+                 from src/object/ambient_sound.cpp:34:
+src/scripting/wrapper.interface.hpp:14:29: ambient_sound.hpp: No such file or di
+rectory
+In file included from src/scripting/squirrel_util.hpp:26,
+                 from src/object/ambient_sound.cpp:34:
+src/scripting/wrapper.hpp:27: error: no type `AmbientSound' in `Scripting'
+src/scripting/wrapper.hpp:27: error: syntax error before `*' token
+src/object/ambient_sound.cpp:119: error: prototype for `void 
+   AmbientSound::hit(Scripting::Player&)' does not match any in class `
+   AmbientSound'
+src/object/ambient_sound.hpp:69: error: candidate is: virtual void 
+   AmbientSound::hit(Player&)
+src/object/ambient_sound.cpp: In member function `virtual void 
+
+   AmbientSound::expose(SQVM*, int)':
+src/object/ambient_sound.cpp:215: error: `AmbientSound' undeclared in namespace 
+   `Scripting'
+src/object/ambient_sound.cpp:215: error: `interface' undeclared (first use this 
+   function)
+src/object/ambient_sound.cpp:215: error: (Each undeclared identifier is 
+   reported only once for each function it appears in.)
+src/object/ambient_sound.cpp:215: error: syntax error before `this'
+
+    g++ -c -o ./build/i686-pc-linux-gnu/optimize/src/object/ambient_sound.o  -I.
+ -I./src -I/usr/include/SDL -D_REENTRANT  -I/usr/X11R6/include -pthread     -Isr
+c/squirrel/include -Isrc/squirrel   -ffast-math -Wall -O3 -g src/object/ambient_
+sound.cpp
+
+
+Follow-Ups:
+
+Date: 2006-Jul-05 12:42
+By: wolfgangb
+
+Comment:
+Right, scripting for ambient sound was not completly implemented. Fixed.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+http://developer.berlios.de/bugs/?func=detailbug&bug_id=8076&group_id=3467
+
+
+From krissij4 at hotmail.com  Wed Jul  5 17:46:12 2006
+From: krissij4 at hotmail.com (kristján ´Jónsson)
+Date: Wed, 05 Jul 2006 15:46:12 +0000
+Subject: [Supertux-devel] bonus
+In-Reply-To: <20060705123152.GA24865@greg.local>
+Message-ID: <BAY12-F15F78D5B9C78964F0182A388760@phx.gbl>
+
+
+
+>From: Wolfgang Becker <uafr at gmx.de>
+>Reply-To: supertux-devel at berlios.de
+>To: kristj?n ?J?nsson <krissij4 at hotmail.com>
+>Subject: Re: [Supertux-devel] bonus
+>Date: Wed, 5 Jul 2006 14:31:52 +0200
+>
+>On 20060704 kristj?n ?J?nsson <krissij4 at hotmail.com> wrote:
+> > ok i will try to make better levels ok?
+>
+>To create levels for milestone 2 and use the new features you
+>need the development version of the game and the editor. Both
+>are work in progress, so there is no binary package yet. See
+>http://supertux.berlios.de/wiki/index.php/Building_SuperTux
+>for details on building it from source.
+>
+>Bye,
+>Wolfgang
+>--
+>Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+
+
+
+
+hay is there some boss like in super mario in  milestone2?
+
+_________________________________________________________________
+Don't just search. Find. Check out the new MSN Search! 
+http://search.msn.click-url.com/go/onm00200636ave/direct/01/
+
+
+
+From tuxdev103 at gmail.com  Thu Jul  6 06:05:09 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Wed, 5 Jul 2006 21:05:09 -0700
+Subject: [Supertux-devel] Supertux patch - death by falling when invincible
+Message-ID: <ff70c5070607052105i1314ab7dh64cd5b17eacea9c3@mail.gmail.com>
+
+Due to a typo in a fix to prevent tux from standing on flames while
+invincible, tux could survive falling off of a level into the endless
+pit.  This fixes it by doing putting parentheses around the
+timer.started() calls and letting the !completely apply to both
+timers.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: invcfalldeath.patch
+Type: application/octet-stream
+Size: 478 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060705/1f69d6a3/attachment.obj>
+
+From uafr at gmx.de  Thu Jul  6 13:23:52 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Thu, 6 Jul 2006 13:23:52 +0200
+Subject: [Supertux-devel] Customizable Sprites for Badguys?
+Message-ID: <20060706112352.GA5981@greg.local>
+
+Hi,
+
+do we want leveldesigner to be able to change the sprites used for
+badguys? Another way would be to implement a new badguy even if
+just the look changes a bit. At the moment it's possible to adjust
+Mr Bomb. Do we want this feature for more or even all badguys? Or
+better remove it from Mr Bomb again?
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From mad_monk4000 at yahoo.com  Thu Jul  6 15:30:19 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Thu, 6 Jul 2006 06:30:19 -0700 (PDT)
+Subject: [Supertux-devel] list, please.
+Message-ID: <20060706133019.71877.qmail@web37008.mail.mud.yahoo.com>
+
+I would like a list of all the bosses and a description of each one.
+
+Julian
+  (a.k.a. mad_monk4000 at yahoo.com)
+
+ 			
+---------------------------------
+Sneak preview the  all-new Yahoo.com. It's not radically different. Just radically better. 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060706/c699aaa6/attachment.html>
+
+From uafr at gmx.de  Thu Jul  6 17:13:07 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Thu, 6 Jul 2006 17:13:07 +0200
+Subject: [Supertux-devel] list, please.
+In-Reply-To: <20060706133019.71877.qmail@web37008.mail.mud.yahoo.com>
+References: <20060706133019.71877.qmail@web37008.mail.mud.yahoo.com>
+Message-ID: <20060706151307.GA10172@greg.local>
+
+On 20060706 Julian Marchant <mad_monk4000 at yahoo.com> wrote:
+> I would like a list of all the bosses and a description of each one.
+
+http://supertux.berlios.de/wiki/index.php/Yeti
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From matze at braunis.de  Thu Jul  6 18:56:12 2006
+From: matze at braunis.de (Matze Braun)
+Date: Thu, 06 Jul 2006 18:56:12 +0200
+Subject: [Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src
+ src/gui
+In-Reply-To: <200607052242.k65MgkTe013386@sheep.berlios.de>
+References: <200607052242.k65MgkTe013386@sheep.berlios.de>
+Message-ID: <44AD40AC.5030306@braunis.de>
+
+sommer at BerliOS wrote:
+> Author: sommer
+> Date: 2006-07-06 00:42:39 +0200 (Thu, 06 Jul 2006)
+> New Revision: 3909
+>
+> Modified:
+>    trunk/supertux/data/locale/de.po
+>    trunk/supertux/src/game_session.cpp
+>    trunk/supertux/src/gui/menu.cpp
+>    trunk/supertux/src/player_status.cpp
+>    trunk/supertux/src/resources.cpp
+>    trunk/supertux/src/statistics.cpp
+> Log:
+> Changed sprintfs to snprintfs, updated translation
+>
+>   
+...
+>  
+> +namespace {
+> +  inline const char* chain(const char* c1, const char* c2) {
+> +    return (std::string(c1) + std::string(c2)).c_str();
+> +  }
+> +  inline const char* chain(const char* c1, const char* c2, const char* c3) {
+> +    return (std::string(c1) + std::string(c2) + std::string(c3)).c_str();
+> +  }
+> +}
+> +
+>   
+That looks like a memory error. The strings will get destructed before 
+the function returns, and then the value of c_str() will be invalid (it 
+probably works because there's no time that something else fills the 
+memory until the stuff is used. But this is definately very wrong.
+
+Greetings,
+    Matze
+
+
+From rflegel at gmail.com  Thu Jul  6 20:21:50 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Thu, 6 Jul 2006 12:21:50 -0600
+Subject: [Supertux-devel] Re: [Supertux-commit] r3909 - in trunk/supertux: data/locale src src/gui
+In-Reply-To: <44AD40AC.5030306@braunis.de>
+References: <200607052242.k65MgkTe013386@sheep.berlios.de>
+	 <44AD40AC.5030306@braunis.de>
+Message-ID: <5a5496320607061121o6e534087gc578e7d2ddcf106@mail.gmail.com>
+
+On 7/6/06, Matze Braun <matze at braunis.de> wrote:
+> sommer at BerliOS wrote:
+> > Author: sommer
+> > Date: 2006-07-06 00:42:39 +0200 (Thu, 06 Jul 2006)
+> > New Revision: 3909
+> >
+> > Modified:
+> >    trunk/supertux/data/locale/de.po
+> >    trunk/supertux/src/game_session.cpp
+> >    trunk/supertux/src/gui/menu.cpp
+> >    trunk/supertux/src/player_status.cpp
+> >    trunk/supertux/src/resources.cpp
+> >    trunk/supertux/src/statistics.cpp
+> > Log:
+> > Changed sprintfs to snprintfs, updated translation
+> >
+> >
+> ...
+> >
+> > +namespace {
+> > +  inline const char* chain(const char* c1, const char* c2) {
+> > +    return (std::string(c1) + std::string(c2)).c_str();
+> > +  }
+> > +  inline const char* chain(const char* c1, const char* c2, const char* c3) {
+> > +    return (std::string(c1) + std::string(c2) + std::string(c3)).c_str();
+> > +  }
+> > +}
+> > +
+> >
+> That looks like a memory error. The strings will get destructed before
+> the function returns, and then the value of c_str() will be invalid (it
+> probably works because there's no time that something else fills the
+> memory until the stuff is used. But this is definately very wrong.
+
+Yep, that's definitely not very safe. Perhaps stringstream would be a
+better solution than snprintf(), anyway?
+
+
+From allen at a-king.us  Thu Jul  6 20:24:29 2006
+From: allen at a-king.us (Allen King)
+Date: Thu, 06 Jul 2006 14:24:29 -0400
+Subject: [Supertux-devel] repeatable platform-independent random numbers
+In-Reply-To: <5a5496320607050911k3f137269wb424fba5f9957651@mail.gmail.com>
+References: <44A83959.3050303@a-king.us> <5a5496320607050911k3f137269wb424fba5f9957651@mail.gmail.com>
+Message-ID: <44AD555D.6080804@a-king.us>
+
+
+Ryan Flegel wrote:
+> Could you send the patch as an attachment?
+>
+
+Ryan,
+
+I don't think so. I think we had this conversation before, back on April 
+26'th of this year!  (see attached below.)  Again, I think I did send it 
+as an attachment. When I receive my post from listserv back onto my 
+computer, my email program reads it as an attachment!
+
+I believe we are seeing an email program incompatability.  I'm using 
+Thunderbird on Linux for my email, and I bet you are using a Microsoft 
+product.  Are you?
+
+To dodge the issue, I've put it on my web site (which is often up), at 
+http://www.a-king.us/060702-RandomGenerator.patch4 .  (I'll keep it 
+there for at least a month.)  Otherwise i'm afraid you'll have to cut 
+and paste,  or figuring out how to turn off "view attachments inline" in 
+Outlook.  Cut and paste, although messy, is much less so than getting in 
+the middle of an  standards battle between the gorilla and the geeks!
+
+       Allen
+
+
+
+=========== 060426 Allen King wrote:
+* Hmmm, I have sent my code as an attachment, and when I look at my post 
+from the listserv, it comes up as an attachments.  a) do you have a 
+"view | display attachments inline" box checked or something?  b) I'm 
+sending via Mozilla Thunderbird on Fedora Core 4, not your average 
+Outlook. *
+
+Ryan Flegel wrote:
+> ...[much omitted]...
+> Improved code is almost always good :) I will commit it shortly. *Could
+> send your patches as attachments from now on? It's easier to download
+> than to copy & paste and makes the email less of a mess.*
+>
+> --
+> Thanks,
+> Ryan
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+>   
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060706/2cac76e5/attachment.html>
+
+From rflegel at gmail.com  Thu Jul  6 20:43:42 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Thu, 6 Jul 2006 12:43:42 -0600
+Subject: [Supertux-devel] repeatable platform-independent random numbers
+In-Reply-To: <44AD555D.6080804@a-king.us>
+References: <44A83959.3050303@a-king.us>
+	 <5a5496320607050911k3f137269wb424fba5f9957651@mail.gmail.com>
+	 <44AD555D.6080804@a-king.us>
+Message-ID: <5a5496320607061143n2d6bbf08i3762ce6f0219d2fd@mail.gmail.com>
+
+On 7/6/06, Allen King <allen at a-king.us> wrote:
+>
+>
+>  Ryan Flegel wrote:
+> Could you send the patch as an attachment?
+>
+>
+>
+>  Ryan,
+>
+>  I don't think so. I think we had this conversation before, back on April
+> 26'th of this year!  (see attached below.)  Again, I think I did send it as
+> an attachment. When I receive my post from listserv back onto my computer,
+> my email program reads it as an attachment!
+
+Oops, my bad :). I'm actually using Gmail and I don't see any options
+to not show the attachment inline, but I *have* seen other people send
+patches as attachments and Gmail has handled them properly. It must be
+some sort of gmail quirk.
+
+-- 
+Ryan
+
+
+From grumbel at gmx.de  Fri Jul  7 03:23:52 2006
+From: grumbel at gmx.de (Ingo Ruhnke)
+Date: Fri, 7 Jul 2006 03:23:52 +0200
+Subject: [Supertux-devel] Customizable Sprites for Badguys?
+In-Reply-To: <20060706112352.GA5981@greg.local>
+References: <20060706112352.GA5981@greg.local>
+Message-ID: <20060707012352.GA23412@localhost.localdomain>
+
+On Thu, Jul 06, 2006 at 01:23:52PM +0200, Wolfgang Becker wrote:
+> do we want leveldesigner to be able to change the sprites used for
+> badguys? 
+
+Short answer: No
+
+Long answer: Consistency is important so we shouldn't break it by
+allowing to much customization, however in some levels it might
+make sense to allow customization (say, something like in the XMas
+edition of Lemmings). Those stuff should however shouldn't be 
+something ever seen in a normal level, but bonus/extra/special 
+level stuff only.
+
+-- 
+WWW:      http://pingus.seul.org/~grumbel/ 
+Blog:     http://grumbel.blogspot.com/
+JabberID: grumbel at jabber.org 
+ICQ:      59461927
+
+
+From tuxdev103 at gmail.com  Fri Jul  7 03:33:29 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Thu, 6 Jul 2006 18:33:29 -0700
+Subject: [Supertux-devel] Re: Customizable Sprites for Badguys?
+In-Reply-To: <20060707012352.GA23412@localhost.localdomain>
+References: <20060706112352.GA5981@greg.local>
+	 <20060707012352.GA23412@localhost.localdomain>
+Message-ID: <ff70c5070607061833xb706044t972ab3fe7a505a35@mail.gmail.com>
+
+I think it should be ability should be there, even if restricted.
+Probably harder not too.  Generally, I agree that people shouldn't
+generally go around creating sprites, but I don't think many amateur
+level designers would want too.  Using a snowball sprite for a spiky
+would be rather evil.
+  Nobody would play such an evil level for too long anyway.
+
+
+From tuxdev103 at gmail.com  Fri Jul  7 03:36:01 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Thu, 6 Jul 2006 18:36:01 -0700
+Subject: [Supertux-devel] Re: A new level for forest world and patch to make it work
+In-Reply-To: <ff70c5070607050830l75b20cf2hf99e2622e73b912e@mail.gmail.com>
+References: <ff70c5070607040812l63b37fa4v1c5fc9fb514ec335@mail.gmail.com>
+	 <ff70c5070607041031l538b4f31hc4600b14258c831@mail.gmail.com>
+	 <ff70c5070607041147i48e24b60jad68ff4e4015062a@mail.gmail.com>
+	 <ff70c5070607050830l75b20cf2hf99e2622e73b912e@mail.gmail.com>
+Message-ID: <ff70c5070607061836m64cfa7a2hbf267a706040551d@mail.gmail.com>
+
+I've cleaned up the level so that the earth tiles are more correct,
+and the teleports are lot less jarring.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: lostwoods.stl
+Type: application/octet-stream
+Size: 16252 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060706/d638c94f/attachment.obj>
+
+From uafr at gmx.de  Fri Jul  7 11:38:03 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Fri, 7 Jul 2006 11:38:03 +0200
+Subject: [Supertux-devel] I've found a bug for never had 'Game Over' in Supertux
+In-Reply-To: <J1W3OB$993F9D037FBDB08E91FC6FD85406ED65@laposte.net>
+References: <J1W3OB$993F9D037FBDB08E91FC6FD85406ED65@laposte.net>
+Message-ID: <20060707093803.GA5761@greg.local>
+
+On 20060705 "lucas.vila" <lucas.vila at laposte.net> wrote:
+> In supertux, when you have no lives, you can put "escape" and
+> click on the 'abort the level' button. This tip is
+> interessant: you have no game over, but you see you have -1,
+> -2, -3 lives (et caetera) when you return in the level.
+
+Thanks for reporting the bug. It will be fixed in the
+the next release.
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From anmaster at berlios.de  Fri Jul  7 15:14:57 2006
+From: anmaster at berlios.de (Arvid Norlander)
+Date: Fri, 07 Jul 2006 15:14:57 +0200
+Subject: [Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src
+In-Reply-To: <200607070749.k677nJwn014117@sheep.berlios.de>
+References: <200607070749.k677nJwn014117@sheep.berlios.de>
+Message-ID: <44AE5E51.9060403@users.berlios.de>
+
+This commit cause odd problems for me:
+
+~/src/supertux $ ./supertux data/levels/world2/level1.stl
+[/home/arvid/.supertux] is in the search path
+[/home/arvid/src/supertux//data] is in the search path
+Warning: Invalid button '0' in buttonmap
+Warning: Invalid button '1' in buttonmap
+Fatal: Unexpected exception: Problem when reading level 'level1.stl': uninitialized RandomGenerator
+object
+
+Before that level worked. Several others got broken by this patch too (but not all,
+data/levels/world2/christoph5.stl works for example).
+
+My system is Gentoo Linux (64-bit) on an AMD64. It doesn't affect a 32-bit supertux in a chroot.
+
+sik0fewl at BerliOS wrote:
+> Author: sik0fewl
+> Date: 2006-07-07 09:49:14 +0200 (Fri, 07 Jul 2006)
+> New Revision: 3929
+> 
+> Modified:
+>    trunk/supertux/src/game_session.cpp
+>    trunk/supertux/src/game_session.hpp
+>    trunk/supertux/src/main.cpp
+>    trunk/supertux/src/mainloop.cpp
+>    trunk/supertux/src/random_generator.cpp
+>    trunk/supertux/src/random_generator.hpp
+> Log:
+> RNG patch from Allen King
+> 
+<snip>
+> _______________________________________________
+> Supertux-commit mailing list
+> Supertux-commit at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-commit
+> 
+
+
+
+From tuxdev103 at gmail.com  Fri Jul  7 17:26:57 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Fri, 7 Jul 2006 08:26:57 -0700
+Subject: [Supertux-devel] Re: A new level for forest world and patch to make it work
+In-Reply-To: <ff70c5070607061836m64cfa7a2hbf267a706040551d@mail.gmail.com>
+References: <ff70c5070607040812l63b37fa4v1c5fc9fb514ec335@mail.gmail.com>
+	 <ff70c5070607041031l538b4f31hc4600b14258c831@mail.gmail.com>
+	 <ff70c5070607041147i48e24b60jad68ff4e4015062a@mail.gmail.com>
+	 <ff70c5070607050830l75b20cf2hf99e2622e73b912e@mail.gmail.com>
+	 <ff70c5070607061836m64cfa7a2hbf267a706040551d@mail.gmail.com>
+Message-ID: <ff70c5070607070826r38f7b82fnece13dd54147b9dd@mail.gmail.com>
+
+Grumbel found that this currently uses music that doesn't officially
+exist yet.  For now, please change the music for the ambient sound to
+ghostforest.ogg to play it
+
+
+From rflegel at gmail.com  Fri Jul  7 20:22:16 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Fri, 7 Jul 2006 12:22:16 -0600
+Subject: [Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src
+In-Reply-To: <44AE5E51.9060403@users.berlios.de>
+References: <200607070749.k677nJwn014117@sheep.berlios.de>
+	 <44AE5E51.9060403@users.berlios.de>
+Message-ID: <5a5496320607071122y24752dc7k4703ef3bff8336b9@mail.gmail.com>
+
+Hmm.. sorry about that. Apparently I didn't test it well enough before
+checking it in. I will take a look when I have a chance. Hopefully
+Allen is around and can fix the problem before then.
+
+-- 
+Ryan
+
+On 7/7/06, Arvid Norlander <anmaster at berlios.de> wrote:
+> This commit cause odd problems for me:
+>
+> ~/src/supertux $ ./supertux data/levels/world2/level1.stl
+> [/home/arvid/.supertux] is in the search path
+> [/home/arvid/src/supertux//data] is in the search path
+> Warning: Invalid button '0' in buttonmap
+> Warning: Invalid button '1' in buttonmap
+> Fatal: Unexpected exception: Problem when reading level 'level1.stl': uninitialized RandomGenerator
+> object
+>
+> Before that level worked. Several others got broken by this patch too (but not all,
+> data/levels/world2/christoph5.stl works for example).
+>
+> My system is Gentoo Linux (64-bit) on an AMD64. It doesn't affect a 32-bit supertux in a chroot.
+>
+> sik0fewl at BerliOS wrote:
+> > Author: sik0fewl
+> > Date: 2006-07-07 09:49:14 +0200 (Fri, 07 Jul 2006)
+> > New Revision: 3929
+> >
+> > Modified:
+> >    trunk/supertux/src/game_session.cpp
+> >    trunk/supertux/src/game_session.hpp
+> >    trunk/supertux/src/main.cpp
+> >    trunk/supertux/src/mainloop.cpp
+> >    trunk/supertux/src/random_generator.cpp
+> >    trunk/supertux/src/random_generator.hpp
+> > Log:
+> > RNG patch from Allen King
+> >
+> <snip>
+> > _______________________________________________
+> > Supertux-commit mailing list
+> > Supertux-commit at lists.berlios.de
+> > http://lists.berlios.de/mailman/listinfo/supertux-commit
+> >
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+
+
+From anmaster at berlios.de  Fri Jul  7 21:12:04 2006
+From: anmaster at berlios.de (AnMaster)
+Date: Fri, 07 Jul 2006 21:12:04 +0200
+Subject: [Supertux-devel] Re: [Supertux-commit] r3929 - trunk/supertux/src
+In-Reply-To: <5a5496320607071122y24752dc7k4703ef3bff8336b9@mail.gmail.com>
+References: <200607070749.k677nJwn014117@sheep.berlios.de>	 <44AE5E51.9060403@users.berlios.de> <5a5496320607071122y24752dc7k4703ef3bff8336b9@mail.gmail.com>
+Message-ID: <44AEB204.2030209@users.berlios.de>
+
+Apparently it is already fixed by WolfgangB.
+/Arvid
+Ryan Flegel skrev:
+> Hmm.. sorry about that. Apparently I didn't test it well enough before
+> checking it in. I will take a look when I have a chance. Hopefully
+> Allen is around and can fix the problem before then.
+> 
+
+
+From matze at braunis.de  Mon Jul 10 11:37:12 2006
+From: matze at braunis.de (Matze Braun)
+Date: Mon, 10 Jul 2006 11:37:12 +0200
+Subject: [Supertux-devel] Re: [Supertux-commit] r3973 - trunk/supertux/src/badguy
+In-Reply-To: <200607092338.k69NcTtG014569@sheep.berlios.de>
+References: <200607092338.k69NcTtG014569@sheep.berlios.de>
+Message-ID: <44B21FC8.7060808@braunis.de>
+
+wolfgangb at BerliOS wrote:
+> Author: wolfgangb
+> Date: 2006-07-10 01:38:24 +0200 (Mon, 10 Jul 2006)
+> New Revision: 3973
+>
+> Modified:
+>    trunk/supertux/src/badguy/mrtree.cpp
+>    trunk/supertux/src/badguy/mrtree.hpp
+>    trunk/supertux/src/badguy/snail.cpp
+>    trunk/supertux/src/badguy/snail.hpp
+> Log:
+> Made Snail and Mr.Tree change direction only once per active_update.
+> Riding down a moving platform still lokes strange; Mr.Tree walks uphill,
+> but not down again.
+>   
+
+I think a much better fix would be to check where the collision happened 
+and base direction change on that. I.e. if you face right AND collide 
+right, then you turn left. I implemented that with mriceblock and it 
+works nicely and is more clear than extra flags IMO.
+
+Greetings,
+    Matze
+
+
+
+From uafr at gmx.de  Mon Jul 10 13:07:56 2006
+From: uafr at gmx.de (Wolfgang Becker)
+Date: Mon, 10 Jul 2006 13:07:56 +0200
+Subject: [Supertux-devel] Re: [Supertux-commit] r3973 - trunk/supertux/src/badguy
+In-Reply-To: <44B21FC8.7060808@braunis.de>
+References: <200607092338.k69NcTtG014569@sheep.berlios.de> <44B21FC8.7060808@braunis.de>
+Message-ID: <20060710110755.GA6641@greg.local>
+
+On 20060710 Matze Braun <matze at braunis.de> wrote:
+> I think a much better fix would be to check where the collision happened 
+> and base direction change on that. I.e. if you face right AND collide 
+> right, then you turn left. I implemented that with mriceblock and it 
+> works nicely and is more clear than extra flags IMO.
+
+Can do. But that would change the behaviour of badguys. ATM, if a
+badguy is kicked in the back he turns around. With that method he
+will just ignore it. Of course that won't be a problem if it was
+never planned to be that way.
+
+Example:
+--------
+
+A is faster than B.
+
+Start:
+
+      +--+       +--+
+      |A +---->  |B +-->
+      +--+       +--+ 
+
+After Collision:
+
+method 1)                          method 2)
+      +--+       +--+                   +--+    +--+
+ <----|A +    <--|B +              <----|A +    |B +-->
+      +--+       +--+                   +--+    +--+
+
+Tsch??,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+
+
+From afief.h at gmail.com  Sat Jul  8 01:46:48 2006
+From: afief.h at gmail.com (Afief Halumi)
+Date: Sat, 8 Jul 2006 02:46:48 +0300
+Subject: [Supertux-devel] bonus
+In-Reply-To: <BAY12-F15F78D5B9C78964F0182A388760@phx.gbl>
+References: <20060705123152.GA24865@greg.local>
+	 <BAY12-F15F78D5B9C78964F0182A388760@phx.gbl>
+Message-ID: <83a40700607071646k514b71cbr49691fa678bad24c@mail.gmail.com>
+
+only one right now(as far as i am aware of)
+http://supertux.berlios.de/wiki/index.php/Yeti
+
+On 7/5/06, kristj?n ?J?nsson <krissij4 at hotmail.com> wrote:
+>
+>
+>
+>
+> >From: Wolfgang Becker <uafr at gmx.de>
+> >Reply-To: supertux-devel at berlios.de
+> >To: kristj?n ?J?nsson <krissij4 at hotmail.com>
+> >Subject: Re: [Supertux-devel] bonus
+> >Date: Wed, 5 Jul 2006 14:31:52 +0200
+> >
+> >On 20060704 kristj?n ?J?nsson <krissij4 at hotmail.com> wrote:
+> > > ok i will try to make better levels ok?
+> >
+> >To create levels for milestone 2 and use the new features you
+> >need the development version of the game and the editor. Both
+> >are work in progress, so there is no binary package yet. See
+> >http://supertux.berlios.de/wiki/index.php/Building_SuperTux
+> >for details on building it from source.
+> >
+> >Bye,
+> >Wolfgang
+> >--
+> >Wolfgang Becker  ***  eMail uafr at gmx.de  ***  http://uafr.freeshell.org/
+>
+>
+>
+>
+>
+>
+> hay is there some boss like in super mario in  milestone2?
+>
+> _________________________________________________________________
+> Don't just search. Find. Check out the new MSN Search!
+> http://search.msn.click-url.com/go/onm00200636ave/direct/01/
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://lists.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060708/2e32a84b/attachment.html>
+
+From mad_monk4000 at yahoo.com  Wed Jul 12 12:29:30 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Wed, 12 Jul 2006 03:29:30 -0700 (PDT)
+Subject: [Supertux-devel] Boss Battles
+Message-ID: <20060712102930.61023.qmail@web37008.mail.mud.yahoo.com>
+
+Will I be able to include Boss Battles in my level subsets? I want to know if I should expect the Yeti in my level subset, "War in Antarctica".
+
+Julian
+  (a.k.a. mad_monk4000 at yahoo.com)
+
+ 		
+---------------------------------
+Do you Yahoo!?
+ Get on board. You're invited to try the new Yahoo! Mail Beta.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060712/85177e67/attachment.html>
+
+From mad_monk4000 at yahoo.com  Wed Jul 12 12:37:52 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Wed, 12 Jul 2006 03:37:52 -0700 (PDT)
+Subject: [Supertux-devel] Links, please
+Message-ID: <20060712103752.77801.qmail@web37009.mail.mud.yahoo.com>
+
+I would like a few links to places I can Submit my own levels.
+
+Julian
+  (a.k.a. mad_monk4000 at yahoo.com)
+
+ __________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060712/9de59534/attachment.html>
+
+From ravu_al_hemio at berlios.de  Wed Jul 12 12:45:41 2006
+From: ravu_al_hemio at berlios.de (Ravu al Hemio)
+Date: Wed, 12 Jul 2006 12:45:41 +0200
+Subject: [Supertux-devel] Links, please
+In-Reply-To: <20060712103752.77801.qmail@web37009.mail.mud.yahoo.com>
+References: <20060712103752.77801.qmail@web37009.mail.mud.yahoo.com>
+Message-ID: <44B4D2D5.8090003@berlios.de>
+
+Julian Marchant wrote:
+> I would like a few links to places I can Submit my own levels.
+>
+> /Julian/
+> (a.k.a. mad_monk4000 at yahoo.com)
+You may wish to check out the SuperTux fanpage at http://supertux.info/, 
+which contains a facility for uploading levels.
+
+~~ Ondra
+
+
+From slacker at gluebox.com  Thu Jul 13 16:04:58 2006
+From: slacker at gluebox.com (S.Groundwater)
+Date: Thu, 13 Jul 2006 10:04:58 -0400 (EDT)
+Subject: [Supertux-devel] Tux Single Image Sprite
+Message-ID: <59034.146.145.190.179.1152799498.squirrel@gluebox.com>
+
+Hello SuperTux Crew.
+
+We have gone back and forth over the last year with respect to making the
+Tux sprite a single image again as opposed to the current four section
+body parts. If anyone here on the ML was around when the split was made, -
+feel free to shed light on why this split was a good idea or why this was
+done.
+
+In discussions on IRC I was commenting on how I would like to basically
+zero out the head and feet and move towards a two sprite solution with a 
+body and an arm sprites. From the graphic side this seems like the easiest
+way to get some relief from the complexities of the current sectional Tux,
+while still retaining a normal look as Tux's carried object gets layered
+between the arms and the body.
+
+IIRC, the other day Grumble had commented in favor of just a single Tux
+sprite.  With additional single graphics for every situation.
+i.e. - BigTux, BigTux with Block, FirehatTux, FirehatTux with Block, etc..
+
+I started the process of making xcf templates for each 'singleTux'
+situation but now I have questions about wether this is a good idea. The
+problem I see is how natural things look and work, especially with regard
+to holding an object and jumping through a 1 tile hole.
+
+On IRC today I discussed this with Sommer and his comments were:
+"I don't know if one complete animation set per type of thing carried is a
+good idea. I'd prefer a generic 'Tux carrying something' animation, which
+the game can then overlay with e.g. MrIceblock. The game can then let Tux
+carry MrIceblock closer to his body when he drops through a 1-tile-hole."
+
+Please speak up if you have comments on how/why the Tux sprite should work.
+I am leaning back towards my original game plan of body plus arm sprites.
+
+- greetings :p
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+
+
+From wansti at gmx.de  Fri Jul 14 14:50:24 2006
+From: wansti at gmx.de (Marek M.)
+Date: Fri, 14 Jul 2006 14:50:24 +0200
+Subject: [Supertux-devel] Tux Single Image Sprite
+In-Reply-To: <59034.146.145.190.179.1152799498.squirrel@gluebox.com>
+References: <59034.146.145.190.179.1152799498.squirrel@gluebox.com>
+Message-ID: <44B79310.6030506@gmx.de>
+
+
+> On IRC today I discussed this with Sommer and his comments were:
+> "I don't know if one complete animation set per type of thing carried is a
+> good idea. I'd prefer a generic 'Tux carrying something' animation, which
+> the game can then overlay with e.g. MrIceblock. The game can then let Tux
+> carry MrIceblock closer to his body when he drops through a 1-tile-hole."
+>   
+I don't do much of either code of graphics, but the single-image plus
+arms for carrying something seems like a good solution to me. That way
+it's easy to make Tux hold lots of different objects and also decide
+where to hold them - for slipping through a one-tile-hole, it should be
+easy to make his arms point upwards and hold the object over his head...
+for example.
+
+    Marek
+> Please speak up if you have comments on how/why the Tux sprite should work.
+> I am leaning back towards my original game plan of body plus arm sprites.
+>
+> - greetings :p
+>
+>
+>   
+
+
+
+From allen at a-king.us  Sat Jul 15 18:55:19 2006
+From: allen at a-king.us (Allen King)
+Date: Sat, 15 Jul 2006 12:55:19 -0400
+Subject: [Supertux-devel] Tux's "hot spot"
+Message-ID: <44B91DF7.3090108@a-king.us>
+
+There's been a "bug" in supertux since I've been using it for the past 6 
+months related to the thread below.  The hot-spot of Tux, which (among 
+other things) determines which brick he hits when he jumps upward, is in 
+the upper LEFT-HAND corner of the Tux icon.  Much more reasonable would 
+be for the hot spot to be in the upper CENTER.  Perhaps this can be 
+fixed when these other changes are rolled in.
+
+I have not energy to develop a patch, so will limit my involvement to 
+being a critical bug finder !^)
+
+-------- Original Message --------
+Subject: 	[Supertux-devel] Tux Single Image Sprite
+Date: 	Thu, 13 Jul 2006 10:04:58 -0400 (EDT)
+From: 	S.Groundwater <slacker at gluebox.com>
+Reply-To: 	supertux-devel at bat.berlios.de
+To: 	supertux-devel at lists.berlios.de
+
+
+
+Hello SuperTux Crew.
+
+We have gone back and forth over the last year with respect to making the
+Tux sprite a single image again as opposed to the current four section
+body parts. If anyone here on the ML was around when the split was made, -
+feel free to shed light on why this split was a good idea or why this was
+done.
+
+In discussions on IRC I was commenting on how I would like to basically
+zero out the head and feet and move towards a two sprite solution with a 
+body and an arm sprites. From the graphic side this seems like the easiest
+way to get some relief from the complexities of the current sectional Tux,
+while still retaining a normal look as Tux's carried object gets layered
+between the arms and the body.
+
+IIRC, the other day Grumble had commented in favor of just a single Tux
+sprite.  With additional single graphics for every situation.
+i.e. - BigTux, BigTux with Block, FirehatTux, FirehatTux with Block, etc..
+
+I started the process of making xcf templates for each 'singleTux'
+situation but now I have questions about wether this is a good idea. The
+problem I see is how natural things look and work, especially with regard
+to holding an object and jumping through a 1 tile hole.
+
+On IRC today I discussed this with Sommer and his comments were:
+"I don't know if one complete animation set per type of thing carried is a
+good idea. I'd prefer a generic 'Tux carrying something' animation, which
+the game can then overlay with e.g. MrIceblock. The game can then let Tux
+carry MrIceblock closer to his body when he drops through a 1-tile-hole."
+
+Please speak up if you have comments on how/why the Tux sprite should work.
+I am leaning back towards my original game plan of body plus arm sprites.
+
+- greetings :p
+
+
+-- 
+This message has been scanned for viruses and
+dangerous content by MailScanner, and is
+believed to be clean.
+
+_______________________________________________
+Supertux-devel mailing list
+Supertux-devel at bat.berlios.de
+http://bat.berlios.de/mailman/listinfo/supertux-devel
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060715/67001509/attachment.html>
+
+From tuxdev103 at gmail.com  Sun Jul 16 00:37:37 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Sat, 15 Jul 2006 15:37:37 -0700
+Subject: [Supertux-devel] Tux's "hot spot"
+In-Reply-To: <44B91DF7.3090108@a-king.us>
+References: <44B91DF7.3090108@a-king.us>
+Message-ID: <ff70c5070607151537v36f95a21m6bb5cf32b26b65d1@mail.gmail.com>
+
+That bug has been fixed in SVN so that Tux's whole head is the
+hotspot. This doesn't seem to have anything to do with a sectional Tux
+sprite but is related to the collision detection code.
+
+
+From matze at braunis.de  Sun Jul 16 00:40:22 2006
+From: matze at braunis.de (Matthias Braun)
+Date: Sun, 16 Jul 2006 00:40:22 +0200
+Subject: [Supertux-devel] Tux's "hot spot"
+In-Reply-To: <44B91DF7.3090108@a-king.us>
+References: <44B91DF7.3090108@a-king.us>
+Message-ID: <1153003222.19667.0.camel@taylor.local>
+
+Am Samstag, den 15.07.2006, 12:55 -0400 schrieb Allen King:
+> There's been a "bug" in supertux since I've been using it for the past
+> 6 months related to the thread below.  The hot-spot of Tux, which
+> (among other things) determines which brick he hits when he jumps
+> upward, is in the upper LEFT-HAND corner of the Tux icon.  Much more
+> reasonable would be for the hot spot to be in the upper CENTER.
+> Perhaps this can be fixed when these other changes are rolled in.
+
+With the new collision detection code that is in for a few days now, tux
+should break all boxes that he hits, not just the ones he hits with the
+upper left corner.
+
+Greetings,
+	Matze
+
+
+
+
+From mad_monk4000 at yahoo.com  Sun Jul 16 07:08:06 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Sat, 15 Jul 2006 22:08:06 -0700 (PDT)
+Subject: [Supertux-devel] Boss Battles (again)
+Message-ID: <20060716050806.1939.qmail@web37013.mail.mud.yahoo.com>
+
+
+I wrote "Will I be able to include Boss Battles in my level subsets? I want to know if I should expect the Yeti in my level subset, "War in Antarctica"." This is the second time
+
+
+
+Julian
+  (a.k.a. mad_monk4000 at yahoo.com)
+
+ 			
+---------------------------------
+See the all-new, redesigned Yahoo.com.  Check it out.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060715/7de88464/attachment.html>
+
+From matze at braunis.de  Tue Jul 18 10:48:02 2006
+From: matze at braunis.de (Matthias Braun)
+Date: Tue, 18 Jul 2006 10:48:02 +0200
+Subject: [Supertux-devel] [Supertux-commit] r4034 - trunk/supertux/src
+In-Reply-To: <200607170036.k6H0aOsY022199@sheep.berlios.de>
+References: <200607170036.k6H0aOsY022199@sheep.berlios.de>
+Message-ID: <1153212482.17935.3.camel@taylor.local>
+
+
+
+Am Montag, den 17.07.2006, 02:36 +0200 schrieb sommer at BerliOS:
+...
+> +      // FIXME: also test unisolid tiles
+...
+
+I think it's impossible to correctly test for unisolid tiles in the
+is_free_space function, as unisolid tiles are defined to be solid
+dependent on the objects movement direction and position. I don't think
+we should pass that info to is_free_space. Simply treating unisolid
+tiles as solid (which should happen already I think) should be ok.
+
+Greetings,
+	Matze
+
+
+
+
+From tuxdev103 at gmail.com  Sun Jul 23 15:45:48 2006
+From: tuxdev103 at gmail.com (tuxdev)
+Date: Sun, 23 Jul 2006 06:45:48 -0700
+Subject: [Supertux-devel] Objects improvement patch, part 1
+Message-ID: <ff70c5070607230645u2afe00c4oc9676a27925d3fc1@mail.gmail.com>
+
+This patch is essentially what I did to the objects in order to try to
+improve scripting.  The scripting isn't mergeable because it has
+crashing issues, so I tried to make a mergeable patch that only did my
+changes to the object system with somewhat minimal changes to the
+scripting system.
+
+1.  Expanded portable interface to include a boolean "portable", as
+well as support methods and constructors.
+2.  Expanded GameObject to include a std::string "name", and added
+support methods and constructors, notably one to allow the field to be
+acquired from a level file.
+3.  Expanded MovingObject to include a boolean "solid", and added
+support for what would become a scripting interface.
+4.  Removed the "flags" field from GameObject, since it is pointless
+with changes 1 and 3.  Fixed where things broke due to its removal.
+5.  Made AmbientSound inherit from MovingObject instead of GameObject,
+since most things that can actually exist physically in a level should
+be MovingObjects, and I know how that class works.
+6.  Loosened the singletoness of Camera, DisplayEffect, and Player.
+Level doesn't have a host object, so I'm not sure how to handle that.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: objects.patch
+Type: application/octet-stream
+Size: 38452 bytes
+Desc: not available
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060723/c813cb09/attachment.obj>
+
+From mad_monk4000 at yahoo.com  Wed Jul 26 23:12:04 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Wed, 26 Jul 2006 14:12:04 -0700 (PDT)
+Subject: [Supertux-devel] suggestion
+Message-ID: <20060726211204.71998.qmail@web37012.mail.mud.yahoo.com>
+
+I think Super Tux would be better if there were two kinds of levels:
+  1.Travel Levels: these would be normal levels
+  2.Battle Levels: these levels would be backscroll levels, and the only objective would be to defeat all the enemies.
+  This feature would make the game better, and would allow me to make a level subset called "War in Antarctica".
+
+
+Julian
+  (a.k.a. mad_monk4000 at yahoo.com)
+
+ __________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060726/53101ec8/attachment.html>
+
+From goldenpiranha at gmail.com  Wed Jul 26 23:57:46 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Wed, 26 Jul 2006 14:57:46 -0700
+Subject: [Supertux-devel] suggestion
+In-Reply-To: <20060726211204.71998.qmail@web37012.mail.mud.yahoo.com>
+References: <20060726211204.71998.qmail@web37012.mail.mud.yahoo.com>
+Message-ID: <bcd1d8470607261457o73e44300y720e107dc915c0e4@mail.gmail.com>
+
+i agree...
+and also a level option to make the player collect all the coins to be able
+to finish (must be backscroll)
+GP
+
+On 7/26/06, Julian Marchant <mad_monk4000 at yahoo.com> wrote:
+>
+> I think Super Tux would be better if there were two kinds of levels:
+> 1.Travel Levels: these would be normal levels
+> 2.Battle Levels: these levels would be backscroll levels, and the only
+> objective would be to defeat all the enemies.
+> This feature would make the game better, and would allow me to make a
+> level subset called "War in Antarctica".
+>
+>
+> *Julian*
+> (a.k.a. mad_monk4000 at yahoo.com)
+>
+> __________________________________________________
+> Do You Yahoo!?
+> Tired of spam? Yahoo! Mail has the best spam protection around
+> http://mail.yahoo.com
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060726/db59d217/attachment.html>
+
+From gnomino at hotmail.com  Fri Jul 28 00:08:20 2006
+From: gnomino at hotmail.com (gnomino)
+Date: Thu, 27 Jul 2006 15:08:20 -0700
+Subject: [Supertux-devel] supertux-nogl patch
+Message-ID: <44C93954.5070808@hotmail.com>
+
+Hello,
+The supertux-nogl patch in revision 4099 was broken when I tried to 
+apply it. (From the svn history, I think it was because of a patch that 
+formatted the code.)
+I've attached a patch (against the nogl patch) that fixes all the 
+problems, which were quite minor (mostly involving removal of 
+inconspicuous whitespace at the ends of lines).
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: supertux-nogl.diff.diff
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060727/dbef0649/attachment.ksh>
+
+From supertux at 2006.expires.deltadevelopment.de  Fri Jul 28 14:37:40 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Fri, 28 Jul 2006 14:37:40 +0200
+Subject: [Supertux-devel] supertux-nogl patch
+In-Reply-To: <44C93954.5070808@hotmail.com>
+References: <44C93954.5070808@hotmail.com>
+Message-ID: <44CA0514.70503@2006.expires.deltadevelopment.de>
+
+Hello gnomino,
+
+gnomino wrote:
+> --- supertux-nogl.diff	2006-07-27 11:47:41.000000000 -0700
+> +++ supertux-nogl.diff.2	2006-07-27 14:43:08.000000000 -0700
+> @@ -32,7 +32,7 @@
+>  #
+>  #  patch -p1 < contrib/supertux-nogl.diff
+>  #
+> -#  This patch works for revision 3858. It may break for later revisions.
+> +#  This patch works for revision 4099. It may break for later revisions.
+
+Thanks! I fixed another minor bug and will commit the new patch as soon 
+as BerliOS gets rid of their "DISK CRITICAL [0 kB (0%) free on 
+/dev/sda7]" error.
+
+
+Regards,
+
+   Christoph
+
+
+From mad_monk4000 at yahoo.com  Fri Jul 28 15:12:29 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Fri, 28 Jul 2006 06:12:29 -0700 (PDT)
+Subject: [Supertux-devel] NOT SUPERTUX!
+Message-ID: <20060728131229.76475.qmail@web37014.mail.mud.yahoo.com>
+
+I want to make a computer game where Tux and Mario fight to the finish. Does anyone know where I might find a FREEWARE program that helps to make games?
+  P.S. I have the trial version of a program called Game Maker.
+
+
+Julian
+  (a.k.a. mad_monk4000 at yahoo.com)
+
+ 		
+---------------------------------
+Do you Yahoo!?
+ Get on board. You're invited to try the new Yahoo! Mail Beta.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060728/e5e29b64/attachment.html>
+
+From daniel at digitree.org  Fri Jul 28 16:07:11 2006
+From: daniel at digitree.org (Daniel Hedlund)
+Date: Fri, 28 Jul 2006 07:07:11 -0700
+Subject: [Supertux-devel] NOT SUPERTUX!
+In-Reply-To: <20060728131229.76475.qmail@web37014.mail.mud.yahoo.com>
+References: <20060728131229.76475.qmail@web37014.mail.mud.yahoo.com>
+Message-ID: <44CA1A0F.7080100@digitree.org>
+
+Julian,
+
+There is a game similar to what you describe except that it doesn't have 
+Tux in it, just Mario-related characters.  It's called "Super Mario War" 
+and can be found at:
+http://freshmeat.net/projects/smw/
+"Super Mario War is a Super Mario deathmatch game. The goal is to stomp 
+as many other Marios as possible. It is a tribute to Mario War by 
+Samuele Poletti."
+
+It shouldn't be too hard to take some SuperTux sprites and replace an 
+existing Mario character's sprites with it to get the effect you're 
+looking for.  Alternatively, you could poke at their source-code and add 
+Tux as a new character.  Also note that I've never actually played this 
+game so I don't know if there are any other characters besides Mario.
+
+Cheers,
+
+Daniel Hedlund
+daniel at digitree.org
+
+
+Julian Marchant wrote:
+> I want to make a computer game where Tux and Mario fight to the 
+> finish. Does anyone know where I might find a FREEWARE program that 
+> helps to make games?
+> P.S. I have the trial version of a program called Game Maker.
+>
+>
+> /Julian/
+> (a.k.a. mad_monk4000 at yahoo.com)
+>
+> ------------------------------------------------------------------------
+> Do you Yahoo!?
+> Get on board. You're invited 
+> <http://us.rd.yahoo.com/evt=40791/*http://advision.webevents.yahoo.com/handraisers> 
+> to try the new Yahoo! Mail Beta.
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>   
+
+
+
+From djwings at gmail.com  Fri Jul 28 17:10:41 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Fri, 28 Jul 2006 11:10:41 -0400
+Subject: [Supertux-devel] supertux-nogl patch
+In-Reply-To: <44CA0514.70503@2006.expires.deltadevelopment.de>
+References: <44C93954.5070808@hotmail.com>
+	<44CA0514.70503@2006.expires.deltadevelopment.de>
+Message-ID: <826ffc730607280810j538fe18di2952c8078518813@mail.gmail.com>
+
+Wow... We're up to 4099? I don't look at SVN numbers anymore when I update
+my copy.
+
+On 7/28/06, Christoph Sommer <supertux at 2006.expires.deltadevelopment.de>
+wrote:
+>
+> Hello gnomino,
+>
+> gnomino wrote:
+> > --- supertux-nogl.diff        2006-07-27 11:47:41.000000000 -0700
+> > +++ supertux-nogl.diff.2      2006-07-27 14:43:08.000000000 -0700
+> > @@ -32,7 +32,7 @@
+> >  #
+> >  #  patch -p1 < contrib/supertux-nogl.diff
+> >  #
+> > -#  This patch works for revision 3858. It may break for later
+> revisions.
+> > +#  This patch works for revision 4099. It may break for later
+> revisions.
+>
+> Thanks! I fixed another minor bug and will commit the new patch as soon
+> as BerliOS gets rid of their "DISK CRITICAL [0 kB (0%) free on
+> /dev/sda7]" error.
+>
+>
+> Regards,
+>
+>    Christoph
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060728/542c844d/attachment.html>
+
+From djwings at gmail.com  Fri Jul 28 17:11:48 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Fri, 28 Jul 2006 11:11:48 -0400
+Subject: [Supertux-devel] NOT SUPERTUX!
+In-Reply-To: <44CA1A0F.7080100@digitree.org>
+References: <20060728131229.76475.qmail@web37014.mail.mud.yahoo.com>
+	<44CA1A0F.7080100@digitree.org>
+Message-ID: <826ffc730607280811i460e1341q6693aff7559b87b@mail.gmail.com>
+
+And if you're looking for some Flash videos of Mario and Sonic fighting to
+the finish, I've got a link, but this probably isn't the place to share it.
+
+On 7/28/06, Daniel Hedlund <daniel at digitree.org> wrote:
+>
+> Julian,
+>
+> There is a game similar to what you describe except that it doesn't have
+> Tux in it, just Mario-related characters.  It's called "Super Mario War"
+> and can be found at:
+> http://freshmeat.net/projects/smw/
+> "Super Mario War is a Super Mario deathmatch game. The goal is to stomp
+> as many other Marios as possible. It is a tribute to Mario War by
+> Samuele Poletti."
+>
+> It shouldn't be too hard to take some SuperTux sprites and replace an
+> existing Mario character's sprites with it to get the effect you're
+> looking for.  Alternatively, you could poke at their source-code and add
+> Tux as a new character.  Also note that I've never actually played this
+> game so I don't know if there are any other characters besides Mario.
+>
+> Cheers,
+>
+> Daniel Hedlund
+> daniel at digitree.org
+>
+>
+> Julian Marchant wrote:
+> > I want to make a computer game where Tux and Mario fight to the
+> > finish. Does anyone know where I might find a FREEWARE program that
+> > helps to make games?
+> > P.S. I have the trial version of a program called Game Maker.
+> >
+> >
+> > /Julian/
+> > (a.k.a. mad_monk4000 at yahoo.com)
+> >
+> > ------------------------------------------------------------------------
+> > Do you Yahoo!?
+> > Get on board. You're invited
+> > <
+> http://us.rd.yahoo.com/evt=40791/*http://advision.webevents.yahoo.com/handraisers
+> >
+> > to try the new Yahoo! Mail Beta.
+> > ------------------------------------------------------------------------
+> >
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.de
+> > http://bat.berlios.de/mailman/listinfo/supertux-devel
+> >
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060728/9441a35c/attachment.html>
+
+From rflegel at gmail.com  Fri Jul 28 19:18:49 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Fri, 28 Jul 2006 11:18:49 -0600
+Subject: [Supertux-devel] NOT SUPERTUX!
+In-Reply-To: <826ffc730607280811i460e1341q6693aff7559b87b@mail.gmail.com>
+References: <20060728131229.76475.qmail@web37014.mail.mud.yahoo.com>
+	<44CA1A0F.7080100@digitree.org>
+	<826ffc730607280811i460e1341q6693aff7559b87b@mail.gmail.com>
+Message-ID: <5a5496320607281018o3a6175fpedc0554dff865505@mail.gmail.com>
+
+Sure it is :)
+
+-- 
+Ryan
+
+On 7/28/06, djwings at gmail.com <djwings at gmail.com> wrote:
+> And if you're looking for some Flash videos of Mario and Sonic fighting to
+> the finish, I've got a link, but this probably isn't the place to share it.
+>
+>
+> On 7/28/06, Daniel Hedlund <daniel at digitree.org> wrote:
+> > Julian,
+> >
+> > There is a game similar to what you describe except that it doesn't have
+> > Tux in it, just Mario-related characters.  It's called "Super Mario War"
+> > and can be found at:
+> > http://freshmeat.net/projects/smw/
+> > "Super Mario War is a Super Mario deathmatch game. The goal is to stomp
+> > as many other Marios as possible. It is a tribute to Mario War by
+> > Samuele Poletti."
+> >
+> > It shouldn't be too hard to take some SuperTux sprites and replace an
+> > existing Mario character's sprites with it to get the effect you're
+> > looking for.  Alternatively, you could poke at their source-code and add
+> > Tux as a new character.  Also note that I've never actually played this
+> > game so I don't know if there are any other characters besides Mario.
+> >
+> > Cheers,
+> >
+> > Daniel Hedlund
+> > daniel at digitree.org
+> >
+> >
+> > Julian Marchant wrote:
+> > > I want to make a computer game where Tux and Mario fight to the
+> > > finish. Does anyone know where I might find a FREEWARE program that
+> > > helps to make games?
+> > > P.S. I have the trial version of a program called Game Maker.
+> > >
+> > >
+> > > /Julian/
+> > > (a.k.a . mad_monk4000 at yahoo.com)
+> > >
+> > >
+> ------------------------------------------------------------------------
+> > > Do you Yahoo!?
+> > > Get on board. You're invited
+> > >
+> <http://us.rd.yahoo.com/evt=40791/*http://advision.webevents.yahoo.com/handraisers>
+> > > to try the new Yahoo! Mail Beta.
+> > >
+> ------------------------------------------------------------------------
+> > >
+> > > _______________________________________________
+> > > Supertux-devel mailing list
+> > > Supertux-devel at lists.berlios.de
+> > > http://bat.berlios.de/mailman/listinfo/supertux-devel
+> > >
+> >
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.de
+> > http://bat.berlios.de/mailman/listinfo/supertux-devel
+> >
+>
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+>
+>
+
+
+From djwings at gmail.com  Fri Jul 28 20:02:26 2006
+From: djwings at gmail.com (djwings at gmail.com)
+Date: Fri, 28 Jul 2006 14:02:26 -0400
+Subject: [Supertux-devel] NOT SUPERTUX!
+In-Reply-To: <5a5496320607281018o3a6175fpedc0554dff865505@mail.gmail.com>
+References: <20060728131229.76475.qmail@web37014.mail.mud.yahoo.com>
+	<44CA1A0F.7080100@digitree.org>
+	<826ffc730607280811i460e1341q6693aff7559b87b@mail.gmail.com>
+	<5a5496320607281018o3a6175fpedc0554dff865505@mail.gmail.com>
+Message-ID: <826ffc730607281102j65232685h163745a5c85e0a4f@mail.gmail.com>
+
+Aight, here it is.<http://videogamedc.com/Pixeled_Parodies/Mario_Vs__Sonic/mario_vs__sonic.html>
+:)
+
+On 7/28/06, Ryan Flegel <rflegel at gmail.com> wrote:
+>
+> Sure it is :)
+>
+> --
+> Ryan
+>
+> On 7/28/06, djwings at gmail.com <djwings at gmail.com> wrote:
+> > And if you're looking for some Flash videos of Mario and Sonic fighting
+> to
+> > the finish, I've got a link, but this probably isn't the place to share
+> it.
+> >
+> >
+> > On 7/28/06, Daniel Hedlund <daniel at digitree.org> wrote:
+> > > Julian,
+> > >
+> > > There is a game similar to what you describe except that it doesn't
+> have
+> > > Tux in it, just Mario-related characters.  It's called "Super Mario
+> War"
+> > > and can be found at:
+> > > http://freshmeat.net/projects/smw/
+> > > "Super Mario War is a Super Mario deathmatch game. The goal is to
+> stomp
+> > > as many other Marios as possible. It is a tribute to Mario War by
+> > > Samuele Poletti."
+> > >
+> > > It shouldn't be too hard to take some SuperTux sprites and replace an
+> > > existing Mario character's sprites with it to get the effect you're
+> > > looking for.  Alternatively, you could poke at their source-code and
+> add
+> > > Tux as a new character.  Also note that I've never actually played
+> this
+> > > game so I don't know if there are any other characters besides Mario.
+> > >
+> > > Cheers,
+> > >
+> > > Daniel Hedlund
+> > > daniel at digitree.org
+> > >
+> > >
+> > > Julian Marchant wrote:
+> > > > I want to make a computer game where Tux and Mario fight to the
+> > > > finish. Does anyone know where I might find a FREEWARE program that
+> > > > helps to make games?
+> > > > P.S. I have the trial version of a program called Game Maker.
+> > > >
+> > > >
+> > > > /Julian/
+> > > > (a.k.a . mad_monk4000 at yahoo.com)
+> > > >
+> > > >
+> > ------------------------------------------------------------------------
+> > > > Do you Yahoo!?
+> > > > Get on board. You're invited
+> > > >
+> > <
+> http://us.rd.yahoo.com/evt=40791/*http://advision.webevents.yahoo.com/handraisers
+> >
+> > > > to try the new Yahoo! Mail Beta.
+> > > >
+> > ------------------------------------------------------------------------
+> > > >
+> > > > _______________________________________________
+> > > > Supertux-devel mailing list
+> > > > Supertux-devel at lists.berlios.de
+> > > > http://bat.berlios.de/mailman/listinfo/supertux-devel
+> > > >
+> > >
+> > > _______________________________________________
+> > > Supertux-devel mailing list
+> > > Supertux-devel at lists.berlios.de
+> > > http://bat.berlios.de/mailman/listinfo/supertux-devel
+> > >
+> >
+> >
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.de
+> > http://bat.berlios.de/mailman/listinfo/supertux-devel
+> >
+> >
+> >
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060728/d82f56aa/attachment.html>
+
+From mad_monk4000 at yahoo.com  Sat Jul 29 05:24:04 2006
+From: mad_monk4000 at yahoo.com (Julian Marchant)
+Date: Fri, 28 Jul 2006 20:24:04 -0700 (PDT)
+Subject: [Supertux-devel] NOT SUPERTUX!
+In-Reply-To: <mailman.4302.1154109756.8507.supertux-devel@lists.berlios.de>
+Message-ID: <20060729032404.32125.qmail@web37002.mail.mud.yahoo.com>
+
+I already have Super Mario War.
+
+
+Julian
+  (a.k.a. mad_monk4000 at yahoo.com)
+
+ 		
+---------------------------------
+Yahoo! Messenger with Voice. Make PC-to-Phone Calls to the US (and 30+ countries) for 2?/min or less.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060728/3abfdbd8/attachment.html>
+
+From goldenpiranha at gmail.com  Sun Jul 30 00:21:33 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Sat, 29 Jul 2006 15:21:33 -0700
+Subject: [Supertux-devel] World map
+Message-ID: <bcd1d8470607291521s2b15ac47k6d5ed58d20fc618d@mail.gmail.com>
+
+is there anyway to make a world map?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060729/a71d1bff/attachment.html>
+
+From gnomino at hotmail.com  Mon Jul 31 00:10:46 2006
+From: gnomino at hotmail.com (gnomino)
+Date: Sun, 30 Jul 2006 15:10:46 -0700
+Subject: [Supertux-devel] Scoring and coins
+Message-ID: <44CD2E66.8020604@hotmail.com>
+
+Hello,
+Why was the score removed? I know that score is currently calculated as 
+coins/time but in milestone 1 you could get some extra bonus score by 
+e.g. breaking bricks or removing a dead badguy.
+Also, I don't think that lives should be calculated using coins. There 
+are many levels in which you can get +4 lives if you get all the coins. 
+And a 1up isn't really a '1'up when it gives you four lives.
+
+
+From supertux at 2006.expires.deltadevelopment.de  Mon Jul 31 01:02:45 2006
+From: supertux at 2006.expires.deltadevelopment.de (Christoph Sommer)
+Date: Mon, 31 Jul 2006 01:02:45 +0200
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44CD2E66.8020604@hotmail.com>
+References: <44CD2E66.8020604@hotmail.com>
+Message-ID: <44CD3A95.2040602@2006.expires.deltadevelopment.de>
+
+gnomino wrote:
+> Why was the score removed? [...] Also, I don't think that lives should be calculated using coins. 
+
+SuperTux Milestone 1 did not really have something like "lives". Just 
+like now, you could always continue your journey from the start of the 
+last level you played. This has made it the perfect causal-gamer's toy 
+to play with during short breaks and contributed to its huge success (or 
+so I believe).
+
+This concept, however, makes keeping something like "score" pretty much 
+impossible. With unlimited tries and retries for any given level, you 
+can reach an arbitrary number of points, so we just dropped it.
+
+
+Kind regards,
+
+   Christoph
+
+
+From bubuabu at bubuabu.org  Mon Jul 31 01:23:17 2006
+From: bubuabu at bubuabu.org (Vivien)
+Date: Mon, 31 Jul 2006 01:23:17 +0200
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44CD3A95.2040602@2006.expires.deltadevelopment.de>
+References: <44CD2E66.8020604@hotmail.com>
+	<44CD3A95.2040602@2006.expires.deltadevelopment.de>
+Message-ID: <200607310123.17449.bubuabu@bubuabu.org>
+
+An other way is to add only to score the best try of a level.
+
+
+> gnomino wrote:
+> > Why was the score removed? [...] Also, I don't think that lives should be
+> > calculated using coins.
+>
+> SuperTux Milestone 1 did not really have something like "lives". Just
+> like now, you could always continue your journey from the start of the
+> last level you played. This has made it the perfect causal-gamer's toy
+> to play with during short breaks and contributed to its huge success (or
+> so I believe).
+>
+> This concept, however, makes keeping something like "score" pretty much
+> impossible. With unlimited tries and retries for any given level, you
+> can reach an arbitrary number of points, so we just dropped it.
+>
+>
+> Kind regards,
+>
+>    Christoph
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+
+
+From anmaster at berlios.de  Mon Jul 31 16:39:26 2006
+From: anmaster at berlios.de (Arvid Norlander)
+Date: Mon, 31 Jul 2006 16:39:26 +0200
+Subject: [Supertux-devel] World map
+In-Reply-To: <bcd1d8470607291521s2b15ac47k6d5ed58d20fc618d@mail.gmail.com>
+References: <bcd1d8470607291521s2b15ac47k6d5ed58d20fc618d@mail.gmail.com>
+Message-ID: <44CE161E.8000806@berlios.de>
+
+I'm sorry if I sent this message 2 times, but I have been having some problems with the mailing 
+lists at BerliOS recently.
+
+Not in the built in editor, but it can be done in Flexlay (for supertux-0.1.x and supertux-svn) or 
+Supertux-sharp (for supertux-svn only) AFAIK.
+
+Danny Bittman wrote:
+> is there anyway to make a world map?
+> 
+> 
+> ------------------------------------------------------------------------
+> 
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+
+
+From goldenpiranha at gmail.com  Mon Jul 31 17:06:12 2006
+From: goldenpiranha at gmail.com (Danny Bittman)
+Date: Mon, 31 Jul 2006 08:06:12 -0700
+Subject: [Supertux-devel] World map
+In-Reply-To: <44CE161E.8000806@berlios.de>
+References: <bcd1d8470607291521s2b15ac47k6d5ed58d20fc618d@mail.gmail.com>
+	<44CE161E.8000806@berlios.de>
+Message-ID: <bcd1d8470607310806s440a9e8ft8e8fdff0e319ef19@mail.gmail.com>
+
+ok, thanks! :)
+
+On 7/31/06, Arvid Norlander <anmaster at berlios.de> wrote:
+>
+> I'm sorry if I sent this message 2 times, but I have been having some
+> problems with the mailing
+> lists at BerliOS recently.
+>
+> Not in the built in editor, but it can be done in Flexlay (for
+> supertux-0.1.x and supertux-svn) or
+> Supertux-sharp (for supertux-svn only) AFAIK.
+>
+> Danny Bittman wrote:
+> > is there anyway to make a world map?
+> >
+> >
+> > ------------------------------------------------------------------------
+> >
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.de
+> > http://bat.berlios.de/mailman/listinfo/supertux-devel
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060731/7b9268ed/attachment.html>
+
+From anmaster at berlios.de  Mon Jul 31 18:20:32 2006
+From: anmaster at berlios.de (Arvid Norlander)
+Date: Mon, 31 Jul 2006 18:20:32 +0200
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44CD2E66.8020604@hotmail.com>
+References: <44CD2E66.8020604@hotmail.com>
+Message-ID: <44CE2DD0.8070305@berlios.de>
+
+That is why it doesn't say "1up" on the small tux powerup any longer.
+
+gnomino wrote:
+> And a 1up isn't really a '1'up when it gives you four lives.
+
+
+From wansti at gmx.de  Mon Jul 31 18:36:11 2006
+From: wansti at gmx.de (Marek M.)
+Date: Mon, 31 Jul 2006 18:36:11 +0200
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <200607310123.17449.bubuabu@bubuabu.org>
+References: <44CD2E66.8020604@hotmail.com>	<44CD3A95.2040602@2006.expires.deltadevelopment.de>
+	<200607310123.17449.bubuabu@bubuabu.org>
+Message-ID: <44CE317B.3090409@gmx.de>
+
+
+But how would you determine what the best try is, i.e. how would you
+define "best try"? Anyway, I think this might lead to a lot of
+confusion, and it would require quite a few lines of additional code.
+I never cared about scores in any game, not even pinball games where
+there is basically no other goal to achieve - besides enjoying the game,
+of course. I wonder how many people really pay attention to the score in
+Milestone 1...
+
+    Marek
+
+
+Vivien wrote:
+> An other way is to add only to score the best try of a level.
+>
+>
+>   
+>> gnomino wrote:
+>>     
+>>> Why was the score removed? [...] Also, I don't think that lives should be
+>>> calculated using coins.
+>>>       
+>> SuperTux Milestone 1 did not really have something like "lives". Just
+>> like now, you could always continue your journey from the start of the
+>> last level you played. This has made it the perfect causal-gamer's toy
+>> to play with during short breaks and contributed to its huge success (or
+>> so I believe).
+>>
+>> This concept, however, makes keeping something like "score" pretty much
+>> impossible. With unlimited tries and retries for any given level, you
+>> can reach an arbitrary number of points, so we just dropped it.
+>>
+>>
+>> Kind regards,
+>>
+>>    Christoph
+>> _______________________________________________
+>> Supertux-devel mailing list
+>> Supertux-devel at lists.berlios.de
+>> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>>     
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>   
+
+
+
+From rflegel at gmail.com  Mon Jul 31 19:28:37 2006
+From: rflegel at gmail.com (Ryan Flegel)
+Date: Mon, 31 Jul 2006 11:28:37 -0600
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44CE317B.3090409@gmx.de>
+References: <44CD2E66.8020604@hotmail.com>
+	<44CD3A95.2040602@2006.expires.deltadevelopment.de>
+	<200607310123.17449.bubuabu@bubuabu.org> <44CE317B.3090409@gmx.de>
+Message-ID: <5a5496320607311028w7e8e9b6bg5df6e2d209b9bd92@mail.gmail.com>
+
+I never look at the score in any game I play, except for where the
+entire point of the game is the score (eg, pinball). For Supertux the
+goal is to finish the game, not to get a high score, imo. However, we
+do have time trials and coin trials that should add to the
+replayability of the game.
+
+One of the biggest problems with scores, I think, is how to calculate
+it. It's tough to come up with a formula that takes into account
+badguys killed, coins collected and level time. If the formula ever
+needs to be changed, it basically voids all scores from previous
+versions of the game. I think this was one of the main reasons we
+decided to do away with a score.
+
+-- 
+Ryan
+
+On 7/31/06, Marek M. <wansti at gmx.de> wrote:
+>
+> But how would you determine what the best try is, i.e. how would you
+> define "best try"? Anyway, I think this might lead to a lot of
+> confusion, and it would require quite a few lines of additional code.
+> I never cared about scores in any game, not even pinball games where
+> there is basically no other goal to achieve - besides enjoying the game,
+> of course. I wonder how many people really pay attention to the score in
+> Milestone 1...
+>
+>     Marek
+>
+>
+> Vivien wrote:
+> > An other way is to add only to score the best try of a level.
+> >
+> >
+> >
+> >> gnomino wrote:
+> >>
+> >>> Why was the score removed? [...] Also, I don't think that lives should be
+> >>> calculated using coins.
+> >>>
+> >> SuperTux Milestone 1 did not really have something like "lives". Just
+> >> like now, you could always continue your journey from the start of the
+> >> last level you played. This has made it the perfect causal-gamer's toy
+> >> to play with during short breaks and contributed to its huge success (or
+> >> so I believe).
+> >>
+> >> This concept, however, makes keeping something like "score" pretty much
+> >> impossible. With unlimited tries and retries for any given level, you
+> >> can reach an arbitrary number of points, so we just dropped it.
+> >>
+> >>
+> >> Kind regards,
+> >>
+> >>    Christoph
+> >> _______________________________________________
+> >> Supertux-devel mailing list
+> >> Supertux-devel at lists.berlios.de
+> >> http://bat.berlios.de/mailman/listinfo/supertux-devel
+> >>
+> > _______________________________________________
+> > Supertux-devel mailing list
+> > Supertux-devel at lists.berlios.de
+> > http://bat.berlios.de/mailman/listinfo/supertux-devel
+> >
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+
+
+From rebecca at laudate.ca  Mon Jul 31 19:30:45 2006
+From: rebecca at laudate.ca (Rebecca Gilbert)
+Date: Mon, 31 Jul 2006 13:30:45 -0400
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <5a5496320607311028w7e8e9b6bg5df6e2d209b9bd92@mail.gmail.com>
+References: <44CD2E66.8020604@hotmail.com>	<44CD3A95.2040602@2006.expires.deltadevelopment.de>	<200607310123.17449.bubuabu@bubuabu.org>
+	<44CE317B.3090409@gmx.de>
+	<5a5496320607311028w7e8e9b6bg5df6e2d209b9bd92@mail.gmail.com>
+Message-ID: <44CE3E45.9040706@laudate.ca>
+
+The only time I paid any attention to score was when I realized that I 
+had a high score, so I tried to see how high it would go.  I found out 
+that the limit of extra lives is 99.  I don't know what the score limit 
+is though as my hard drive crashed and burned when I was around 750,000.
+
+Ryan Flegel wrote:
+> I never look at the score in any game I play, except for where the
+> entire point of the game is the score (eg, pinball). For Supertux the
+> goal is to finish the game, not to get a high score, imo. However, we
+> do have time trials and coin trials that should add to the
+> replayability of the game.
+>
+> One of the biggest problems with scores, I think, is how to calculate
+> it. It's tough to come up with a formula that takes into account
+> badguys killed, coins collected and level time. If the formula ever
+> needs to be changed, it basically voids all scores from previous
+> versions of the game. I think this was one of the main reasons we
+> decided to do away with a score.
+>
+>   
+
+-- 
+"Act justly ... love mercy ... walk humbly with your God."
+        -- Micah 6:8
+
+
+
+From evilglowingapple at gmail.com  Mon Jul 31 20:52:58 2006
+From: evilglowingapple at gmail.com (Jayson Kempinger)
+Date: Mon, 31 Jul 2006 18:52:58 +0000
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44CE3E45.9040706@laudate.ca>
+References: <44CD2E66.8020604@hotmail.com>
+	<44CD3A95.2040602@2006.expires.deltadevelopment.de>
+	<200607310123.17449.bubuabu@bubuabu.org> <44CE317B.3090409@gmx.de>
+	<5a5496320607311028w7e8e9b6bg5df6e2d209b9bd92@mail.gmail.com>
+	<44CE3E45.9040706@laudate.ca>
+Message-ID: <c3ab478a0607311152g3b35ac79j81d3c2d198bfed26@mail.gmail.com>
+
+I always did like the score, especially trying to kill multiple badguys
+before touching the ground, but it was a subjective score and playing the
+level over again would raise my score significantly, so it really wasn't a
+measure of how well I did in the level.  After playing the SVN of MS2 for a
+while and not having score I am was really missing it.  However, the level
+stats are just as good and more challenging.  It's a lot harder and more fun
+to beat a best level time or capture all coins in a level and find all
+hidden areas.  My only complaint was the 1up written on the small tux
+powerup and the explanation of it in the phone/firefly/mask/bell/etc in the
+first level.  Since they are changed as Arvid said, I would say the points
+aren't necessary anymore.
+
+just my 2 cents,
+Jayson
+
+On 7/31/06, Rebecca Gilbert <rebecca at laudate.ca> wrote:
+>
+> The only time I paid any attention to score was when I realized that I
+> had a high score, so I tried to see how high it would go.  I found out
+> that the limit of extra lives is 99.  I don't know what the score limit
+> is though as my hard drive crashed and burned when I was around 750,000.
+>
+> Ryan Flegel wrote:
+> > I never look at the score in any game I play, except for where the
+> > entire point of the game is the score (eg, pinball). For Supertux the
+> > goal is to finish the game, not to get a high score, imo. However, we
+> > do have time trials and coin trials that should add to the
+> > replayability of the game.
+> >
+> > One of the biggest problems with scores, I think, is how to calculate
+> > it. It's tough to come up with a formula that takes into account
+> > badguys killed, coins collected and level time. If the formula ever
+> > needs to be changed, it basically voids all scores from previous
+> > versions of the game. I think this was one of the main reasons we
+> > decided to do away with a score.
+> >
+> >
+>
+> --
+> "Act justly ... love mercy ... walk humbly with your God."
+>         -- Micah 6:8
+>
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/supertux-devel/attachments/20060731/fc2044dc/attachment.html>
+
+From gnomino at hotmail.com  Mon Jul 31 21:11:11 2006
+From: gnomino at hotmail.com (gnomino)
+Date: Mon, 31 Jul 2006 12:11:11 -0700
+Subject: [Supertux-devel] Scoring and coins
+Message-ID: <44CE55CF.2060606@hotmail.com>
+
+Admittedly, I never paid attention to the actual score either, but I 
+always thought that the double/triple hit/breaking bricks/removing dead 
+badguy bonus was a neat feature. But now that you mention it, I have no 
+idea how an accurate score would be calculated either :(
+
+
+From anmaster at berlios.de  Mon Jul 31 22:35:07 2006
+From: anmaster at berlios.de (Arvid Norlander)
+Date: Mon, 31 Jul 2006 22:35:07 +0200
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44CE55CF.2060606@hotmail.com>
+References: <44CE55CF.2060606@hotmail.com>
+Message-ID: <44CE697B.9020205@berlios.de>
+
+I agree that the "multi-hit-of-badguys" score was nice, but there is no sane way to calculate it as 
+far as I can see.
+
+gnomino wrote:
+> Admittedly, I never paid attention to the actual score either, but I 
+> always thought that the double/triple hit/breaking bricks/removing dead 
+> badguy bonus was a neat feature. But now that you mention it, I have no 
+> idea how an accurate score would be calculated either :(
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+> 
+
+
+From wansti at gmx.de  Mon Jul 31 23:19:36 2006
+From: wansti at gmx.de (Marek M.)
+Date: Mon, 31 Jul 2006 23:19:36 +0200
+Subject: [Supertux-devel] Scoring and coins
+In-Reply-To: <44CE697B.9020205@berlios.de>
+References: <44CE55CF.2060606@hotmail.com> <44CE697B.9020205@berlios.de>
+Message-ID: <44CE73E8.8090800@gmx.de>
+
+
+Yeah, it was kinda cool. Maybe we can think of another way to reward
+multi-hits; coins or funny messages...
+
+Arvid Norlander wrote:
+> I agree that the "multi-hit-of-badguys" score was nice, but there is no sane way to calculate it as 
+> far as I can see.
+>
+> gnomino wrote:
+>   
+>> Admittedly, I never paid attention to the actual score either, but I 
+>> always thought that the double/triple hit/breaking bricks/removing dead 
+>> badguy bonus was a neat feature. But now that you mention it, I have no 
+>> idea how an accurate score would be calculated either :(
+>> _______________________________________________
+>> Supertux-devel mailing list
+>> Supertux-devel at lists.berlios.de
+>> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>>
+>>     
+> _______________________________________________
+> Supertux-devel mailing list
+> Supertux-devel at lists.berlios.de
+> http://bat.berlios.de/mailman/listinfo/supertux-devel
+>   
+
+
+

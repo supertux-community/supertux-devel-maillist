@@ -1,0 +1,99 @@
+From anugupta at pu.ac.in  Tue Apr  3 11:45:49 2007
+From: anugupta at pu.ac.in (Anu Gupta DCSA)
+Date: Tue, 3 Apr 2007 16:15:49 +0630
+Subject: [Supertux-devel] A Survey on Defect Management Practices in
+	Free/Open Source Software
+Message-ID: <20070403094517.M50847@pu.ac.in>
+
+Dear Supertux Contributors,
+
+I seek help from designers, developers, testers,defect fixers,project 
+managers or playing any other key role in Free/Open Source software 
+development or maintenence 
+in carrying out a study on practices and problems of defect management in 
+various Free/Open Source Software projects. The 
+insights gained from the study can further help us to extract publicly 
+accessible defect data and determine impact of defect management practices 
+on software quality. 
+Please spend a few minutes of your precious time to fill up the 
+Questionnaire. The most of the questions follow multiple choice formats and 
+are quite easy to answer. 
+
+To have the Online Questionnaire, please visit: 
+
+http://anu.puchd.ac.in/phpESP/public/survey.php?name=FOSS_Defect_Survey 
+
+(You can also copy and paste this link into your browser, and hit the 
+'Return' key.) 
+
+I hope you will find all the questions interesting and thought-provoking. 
+Your answers will be kept anonymous.The data thus collected will 
+only be used for research purpose.It would be nice if you may further refer 
+this mail to others actively engaged with Free/Open Source Software 
+development. If you have any query or suggestions then 
+feel free to contact. 
+
+Thank You 
+
+With regards, 
+
+Anu Gupta 
+Senior Lecturer 
+Department of Computer Science and Applications, 
+Panjab University, Chandigarh. 
+INDIA
+
+
+In case of any problem in accessing/using the above mentioned link please 
+contact:
+E-mail: anugupta at pu.ac.in 
+     	anugupta98 at gmail.com 
+
+
+
+From anugupta at pu.ac.in  Tue Apr 10 07:47:56 2007
+From: anugupta at pu.ac.in (Anu Gupta DCSA)
+Date: Tue, 10 Apr 2007 12:17:56 +0630
+Subject: [Supertux-devel] A Study on Free/Open Source Software Defect
+	Management
+Message-ID: <20070410054734.M12019@pu.ac.in>
+
+Dear Sir/Madam,
+
+I am really thankful to Free/Open Source Software development community for 
+their overwhelming response to the survey on  practices and problems of 
+defect management in Free/Open Source Software projects. 
+
+If you have not participated ealier, you may spend a few minutes now too. 
+
+The Online Questionnaire is available at:
+
+
+http://anu.puchd.ac.in/phpESP/public/survey.php?name=FOSS_Defect_Survey 
+ 
+
+I hope you have found all the questions interesting and thought-provoking. 
+Your answers will be kept anonymous.The data thus collected will only be 
+used for research purpose. The insights gained from the study can further 
+help us to extract publicly accessible defect data and determine impact of 
+defect management practices on software quality. The results of study will 
+soon be communicated to you.
+
+Thank You 
+
+With regards, 
+
+Anu Gupta 
+Senior Lecturer 
+Department of Computer Science and Applications, 
+Panjab University, Chandigarh. 
+INDIA
+
+
+In case of any problem in accessing/using the above mentioned link please 
+contact:
+E-mail: anugupta at pu.ac.in 
+     	anugupta98 at gmail.com 
+
+
+

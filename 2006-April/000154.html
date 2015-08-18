@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Bug report for svn revision 3382
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Bug%20report%20for%20svn%20revision%203382&In-Reply-To=%3C873ECE14-02DE-4D3B-B0E6-85B4DE7B550D%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000144.html">
+   <LINK REL="Next"  HREF="000141.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Bug report for svn revision 3382</H1>
+    <B>Jayson Kempinger</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Bug%20report%20for%20svn%20revision%203382&In-Reply-To=%3C873ECE14-02DE-4D3B-B0E6-85B4DE7B550D%40gmail.com%3E"
+       TITLE="[Supertux-devel] Bug report for svn revision 3382">EvilGlowingApple at gmail.com
+       </A><BR>
+    <I>Sun Apr 23 20:59:29 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000144.html">[Supertux-devel] Bug report for svn revision 3382
+</A></li>
+        <LI>Next message: <A HREF="000141.html">[Supertux-devel] downloading?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#154">[ date ]</a>
+              <a href="thread.html#154">[ thread ]</a>
+              <a href="subject.html#154">[ subject ]</a>
+              <a href="author.html#154">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Thanks for the help Matze.  Running the game from the supertux source  
+directory works, but I still get the issue with the config file.  I  
+am letting supertux create the .supertux directory and all the config/ 
+save files.  When I look at the config file in nano/vim/emacs, there  
+is a character where the ')' is supposed to be, but it's not a ')'.   
+It shows up as '^@' in all editors.  If I modify the config file to  
+add the ')' it seems to work fine, but as soon as I run and exit the  
+game (whether I change options or not) supertux regenerates the  
+config file and puts the '^@' back in.  Changing the options in the  
+middle of the game writes the config file correctly, but once I exit  
+the '^@' is written.
+
+Jayson
+
+
+- ----------------------------------------------------------------------
+This message is digitally signed with GnuPG.
+<A HREF="http://www.kempinger.homelinux.net/EvilGlowingApple@gmail.com.GPG.html">http://www.kempinger.homelinux.net/EvilGlowingApple@gmail.com.GPG.html</A>
+
+(see <A HREF="http://www.gnupg.org/gph/en/manual.html#AEN136">http://www.gnupg.org/gph/en/manual.html#AEN136</A>
+for information on how to verify this message)
+- ----------------------------------------------------------------------
+
+
+On Apr 23, 2006, at 2:16 AM, Matze Braun wrote:
+
+&gt;<i> Am Samstag, den 22.04.2006, 21:03 -0500 schrieb Jayson Kempinger:
+</I>&gt;&gt;<i> Hi,
+</I>&gt;&gt;<i> Been playing around with the development version of SuperTux and ran
+</I>&gt;&gt;<i> into a few bugs.  First, none of my settings save.  When the app
+</I>&gt;&gt;<i> begins it uses the default (music on, sound on, fullscreen, etc).  If
+</I>&gt;&gt;<i> I change those to music off, sound off, windowed for example and then
+</I>&gt;&gt;<i> restart the game, it uses the default settings again.  Here's a copy
+</I>&gt;&gt;<i> of the config file in my ~/.supertux directory
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> (supertux-config
+</I>&gt;&gt;&gt;<i>   (show_fps #f)
+</I>&gt;&gt;&gt;<i>   (cheats #f)
+</I>&gt;&gt;&gt;<i>   (video
+</I>&gt;&gt;&gt;<i>     (fullscreen #f)
+</I>&gt;&gt;&gt;<i>     (width 800)
+</I>&gt;&gt;&gt;<i>     (height 600)
+</I>&gt;&gt;&gt;<i>   )
+</I>&gt;&gt;&gt;<i>   (audio
+</I>&gt;&gt;&gt;<i>     (sound_enabled #f)
+</I>&gt;&gt;&gt;<i>     (music_enabled #f)
+</I>&gt;&gt;&gt;<i>   )
+</I>&gt;&gt;&gt;<i>   (control
+</I>&gt;&gt;&gt;<i>     (keymap
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 13)
+</I>&gt;&gt;&gt;<i>         (control &quot;menu-select&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 19)
+</I>&gt;&gt;&gt;<i>         (control &quot;pause-menu&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 27)
+</I>&gt;&gt;&gt;<i>         (control &quot;pause-menu&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 32)
+</I>&gt;&gt;&gt;<i>         (control &quot;jump&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 94)
+</I>&gt;&gt;&gt;<i>         (control &quot;console&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 112)
+</I>&gt;&gt;&gt;<i>         (control &quot;pause-menu&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 271)
+</I>&gt;&gt;&gt;<i>         (control &quot;menu-select&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 273)
+</I>&gt;&gt;&gt;<i>         (control &quot;up&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 274)
+</I>&gt;&gt;&gt;<i>         (control &quot;down&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 275)
+</I>&gt;&gt;&gt;<i>         (control &quot;right&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 276)
+</I>&gt;&gt;&gt;<i>         (control &quot;left&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 306)
+</I>&gt;&gt;&gt;<i>         (control &quot;action&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (key 308)
+</I>&gt;&gt;&gt;<i>         (control &quot;action&quot;
+</I>&gt;<i> Here you are missing a )
+</I>&gt;<i> Are you sure the supertux game created that config file? I couldn't  
+</I>&gt;<i> see
+</I>&gt;<i> anything wrong in the source or manage to make supertux create such a
+</I>&gt;<i> config file.
+</I>&gt;<i>
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>     )
+</I>&gt;&gt;&gt;<i>     (joystick
+</I>&gt;&gt;&gt;<i>       (use_hat #t)
+</I>&gt;&gt;&gt;<i>       (axis_x 0)
+</I>&gt;&gt;&gt;<i>       (axis_y 1)
+</I>&gt;&gt;&gt;<i>       (dead_zone_x 1000)
+</I>&gt;&gt;&gt;<i>       (dead_zone_y 1000)
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (button 0)
+</I>&gt;&gt;&gt;<i>         (control &quot;jump&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>       (map
+</I>&gt;&gt;&gt;<i>         (button 1)
+</I>&gt;&gt;&gt;<i>         (control &quot;action&quot;)
+</I>&gt;&gt;&gt;<i>       )
+</I>&gt;&gt;&gt;<i>     )
+</I>&gt;&gt;&gt;<i>   )
+</I>&gt;&gt;&gt;<i> )
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> When I run the app (compiled with debug enabled) this is what I  
+</I>&gt;&gt;<i> get in
+</I>&gt;&gt;<i> the terminal:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> [INFO] src/main.cpp:195 [/Users/jayson/.supertux] is in the search
+</I>&gt;&gt;&gt;<i> path
+</I>&gt;&gt;&gt;<i> [INFO] src/main.cpp:195 [/usr/local/share/supertux] is in the search
+</I>&gt;&gt;&gt;<i> path
+</I>&gt;&gt;&gt;<i> [INFO] src/main.cpp:469 Component 'controller' finished after 0.201
+</I>&gt;&gt;&gt;<i> seconds
+</I>&gt;&gt;&gt;<i> [INFO] src/main.cpp:68 Couldn't load config file: Parse Error at
+</I>&gt;&gt;&gt;<i> line 84: Unexpected EOF., using default settings
+</I>&gt;&gt;&gt;<i> [INFO] src/main.cpp:469 Component 'config' finished after 0.174
+</I>&gt;&gt;&gt;<i> seconds
+</I>&gt;&gt;&gt;<i> [INFO] src/main.cpp:469 Component 'tinygettext' finished after 0.002
+</I>&gt;&gt;&gt;<i> seconds
+</I>&gt;&gt;&gt;<i> [INFO] src/main.cpp:469 Component 'commandline' finished after 0.001
+</I>&gt;&gt;&gt;<i> seconds
+</I>&gt;&gt;&gt;<i> [INFO] src/main.cpp:469 Component 'audio' finished after 0.461
+</I>&gt;&gt;&gt;<i> seconds
+</I>&gt;&gt;&gt;<i> [INFO] src/main.cpp:469 Component 'video' finished after 3.62
+</I>&gt;&gt;&gt;<i> seconds
+</I>&gt;&gt;&gt;<i> [WARNING] src/script_manager.cpp:102 Couldn't load default.nut:
+</I>&gt;&gt;&gt;<i> Couldn't open file 'scripts/default.nut': No such file or directory
+</I>&gt;&gt;&gt;<i> [INFO] src/main.cpp:469 Component 'scripting' finished after 0.007
+</I>&gt;&gt;&gt;<i> seconds
+</I>&gt;&gt;&gt;<i> [DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.117 seconds
+</I>&gt;&gt;&gt;<i> [INFO] src/main.cpp:469 Component 'resources' finished after 0.524
+</I>&gt;&gt;&gt;<i> seconds
+</I>&gt;&gt;&gt;<i> [DEBUG] src/world.cpp:226 Couldn't load savegame: Couldn't open file
+</I>&gt;&gt;&gt;<i> 'save/world1_1.stsg': No such file or directory
+</I>&gt;&gt;&gt;<i> [WARNING] src/sector.cpp:447 Spawnpoint 'main' not found.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> AN ERROR HAS OCCURED [the index 'println' does not exist]
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> CALLSTACK
+</I>&gt;&gt;&gt;<i> *FUNCTION [main()] levels/world1//world.nut line [9]
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> LOCALS
+</I>&gt;&gt;&gt;<i> [this] TABLE
+</I>&gt;&gt;&gt;<i> Problem executing script: Squirrel error: Couldn't resume script
+</I>&gt;&gt;&gt;<i> (the index 'println' does not exist)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Line 84 is the last ')' in the file and as far as I can tell each '('
+</I>&gt;&gt;<i> has a ')', so I'm not sure what the parse error is.  The other error
+</I>&gt;&gt;<i> I've been having is as soon as the intro is done the game returns to
+</I>&gt;&gt;<i> the main screen and the CALLSTACK listed above is throw in the
+</I>&gt;&gt;<i> terminal.  Afterward when I open the game up again the save slots  
+</I>&gt;&gt;<i> show
+</I>&gt;&gt;<i> a blank instead of Free and cannot be used anymore (e.g. 'Slot 1 -  
+</I>&gt;&gt;<i> ').
+</I>&gt;&gt;<i> I've tried it several times and get the same error.  Tried  
+</I>&gt;&gt;<i> recompiling
+</I>&gt;&gt;<i> and reinstalling but I get the same issue.  Also tried deleting
+</I>&gt;&gt;<i> ~/.supertux and allowing the app to recreate it, but that didn't
+</I>&gt;&gt;<i> change anything either.
+</I>&gt;<i>
+</I>&gt;<i> The problem is that the &quot;jam install&quot; target is currently broken and
+</I>&gt;<i> leaves out some files like default.nut (and it'll probably stay broken
+</I>&gt;<i> until shortly before the release). But you can just run the game from
+</I>&gt;<i> the supertux directory where you compiled instead.
+</I>&gt;<i>
+</I>&gt;<i> Greetings,
+</I>&gt;<i> 	Matze
+</I>&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="http://lists.berlios.de/mailman/listinfo/supertux-devel">http://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.3 (Darwin)
+
+iD8DBQFES86RW6oxcmeg/20RAqNvAJ9WEzuTmd4Nle8pCfJsRzTf+9mSyACfeLT+
+I9lJB4abUv/t3MfDYqybAFA=
+=A/Tx
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000144.html">[Supertux-devel] Bug report for svn revision 3382
+</A></li>
+	<LI>Next message: <A HREF="000141.html">[Supertux-devel] downloading?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#154">[ date ]</a>
+              <a href="thread.html#154">[ thread ]</a>
+              <a href="subject.html#154">[ subject ]</a>
+              <a href="author.html#154">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

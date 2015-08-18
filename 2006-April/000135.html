@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20status&In-Reply-To=%3C44492210.7010209%402006.expires.deltadevelopment.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000134.html">
+   <LINK REL="Next"  HREF="000136.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status</H1>
+    <B>Christoph Sommer</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20status&In-Reply-To=%3C44492210.7010209%402006.expires.deltadevelopment.de%3E"
+       TITLE="[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status">supertux at 2006.expires.deltadevelopment.de
+       </A><BR>
+    <I>Fri Apr 21 20:18:56 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000134.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+        <LI>Next message: <A HREF="000136.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#135">[ date ]</a>
+              <a href="thread.html#135">[ thread ]</a>
+              <a href="subject.html#135">[ subject ]</a>
+              <a href="author.html#135">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey Allen,
+
+Allen King wrote:
+&gt;<i> I've been working on the &quot;Remote Control&quot; [...]
+</I>&gt;<i> program that supplies button presses from a canned list to supertux over 
+</I>&gt;<i> a port
+</I>[...]
+&gt;<i>        a. If a (random_seed &lt;decimal number&gt;) line is present in the
+</I>&gt;<i>        configuration file, it is used used as the random seed to start
+</I>&gt;<i>        the run.
+</I>&gt;<i>        b. If the above line isn't there, the seed obtained from time()
+</I>&gt;<i>        in the usual way, and is additionally printed, so it can later
+</I>&gt;<i>        be pasted into the configuration file if the run wants to be
+</I>&gt;<i>        reproduced.
+</I>&gt;<i> 
+</I>&gt;<i>    QUESTION #1: seem reasonable?
+</I>
+Depends, I'd say.
+If a button press reaches the game one frame later than in the last run, 
+e.g. killing a badguy that consumes one random number per frame, you 
+might end up with a different stream of random-numbers from that point 
+in time on.
+
+&gt;<i>    QUESTION #3: any objections to this?  suggestions of better ways
+</I>&gt;<i>    (e.g. changing calls to rand to BlaBlaRand, and redefining rand()
+</I>&gt;<i>    and srand() to print helpful errors?
+</I>
+I like that approach better. &quot;Altering&quot; standard functions seems a 
+little odd to me.
+
+&gt;<i>    4) There is a call to srand() in player.cpp, which occurs after a
+</I>&gt;<i>    player is killed.  I do not understand why it would be necessary to
+</I>&gt;<i>    do this -- it seems totally superfluous
+</I>
+Seems like it got introduced in rev 3320 (Hacked together a &quot;coin 
+losing&quot; effect when Tux is killed), so it seems superfluous to me, too.
+
+&gt;<i>    5) There is another call to srand() in sqstdmath.cpp, but nobody in
+</I>&gt;<i>    supertux-ville seems to call the routine that contains it.  I added
+</I>&gt;<i>    an throw of runtime_error to discourage its future use.
+</I>&gt;<i>    QUESTION #5: Is this okay, or too harsh.
+</I>
+I'm just guessing, but might this be called from a squirrel script?
+
+&gt;<i>    QUESTION #6:  Can someone help me determine how I would modify the
+</I>&gt;<i>    default ~/.supertux/config?  I will do this if someone does.
+</I>
+I think it's just written by Config::save in gameconfig.cpp
+
+
+Regards,
+
+   Christoph
+
+-- 
+Plan to be spontaneous tomorrow.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000134.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+	<LI>Next message: <A HREF="000136.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#135">[ date ]</a>
+              <a href="thread.html#135">[ thread ]</a>
+              <a href="subject.html#135">[ subject ]</a>
+              <a href="author.html#135">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

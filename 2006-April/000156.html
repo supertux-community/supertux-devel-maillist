@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-April/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20status&In-Reply-To=%3C5a5496320604231218x28f21d8eu55f26b8e9aebce6c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000153.html">
+   <LINK REL="Next"  HREF="000160.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status</H1>
+    <B>Ryan Flegel</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%22Remote%20Control%22%20for%20Supertux%20--%20status&In-Reply-To=%3C5a5496320604231218x28f21d8eu55f26b8e9aebce6c%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status">rflegel at gmail.com
+       </A><BR>
+    <I>Sun Apr 23 21:18:20 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000153.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+        <LI>Next message: <A HREF="000160.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#156">[ date ]</a>
+              <a href="thread.html#156">[ thread ]</a>
+              <a href="subject.html#156">[ subject ]</a>
+              <a href="author.html#156">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 4/23/06, Allen King &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">allen at a-king.us</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  Chris, Matt, et. al.
+</I>&gt;<i>
+</I>&gt;<i>  Great feedback.  This is converging.   I will resurface in a couple of days
+</I>&gt;<i> with a patch.  The patch will have only the minimal testing I can do on it,
+</I>&gt;<i> which is play the game for a while.  Also I won't be able to generate the
+</I>&gt;<i> patch until I get the instructions, which are on the wiki (which is down),
+</I>&gt;<i> or perhaps someone could send me them.
+</I>
+The wiki is back up (for now).
+
+Run &quot;svn diff &gt; my.patch&quot; from the supertux/ directory to create a
+patch file. You can also use &quot;svn diff file1 file2 file3 ... &gt;
+my.patch&quot; to only make diffs from the files you specify.
+
+&gt;<i>  Question #1:
+</I>
+&gt;<i>  c) For my purposes, config settings is adequate, and it already works.  It
+</I>&gt;<i> is also a general tool.  I don't need network setting.  If someone has a
+</I>&gt;<i> religious objection, let me know.
+</I>
+What are you putting in the config settings? I thought you were just
+holding a random seed, which is now in the demo files? Or do you
+loading the random seed for your remote control from the config? If
+so, I would think it would make the most sense to actually set it
+remotely.
+
+&gt;<i>  Question #2:
+</I>&gt;<i>
+</I>&gt;<i> a) I have called the random class RandomGenerator.
+</I>
+Sounds good.
+
+&gt;<i>  b) Having heard no objections, I will use referenced code, with copyleft as
+</I>&gt;<i> shown. (<A HREF="http://www.jbox.dk/sanos/source/lib/random.c.html">http://www.jbox.dk/sanos/source/lib/random.c.html</A>)
+</I>
+Yep, that code is okay. It is GPL compatible (I think it's BSD, but
+I'm too lazy to check :).
+
+&gt;<i> Question #3:
+</I>&gt;<i>
+</I>&gt;<i> a) Will make different names for the random calls as suggested.  Good
+</I>&gt;<i> feedback, good reasons.  Now, I need a short memorable proper name for it.
+</I>&gt;<i> Currently thinking of SDL_rand() (as that is what it really is, and
+</I>&gt;<i> currently SDL doesn't have one). Another possibility is tux_rand().
+</I>&gt;<i> Suggestions?
+</I>&gt;<i>  b) Will put includes for RandomGenerator only in .cpp files using
+</I>&gt;<i> RandomGenerator, to minimize compile times.
+</I>
+The SDL_ prefix is for SDL functions and using that prefix would be
+confusing. Perhaps RandomGenerator should be a singleton class?
+
+RandomGenerator::instance()-&gt;srand()
+RandomGenerator::instance()-&gt;rand()
+
+--
+Ryan
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000153.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- status
+</A></li>
+	<LI>Next message: <A HREF="000160.html">[Supertux-devel] &quot;Remote Control&quot; for Supertux -- random repeatability patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#156">[ date ]</a>
+              <a href="thread.html#156">[ thread ]</a>
+              <a href="subject.html#156">[ subject ]</a>
+              <a href="author.html#156">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

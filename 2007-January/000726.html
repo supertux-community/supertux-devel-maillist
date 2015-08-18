@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Debian planning to ship broken Supertux?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Debian%20planning%20to%20ship%20broken%20Supertux%3F&In-Reply-To=%3C826ffc730701201552m2d2d1963xc3e03f18fb001311%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000725.html">
+   <LINK REL="Next"  HREF="000650.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Debian planning to ship broken Supertux?</H1>
+    <B>djwings at gmail.com</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Debian%20planning%20to%20ship%20broken%20Supertux%3F&In-Reply-To=%3C826ffc730701201552m2d2d1963xc3e03f18fb001311%40mail.gmail.com%3E"
+       TITLE="[Supertux-devel] Debian planning to ship broken Supertux?">djwings at gmail.com
+       </A><BR>
+    <I>Sun Jan 21 00:52:51 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000725.html">[Supertux-devel] Debian planning to ship broken Supertux?
+</A></li>
+        <LI>Next message: <A HREF="000650.html">[Supertux-devel] Hungarian translation update
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#726">[ date ]</a>
+              <a href="thread.html#726">[ thread ]</a>
+              <a href="subject.html#726">[ subject ]</a>
+              <a href="author.html#726">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Milestone 2, however, is up for debate when it's released. On one hand, it
+would mean a new version of SuperTux (always a good thing), but on the
+other, we'd get lots of complaints from people without any 3D acceleration.
+My 2 cents is that they should ship 2 packages in parallel: supertux and
+supertux2. The packages could use the versioning scheme we're using now (
+0.1.3 for supertux and 0.3.0 for supertux2), and...
+...Dang it, I'm using Skype, and my &quot;2 cents&quot; are only good for a minute.
+Alright, my 2-more-cents: the Debian devs are weasels for IceWeaseling their
+way out of the FFX-DFSG conflict. If they won't use a non-DFSG image in
+their distribution, then why are they shipping a broken version of SuperTux?
+Something's not right here... Maybe they should amend the DFSG to ban
+patches like these?
+*irate hordes of Debianians pick up their pitchforks*
+Never mind. Forget I said that. Gimme my 2-more-cents back.
+
+On 1/20/07, Marek M. &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">wansti at gmx.de</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Ryan Flegel wrote:
+</I>&gt;<i> &gt; On 1/5/07, Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">grumbel at gmx.de</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;&gt; Wolfgang Becker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">uafr at gmx.de</A>&gt; writes:
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt; Just found
+</I>&gt;<i> <A HREF="http://lists.debian.org/debian-devel-games/2007/01/msg00002.html">http://lists.debian.org/debian-devel-games/2007/01/msg00002.html</A>
+</I>&gt;<i> &gt;&gt;&gt; If they really ship a SDL-only version this would mean we'd get tons
+</I>&gt;<i> of
+</I>&gt;<i> &gt;&gt;&gt; reports about bad performance and non-working levels. Why not use mesa
+</I>&gt;<i> &gt;&gt;&gt; instead of the nosdl patch. Performance would suck likewise but it
+</I>&gt;<i> won't
+</I>&gt;<i> &gt;&gt;&gt; be our fault. Does anybody here know the debian packagers? Do we want
+</I>&gt;<i> to
+</I>&gt;<i> &gt;&gt;&gt; ask them about it? Or just wait what they really do and recommend the
+</I>&gt;<i> &gt;&gt;&gt; autopackage to everyone with poor performance?
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt; I alread mentioned it on IRC, but here again for the rest of you:
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Is there any reason why Debian or any other distri for that matter,
+</I>&gt;<i> &gt;&gt; should ship 0.3.0 in the first place? As I understand it, it was never
+</I>&gt;<i> &gt;&gt; meant to be a 'real' release, instead it was meant as an
+</I>&gt;<i> &gt;&gt; engine-preview demo kind of thing. Its full of bugs and annoyances,
+</I>&gt;<i> &gt;&gt; the whole Milestone1 world got butchered into a mess, the difficulty
+</I>&gt;<i> &gt;&gt; is out of balance and it requires OpenGL for no good reason. In short,
+</I>&gt;<i> &gt;&gt; its *not* Milestone2 and its not something I would want to ship to a
+</I>&gt;<i> &gt;&gt; wide audience.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; So can't we just suggest to Debian and all the other distros out there
+</I>&gt;<i> &gt;&gt; to continue shipping whatever is the latest release of Milestone1?
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Well, I think that depends on how they do it. 0.3.0 should not
+</I>&gt;<i> &gt; *replace* 0.1.x, since it is only a development branch. However, if
+</I>&gt;<i> &gt; they make both available, so that people can try out 0.3.0, but still
+</I>&gt;<i> &gt; have 0.1.x installed, that should be fine.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I'm not sure what Debian plans on doing, though.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> Whoops, looks like I totally missed this discussion on the mailing list...
+</I>&gt;<i> I agree that 0.3.0 should not replace Milestone 1 in any distribution.
+</I>&gt;<i> If they decide that they want to ship both that's fine, but this is a
+</I>&gt;<i> pre-release which is not intended to replace the current stable version.
+</I>&gt;<i>
+</I>&gt;<i>     Marek
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Supertux-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">Supertux-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">https://lists.berlios.de/mailman/listinfo/supertux-devel</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20070120/1abd100b/attachment.html">https://lists.berlios.de/pipermail/supertux-devel/attachments/20070120/1abd100b/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000725.html">[Supertux-devel] Debian planning to ship broken Supertux?
+</A></li>
+	<LI>Next message: <A HREF="000650.html">[Supertux-devel] Hungarian translation update
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#726">[ date ]</a>
+              <a href="thread.html#726">[ thread ]</a>
+              <a href="subject.html#726">[ subject ]</a>
+              <a href="author.html#726">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

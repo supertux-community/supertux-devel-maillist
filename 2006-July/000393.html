@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Re: [Supertux-commit] r3973 - trunk/supertux/src/badguy
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3973%20-%20trunk/supertux/src/badguy&In-Reply-To=%3C20060710110755.GA6641%40greg.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000392.html">
+   <LINK REL="Next"  HREF="000395.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Re: [Supertux-commit] r3973 - trunk/supertux/src/badguy</H1>
+    <B>Wolfgang Becker</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Re%3A%20%5BSupertux-commit%5D%20r3973%20-%20trunk/supertux/src/badguy&In-Reply-To=%3C20060710110755.GA6641%40greg.local%3E"
+       TITLE="[Supertux-devel] Re: [Supertux-commit] r3973 - trunk/supertux/src/badguy">uafr at gmx.de
+       </A><BR>
+    <I>Mon Jul 10 13:07:56 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000392.html">[Supertux-devel] Re: [Supertux-commit] r3973 - trunk/supertux/src/badguy
+</A></li>
+        <LI>Next message: <A HREF="000395.html">[Supertux-devel] Boss Battles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#393">[ date ]</a>
+              <a href="thread.html#393">[ thread ]</a>
+              <a href="subject.html#393">[ subject ]</a>
+              <a href="author.html#393">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 20060710 Matze Braun &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">matze at braunis.de</A>&gt; wrote:
+&gt;<i> I think a much better fix would be to check where the collision happened 
+</I>&gt;<i> and base direction change on that. I.e. if you face right AND collide 
+</I>&gt;<i> right, then you turn left. I implemented that with mriceblock and it 
+</I>&gt;<i> works nicely and is more clear than extra flags IMO.
+</I>
+Can do. But that would change the behaviour of badguys. ATM, if a
+badguy is kicked in the back he turns around. With that method he
+will just ignore it. Of course that won't be a problem if it was
+never planned to be that way.
+
+Example:
+--------
+
+A is faster than B.
+
+Start:
+
+      +--+       +--+
+      |A +----&gt;  |B +--&gt;
+      +--+       +--+ 
+
+After Collision:
+
+method 1)                          method 2)
+      +--+       +--+                   +--+    +--+
+ &lt;----|A +    &lt;--|B +              &lt;----|A +    |B +--&gt;
+      +--+       +--+                   +--+    +--+
+
+Tsch&#252;&#223;,
+Wolfgang
+-- 
+Wolfgang Becker  ***  eMail <A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">uafr at gmx.de</A>  ***  <A HREF="http://uafr.freeshell.org/">http://uafr.freeshell.org/</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000392.html">[Supertux-devel] Re: [Supertux-commit] r3973 - trunk/supertux/src/badguy
+</A></li>
+	<LI>Next message: <A HREF="000395.html">[Supertux-devel] Boss Battles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#393">[ date ]</a>
+              <a href="thread.html#393">[ thread ]</a>
+              <a href="subject.html#393">[ subject ]</a>
+              <a href="author.html#393">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

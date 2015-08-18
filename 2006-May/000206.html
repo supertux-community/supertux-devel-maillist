@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] [Bug #7373] Supertux crash when starting game
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%5BBug%20%237373%5D%20Supertux%20crash%20when%20starting%20game&In-Reply-To=%3C200605040517.k445HHss023248%40unicorn.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000196.html">
+   <LINK REL="Next"  HREF="000203.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] [Bug #7373] Supertux crash when starting game</H1>
+    <B>admin at berlios.de</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20%5BBug%20%237373%5D%20Supertux%20crash%20when%20starting%20game&In-Reply-To=%3C200605040517.k445HHss023248%40unicorn.berlios.de%3E"
+       TITLE="[Supertux-devel] [Bug #7373] Supertux crash when starting game">admin at berlios.de
+       </A><BR>
+    <I>Thu May  4 07:17:17 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000196.html">[Supertux-devel] [Bug #7373] Supertux crash when starting game
+</A></li>
+        <LI>Next message: <A HREF="000203.html">[Supertux-devel] Re: [Supertux-commit] r3492
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#206">[ date ]</a>
+              <a href="thread.html#206">[ thread ]</a>
+              <a href="subject.html#206">[ subject ]</a>
+              <a href="author.html#206">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Bug #7373, was updated on 2006-May-03 13:44
+Here is a current snapshot of the bug.
+
+Project: SuperTux
+Category: None
+Status: Open
+Resolution: None
+Bug Group: None
+Priority: 5
+Submitted by: bugmenot
+Assigned to : none
+Summary: Supertux crash when starting game
+
+Details: Latest svn, --enable-debug
+[DEBUG] src/tile_manager.cpp:47 Tiles loaded in 0.131 seconds
+[INFO] src/main.cpp:429 Component 'resources' finished after 1.503 seconds
+[INFO] src/main.cpp:297 Using random seed 1146655925, from time().
+[DEBUG] src/world.cpp:233 Couldn't load savegame: Couldn't open file 'save/world1_1.stsg': No such file or directory
+Display intro
+
+Program received signal SIGILL, Illegal instruction.
+[Switching to Thread -1225926944 (LWP 9147)]
+0xb7e7cd98 in png_handle_gAMA ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+(gdb) bt
+#0  0xb7e7cd98 in png_handle_gAMA ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#1  0xb7e69061 in png_read_info ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#2  0xb7e53243 in IMG_LoadPNG_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#3  0xb7e4fca4 in IMG_LoadTyped_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#4  0xb7e4fb0c in IMG_Load_RW ()
+   from /home/wolfgang/.local/lib/libSDL_image-1.2.so.0
+#5  0x08121e91 in TextureManager::create_image_texture (this=0x82b88c0,
+    filename=@0xbfe9d8b8) at src/video/texture_manager.cpp:103
+#6  0x08122d5b in TextureManager::get (this=0x82b88c0, _filename=@0xbfe9d954)
+    at src/video/texture_manager.cpp:66
+#7  0x08121353 in Surface (this=0x8912740, file=@0xbfe9d954)
+    at src/video/surface.cpp:40
+#8  0x080e1da2 in SnowParticleSystem (this=0x8911b38)
+    at src/object/particlesystem.cpp:85
+#9  0x080756f2 in Sector::parse_object (this=0x890e9e0, name=@0xbfe9da28,
+    reader=@0x0) at src/sector.cpp:144
+#10 0x0807a6a3 in Sector::parse (this=0x890e9e0, sector=@0x890e6e0)
+    at src/sector.cpp:194
+#11 0x080500cb in Level::load (this=0x8927e88, filepath=@0x8927918)
+    at src/level.cpp:89
+
+
+Follow-Ups:
+
+Date: 2006-May-04 07:17
+By: ravu_al_hemio
+
+Comment:
+Sounds like an SDL/PNG problem.
+
+Could you go &quot;up 5&quot; and &quot;print *filename&quot;? Thanks.
+-------------------------------------------------------
+
+For detailed info, follow this link:
+<A HREF="http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=7373&amp;group_id=3467">http://developer.berlios.de/bugs/?func=detailbug&amp;bug_id=7373&amp;group_id=3467</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000196.html">[Supertux-devel] [Bug #7373] Supertux crash when starting game
+</A></li>
+	<LI>Next message: <A HREF="000203.html">[Supertux-devel] Re: [Supertux-commit] r3492
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#206">[ date ]</a>
+              <a href="thread.html#206">[ thread ]</a>
+              <a href="subject.html#206">[ subject ]</a>
+              <a href="author.html#206">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

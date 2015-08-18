@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Trouble with MrIceBlock
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-February/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Trouble%20with%20MrIceBlock&In-Reply-To=%3C43E9F6F1.5090309%402006.expires.deltadevelopment.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000042.html">
+   <LINK REL="Next"  HREF="000046.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Trouble with MrIceBlock</H1>
+    <B>Christoph Sommer</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Trouble%20with%20MrIceBlock&In-Reply-To=%3C43E9F6F1.5090309%402006.expires.deltadevelopment.de%3E"
+       TITLE="[Supertux-devel] Trouble with MrIceBlock">supertux at 2006.expires.deltadevelopment.de
+       </A><BR>
+    <I>Wed Feb  8 14:49:37 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000042.html">[Supertux-devel] New Badguy &quot;Sleeping Spiky&quot;
+</A></li>
+        <LI>Next message: <A HREF="000046.html">[Supertux-devel] anything i can do to help with milestone 2's coming?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#43">[ date ]</a>
+              <a href="thread.html#43">[ thread ]</a>
+              <a href="subject.html#43">[ subject ]</a>
+              <a href="author.html#43">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+everytime I grabbed MrIceBlock, the game made a &quot;kick&quot; sound anyway.
+
+Having player.cpp notify MrIceBlock immediately after grabbing him cured 
+the problem for me.
+
+This fix, however, depends on the Player receiving collision events 
+before MrIceBlock. I do not know if this will always be the case in 
+later versions of the game, so maybe sector.cpp would additionally have 
+to make sure objects derived from Portable receive collision events 
+after non-portable ones?
+
+I do not yet fully understand the inner workings of the SuperTux engine, 
+but anyway - it &quot;worked for me&quot; (tm), so I thought I post it.
+
+
+Regards,
+
+   Christoph
+
+
+-- 
+My girlfriend always laughs during sex-no matter what she's reading.
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: supertux-3047-mibfix-0.1.diff
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060208/7b220f98/attachment.ksh">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060208/7b220f98/attachment.ksh</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000042.html">[Supertux-devel] New Badguy &quot;Sleeping Spiky&quot;
+</A></li>
+	<LI>Next message: <A HREF="000046.html">[Supertux-devel] anything i can do to help with milestone 2's coming?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#43">[ date ]</a>
+              <a href="thread.html#43">[ thread ]</a>
+              <a href="subject.html#43">[ subject ]</a>
+              <a href="author.html#43">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

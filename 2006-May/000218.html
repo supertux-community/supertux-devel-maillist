@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Building Supertux on OS/2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Building%20Supertux%20on%20OS/2&In-Reply-To=%3C20060509055718.3F56AB7549%40generation.lgisp.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000227.html">
+   <LINK REL="Next"  HREF="000220.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Building Supertux on OS/2</H1>
+    <B>Dave Yeo</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Building%20Supertux%20on%20OS/2&In-Reply-To=%3C20060509055718.3F56AB7549%40generation.lgisp.net%3E"
+       TITLE="[Supertux-devel] Building Supertux on OS/2">dave_yeo at paralynx.com
+       </A><BR>
+    <I>Tue May  9 08:57:41 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000227.html">[Supertux-devel] 1 single idea
+</A></li>
+        <LI>Next message: <A HREF="000220.html">[Supertux-devel] OpenAL configuration nuisance when it requires pthreads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#218">[ date ]</a>
+              <a href="thread.html#218">[ thread ]</a>
+              <a href="subject.html#218">[ subject ]</a>
+              <a href="author.html#218">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 08 May 2006 07:20:02 +0200, Ravu al Hemio wrote:
+
+&gt;<i>Hey Dave,
+</I>&gt;<i>
+</I>&gt;<i>it's entirely possible that bison spat out a pair of files (parser.cpp 
+</I>&gt;<i>and a header) with the header file not being called &quot;parser.hpp&quot;. Check 
+</I>&gt;<i>if you can find a file named parser.cpp.h and rename it to parser.hpp. 
+</I>&gt;<i>Then you should be able to continue the build.
+</I>&gt;<i>
+</I>&gt;<i>(I had to do this hack on Mac OS X too.)
+</I>&gt;<i>
+</I>&gt;<i>Please drop a line if it helped.
+</I>
+Thanks Ravu and Jayson for the hint. Yes I had to mv parser.cpp.h to parser.hpp.
+Next problems were with
+        gcc -E -x c -CC  -I. -I./src -DSCRIPTING_API src\scripting\wrapper.interface.hpp -o ./build/i386-pc-os2-emx/optimize/miniswig.tmp
+        ./miniswig --output-cpp src\scripting\wrapper.cpp --input ./build/i386-pc-os2-emx/optimize/miniswig.tmp --output-hpp src\scripting\wrapper.hpp --module supertux --select-namespace Scripting
+#       rm -f ./build/i386-pc-os2-emx/optimize/miniswig.tmp
+
+gcc did not create ./build/i386-pc-os2-emx/optimize. Had to create it manually. Will ask the gcc maintainer about this.
+miniswig was not linked as an executable, miniswig.exe should of been the target eg miniswig$(exeext) (I bound it manually to make the executable)
+The shell (cmd.exe) choked on the ./ which I removed
+The shell choked on the # which I removed.
+I then got this error at the end
+LinkApplication actions too long (max 996)!
+Will investigate if this is a hard limit
+Thanks
+Dave
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000227.html">[Supertux-devel] 1 single idea
+</A></li>
+	<LI>Next message: <A HREF="000220.html">[Supertux-devel] OpenAL configuration nuisance when it requires pthreads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#218">[ date ]</a>
+              <a href="thread.html#218">[ thread ]</a>
+              <a href="subject.html#218">[ subject ]</a>
+              <a href="author.html#218">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

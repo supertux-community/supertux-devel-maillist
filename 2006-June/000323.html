@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] SuperTux Configuration Files (patch)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20SuperTux%20Configuration%20Files%20%28patch%29&In-Reply-To=%3C44A1120E.5050700%40digitree.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000346.html">
+   <LINK REL="Next"  HREF="000327.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] SuperTux Configuration Files (patch)</H1>
+    <B>Daniel Hedlund</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20SuperTux%20Configuration%20Files%20%28patch%29&In-Reply-To=%3C44A1120E.5050700%40digitree.org%3E"
+       TITLE="[Supertux-devel] SuperTux Configuration Files (patch)">daniel at digitree.org
+       </A><BR>
+    <I>Tue Jun 27 13:10:06 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000346.html">[Supertux-devel] Introduction and Plans
+</A></li>
+        <LI>Next message: <A HREF="000327.html">[Supertux-devel] SuperTux Configuration Files Contd. (patch)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#323">[ date ]</a>
+              <a href="thread.html#323">[ thread ]</a>
+              <a href="subject.html#323">[ subject ]</a>
+              <a href="author.html#323">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've been looking around at the user configuration file for SuperTux and 
+have spotted a something that don't seem quite right to me.  Whenever a 
+user passes a command-line argument to SuperTux, those command arguments 
+are saved/reflected back in the SuperTux configuration file after 
+SuperTux is run.
+
+Some example scenarios where saving arguments is bad include:
+1.  passing &quot;-f&quot; or &quot;--fullscreen&quot; to SuperTux.  If fullscreen mode is 
+broken or gives a black screen, SuperTux would default to fullscreen 
+mode the next time it is run without arguments.
+2.  passing &quot;-g&quot; or &quot;--geometry ...&quot; to SuperTux.  Consider what happens 
+if a really odd geometry gets passed to SuperTux such as &quot;600x800&quot;, 
+&quot;1000x1&quot; or even &quot;1280x0&quot; (which causes SuperTux to crash but still save 
+the geometry in the config); the user will be stuck with this weird 
+resolution or crashes until they specify the original resolution on the 
+command line (&quot;What was the original resolution?  Doh!&quot;).
+3.  passing &quot;--show-fps&quot;,  &quot;--disable-sfx&quot; or &quot;--disable-music&quot; to 
+SuperTux.  Frames per second will be shown in SuperTux forever until 
+they manually edit the configuration file and disable it!  The 
+configuration file is in lisp which makes things even worse from a 
+user's point of view (&quot;(show_fps #t)&quot;).  Sound effects and music would 
+also be permanently disabled until manually editing the config file.
+
+My solution to this problem is to create two configuration objects, one 
+representing the configuration file itself (&quot;config_file&quot;) and the other 
+representing the configuration file with command arguments applied 
+(&quot;config&quot;).  Whenever the configuration file is saved, it will save the 
+version without the command arguments.
+
+In addition, sometimes the configuration was saved each time an option 
+was toggled (ex. fullscreen mode) and sometimes it wasn't (ex. 
+configuring keyboard or joystick); the configuration file was always 
+saved when the game quit though.  I have modified this behaviour to only 
+save when the program quits to standardise behaviour.  This is temporary 
+as I'm working on another patch that will save all command options when 
+the options menu has been exited.  I should have this within a couple of 
+hours.
+
+The patch to prevent saving command arguments is attached.
+
+Cheers,
+
+Daniel Hedlund
+<A HREF="https://lists.berlios.de/mailman/listinfo/supertux-devel">daniel at digitree.org</A>
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: fix_config-2006-06-27.patch
+Type: text/x-patch
+Size: 2976 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/supertux-devel/attachments/20060627/351063f6/attachment.bin">https://lists.berlios.de/pipermail/supertux-devel/attachments/20060627/351063f6/attachment.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000346.html">[Supertux-devel] Introduction and Plans
+</A></li>
+	<LI>Next message: <A HREF="000327.html">[Supertux-devel] SuperTux Configuration Files Contd. (patch)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#323">[ date ]</a>
+              <a href="thread.html#323">[ thread ]</a>
+              <a href="subject.html#323">[ subject ]</a>
+              <a href="author.html#323">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Supertux-devel] Installing 0.3.0 Level Editor
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/supertux-devel/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Installing%200.3.0%20Level%20Editor&In-Reply-To=%3C859625.8525.qm%40web32910.mail.mud.yahoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000698.html">
+   <LINK REL="Next"  HREF="000703.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Supertux-devel] Installing 0.3.0 Level Editor</H1>
+    <B>onlinejb at yahoo.com</B> 
+    <A HREF="mailto:supertux-devel%40lists.berlios.de?Subject=Re%3A%20%5BSupertux-devel%5D%20Installing%200.3.0%20Level%20Editor&In-Reply-To=%3C859625.8525.qm%40web32910.mail.mud.yahoo.com%3E"
+       TITLE="[Supertux-devel] Installing 0.3.0 Level Editor">onlinejb at yahoo.com
+       </A><BR>
+    <I>Mon Jan 15 03:01:41 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000698.html">[Supertux-devel] [Supertux-commit] r4542 - in trunk/supertux: .	mk mk/cmake src/squirrel
+</A></li>
+        <LI>Next message: <A HREF="000703.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#702">[ date ]</a>
+              <a href="thread.html#702">[ thread ]</a>
+              <a href="subject.html#702">[ subject ]</a>
+              <a href="author.html#702">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>System:  Fedora Core 4 (32-bit) on an AMD-64 3200
+
+I'm having no luck installing the level editor either
+as a .package or as source.  The README says:
+
+  == Prerequisites ==
+
+   * SuperTux version 0.3.0 or higher
+   * OpenGL driver and environment
+   * mono 1.1.13 or newer
+   * gtk-sharp 2.8 or newer
+              ^^^^^
+            (BTW, do we mean 2.0?)
+
+I have Supertux 0.3.0, openGL, mono-core.i586
+1.2.2.1-0.novell, gtk-sharp2 2.4.3-1.fedora4.novell.
+
+Here are the error mesgs--
+
+Autopackage:
+
+Checking for Mono .NET Runtime ... OK
+Checking for Gtk# ...
+Error: Unable to prepare package SuperTux Platform
+Game - Level Editor!
+
+Jam:
+
+...found 140 target(s)...
+...updating 1 target(s)...
+MonoCSharp supertux-editor.exe 
+supertux-editor/GameObjectListWidget.cs(5,37): error
+CS0246: The type or namespace name `IconView' could
+not be found. Are you missing a using directive or an
+assembly reference?
+Compilation failed: 1 error(s), 0 warnings
+
+    gmcs -debug -unsafe -pkg:gtk-sharp-2.0
+-pkg:glade-sharp-2.0 -out:supertux-editor.exe
+-target:exe -r:Lisp.dll -r:Resources.dll
+-r:LispReader.dll -r:libeditor.dll -r:gtkgl-sharp.dll
+-resource:supertux-editor/resources/stock-eye-12.png
+-resource:supertux-editor/resources/stock-tool-objects-24.png
+-resource:super...............
+
+[[ that mess goes on for a few pages ]]
+
+..................ects/Level.cs
+supertux-editor/LevelObjects/SimpleObject.cs
+supertux-editor/LevelObjects/Sector.cs
+
+...failed MonoCSharp supertux-editor.exe ...
+...failed updating 1 target(s)...
+
+
+
+ 
+____________________________________________________________________________________
+Do you Yahoo!?
+Everyone is raving about the all-new Yahoo! Mail beta.
+<A HREF="http://new.mail.yahoo.com">http://new.mail.yahoo.com</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000698.html">[Supertux-devel] [Supertux-commit] r4542 - in trunk/supertux: .	mk mk/cmake src/squirrel
+</A></li>
+	<LI>Next message: <A HREF="000703.html">[Supertux-devel] Installing 0.3.0 Level Editor
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#702">[ date ]</a>
+              <a href="thread.html#702">[ thread ]</a>
+              <a href="subject.html#702">[ subject ]</a>
+              <a href="author.html#702">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/supertux-devel">More information about the Supertux-devel
+mailing list</a><br>
+</body></html>
